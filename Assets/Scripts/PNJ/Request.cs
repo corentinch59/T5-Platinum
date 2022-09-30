@@ -9,38 +9,49 @@ using Random = UnityEngine.Random;
 
 public class Request : MonoBehaviour
 {
-    [SerializeField] private ScriptableRequest _scriptableRequest;
     [SerializeField] private ScriptableTextureData _textureData;
     [SerializeField] private RequestDataBase _requestInfos;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
-    
+    private QuestManager _questManager;
+
 
     private void Awake()
     {
-        setRequest();
-        
+        _questManager = GameObject.FindObjectOfType<QuestManager>();
     }
 
     private void Start()
     {
-        UpdateUI();
+        SetRequest();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            setRequest();
-            UpdateUI();
+            SetRequest();
         }
     }
 
-    private void setRequest()
+    private void SetRequest()
     {
-        _requestInfos = _scriptableRequest._dataBase[GetRandomNumber(_scriptableRequest._dataBase.Count)];
+        if (_questManager.allQuests.Count > 0)
+        {
+            int index = GetRandomNumber(_questManager.allQuests.Count);
+            Debug.Log(index);
+            _requestInfos = _questManager.allQuests[index];
+            _questManager.activeQuests.Add(_requestInfos);
+            _questManager.allQuests.Remove(_requestInfos);
+            UpdateUI();
+        }
+        else
+        {
+            Debug.Log("t'as pris toutes les requetes chacal");
+        }
+        
     }
 
     private int GetRandomNumber(int arrayCount)
