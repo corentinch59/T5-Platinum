@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Have to add a collider
-public class Corpse : MonoBehaviour
+public class Grave : MonoBehaviour
 {
     public float radius;
     /*[HideInInspector]*/ public List<string> localisations = new List<string>(); 
