@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedbfe1b42e875443bec90b41450d150, type: 3}
+  m_Name: RequestAsset
+  m_EditorClassIdentifier: 
+  _dataBase:
+  - name: Gerad
+    loc: 0
+    cof: 0
+    corp: 0
+  - name: Luc
+    loc: 1
+    cof: 0
+    corp: 0
+  - name: Jean-Marc
+    loc: 2
+    cof: 1
+    corp: 1
+  - name: Sylvie
+    loc: 2
+    cof: 1
+    corp: 0
+  - name: Maceo
+    loc: 1
+    cof: 0
+    corp: 1
