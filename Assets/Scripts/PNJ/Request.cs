@@ -32,6 +32,8 @@ public class Request : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
+            _questManager.activeQuests.Add(_requestInfos);
+            _questManager.allQuests.Remove(_requestInfos);
             SetRequest();
         }
     }
@@ -41,10 +43,7 @@ public class Request : MonoBehaviour
         if (_questManager.allQuests.Count > 0)
         {
             int index = GetRandomNumber(_questManager.allQuests.Count);
-            Debug.Log(index);
             _requestInfos = _questManager.allQuests[index];
-            _questManager.activeQuests.Add(_requestInfos);
-            _questManager.allQuests.Remove(_requestInfos);
             UpdateUI();
         }
         else
