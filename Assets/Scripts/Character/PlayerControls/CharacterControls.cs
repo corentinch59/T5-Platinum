@@ -35,6 +35,24 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dig"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""0d3a320c-7cb7-41b9-af19-667cc9f7ca21"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dig Up"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""8b0950a0-0a45-4c6a-b490-fb702dde4a68"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +66,28 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""067ac182-2099-4b8f-afd3-0ad72e8a26ba"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": ""Hold(duration=3)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dig"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3bc52a95-4ff0-4d2a-a234-c18b7799e4f0"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": ""MultiTap(tapCount=3)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dig Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +97,8 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Dig = m_Player.FindAction("Dig", throwIfNotFound: true);
+        m_Player_DigUp = m_Player.FindAction("Dig Up", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -117,11 +159,15 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Dig;
+    private readonly InputAction m_Player_DigUp;
     public struct PlayerActions
     {
         private @CharacterControls m_Wrapper;
         public PlayerActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Dig => m_Wrapper.m_Player_Dig;
+        public InputAction @DigUp => m_Wrapper.m_Player_DigUp;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -134,6 +180,12 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Dig.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDig;
+                @Dig.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDig;
+                @Dig.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDig;
+                @DigUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDigUp;
+                @DigUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDigUp;
+                @DigUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDigUp;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -141,6 +193,12 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Dig.started += instance.OnDig;
+                @Dig.performed += instance.OnDig;
+                @Dig.canceled += instance.OnDig;
+                @DigUp.started += instance.OnDigUp;
+                @DigUp.performed += instance.OnDigUp;
+                @DigUp.canceled += instance.OnDigUp;
             }
         }
     }
@@ -148,5 +206,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnDig(InputAction.CallbackContext context);
+        void OnDigUp(InputAction.CallbackContext context);
     }
 }

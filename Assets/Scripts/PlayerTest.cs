@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class PlayerTest : MonoBehaviour
 {
@@ -9,7 +11,6 @@ public class PlayerTest : MonoBehaviour
 
     [Tooltip("Add this GameObject as a child to the player")] public GameObject corpse;
 
-    private float timerDigInit;
     public float timerDig;
 
     private int numberMashDigUpInit;
@@ -35,7 +36,6 @@ public class PlayerTest : MonoBehaviour
             Debug.LogError("You need to add a corpse in the component");
         }
         
-        timerDigInit = timerDig;
         numberMashDigUpInit = numberMashDigUp;
     }
 
@@ -48,27 +48,6 @@ public class PlayerTest : MonoBehaviour
         //Debug player vision
         Debug.DrawLine(transform.position, transform.position + transform.forward * distGraveCreation, Color.red);
 
-
-        //Block movement if dig or dig up
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Quaternion graveRot = Quaternion.FromToRotation(transform.position, transform.forward);
-            graveRot.x = 0;
-            graveRot.z = 0;
-            Collider[] graveHit = Physics.OverlapBox(transform.position + transform.forward * distGraveCreation,
-                graveToCreate.transform.localScale / 2, graveRot, graveLayer);
-            if (graveHit.Length == 0)
-            {
-                Dig();
-            }
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            timerDig = timerDigInit;
-        }
-
-
         if (isHit)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -76,7 +55,7 @@ public class PlayerTest : MonoBehaviour
                 numberMashDigUp--;
                 if (numberMashDigUp <= 0)
                 {
-                    DigUp(hit.collider.gameObject);
+                    //DigUp(hit.collider.gameObject);
                 }
             }
         }
@@ -95,33 +74,37 @@ public class PlayerTest : MonoBehaviour
     /// <summary>
     /// Mash an input to call this method
     /// </summary>
-    public void Dig()
+    public void Dig(InputAction.CallbackContext ctx)
     {
-        // need to display QTE
-        if (corpse.activeSelf)
+        if (ctx.performed)
         {
-            timerDig -= Time.deltaTime;
-            if (timerDig <= 0)
+            // need to display QTE
+            if (corpse.activeSelf)
             {
-                // create grave in front of the player /!\ have to check the rotation in game
                 Quaternion graveRot = Quaternion.FromToRotation(transform.position, transform.forward);
                 graveRot.x = 0;
                 graveRot.z = 0;
 
-                graveCreated = Instantiate(graveToCreate, transform.position + transform.forward * distGraveCreation, graveRot);
-                
-                //if(graveCreated.GetComponent<Collider>().bounds)
+                Collider[] graveHit = Physics.OverlapBox(transform.position + transform.forward * distGraveCreation,
+                    graveToCreate.transform.localScale / 2, graveRot, graveLayer);
 
-                // Create grave at a certain position
-                if (graveCreated.TryGetComponent(out Grave g))
+                if (graveHit.Length == 0)
                 {
-                    g.UpdateLocalisation();
+                    if (ctx.duration >= timerDig)
+                    {
+                        // create grave in front of the player /!\ have to check the rotation in game
+                        graveCreated = Instantiate(graveToCreate, transform.position + transform.forward * distGraveCreation, graveRot);
+                        
+                        // Create grave at a certain position
+                        if (graveCreated.TryGetComponent(out Grave g))
+                        {
+                            g.UpdateLocalisation();
+                        }
+
+                        // player doesn't carry a corpse anymore
+                        corpse.SetActive(false);
+                    }
                 }
-
-                timerDig = timerDigInit;
-
-                // player doesn't carry a corpse anymore
-                corpse.SetActive(false);
             }
         }
     }
@@ -129,17 +112,31 @@ public class PlayerTest : MonoBehaviour
     /// <summary>
     /// Hold an input to call this method
     /// </summary>
-    public void DigUp(GameObject graveToDestroy)
+    public void DigUp(InputAction.CallbackContext ctx)
     {
-        // Remove info & collider from the corpse to carry it 
-        if (graveCreated.TryGetComponent(out Grave c))
+        if (ctx.performed)
         {
-            c.RemoveLocalisations();
+            if (ctx.interaction is MultiTapInteraction)
+            {
+                bool isHit = Physics.Linecast(transform.position, transform.position + transform.forward * distGraveCreation, out RaycastHit hit,
+                    graveLayer);
+
+                if (isHit)
+                {
+                    // Remove info & collider from the corpse to carry it 
+                    if (graveCreated.TryGetComponent(out Grave c))
+                    {
+                        c.RemoveLocalisations();
+                    }
+                    // need to display QTE
+                    numberMashDigUp = numberMashDigUpInit;
+                    corpse.SetActive(true);
+                    Destroy(hit.collider.gameObject);
+                }
+
+                numberMashDigUp--;
+            }
         }
-        // need to display QTE
-        numberMashDigUp = numberMashDigUpInit;
-        corpse.SetActive(true);
-        Destroy(graveToDestroy);
     }
 
     private void OnDrawGizmosSelected()

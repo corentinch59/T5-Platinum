@@ -13,6 +13,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Dig",
+                    "type": "PassThrough",
+                    "id": "0d3a320c-7cb7-41b9-af19-667cc9f7ca21",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dig Up",
+                    "type": "PassThrough",
+                    "id": "8b0950a0-0a45-4c6a-b490-fb702dde4a68",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -24,6 +42,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "067ac182-2099-4b8f-afd3-0ad72e8a26ba",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "Hold(duration=3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dig",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3bc52a95-4ff0-4d2a-a234-c18b7799e4f0",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "MultiTap(tapCount=3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dig Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
