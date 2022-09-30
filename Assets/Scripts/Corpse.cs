@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Have to add a collider
 public class Corpse : MonoBehaviour
 {
     public float radius;

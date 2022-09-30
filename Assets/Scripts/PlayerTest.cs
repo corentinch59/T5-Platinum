@@ -6,17 +6,17 @@ public class PlayerTest : MonoBehaviour
 {
     public GameObject graveToCreate;
 
-    public GameObject corpse;//debug in public
-    public bool gotCorpse; // have to set false
+    [Tooltip("Add this GameObject as a child to the player")] public GameObject corpse;
 
     private float timerDigInit;
     public float timerDig;
 
     private int numberMashDigUpInit;
     public int numberMashDigUp;
-
-    public float maxDistVision;
+    
     public LayerMask graveLayer;
+    public float distGraveCreation;
+
     /*public float timerDig
     {
         get { return _timerDig; }
@@ -25,7 +25,14 @@ public class PlayerTest : MonoBehaviour
 
     private void Start()
     {
-        gotCorpse = false;
+        if (corpse != null)
+        {
+            corpse.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("You need to add a corpse in the component");
+        }
         timerDigInit = timerDig;
         numberMashDigUpInit = numberMashDigUp;
     }
@@ -35,7 +42,6 @@ public class PlayerTest : MonoBehaviour
         //Block movement if dig or dig up
         if (Input.GetKey(KeyCode.Space))
         {
-            // maintain to dig
             Debug.DrawRay(transform.position, transform.forward, Color.black);
             Dig();
         }
@@ -46,15 +52,15 @@ public class PlayerTest : MonoBehaviour
         }
 
         // Check if player is facing a grave
-        bool isHit = Physics.Raycast(transform.position, transform.right,out RaycastHit hit, maxDistVision, graveLayer);
+        bool isHit = Physics.Linecast(transform.position, transform.position + transform.forward * distGraveCreation,out RaycastHit hit, graveLayer);
 
         //Debug player vision
-        Debug.DrawRay(transform.position, transform.right * maxDistVision, Color.red);
+        Debug.DrawLine(transform.position, transform.position + transform.forward * distGraveCreation, Color.red);
 
         if (isHit)
         {
-            corpse = hit.collider.gameObject;
-            // mash to digUp
+            Destroy(hit.collider.gameObject);
+            corpse.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
                 numberMashDigUp--;
@@ -70,40 +76,51 @@ public class PlayerTest : MonoBehaviour
         }
         
 
-        if (!gotCorpse)
+        if (!corpse.activeSelf)
         {
             // can carry corpse
         }
     }
 
+
+    /// <summary>
+    /// Mash an input to call this method
+    /// </summary>
     public void Dig()
     {
-        if (gotCorpse && corpse != null)
+        // need to display QTE
+        if (!corpse.activeSelf)
         {
             timerDig -= Time.deltaTime;
             if (timerDig <= 0)
             {
                 // Create grave at a certain position
-                Debug.Log("Hole Dug");
                 if (corpse.TryGetComponent(out Corpse c))
                 {
                     c.UpdateLocalisation();
                 }
+
                 // create grave in front of the player /!\ have to check the rotation in game
-                Debug.Log(transform.forward);
-                Instantiate(graveToCreate, transform.position + transform.forward, Quaternion.identity);
+                GameObject graveCreated = Instantiate(graveToCreate, transform.position + transform.forward * distGraveCreation, Quaternion.identity);
                 timerDig = timerDigInit;
+
+                // player doesn't carry a corpse anymore
+                corpse.SetActive(false);
             }
         }
     }
 
+    /// <summary>
+    /// Hold an input to call this method
+    /// </summary>
     public void DigUp()
     {
-        Debug.Log("Hole dug up");
-        numberMashDigUp = numberMashDigUpInit;
+        // Remove info & collider from the corpse to carry it 
         if (corpse.TryGetComponent(out Corpse c))
         {
             c.RemoveLocalisations();
         }
+        // need to display QTE
+        numberMashDigUp = numberMashDigUpInit;
     }
 }
