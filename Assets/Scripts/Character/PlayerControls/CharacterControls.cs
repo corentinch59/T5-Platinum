@@ -82,7 +82,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""3bc52a95-4ff0-4d2a-a234-c18b7799e4f0"",
                     ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": ""MultiTap(tapCount=3)"",
+                    ""interactions"": ""MultiTap(tapDelay=0.2,tapCount=3)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dig Up"",
