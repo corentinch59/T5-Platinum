@@ -17,8 +17,4 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void ActionQuest()
-    {
-        
-    }
 }
