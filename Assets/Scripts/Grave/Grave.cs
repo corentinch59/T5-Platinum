@@ -6,7 +6,7 @@ using UnityEngine;
 public class Grave : MonoBehaviour
 {
     public float radius;
-    /*[HideInInspector]*/ public List<string> localisations = new List<string>(); 
+    /*[HideInInspector]*/ public List<LocalisationsEnum> localisations = new List<LocalisationsEnum>(); 
     public LayerMask localisationsLayer;
 
     [ContextMenu("Update Localisations")]
@@ -16,7 +16,7 @@ public class Grave : MonoBehaviour
 
         foreach (Collider col in corpsInAreas)
         {
-            localisations.Add(col.gameObject.tag);
+            localisations.Add(AddLocalisation(col.gameObject.tag));
         }
     }
 
@@ -24,6 +24,16 @@ public class Grave : MonoBehaviour
     public void RemoveLocalisations()
     {
         localisations.Clear();
+    }
+
+    public LocalisationsEnum AddLocalisation(string tag)
+    {
+        switch (tag)
+        {
+            case "Water": return LocalisationsEnum.WATER;
+            case "Tree": return LocalisationsEnum.TREE;
+            default: return LocalisationsEnum.NONE;
+        }
     }
 
     private void OnDrawGizmosSelected()

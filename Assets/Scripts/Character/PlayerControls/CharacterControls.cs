@@ -53,6 +53,15 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ccefa9e-183a-41e9-b7aa-39a94f34fce7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -88,6 +97,17 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""action"": ""Dig Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce07c395-c795-4884-ba69-df72f0dabd08"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -99,6 +119,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Dig = m_Player.FindAction("Dig", throwIfNotFound: true);
         m_Player_DigUp = m_Player.FindAction("Dig Up", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,6 +182,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Dig;
     private readonly InputAction m_Player_DigUp;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @CharacterControls m_Wrapper;
@@ -168,6 +190,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Dig => m_Wrapper.m_Player_Dig;
         public InputAction @DigUp => m_Wrapper.m_Player_DigUp;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -186,6 +209,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @DigUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDigUp;
                 @DigUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDigUp;
                 @DigUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDigUp;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -199,6 +225,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @DigUp.started += instance.OnDigUp;
                 @DigUp.performed += instance.OnDigUp;
                 @DigUp.canceled += instance.OnDigUp;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -208,5 +237,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnDig(InputAction.CallbackContext context);
         void OnDigUp(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
