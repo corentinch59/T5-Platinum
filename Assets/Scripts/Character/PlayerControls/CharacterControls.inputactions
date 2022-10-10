@@ -1,0 +1,74 @@
+{
+    "name": "CharacterControls",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "f85837f0-ff07-42c3-ac9e-809ccf15e78c",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "67d3ff45-f782-42c8-84e1-6a819aeec05a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Dig",
+                    "type": "PassThrough",
+                    "id": "0d3a320c-7cb7-41b9-af19-667cc9f7ca21",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dig Up",
+                    "type": "PassThrough",
+                    "id": "8b0950a0-0a45-4c6a-b490-fb702dde4a68",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e98a4543-3f3e-460a-b9ab-397dc1ce87b6",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "067ac182-2099-4b8f-afd3-0ad72e8a26ba",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "Hold(duration=3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dig",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3bc52a95-4ff0-4d2a-a234-c18b7799e4f0",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "MultiTap(tapDelay=0.2,tapCount=3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dig Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
