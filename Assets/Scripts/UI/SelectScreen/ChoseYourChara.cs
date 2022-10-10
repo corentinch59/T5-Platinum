@@ -35,6 +35,11 @@ public class ChoseYourChara : MonoBehaviour
         leftPos = new Vector3(25f, 0f, 0f);
     }
 
+    private void GetInput()
+    {
+        
+    }
+
     public void MoveCharas(int move)
     {
         if (isReady) return;
