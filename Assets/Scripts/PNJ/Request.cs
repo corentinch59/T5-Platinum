@@ -15,12 +15,16 @@ public class Request : MonoBehaviour
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
+    [SerializeField] private GameObject questToInstantiate;
     private QuestManager _questManager;
+    private GameObject questParent;
+  
 
 
     private void Awake()
     {
         _questManager = GameObject.FindObjectOfType<QuestManager>();
+        questParent = GameObject.FindGameObjectWithTag("QuestUI");
     }
 
     private void Start()
@@ -32,9 +36,8 @@ public class Request : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            _questManager.activeQuests.Add(_requestInfos);
-            _questManager.allQuests.Remove(_requestInfos);
             SetRequest();
+            
         }
     }
 
@@ -42,9 +45,17 @@ public class Request : MonoBehaviour
     {
         if (_questManager.allQuests.Count > 0)
         {
-            int index = GetRandomNumber(_questManager.allQuests.Count);
-            _requestInfos = _questManager.allQuests[index];
+            _questManager.activeQuests.Add(_requestInfos);
+            _questManager.allQuests.Remove(_requestInfos);
+            if (_questManager.allQuests.Count > 0)
+            {
+                int index = GetRandomNumber(_questManager.allQuests.Count);
+                _requestInfos = _questManager.allQuests[index];
+            }
             UpdateUI();
+            GameObject quest = Instantiate(questToInstantiate, questParent.transform);
+            quest.GetComponent<Quest>().InitialiseQuestUI(_requestInfos, corpseImage.texture,
+                localisationImage.texture,coffinImage.texture);
         }
         else
         {
@@ -65,7 +76,5 @@ public class Request : MonoBehaviour
         corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corp];
         localisationImage.texture = tex.localisationTex[(int)_requestInfos.loc];
         coffinImage.texture = tex.coffinTex[(int)_requestInfos.cof];
-        
-        
     }
 }

@@ -16,4 +16,9 @@ public class QuestManager : MonoBehaviour
             allQuests.Add(quest);
         }
     }
+
+    public void ActionQuest()
+    {
+        
+    }
 }

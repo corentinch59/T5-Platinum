@@ -8,7 +8,7 @@ public class RequestDataBase
         public string name;
         public localisation loc;
         public coffin cof;
-        public corpse corp;
+        public corpseType corp;
     
         
         public enum localisation
@@ -22,10 +22,10 @@ public class RequestDataBase
                 COFFIN,
                 JARRE,
         }
-        public enum corpse
+        public enum corpseType
         {
                 MONSTERVERT,
                 MONSTREBLEU,
-        }  
+        } 
 
 }
