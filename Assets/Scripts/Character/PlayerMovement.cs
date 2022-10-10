@@ -12,11 +12,13 @@ public class PlayerMovement : MonoBehaviour
 
     private const float gravityValue = -9.81f;
 
-    private Vector3 moveDir;
-    private Vector3 playerVelocity;
+    [HideInInspector] public Vector3 moveDir;
+    [HideInInspector] public Vector3 playerVelocity;
 
     private Vector2 orientation;
     private Vector2 move;
+
+    public bool canMove = true;
 
     private void Start()
     {
@@ -37,8 +39,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        move = ctx.ReadValue<Vector2>();
-        orientation = ctx.ReadValue<Vector2>();
-        orientation = orientation.normalized;
+        if (canMove)
+        {
+            move = ctx.ReadValue<Vector2>();
+            orientation = ctx.ReadValue<Vector2>();
+            orientation = orientation.normalized;
+        }
+        else
+        {
+            move = Vector2.zero;
+        }
     }
 }
