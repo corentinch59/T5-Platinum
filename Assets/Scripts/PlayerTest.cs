@@ -21,11 +21,8 @@ public class PlayerTest : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
-    /*public float timerDig
-    {
-        get { return _timerDig; }
-        set { if(_timerDig < )_timerDig = value; }
-    }*/
+    //public IPutDown objToPutDown;
+    //public Carryable carriedObj;
 
     private void Start()
     {

@@ -24,6 +24,12 @@ public class StartTheGame : MonoBehaviour
         //Lancer un timer 3 2 1 GO et le jeu 
     }
 
+    public void CreateTheUIPlayer(GameObject eeeeee)
+    {
+        //GameObject MANANA = Instantiate(eeeeee);
+        //MANANA.transform.position = new Vector3(5f, 0f, 0f);
+    }
+
     private void OnDestroy()
     {
         ChoseYourChara.OnReady -= ChoseYourChara_OnReady;

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public delegate void ReadyEventHandler();
 public class ChoseYourChara : MonoBehaviour
 {
     [SerializeField] private List<GameObject> charas = new List<GameObject>();
+    //[SerializeField] private Canvas canvas;
 
     private GameObject currentChara; 
 
@@ -19,12 +21,14 @@ public class ChoseYourChara : MonoBehaviour
 
     private void Start()
     {
+        //transform.SetParent(canvas.transform);
+
         currentChara = charas[0];
         for (int i = 0; i < charas.Count; i++)
         {
             charas[i].SetActive(false);
         }
-
+        
         currentChara.SetActive(true);
 
         leftPos = new Vector3(-25f, 0f, 0f);
@@ -75,11 +79,11 @@ public class ChoseYourChara : MonoBehaviour
         if (isReady)
         {
             isReady = false;
-            currentChara.transform.DOScale(25f, 0.5f);
+            currentChara.transform.DOScale(1f, 0.5f);
         }
         else
         {
-            currentChara.transform.DOScale(40f, 0.5f);
+            currentChara.transform.DOScale(2f, 0.5f);
             isReady = true;
             OnReady?.Invoke();
         }
