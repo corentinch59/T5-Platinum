@@ -7,8 +7,7 @@ using TMPro;
 public class Quest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
-    public float questTimer;
-
+    private QuestManager _questManager;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
@@ -18,6 +17,11 @@ public class Quest : MonoBehaviour
     [SerializeField] private Image image;
     private float timer;
 
+
+    private void Awake()
+    {
+        _questManager = FindObjectOfType<QuestManager>();
+    }
 
     private void Update()
     {
@@ -32,7 +36,11 @@ public class Quest : MonoBehaviour
             questSlider.value = 0;
             StartCoroutine(TimeOutQuest());
         }
-       
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            StartCoroutine(FinishQuest());
+        }
        
         
     }
@@ -47,9 +55,12 @@ public class Quest : MonoBehaviour
         coffinImage.texture = coffinT;
     }
     
-    public void FinishQuest()
+    private IEnumerator FinishQuest()
     {
-        
+        image.color = Color.green;
+        yield return new WaitForSeconds(1);
+        _questManager.UpdateScore(5);
+        Destroy(gameObject);
     }
 
     private IEnumerator TimeOutQuest()
