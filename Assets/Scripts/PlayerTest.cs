@@ -21,8 +21,8 @@ public class PlayerTest : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
-    public IPutDown objToPutDown;
-    public Carryable carriedObj;
+    //public IPutDown objToPutDown;
+    //public Carryable carriedObj;
 
     [Header("Debug")]
     public float radiusSphere = 5f;
