@@ -167,8 +167,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Dig = m_Player.FindAction("Dig", throwIfNotFound: true);
-        m_Player_DigUp = m_Player.FindAction("Dig Up", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         // SelectionScreenControlE
         m_SelectionScreenControlE = asset.FindActionMap("SelectionScreenControlE", throwIfNotFound: true);
