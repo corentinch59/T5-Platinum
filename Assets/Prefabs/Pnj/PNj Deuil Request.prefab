@@ -217,9 +217,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2457018146436438973}
-  - component: {fileID: 9043336061808264405}
+  - component: {fileID: 3051463643657018642}
   m_Layer: 5
-  m_Name: PNJ Request
+  m_Name: PNj Deuil Request
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9043336061808264405
+--- !u!114 &3051463643657018642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,20 +255,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1683572570302702859}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a32153e0e03c91f428b0ab6a7a2e769b, type: 3}
+  m_Script: {fileID: 11500000, guid: bc30049ce944f8949931f7cceda702bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textureData: {fileID: 11400000, guid: 1c91b26c7fd3b3d459127a8143bcf1b3, type: 2}
   _requestInfos:
     name: 
     loc: 0
     cof: 0
     corp: 0
-  nameText: {fileID: 573102795083411221}
+  _textureData: {fileID: 11400000, guid: 1c91b26c7fd3b3d459127a8143bcf1b3, type: 2}
+  nameText: {fileID: 8883895847954076252}
   corpseImage: {fileID: 1450577151129272518}
-  localisationImage: {fileID: 9043967723521533827}
-  coffinImage: {fileID: 192509422992928281}
-  questToInstantiate: {fileID: 0}
+  questToInstantiate: {fileID: 8707251112121258463, guid: 40f4b0756a2c1f84193dc98d3c066c5e, type: 3}
   _questManager: {fileID: 0}
 --- !u!1 &5154784137471476875
 GameObject:

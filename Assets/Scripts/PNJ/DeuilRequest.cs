@@ -6,15 +6,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-
-public class Request : MonoBehaviour
+public class DeuilRequest : MonoBehaviour
 {
-    [SerializeField] private ScriptableTextureData _textureData;
     [SerializeField] private RequestDataBase _requestInfos;
+    [SerializeField] private ScriptableTextureData _textureData;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
-    [SerializeField] private RawImage localisationImage;
-    [SerializeField] private RawImage coffinImage;
     [SerializeField] private GameObject questToInstantiate;
     [SerializeField] private QuestManager _questManager;
     private GameObject questParent;
@@ -24,36 +21,37 @@ public class Request : MonoBehaviour
     private void Awake()
     {
         _questManager = FindObjectOfType<QuestManager>();
-        questParent = GameObject.FindGameObjectWithTag("QuestUI");
+        questParent = GameObject.FindGameObjectWithTag("DeuilQuestUI");
     }
-
-    private void Start()
-    {
-        SetRequest();
-    }
+    
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D) && _questManager.allQuests.Count > 0 
-                                        && _questManager.activeQuests.Count < _questManager.numberOfQuests)
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SetRequest();
+        }
+        if (Input.GetKeyDown(KeyCode.P) && _questManager.questFinished.Count > 0 
+                                        && _questManager.activeDeuilQuests.Count < _questManager.numberOfDeuilQuests)
         {
             AcceptRequest();
         }
+
     }
 
     private void SetRequest()
     {
-        int index = GetRandomNumber(_questManager.allQuests.Count);
-        _requestInfos = _questManager.allQuests[index];
+        int index = GetRandomNumber(_questManager.questFinished.Count);
+        _requestInfos = _questManager.questFinished[index];
         UpdateUI();
     }
 
     public void AcceptRequest()
     {
         SetQuestInUI();
-        _questManager.activeQuests.Add(_requestInfos);
-        _questManager.allQuests.Remove(_requestInfos);
-        if (_questManager.allQuests.Count > 0)
+        _questManager.activeDeuilQuests.Add(_requestInfos);
+        _questManager.questFinished.Remove(_requestInfos);
+        if (_questManager.activeDeuilQuests.Count > 0)
         {
             SetRequest();
         }
@@ -61,8 +59,6 @@ public class Request : MonoBehaviour
         {
             nameText.text = null;
             corpseImage.texture = null;
-            localisationImage.texture = null;
-            coffinImage.texture = null;
         }
         
     }
@@ -77,14 +73,11 @@ public class Request : MonoBehaviour
         nameText.text = _requestInfos.name;
         TextureData tex = _textureData._TextureData;
         corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corp];
-        localisationImage.texture = tex.localisationTex[(int)_requestInfos.loc];
-        coffinImage.texture = tex.coffinTex[(int)_requestInfos.cof];
     }
 
     public void SetQuestInUI()
     {
         GameObject quest = Instantiate(questToInstantiate, questParent.transform);
-        quest.GetComponent<Quest>().InitialiseQuestUI(_requestInfos, corpseImage.texture,
-            localisationImage.texture,coffinImage.texture);
+        quest.GetComponent<DeuilQuest>().InitialiseDeuilQuestUI(_requestInfos, corpseImage.texture);
     }
 }
