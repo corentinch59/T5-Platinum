@@ -112,6 +112,15 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Ready"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3909571-cddd-4d00-a05f-e2dfc4ff82c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -158,6 +167,17 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""action"": ""ChangeRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6deda0c0-f84d-4038-ad14-7e865ad0e1ee"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -173,6 +193,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_SelectionScreenControlE = asset.FindActionMap("SelectionScreenControlE", throwIfNotFound: true);
         m_SelectionScreenControlE_ChangeLeft = m_SelectionScreenControlE.FindAction("ChangeLeft", throwIfNotFound: true);
         m_SelectionScreenControlE_ChangeRight = m_SelectionScreenControlE.FindAction("ChangeRight", throwIfNotFound: true);
+        m_SelectionScreenControlE_Ready = m_SelectionScreenControlE.FindAction("Ready", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -283,12 +304,14 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     private ISelectionScreenControlEActions m_SelectionScreenControlEActionsCallbackInterface;
     private readonly InputAction m_SelectionScreenControlE_ChangeLeft;
     private readonly InputAction m_SelectionScreenControlE_ChangeRight;
+    private readonly InputAction m_SelectionScreenControlE_Ready;
     public struct SelectionScreenControlEActions
     {
         private @CharacterControls m_Wrapper;
         public SelectionScreenControlEActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @ChangeLeft => m_Wrapper.m_SelectionScreenControlE_ChangeLeft;
         public InputAction @ChangeRight => m_Wrapper.m_SelectionScreenControlE_ChangeRight;
+        public InputAction @Ready => m_Wrapper.m_SelectionScreenControlE_Ready;
         public InputActionMap Get() { return m_Wrapper.m_SelectionScreenControlE; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -304,6 +327,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @ChangeRight.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
                 @ChangeRight.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
                 @ChangeRight.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
+                @Ready.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnReady;
+                @Ready.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnReady;
+                @Ready.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnReady;
             }
             m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface = instance;
             if (instance != null)
@@ -314,6 +340,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @ChangeRight.started += instance.OnChangeRight;
                 @ChangeRight.performed += instance.OnChangeRight;
                 @ChangeRight.canceled += instance.OnChangeRight;
+                @Ready.started += instance.OnReady;
+                @Ready.performed += instance.OnReady;
+                @Ready.canceled += instance.OnReady;
             }
         }
     }
@@ -328,5 +357,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     {
         void OnChangeLeft(InputAction.CallbackContext context);
         void OnChangeRight(InputAction.CallbackContext context);
+        void OnReady(InputAction.CallbackContext context);
     }
 }

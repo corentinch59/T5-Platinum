@@ -33,14 +33,15 @@ public class ChoseYourChara : MonoBehaviour
 
         leftPos = new Vector3(-25f, 0f, 0f);
         leftPos = new Vector3(25f, 0f, 0f);
+
+
     }
 
-    public void MoveCharas(int move)
+    public void MoveRight(InputAction.CallbackContext context)
     {
         if (isReady) return;
 
-        // 0 == on bouge vers la Droite
-        if (move == 0)
+        if (context.performed)
         {
             if (charas.IndexOf(currentChara) == 0)
             {
@@ -50,14 +51,17 @@ public class ChoseYourChara : MonoBehaviour
             }
             else
             {
-
                 currentChara.SetActive(false);
                 currentChara = charas[charas.IndexOf(currentChara) - 1];
                 currentChara.SetActive(true);
             }
-        }
-        // 1 == on bouge vers la gauche
-        else if (move == 1)
+        }       
+    }
+
+    public void MoveLeft(InputAction.CallbackContext context)
+    {
+        if (isReady) return;
+        if (context.performed)
         {
             if (charas.IndexOf(currentChara) == charas.Count - 1)
             {
@@ -69,23 +73,27 @@ public class ChoseYourChara : MonoBehaviour
             {
                 currentChara.SetActive(false);
                 currentChara = charas[charas.IndexOf(currentChara) + 1];
-                 currentChara.SetActive(true);
+                currentChara.SetActive(true);
             }
         }
     }
 
-    public void OnReadyButton()
+    public void GetReady(InputAction.CallbackContext context)
     {
-        if (isReady)
+        if (context.performed)
         {
-            isReady = false;
-            currentChara.transform.DOScale(1f, 0.5f);
+            if (isReady)
+            {
+                isReady = false;
+                currentChara.transform.DOScale(1f, 0.5f);
+            }
+            else
+            {
+                currentChara.transform.DOScale(2f, 0.5f);
+                isReady = true;
+                OnReady?.Invoke();
+            }
         }
-        else
-        {
-            currentChara.transform.DOScale(2f, 0.5f);
-            isReady = true;
-            OnReady?.Invoke();
-        }
+        
     }
 }
