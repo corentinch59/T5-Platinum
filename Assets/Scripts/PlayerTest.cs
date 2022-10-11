@@ -21,12 +21,13 @@ public class PlayerTest : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
-    //public IPutDown objToPutDown;
-    //public Carryable carriedObj;
+    public IPutDown objToPutDown;
+    public Carryable carriedObj;
 
     [Header("Debug")]
     public float radiusSphere = 5f;
     public IInteractable interactableObj;
+    public LayerMask interactableLayer;
 
     private void Start()
     {
@@ -55,19 +56,28 @@ public class PlayerTest : MonoBehaviour
         }
 
         // check interactables
-        Collider[] interactables = Physics.OverlapSphere(transform.position, radiusSphere);
-        float min = float.MaxValue;
-        foreach(Collider col in interactables)
+        Collider[] interactables;
+        interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
+
+        if (interactables.Length > 0)
         {
-            if (col.gameObject.TryGetComponent(out IInteractable interactable))
+            float min = float.MaxValue;
+
+            foreach(Collider col in interactables)
             {
-                float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
-                if(dist < min)
+                if (col.gameObject.TryGetComponent(out IInteractable interactable))
                 {
-                    min = dist;
-                    interactableObj = interactable;
+                    float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
+                    if(dist < min)
+                    {
+                        min = dist;
+                        interactableObj = interactable;
+                    }
                 }
             }
+        } else
+        {
+            interactableObj = null;
         }
     }
 

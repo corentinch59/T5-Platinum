@@ -4,7 +4,7 @@ using Codice.CM.Common.Serialization;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(PlayerTest))]
+//[CustomEditor(typeof(PlayerTest))]
 public class TestEditor : Editor
 {
     private PlayerTest myPlayer = null;

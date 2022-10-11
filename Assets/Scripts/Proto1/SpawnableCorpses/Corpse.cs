@@ -27,8 +27,11 @@ public class Corpse : Carryable
                 player.interactableObj = null;
             }
         }
+
+        // One player
         player.interactableObj = null;
         player.carriedObj = this;
+        player.carriedObj.gameObject.SetActive(false);
         player.objToPutDown = new PutDownCorpse();
     }
 }
