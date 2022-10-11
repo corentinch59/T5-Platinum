@@ -19,7 +19,7 @@ public class PlayerTest : MonoBehaviour
     public LayerMask graveLayer;
     public float distGraveCreation;
 
-    private PlayerMovement playerMovement;
+    [HideInInspector] public PlayerMovement playerMovement;
 
     public IPutDown objToPutDown;
     public Carryable carriedObj;
