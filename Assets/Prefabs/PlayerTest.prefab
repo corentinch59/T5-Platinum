@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 2596005604130923465}
   - component: {fileID: 2596005604130923475}
   - component: {fileID: 1676592206633555986}
-  - component: {fileID: 1641089447}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -66,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,7 +117,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.01
+  m_MinMoveDistance: 0.015
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2596005604130923475
 MonoBehaviour:
@@ -133,6 +132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
+  moveDir: {x: 0, y: 0, z: 0}
+  playerVelocity: {x: 0, y: 0, z: 0}
+  canMove: 1
 --- !u!114 &1676592206633555986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,9 +178,9 @@ MonoBehaviour:
     m_ActionName: Player/Move[/SwitchProControllerHID/leftStick,/SwitchProControllerHID1/leftStick,/XInputControllerWindows1/leftStick,/XInputControllerWindows/leftStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1641089447}
-        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
-        m_MethodName: Dig
+      - m_Target: {fileID: 2596005604130923475}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -188,46 +190,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 0d3a320c-7cb7-41b9-af19-667cc9f7ca21
-    m_ActionName: Player/Dig[/XInputControllerWindows/buttonWest]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1641089447}
-        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
-        m_MethodName: DigUp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 8b0950a0-0a45-4c6a-b490-fb702dde4a68
-    m_ActionName: Player/Dig Up[/XInputControllerWindows/buttonSouth]
+    m_ActionId: 5ccefa9e-183a-41e9-b7aa-39a94f34fce7
+    m_ActionName: Player/Interact[/XInputControllerWindows/buttonNorth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1641089447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2596005604130923474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f36c2f1bb3a114d861fd33501cc716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graveToCreate: {fileID: 8366753863871105557, guid: 21e8a7e95cd03be4192bafca4eef7cc6, type: 3}
-  corpse: {fileID: 0}
-  timerDig: 3
-  numberMashDigUp: 3
-  graveLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  distGraveCreation: 5

@@ -5,20 +5,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("PlayerControls")]
+    [Header("Player Controls")]
     [SerializeField] private float playerSpeed;
-
-    private CharacterController controller;
-
-    private const float gravityValue = -9.81f;
+    [SerializeField] private float digDistance;
+    [SerializeField] private float interactionRange;
 
     [HideInInspector] public Vector3 moveDir;
     [HideInInspector] public Vector3 playerVelocity;
+    public bool canMove = true;
 
+    private const float gravityValue = -9.81f;
+    private CharacterController controller;
     private Vector2 orientation;
     private Vector2 move;
 
-    public bool canMove = true;
 
     private void Start()
     {
@@ -49,5 +49,11 @@ public class PlayerMovement : MonoBehaviour
         {
             move = Vector2.zero;
         }
+
+    }
+
+    public void OnInteract(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Interacted");
     }
 }
