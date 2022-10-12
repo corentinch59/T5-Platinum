@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Jobs;
 using UnityEngine.UI;
 using DG.Tweening;
-using System.Linq;
 
 public class PlayerProto2 : MonoBehaviour
 {
     [Header("Player Controls")]
-    [SerializeField] private float playerSpeed;
-    [SerializeField] private float interactionDuration;
+    [SerializeField] [Tooltip("The player's movement speed.")]private float playerSpeed;
+    [SerializeField] [Tooltip("The time in seconds it takes for the QTE to finish.")] private float interactionDuration;
+    [SerializeField] [Tooltip("The height at which the hole will spawn in. (can be negative and is adviced to be)")] private float HeightOfHole;
+
+    [Header("Raycast Handling")]
     [SerializeField] private float raycastRadius;
     [SerializeField] private LayerMask raycastMask;
 
@@ -30,6 +31,7 @@ public class PlayerProto2 : MonoBehaviour
     private Image qteFillImage;
     private IEnumerator myCoroutine;
     private Hole detectedHole;
+    private PlayerInput playerInput;
 
     private void Start()
     {
@@ -37,6 +39,7 @@ public class PlayerProto2 : MonoBehaviour
         canvaQte = gameObject.transform.GetChild(0);
         qteFillImage = canvaQte.GetComponentsInChildren<Image>()[1];
         canvaQte.gameObject.SetActive(false);
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Update()
@@ -77,27 +80,20 @@ public class PlayerProto2 : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (canMove)
-        {
-            move = ctx.ReadValue<Vector2>();
+        move = ctx.ReadValue<Vector2>();
 
-            if(ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
-            {
-                orientationVect = ctx.ReadValue<Vector2>();
-                if(Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
-                {
-                    orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
-                }
-                else
-                {
-                    orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
-                }
-                orientationVect.Normalize();
-            }
-        }
-        else
+        if(ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
         {
-            move = Vector2.zero;
+            orientationVect = ctx.ReadValue<Vector2>();
+            if(Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
+            {
+                orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
+            }
+            else
+            {
+                orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
+            }
+            orientationVect.Normalize();
         }
     }
 
@@ -106,15 +102,17 @@ public class PlayerProto2 : MonoBehaviour
         // Start of QTE code
         if (ctx.started)
         {
-            Debug.Log("Started");
             myCoroutine = StartTimer();
             StartCoroutine(myCoroutine);
+            playerInput.currentActionMap.FindAction("Move").Disable();
+
         }
         if (ctx.canceled)
         {
-            Debug.Log("Canceled");
             StopCoroutine(myCoroutine);
             canvaQte.gameObject.SetActive(false);
+            playerInput.currentActionMap.FindAction("Move").Enable();
+
         }
     }
 
@@ -134,6 +132,7 @@ public class PlayerProto2 : MonoBehaviour
 
         Dig(); // Diggy diggy hole
         canvaQte.gameObject.SetActive(false);
+        playerInput.currentActionMap.FindAction("Move").Enable();
         yield return null;
     }
 
@@ -148,7 +147,7 @@ public class PlayerProto2 : MonoBehaviour
         }
         else
         {
-            Instantiate(holePrefab, transform.position + new Vector3(orientationVect.x, 0, orientationVect.y), Quaternion.identity);
+            Instantiate(holePrefab, transform.position + new Vector3(orientationVect.x, HeightOfHole, orientationVect.y), Quaternion.identity);
         }
 
     }
