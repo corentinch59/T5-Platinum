@@ -37,18 +37,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Dig"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""0d3a320c-7cb7-41b9-af19-667cc9f7ca21"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Dig Up"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""8b0950a0-0a45-4c6a-b490-fb702dde4a68"",
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ccefa9e-183a-41e9-b7aa-39a94f34fce7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -69,93 +60,12 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""067ac182-2099-4b8f-afd3-0ad72e8a26ba"",
+                    ""id"": ""ce07c395-c795-4884-ba69-df72f0dabd08"",
                     ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": ""Hold(duration=3)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dig"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3bc52a95-4ff0-4d2a-a234-c18b7799e4f0"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": ""MultiTap(tapDelay=0.2,tapCount=3)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dig Up"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""SelectionScreenControlE"",
-            ""id"": ""8a54639e-965d-4ebf-a512-0bca53662b6a"",
-            ""actions"": [
-                {
-                    ""name"": ""ChangeLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""8e17399d-219d-4361-8e40-5d0cb8612fac"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""ChangeRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""b1334139-407d-4107-86fc-9c849ba2cae9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""73107d7d-f1a2-422f-aebf-8daa2e338e9f"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""db46a877-07cf-403a-92ef-003efa791ed0"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3df8caad-e30b-4010-a868-c107f7f07c14"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""71642d6e-2557-4cc6-995b-798d6c672322"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeRight"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -167,12 +77,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Dig = m_Player.FindAction("Dig", throwIfNotFound: true);
-        m_Player_DigUp = m_Player.FindAction("Dig Up", throwIfNotFound: true);
-        // SelectionScreenControlE
-        m_SelectionScreenControlE = asset.FindActionMap("SelectionScreenControlE", throwIfNotFound: true);
-        m_SelectionScreenControlE_ChangeLeft = m_SelectionScreenControlE.FindAction("ChangeLeft", throwIfNotFound: true);
-        m_SelectionScreenControlE_ChangeRight = m_SelectionScreenControlE.FindAction("ChangeRight", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -233,15 +138,13 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Dig;
-    private readonly InputAction m_Player_DigUp;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @CharacterControls m_Wrapper;
         public PlayerActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Dig => m_Wrapper.m_Player_Dig;
-        public InputAction @DigUp => m_Wrapper.m_Player_DigUp;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -254,12 +157,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Dig.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDig;
-                @Dig.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDig;
-                @Dig.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDig;
-                @DigUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDigUp;
-                @DigUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDigUp;
-                @DigUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDigUp;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -267,66 +167,16 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Dig.started += instance.OnDig;
-                @Dig.performed += instance.OnDig;
-                @Dig.canceled += instance.OnDig;
-                @DigUp.started += instance.OnDigUp;
-                @DigUp.performed += instance.OnDigUp;
-                @DigUp.canceled += instance.OnDigUp;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
-
-    // SelectionScreenControlE
-    private readonly InputActionMap m_SelectionScreenControlE;
-    private ISelectionScreenControlEActions m_SelectionScreenControlEActionsCallbackInterface;
-    private readonly InputAction m_SelectionScreenControlE_ChangeLeft;
-    private readonly InputAction m_SelectionScreenControlE_ChangeRight;
-    public struct SelectionScreenControlEActions
-    {
-        private @CharacterControls m_Wrapper;
-        public SelectionScreenControlEActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ChangeLeft => m_Wrapper.m_SelectionScreenControlE_ChangeLeft;
-        public InputAction @ChangeRight => m_Wrapper.m_SelectionScreenControlE_ChangeRight;
-        public InputActionMap Get() { return m_Wrapper.m_SelectionScreenControlE; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(SelectionScreenControlEActions set) { return set.Get(); }
-        public void SetCallbacks(ISelectionScreenControlEActions instance)
-        {
-            if (m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface != null)
-            {
-                @ChangeLeft.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeLeft;
-                @ChangeLeft.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeLeft;
-                @ChangeLeft.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeLeft;
-                @ChangeRight.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
-                @ChangeRight.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
-                @ChangeRight.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
-            }
-            m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @ChangeLeft.started += instance.OnChangeLeft;
-                @ChangeLeft.performed += instance.OnChangeLeft;
-                @ChangeLeft.canceled += instance.OnChangeLeft;
-                @ChangeRight.started += instance.OnChangeRight;
-                @ChangeRight.performed += instance.OnChangeRight;
-                @ChangeRight.canceled += instance.OnChangeRight;
-            }
-        }
-    }
-    public SelectionScreenControlEActions @SelectionScreenControlE => new SelectionScreenControlEActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnDig(InputAction.CallbackContext context);
-        void OnDigUp(InputAction.CallbackContext context);
-    }
-    public interface ISelectionScreenControlEActions
-    {
-        void OnChangeLeft(InputAction.CallbackContext context);
-        void OnChangeRight(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
