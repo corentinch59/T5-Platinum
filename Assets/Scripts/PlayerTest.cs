@@ -21,6 +21,7 @@ public class PlayerTest : MonoBehaviour
 
     [HideInInspector] public PlayerMovement playerMovement;
 
+    public Sprite playerNotCarrying;
     public IPutDown objToPutDown;
     public Carryable carriedObj;
 

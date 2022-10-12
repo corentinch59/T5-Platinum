@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public Vector3 moveDir;
     [HideInInspector] public Vector3 playerVelocity;
 
-    public Vector2 orientation;
+    public Vector2 orientationVect;
     private Vector2 move;
 
     public bool canMove = true;
@@ -42,8 +42,21 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             move = ctx.ReadValue<Vector2>();
-            orientation = ctx.ReadValue<Vector2>();
-            orientation = orientation.normalized;
+            if(ctx.ReadValue<Vector2>() != Vector2.zero && controller.minMoveDistance <= ctx.ReadValue<Vector2>().magnitude * playerSpeed)
+            {
+                orientationVect = ctx.ReadValue<Vector2>();
+
+                if (Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
+                {
+                    orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
+                }
+                else
+                {
+                    orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
+                }
+                orientationVect.Normalize();
+                //Debug.Log("Orientation : " + orientationVect);
+            }
         }
         else
         {

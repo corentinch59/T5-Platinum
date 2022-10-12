@@ -6,8 +6,9 @@ using UnityEngine;
 public struct CorpseData
 {
     [Header("Name")]              public string name;
-    [Header("Texture")]           public Material texture;
-    [Header("Localisations")]     public List<LocalisationsEnum> localisations;
-    [Header("Coffin Type")]       public CoffinType coffinType;
-    [Header("Size")] [Range(1,3)] public int size;
+    [Header("Size")]              public RequestDataBase.size size;
+    [Header("Corpse Type")]       public RequestDataBase.corpseType corpseType;
+    [Header("Localisations")]     public RequestDataBase.localisation localisation;
+    [Header("Coffin Type")]       public RequestDataBase.coffin coffinType;
+    [Header("Specificity")]       public RequestDataBase.specificity specificity;
 }

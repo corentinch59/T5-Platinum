@@ -7,6 +7,8 @@ public class Corpse : Carryable
     public CorpseData corpseData;
     private Vector2 direction;
     private List<PlayerTest> players = new List<PlayerTest>();
+
+    public Sprite spriteCarry;
  
     private void Update()
     {
@@ -29,6 +31,7 @@ public class Corpse : Carryable
         }
 
         // One player
+        player.GetComponent<SpriteRenderer>().sprite = spriteCarry;
         player.interactableObj = null;
         player.carriedObj = this;
         player.carriedObj.gameObject.SetActive(false);

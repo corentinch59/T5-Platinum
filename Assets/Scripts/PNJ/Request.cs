@@ -11,7 +11,7 @@ public class Request : MonoBehaviour
 {
     [SerializeField] private ScriptableTextureData _textureData;
     [SerializeField] private RequestDataBase _requestInfos;
-    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshPro nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
@@ -41,7 +41,7 @@ public class Request : MonoBehaviour
         }
     }
 
-    private void SetRequest()
+    public void SetRequest()
     {
         int index = GetRandomNumber(_questManager.allQuests.Count);
         _requestInfos = _questManager.allQuests[index];
