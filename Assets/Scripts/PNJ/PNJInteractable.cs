@@ -6,7 +6,7 @@ public class PNJInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private Request request;
     [SerializeField] private GameObject requestImg;
-    [SerializeField] private Corpse corpseToCreate;
+    [SerializeField] private GameObject corpseToCreate;
 
     private void Start()
     {
@@ -32,7 +32,32 @@ public class PNJInteractable : MonoBehaviour, IInteractable
     public void Interact(PlayerTest player)
     {
         requestImg.SetActive(false);
-        Corpse corpseCreated = Instantiate(corpseToCreate, transform.position, Quaternion.identity);
+        request.AcceptRequest();
+
+        // spawn Corpse To Bury
+        Vector3 spawn = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
+        GameObject corpseCreated = Instantiate(corpseToCreate, spawn, Quaternion.identity);
+
+        if(corpseCreated.TryGetComponent(out Corpse c))
+        {
+            // corpseCreated is taking data from the request
+            c.corpseData = UpdateData(c.corpseData);
+
+        }
+        Destroy(this); // enable = false not working
+        // move back
         Debug.Log("Quest accepted");
+    }
+
+    private CorpseData UpdateData(CorpseData cData)
+    {
+        CorpseData newCD = new CorpseData();
+        newCD.name = request._requestInfos.name;
+        newCD.size = request._requestInfos.siz;
+        newCD.corpseType = request._requestInfos.corps;
+        newCD.localisation = request._requestInfos.loc;
+        newCD.coffinType = request._requestInfos.cof;
+        newCD.specificity = request._requestInfos.spec;
+        return newCD;
     }
 }

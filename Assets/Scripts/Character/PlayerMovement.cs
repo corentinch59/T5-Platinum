@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private const float gravityValue = -9.81f;
     private CharacterController controller;
-    private Vector2 orientation;
+    public Vector2 orientationVect;
     private Vector2 move;
     private IInteractable interactable;
 
@@ -48,8 +48,19 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             move = ctx.ReadValue<Vector2>();
-            orientation = ctx.ReadValue<Vector2>();
-            orientation = orientation.normalized;
+            if (ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
+            {
+                orientationVect = ctx.ReadValue<Vector2>();
+                if (Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
+                {
+                    orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
+                }
+                else
+                {
+                    orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
+                }
+                orientationVect.Normalize();
+            }
         }
         else
         {
