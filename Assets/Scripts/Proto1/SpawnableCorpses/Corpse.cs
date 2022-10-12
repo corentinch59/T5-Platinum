@@ -7,6 +7,8 @@ public class Corpse : Carryable
     public CorpseData corpseData;
     private Vector2 direction;
     private List<PlayerTest> players = new List<PlayerTest>();
+    public float radius = 5f;
+    public LayerMask localisationsLayer;
 
     public Sprite spriteCarry;
  
@@ -19,22 +21,81 @@ public class Corpse : Carryable
     {
         Debug.Log("Interaction");
         // need many players
-        if(corpseData.size > 1)
+        if((int)corpseData.size > 0)
         {
             players.Add(player);
             foreach(PlayerTest p in players)
             {
-                p.objToPutDown = new PutDownCorpse(); // multiple people have to put down or leave the corpse
-                p.carriedObj = this;
+                p.carriedObj = this; // multiple people have to put down or leave the corpse
                 player.interactableObj = null;
             }
         }
-
         // One player
         player.GetComponent<SpriteRenderer>().sprite = spriteCarry;
         player.interactableObj = null;
         player.carriedObj = this;
         player.carriedObj.gameObject.SetActive(false);
-        player.objToPutDown = new PutDownCorpse();
+
+    }
+
+    public override void PutDown(PlayerTest player)
+    {
+        // corpse became grave (sprite)
+        // update CorpseData
+        UpdateLocalisation();
+
+        Debug.Log("Corpse put down");
+
+        // Visual Debug 
+        player.carriedObj.gameObject.SetActive(true);
+        player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
+        player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
+
+        //put down corpse in front of a player -> use rotation but now just t.right
+        player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
+            player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
+
+        // check if the corpse correspond to the quest -> finish quest
+
+        player.carriedObj = null;
+    }
+
+    [ContextMenu("Update Localisations")]
+    public void UpdateLocalisation()
+    {
+        Collider[] corpsInAreas = Physics.OverlapSphere(transform.position, radius, localisationsLayer);
+
+        foreach (Collider col in corpsInAreas)
+        {
+            CorpseData newLoc;
+            newLoc.localisation = AddLocalisation(col.gameObject.tag);
+            newLoc.name = corpseData.name;
+            newLoc.size = corpseData.size;
+            newLoc.corpseType = corpseData.corpseType;
+            newLoc.coffinType = corpseData.coffinType;
+            newLoc.specificity = corpseData.specificity;
+        }
+    }
+
+    [ContextMenu("Remove Localisations")]
+    public void RemoveLocalisations()
+    {
+        CorpseData newLoc;
+        newLoc.localisation = AddLocalisation("");
+        newLoc.name = corpseData.name;
+        newLoc.size = corpseData.size;
+        newLoc.corpseType = corpseData.corpseType;
+        newLoc.coffinType = corpseData.coffinType;
+        newLoc.specificity = corpseData.specificity;
+    }
+
+    public RequestDataBase.localisation AddLocalisation(string tag)
+    {
+        switch (tag)
+        {
+            case "Water": return RequestDataBase.localisation.WATER;
+            case "Tree": return RequestDataBase.localisation.TREE;
+            default: return RequestDataBase.localisation.NONE;
+        }
     }
 }

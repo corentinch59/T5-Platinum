@@ -22,7 +22,6 @@ public class PlayerTest : MonoBehaviour
     [HideInInspector] public PlayerMovement playerMovement;
 
     public Sprite playerNotCarrying;
-    public IPutDown objToPutDown;
     public Carryable carriedObj;
 
     [Header("Debug")]
@@ -174,7 +173,7 @@ public class PlayerTest : MonoBehaviour
         {
             if (interactableObj == null && carriedObj != null)
             {
-                objToPutDown.PutDown(this);
+                carriedObj.PutDown(this);
             }
 
             if (interactableObj != null)

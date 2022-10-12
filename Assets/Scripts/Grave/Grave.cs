@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Have to add a collider
 public class Grave : MonoBehaviour
 {
     public float radius;
-    /*[HideInInspector]*/ public List<LocalisationsEnum> localisations = new List<LocalisationsEnum>(); 
+    public RequestDataBase.localisation localisation; 
     public LayerMask localisationsLayer;
 
     [ContextMenu("Update Localisations")]
@@ -16,23 +15,23 @@ public class Grave : MonoBehaviour
 
         foreach (Collider col in corpsInAreas)
         {
-            localisations.Add(AddLocalisation(col.gameObject.tag));
+            localisation = AddLocalisation(col.gameObject.tag);
         }
     }
 
     [ContextMenu("Remove Localisations")]
     public void RemoveLocalisations()
     {
-        localisations.Clear();
+        localisation = AddLocalisation("");
     }
 
-    public LocalisationsEnum AddLocalisation(string tag)
+    public RequestDataBase.localisation AddLocalisation(string tag)
     {
         switch (tag)
         {
-            case "Water": return LocalisationsEnum.WATER;
-            case "Tree": return LocalisationsEnum.TREE;
-            default: return LocalisationsEnum.NONE;
+            case "Water": return RequestDataBase.localisation.WATER;
+            case "Tree": return RequestDataBase.localisation.TREE;
+            default: return RequestDataBase.localisation.NONE;
         }
     }
 

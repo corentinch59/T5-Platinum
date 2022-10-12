@@ -5,12 +5,15 @@ using UnityEngine.InputSystem;
 using UnityEngine.Jobs;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Linq;
 
 public class PlayerProto2 : MonoBehaviour
 {
     [Header("Player Controls")]
     [SerializeField] private float playerSpeed;
     [SerializeField] private float interactionDuration;
+    [SerializeField] private float raycastRadius;
+    [SerializeField] private LayerMask raycastMask;
 
     [Header("Prefabs to spawn")]
     public GameObject holePrefab;
@@ -26,6 +29,7 @@ public class PlayerProto2 : MonoBehaviour
     private Transform canvaQte;
     private Image qteFillImage;
     private IEnumerator myCoroutine;
+    private Hole detectedHole;
 
     private void Start()
     {
@@ -37,7 +41,26 @@ public class PlayerProto2 : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawLine(transform.position, new Vector3(transform.position.x + orientationVect.x, transform.position.y , transform.position.z + orientationVect.y));
+        Debug.DrawLine(transform.position, new Vector3(transform.position.x + orientationVect.x, transform.position.y, transform.position.z + orientationVect.y));
+        RaycastHit[] colliders = Physics.SphereCastAll(transform.position, raycastRadius, transform.forward, Mathf.Infinity, raycastMask);
+        if(colliders.Length > 0)
+        {
+            detectedHole = colliders[0].collider.GetComponent<Hole>();
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                float distanceCurrent = (colliders[i].transform.position - transform.position).magnitude;
+                float distancePrevious = (detectedHole.transform.position - transform.position).magnitude;
+
+                if(distanceCurrent > distancePrevious)
+                {
+                    detectedHole = colliders[i].collider.GetComponent<Hole>();
+                }
+            }
+        }
+        else
+        {
+            detectedHole = null;
+        }
     }
 
     private void FixedUpdate()
@@ -108,6 +131,8 @@ public class PlayerProto2 : MonoBehaviour
 
             yield return null;
         }
+
+        Dig(); // Diggy diggy hole
         canvaQte.gameObject.SetActive(false);
         yield return null;
     }
@@ -116,6 +141,15 @@ public class PlayerProto2 : MonoBehaviour
 
     private void Dig()
     {
+        Debug.Log(detectedHole);
+        if (detectedHole)
+        {
+            detectedHole.SetHoleSize = 1;
+        }
+        else
+        {
+            Instantiate(holePrefab, transform.position + new Vector3(orientationVect.x, 0, orientationVect.y), Quaternion.identity);
+        }
 
     }
 }

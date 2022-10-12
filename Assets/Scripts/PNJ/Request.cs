@@ -10,15 +10,18 @@ using Random = UnityEngine.Random;
 public class Request : MonoBehaviour
 {
     [SerializeField] private ScriptableTextureData _textureData;
-    [SerializeField] private RequestDataBase _requestInfos;
+    [SerializeField] public RequestDataBase _requestInfos;
     [SerializeField] private TextMeshPro nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
     [SerializeField] private GameObject questToInstantiate;
-    [SerializeField] private QuestManager _questManager;
+    [SerializeField] private GameObject quest;
+    [SerializeField] public QuestManager _questManager;
     private GameObject questParent;
-    
+  
+
+
     private void Awake()
     {
         _questManager = FindObjectOfType<QuestManager>();
@@ -80,8 +83,8 @@ public class Request : MonoBehaviour
     }
 
     public void SetQuestInUI()
-    {   
-        GameObject quest = Instantiate(questToInstantiate, questParent.transform);
+    {
+        quest = Instantiate(questToInstantiate, questParent.transform);
         quest.GetComponent<Quest>().InitialiseQuestUI(_requestInfos, corpseImage.texture,
             localisationImage.texture,coffinImage.texture);
     }

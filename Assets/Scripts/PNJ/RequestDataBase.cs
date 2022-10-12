@@ -14,6 +14,7 @@ public class RequestDataBase
 
     public enum localisation
     {
+        NONE,
         TREE,
         WATER,
         INCINERATOR,

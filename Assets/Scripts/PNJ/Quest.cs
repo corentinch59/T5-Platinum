@@ -44,9 +44,6 @@ public class Quest : MonoBehaviour
                 //StartCoroutine(FinishQuest());
             }
         }
- 
-       
-        
     }
 
     public void InitialiseQuestUI(RequestDataBase request, Texture corpseT, Texture localisationT,
