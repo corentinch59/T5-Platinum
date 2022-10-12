@@ -51,7 +51,7 @@ public class DeuilRequest : MonoBehaviour
         SetQuestInUI();
         _questManager.activeDeuilQuests.Add(_requestInfos);
         _questManager.questFinished.Remove(_requestInfos);
-        if (_questManager.activeDeuilQuests.Count > 0)
+        if (_questManager.questFinished.Count > 0)
         {
             SetRequest();
         }
