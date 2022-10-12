@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Jobs;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlayerProto2 : MonoBehaviour
 {
     [Header("Player Controls")]
     [SerializeField] private float playerSpeed;
     [SerializeField] private float interactionDuration;
+
+    [Header("Prefabs to spawn")]
+    public GameObject holePrefab;
 
     [HideInInspector] public Vector3 moveDir;
     [HideInInspector] public Vector3 playerVelocity;
@@ -32,7 +37,7 @@ public class PlayerProto2 : MonoBehaviour
 
     private void Update()
     {
-        
+        Debug.DrawLine(transform.position, new Vector3(transform.position.x + orientationVect.x, transform.position.y , transform.position.z + orientationVect.y));
     }
 
     private void FixedUpdate()
@@ -52,16 +57,19 @@ public class PlayerProto2 : MonoBehaviour
         if (canMove)
         {
             move = ctx.ReadValue<Vector2>();
-            orientationVect = ctx.ReadValue<Vector2>();
-            orientationVect.Normalize();
 
-            if(Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
+            if(ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
             {
-                orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
-            }
-            else
-            {
-                orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
+                orientationVect = ctx.ReadValue<Vector2>();
+                if(Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
+                {
+                    orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
+                }
+                else
+                {
+                    orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
+                }
+                orientationVect.Normalize();
             }
         }
         else
@@ -105,4 +113,9 @@ public class PlayerProto2 : MonoBehaviour
     }
 
     //End of QTE code
+
+    private void Dig()
+    {
+
+    }
 }
