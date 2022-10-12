@@ -72,7 +72,7 @@ public class DeuilRequest : MonoBehaviour
     {
         nameText.text = _requestInfos.name;
         TextureData tex = _textureData._TextureData;
-        corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corp];
+        corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corps];
     }
 
     public void SetQuestInUI()
