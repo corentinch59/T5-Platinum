@@ -37,3 +37,7 @@ MonoBehaviour:
     loc: 0
     cof: 0
     corp: 0
+  - name: Corentin
+    loc: 1
+    cof: 0
+    corp: 1

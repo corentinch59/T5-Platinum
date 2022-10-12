@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Tree
   - Water
+  - QuestUI
+  - Score
+  - DeuilQuestUI
   layers:
   - Default
   - TransparentFX
