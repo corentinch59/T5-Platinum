@@ -45,7 +45,7 @@ public class ScreenShot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         { 
             //ScreenCapture.CaptureScreenshot("ScreenShot.png");
-            StartCoroutine(TakeScreenShot());
+            //StartCoroutine(TakeScreenShot());
             //takeScreenShot = true;
            
         }
