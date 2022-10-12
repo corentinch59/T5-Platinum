@@ -38,7 +38,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Interact"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""5ccefa9e-183a-41e9-b7aa-39a94f34fce7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -61,7 +61,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ce07c395-c795-4884-ba69-df72f0dabd08"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -97,6 +97,15 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""name"": ""Ready"",
                     ""type"": ""Button"",
                     ""id"": ""c3909571-cddd-4d00-a05f-e2dfc4ff82c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UnReady"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef91c638-039c-45dc-a7c1-36e036ea2ef2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -158,6 +167,65 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""action"": ""Ready"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6fdfac58-daa3-457d-ad80-9b9ccfad9cc2"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UnReady"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerProto3"",
+            ""id"": ""aba416ab-22d4-4cd7-873b-ef7a19e0c3ae"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""c3f7bec8-09dd-46df-a3ad-86e7041874a0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Action"",
+                    ""type"": ""Value"",
+                    ""id"": ""5da23c4d-cd08-4633-ab9c-e332688df955"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=1,pressPoint=0.1)"",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4487a69f-99f4-4c5d-b913-8b06581aee78"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""942107ea-7548-4c06-979b-27ac32f16bae"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -173,6 +241,11 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_SelectionScreenControlE_ChangeLeft = m_SelectionScreenControlE.FindAction("ChangeLeft", throwIfNotFound: true);
         m_SelectionScreenControlE_ChangeRight = m_SelectionScreenControlE.FindAction("ChangeRight", throwIfNotFound: true);
         m_SelectionScreenControlE_Ready = m_SelectionScreenControlE.FindAction("Ready", throwIfNotFound: true);
+        m_SelectionScreenControlE_UnReady = m_SelectionScreenControlE.FindAction("UnReady", throwIfNotFound: true);
+        // PlayerProto3
+        m_PlayerProto3 = asset.FindActionMap("PlayerProto3", throwIfNotFound: true);
+        m_PlayerProto3_Move = m_PlayerProto3.FindAction("Move", throwIfNotFound: true);
+        m_PlayerProto3_Action = m_PlayerProto3.FindAction("Action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -276,6 +349,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_SelectionScreenControlE_ChangeLeft;
     private readonly InputAction m_SelectionScreenControlE_ChangeRight;
     private readonly InputAction m_SelectionScreenControlE_Ready;
+    private readonly InputAction m_SelectionScreenControlE_UnReady;
     public struct SelectionScreenControlEActions
     {
         private @CharacterControls m_Wrapper;
@@ -283,6 +357,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         public InputAction @ChangeLeft => m_Wrapper.m_SelectionScreenControlE_ChangeLeft;
         public InputAction @ChangeRight => m_Wrapper.m_SelectionScreenControlE_ChangeRight;
         public InputAction @Ready => m_Wrapper.m_SelectionScreenControlE_Ready;
+        public InputAction @UnReady => m_Wrapper.m_SelectionScreenControlE_UnReady;
         public InputActionMap Get() { return m_Wrapper.m_SelectionScreenControlE; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -301,6 +376,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @Ready.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnReady;
                 @Ready.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnReady;
                 @Ready.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnReady;
+                @UnReady.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnUnReady;
+                @UnReady.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnUnReady;
+                @UnReady.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnUnReady;
             }
             m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface = instance;
             if (instance != null)
@@ -314,10 +392,54 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @Ready.started += instance.OnReady;
                 @Ready.performed += instance.OnReady;
                 @Ready.canceled += instance.OnReady;
+                @UnReady.started += instance.OnUnReady;
+                @UnReady.performed += instance.OnUnReady;
+                @UnReady.canceled += instance.OnUnReady;
             }
         }
     }
     public SelectionScreenControlEActions @SelectionScreenControlE => new SelectionScreenControlEActions(this);
+
+    // PlayerProto3
+    private readonly InputActionMap m_PlayerProto3;
+    private IPlayerProto3Actions m_PlayerProto3ActionsCallbackInterface;
+    private readonly InputAction m_PlayerProto3_Move;
+    private readonly InputAction m_PlayerProto3_Action;
+    public struct PlayerProto3Actions
+    {
+        private @CharacterControls m_Wrapper;
+        public PlayerProto3Actions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_PlayerProto3_Move;
+        public InputAction @Action => m_Wrapper.m_PlayerProto3_Action;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerProto3; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerProto3Actions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerProto3Actions instance)
+        {
+            if (m_Wrapper.m_PlayerProto3ActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnMove;
+                @Action.started -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnAction;
+                @Action.performed -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnAction;
+                @Action.canceled -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnAction;
+            }
+            m_Wrapper.m_PlayerProto3ActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Action.started += instance.OnAction;
+                @Action.performed += instance.OnAction;
+                @Action.canceled += instance.OnAction;
+            }
+        }
+    }
+    public PlayerProto3Actions @PlayerProto3 => new PlayerProto3Actions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -328,5 +450,11 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         void OnChangeLeft(InputAction.CallbackContext context);
         void OnChangeRight(InputAction.CallbackContext context);
         void OnReady(InputAction.CallbackContext context);
+        void OnUnReady(InputAction.CallbackContext context);
+    }
+    public interface IPlayerProto3Actions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnAction(InputAction.CallbackContext context);
     }
 }

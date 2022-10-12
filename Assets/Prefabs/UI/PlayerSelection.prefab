@@ -375,14 +375,6 @@ MonoBehaviour:
     m_ActionId: 67d3ff45-f782-42c8-84e1-6a819aeec05a
     m_ActionName: Player/Move
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0d3a320c-7cb7-41b9-af19-667cc9f7ca21
-    m_ActionName: Player/Dig
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8b0950a0-0a45-4c6a-b490-fb702dde4a68
-    m_ActionName: Player/Dig Up
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3155147395489173271}
         m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
@@ -430,6 +422,34 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c3909571-cddd-4d00-a05f-e2dfc4ff82c8
     m_ActionName: SelectionScreenControlE/Ready[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5ccefa9e-183a-41e9-b7aa-39a94f34fce7
+    m_ActionName: Player/Interact[/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3155147395489173271}
+        m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
+        m_MethodName: RemovePlayer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ef91c638-039c-45dc-a7c1-36e036ea2ef2
+    m_ActionName: SelectionScreenControlE/UnReady[/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c3f7bec8-09dd-46df-a3ad-86e7041874a0
+    m_ActionName: PlayerProto3/Move[/DualShock4GamepadHID/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5da23c4d-cd08-4633-ab9c-e332688df955
+    m_ActionName: PlayerProto3/Action[/DualShock4GamepadHID/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: SelectionScreenControlE

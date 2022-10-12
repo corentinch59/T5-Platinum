@@ -5,24 +5,20 @@ using DG.Tweening;
 using UnityEngine.InputSystem;
 
 public delegate void ReadyEventHandler();
+public delegate void RemovePlayerEventHandler(GameObject player);
 public class ChoseYourChara : MonoBehaviour
 {
     [SerializeField] private List<GameObject> charas = new List<GameObject>();
-    //[SerializeField] private Canvas canvas;
 
     private GameObject currentChara; 
 
     public static event ReadyEventHandler OnReady;
+    public static event RemovePlayerEventHandler OnRemovePlayer;
 
     public bool isReady = false;
 
-    private Vector3 leftPos;
-    private Vector3 rightPos;
-
     private void Start()
     {
-        //transform.SetParent(canvas.transform);
-
         currentChara = charas[0];
         for (int i = 0; i < charas.Count; i++)
         {
@@ -30,16 +26,11 @@ public class ChoseYourChara : MonoBehaviour
         }
         
         currentChara.SetActive(true);
-
-        leftPos = new Vector3(-25f, 0f, 0f);
-        leftPos = new Vector3(25f, 0f, 0f);
-
-
     }
 
     public void MoveRight(InputAction.CallbackContext context)
     {
-        if (isReady) return;
+        if (isReady) return;//on bloque si le joueur est ready 
 
         if (context.performed)
         {
@@ -60,7 +51,7 @@ public class ChoseYourChara : MonoBehaviour
 
     public void MoveLeft(InputAction.CallbackContext context)
     {
-        if (isReady) return;
+        if (isReady) return;//on bloque si le joueur est ready 
         if (context.performed)
         {
             if (charas.IndexOf(currentChara) == charas.Count - 1)
@@ -82,18 +73,28 @@ public class ChoseYourChara : MonoBehaviour
     {
         if (context.performed)
         {
-            if (isReady)
-            {
-                isReady = false;
-                currentChara.transform.DOScale(1f, 0.5f);
-            }
-            else
+            if (!isReady)//activation de l'etat ready 
             {
                 currentChara.transform.DOScale(2f, 0.5f);
                 isReady = true;
                 OnReady?.Invoke();
             }
         }
-        
+    }
+
+    public void RemovePlayer(InputAction.CallbackContext ctx){
+
+        if (ctx.performed)
+        {
+            if (isReady)//Cancel l'etat ready 
+            {
+                isReady = false;
+                currentChara.transform.DOScale(1f, 0.5f);
+            }
+            else//Remove du player
+            {
+                OnRemovePlayer?.Invoke(gameObject);
+            }
+        }
     }
 }

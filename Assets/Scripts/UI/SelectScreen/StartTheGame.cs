@@ -7,87 +7,68 @@ public class StartTheGame : MonoBehaviour
 {
 
     [SerializeField] private List<Transform> listPos = new List<Transform>();
-    [SerializeField] public List<GameObject> players = new List<GameObject>();
+    [SerializeField] private GameObject[] players = new GameObject[4];
     [SerializeField] private PlayerInputManager m;
     
     
     private void Start()
     {
         ChoseYourChara.OnReady += ChoseYourChara_OnReady;
+        ChoseYourChara.OnRemovePlayer += ChoseYourChara_OnRemovePlayer;        
+    }
+
+    private void ChoseYourChara_OnRemovePlayer(GameObject player)
+    {
+        //On enleve le player du tableau + on le detruit
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] == player)
+            {
+                players[i] = null;
+            }
+        }
+        Destroy(player);
     }
 
     private void ChoseYourChara_OnReady()
     {
         //On test si tous les joueurs sont ready
-        //foreach (ChoseYourChara chara in listPos)
-        //{
-        //    if (!chara.isReady) return;
-        //}
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] != null && !players[i].GetComponent<ChoseYourChara>().isReady)
+            {
+                return;
+            }
+        }
 
         Debug.Log("ALL READY");
         //Lancer un timer 3 2 1 GO et le jeu 
-    }
-
-    public void OnCreateCharacter(PlayerInput playerInput)
-    {
-        //GameObject MANANA = Instantiate(eeeeee);
-        //MANANA.transform.position = new Vector3(5f, 0f, 0f);
-        Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
-
-        players.Add(playerInput.gameObject);
-        
-        switch (m.playerCount)
-        {
-            case 1:
-                m.playerPrefab.transform.position = listPos[0].position;
-                break;
-            case 2:
-                m.playerPrefab.transform.position = listPos[1].position;
-                break;
-            case 3:
-                m.playerPrefab.transform.position = listPos[2].position;
-                break;
-            case 4:
-                m.playerPrefab.transform.position = listPos[3].position;
-                break;
-            default:
-                m.playerPrefab.transform.position = listPos[0].position;
-                break;
-        }
     }
 
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
+        //On recupere le GameObject Du player
         GameObject player;
         player = playerInput.gameObject;
 
-        players.Add(player);
 
-
-        switch (m.playerCount)
+        //Ajout du player dans le tableau + on met dans une position libre de gauche a droite
+        for (int i = 0; i < players.Length; i++)
         {
-            case 1:
-                player.transform.position = listPos[0].position;
-                break;
-            case 2:
-                player.transform.position = listPos[1].position;
-                break;
-            case 3:
-                player.transform.position = listPos[2].position;
-                break;
-            case 4:
-                player.transform.position = listPos[3].position;
-                break;
-            default:
-                player.transform.position = listPos[0].position;
-                break;
+            if (players[i] == null) //test si une place est libre de gauche a droite 
+            {
+                players[i] = player;
+                player.transform.position = listPos[i].position;
+                break;//On break car on a trouve une place
+            }
         }
     }
 
     private void OnDestroy()
     {
+        ChoseYourChara.OnRemovePlayer -= ChoseYourChara_OnRemovePlayer;
         ChoseYourChara.OnReady -= ChoseYourChara_OnReady;
     }
 }
