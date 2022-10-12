@@ -5,24 +5,30 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("PlayerControls")]
+    [Header("Player Controls")]
     [SerializeField] private float playerSpeed;
-
-    private CharacterController controller;
-
-    private const float gravityValue = -9.81f;
+    [SerializeField] private float digDistance;
+    [SerializeField] private float interactionRange;
 
     [HideInInspector] public Vector3 moveDir;
     [HideInInspector] public Vector3 playerVelocity;
-
-    public Vector2 orientationVect;
-    private Vector2 move;
-
     public bool canMove = true;
+
+    private const float gravityValue = -9.81f;
+    private CharacterController controller;
+    private Vector2 orientation;
+    private Vector2 move;
+    private IInteractable interactable;
+
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void FixedUpdate()
@@ -42,25 +48,18 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             move = ctx.ReadValue<Vector2>();
-            if(ctx.ReadValue<Vector2>() != Vector2.zero && controller.minMoveDistance <= ctx.ReadValue<Vector2>().magnitude * playerSpeed)
-            {
-                orientationVect = ctx.ReadValue<Vector2>();
-
-                if (Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
-                {
-                    orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
-                }
-                else
-                {
-                    orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
-                }
-                orientationVect.Normalize();
-                //Debug.Log("Orientation : " + orientationVect);
-            }
+            orientation = ctx.ReadValue<Vector2>();
+            orientation = orientation.normalized;
         }
         else
         {
             move = Vector2.zero;
         }
+
+    }
+
+    public void OnInteract(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Interacted");
     }
 }
