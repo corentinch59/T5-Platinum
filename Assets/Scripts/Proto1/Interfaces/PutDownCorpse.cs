@@ -11,11 +11,12 @@ public class PutDownCorpse : IPutDown
 
         // Debug
         player.carriedObj.gameObject.SetActive(true);
+        player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
         player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
         player.playerMovement.canMove = false;
         //put down corpse in front of a player -> use rotation but now just t.right
-        player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientation.x * 1.5f, 
-            player.transform.position.y, player.transform.position.z + player.playerMovement.orientation.y * 1.5f);
+        player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f, 
+            player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
 
         player.carriedObj = null;
         player.playerMovement.canMove = true;
