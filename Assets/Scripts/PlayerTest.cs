@@ -19,10 +19,15 @@ public class PlayerTest : MonoBehaviour
     public LayerMask graveLayer;
     public float distGraveCreation;
 
-    private PlayerMovement playerMovement;
+    [HideInInspector] public PlayerMovement playerMovement;
 
-    //public IPutDown objToPutDown;
-    //public Carryable carriedObj;
+    public IPutDown objToPutDown;
+    public Carryable carriedObj;
+
+    [Header("Debug")]
+    public float radiusSphere = 5f;
+    public IInteractable interactableObj;
+    public LayerMask interactableLayer;
 
     private void Start()
     {
@@ -36,7 +41,7 @@ public class PlayerTest : MonoBehaviour
         }
 
         playerMovement = GetComponent<PlayerMovement>();
-
+         
         numberMashDigUpInit = numberMashDigUp;
     }
 
@@ -48,6 +53,31 @@ public class PlayerTest : MonoBehaviour
         if (!corpse.activeSelf)
         {
             // can carry corpse
+        }
+
+        // check interactables
+        Collider[] interactables;
+        interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
+
+        if (interactables.Length > 0)
+        {
+            float min = float.MaxValue;
+
+            foreach(Collider col in interactables)
+            {
+                if (col.gameObject.TryGetComponent(out IInteractable interactable))
+                {
+                    float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
+                    if(dist < min)
+                    {
+                        min = dist;
+                        interactableObj = interactable;
+                    }
+                }
+            }
+        } else
+        {
+            interactableObj = null;
         }
     }
 
@@ -137,9 +167,28 @@ public class PlayerTest : MonoBehaviour
        
     }
 
+    public void InteractInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if (interactableObj == null && carriedObj != null)
+            {
+                objToPutDown.PutDown(this);
+            }
+
+            if (interactableObj != null)
+            {
+                interactableObj.Interact(this);
+            }
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireCube(transform.position + transform.forward * distGraveCreation, graveToCreate.transform.localScale);
         Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(transform.position + transform.forward * distGraveCreation, graveToCreate.transform.localScale);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, radiusSphere);
+
     }
 }

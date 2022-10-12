@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public Vector3 moveDir;
     [HideInInspector] public Vector3 playerVelocity;
 
-    private Vector2 orientation;
+    public Vector2 orientation;
     private Vector2 move;
 
     public bool canMove = true;
