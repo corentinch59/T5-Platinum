@@ -9,6 +9,7 @@ public class Corpse : Carryable
     private List<PlayerTest> players = new List<PlayerTest>();
     public float radius = 5f;
     public LayerMask localisationsLayer;
+    public Quest thisQuest;
 
     public Sprite spriteCarry;
  
@@ -56,6 +57,7 @@ public class Corpse : Carryable
             player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
 
         // check if the corpse correspond to the quest -> finish quest
+        thisQuest.FinishQuest(corpseData);
 
         player.carriedObj = null;
     }
@@ -97,5 +99,17 @@ public class Corpse : Carryable
             case "Tree": return RequestDataBase.localisation.TREE;
             default: return RequestDataBase.localisation.NONE;
         }
+    }
+
+    private CorpseData UpdateData(CorpseData cData)
+    {
+        CorpseData newCD = new CorpseData();
+        newCD.name = thisQuest.requestInfos.name;
+        newCD.size = thisQuest.requestInfos.siz;
+        newCD.corpseType = thisQuest.requestInfos.corps;
+        newCD.coffinType = thisQuest.requestInfos.cof;
+        newCD.specificity = thisQuest.requestInfos.spec;
+        //newCD.localisation = AddLocalisation(col.gameObject.tag);
+        return newCD;
     }
 }

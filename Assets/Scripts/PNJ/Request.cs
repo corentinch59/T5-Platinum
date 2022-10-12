@@ -16,7 +16,7 @@ public class Request : MonoBehaviour
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
     [SerializeField] private GameObject questToInstantiate;
-    [SerializeField] private GameObject quest;
+    [SerializeField] public GameObject quest;
     [SerializeField] public QuestManager _questManager;
     private GameObject questParent;
   
