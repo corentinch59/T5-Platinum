@@ -209,9 +209,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
-  digDistance: 0
-  interactionRange: 0
   interactionDuration: 2
+  raycastRadius: 0
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 64
+  holePrefab: {fileID: 7901434866790508091, guid: 4d63c4b30cf348542af2ce42ccb31710, type: 3}
   moveDir: {x: 0, y: 0, z: 0}
   playerVelocity: {x: 0, y: 0, z: 0}
   canMove: 1
