@@ -18,9 +18,7 @@ public class Request : MonoBehaviour
     [SerializeField] private GameObject questToInstantiate;
     [SerializeField] private QuestManager _questManager;
     private GameObject questParent;
-  
-
-
+    
     private void Awake()
     {
         _questManager = FindObjectOfType<QuestManager>();
@@ -82,7 +80,7 @@ public class Request : MonoBehaviour
     }
 
     public void SetQuestInUI()
-    {
+    {   
         GameObject quest = Instantiate(questToInstantiate, questParent.transform);
         quest.GetComponent<Quest>().InitialiseQuestUI(_requestInfos, corpseImage.texture,
             localisationImage.texture,coffinImage.texture);
