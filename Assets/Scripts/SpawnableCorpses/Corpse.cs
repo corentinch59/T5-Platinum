@@ -22,13 +22,13 @@ public class Corpse : Carryable
             players.Add(player);
             foreach(PlayerTest p in players)
             {
-                p.objToPutDown = new PutDownCorpse(); // multiple people have to put down or leave the corpse
-                p.carriedObj = this;
+                //p.objToPutDown = new PutDownCorpse(); // multiple people have to put down or leave the corpse
+                //p.carriedObj = this;
                 player.interactableObj = null;
             }
         }
         player.interactableObj = null;
-        player.carriedObj = this;
-        player.objToPutDown = new PutDownCorpse();
+        //player.carriedObj = this;
+        //player.objToPutDown = new PutDownCorpse();
     }
 }

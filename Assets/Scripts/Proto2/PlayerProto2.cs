@@ -13,7 +13,7 @@ public class PlayerProto2 : MonoBehaviour
     [SerializeField] [Tooltip("The height at which the hole will spawn in. (can be negative and is adviced to be)")] private float HeightOfHole;
 
     [Header("Raycast Handling")]
-    [SerializeField] private float raycastRadius;
+    [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
     [SerializeField] private LayerMask raycastMask;
 
     [Header("Prefabs to spawn")]

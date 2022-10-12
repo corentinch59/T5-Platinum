@@ -161,10 +161,10 @@ public class PlayerTest : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if (interactableObj == null && carriedObj != null)
-            {
-                objToPutDown.PutDown(this);
-            }
+            //if (interactableObj == null && carriedObj != null)
+            //{
+            //    //objToPutDown.PutDown(this);
+            //}
 
             if (interactableObj != null)
             {

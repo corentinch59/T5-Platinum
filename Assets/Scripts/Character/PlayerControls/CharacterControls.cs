@@ -70,6 +70,76 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SelectionScreenControlE"",
+            ""id"": ""8a54639e-965d-4ebf-a512-0bca53662b6a"",
+            ""actions"": [
+                {
+                    ""name"": ""ChangeLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e17399d-219d-4361-8e40-5d0cb8612fac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1334139-407d-4107-86fc-9c849ba2cae9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""73107d7d-f1a2-422f-aebf-8daa2e338e9f"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db46a877-07cf-403a-92ef-003efa791ed0"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3df8caad-e30b-4010-a868-c107f7f07c14"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71642d6e-2557-4cc6-995b-798d6c672322"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -78,6 +148,10 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        // SelectionScreenControlE
+        m_SelectionScreenControlE = asset.FindActionMap("SelectionScreenControlE", throwIfNotFound: true);
+        m_SelectionScreenControlE_ChangeLeft = m_SelectionScreenControlE.FindAction("ChangeLeft", throwIfNotFound: true);
+        m_SelectionScreenControlE_ChangeRight = m_SelectionScreenControlE.FindAction("ChangeRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,9 +248,55 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // SelectionScreenControlE
+    private readonly InputActionMap m_SelectionScreenControlE;
+    private ISelectionScreenControlEActions m_SelectionScreenControlEActionsCallbackInterface;
+    private readonly InputAction m_SelectionScreenControlE_ChangeLeft;
+    private readonly InputAction m_SelectionScreenControlE_ChangeRight;
+    public struct SelectionScreenControlEActions
+    {
+        private @CharacterControls m_Wrapper;
+        public SelectionScreenControlEActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ChangeLeft => m_Wrapper.m_SelectionScreenControlE_ChangeLeft;
+        public InputAction @ChangeRight => m_Wrapper.m_SelectionScreenControlE_ChangeRight;
+        public InputActionMap Get() { return m_Wrapper.m_SelectionScreenControlE; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SelectionScreenControlEActions set) { return set.Get(); }
+        public void SetCallbacks(ISelectionScreenControlEActions instance)
+        {
+            if (m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface != null)
+            {
+                @ChangeLeft.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeLeft;
+                @ChangeLeft.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeLeft;
+                @ChangeLeft.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeLeft;
+                @ChangeRight.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
+                @ChangeRight.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
+                @ChangeRight.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
+            }
+            m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ChangeLeft.started += instance.OnChangeLeft;
+                @ChangeLeft.performed += instance.OnChangeLeft;
+                @ChangeLeft.canceled += instance.OnChangeLeft;
+                @ChangeRight.started += instance.OnChangeRight;
+                @ChangeRight.performed += instance.OnChangeRight;
+                @ChangeRight.canceled += instance.OnChangeRight;
+            }
+        }
+    }
+    public SelectionScreenControlEActions @SelectionScreenControlE => new SelectionScreenControlEActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface ISelectionScreenControlEActions
+    {
+        void OnChangeLeft(InputAction.CallbackContext context);
+        void OnChangeRight(InputAction.CallbackContext context);
     }
 }

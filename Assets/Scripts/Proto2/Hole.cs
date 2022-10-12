@@ -13,8 +13,8 @@ public class Hole : MonoBehaviour
     }
 
     [Header("Hole stuff")]
-    public float scaleRatioModifier;
-    public float scaleAnimDuration;
+    [Tooltip("The ratio that will determine how much the hole grows in size when digging more")]public float scaleRatioModifier;
+    [Tooltip("How quick the hole grows in size when digging more.")] public float scaleAnimDuration;
 
     private void ModifyHoleSize(int modifier)
     {
