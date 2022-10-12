@@ -41,7 +41,7 @@ public class Quest : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                StartCoroutine(FinishQuest());
+                //StartCoroutine(FinishQuest());
             }
         }
  
@@ -58,13 +58,18 @@ public class Quest : MonoBehaviour
         localisationImage.texture = localisationT;
         coffinImage.texture = coffinT;
     }
-    
-    private IEnumerator FinishQuest()
+
+    public int CheckScoreQuest(CorpseData data)
     {
+        return 1;
+    }
+    
+    private IEnumerator FinishQuest(CorpseData data)
+    {
+        _questManager.UpdateScore(CheckScoreQuest(data));
         isQuestFinished = true;
         image.color = Color.green;
         yield return new WaitForSeconds(1);
-        _questManager.UpdateScore(5);
         _questManager.questFinished.Add(requestInfos);
         _questManager.activeQuests.Remove(requestInfos);
         Destroy(gameObject);
