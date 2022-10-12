@@ -13,6 +13,7 @@ public class DeuilQuest : MonoBehaviour
     [SerializeField] private Slider questSlider;
     [SerializeField] private float questTime = 5;
     [SerializeField] private Image image;
+    private bool isQuestFinished;
     private float timer;
 
 
@@ -23,22 +24,25 @@ public class DeuilQuest : MonoBehaviour
 
     private void Update()
     {
-        if (timer <= questTime)
+        if (!isQuestFinished)
         {
-            timer += Time.deltaTime;
-            questSlider.value = Mathf.Lerp(1, 0, timer / questTime);
-        }
-        else
-        {
-            questSlider.value = 0;
-            StartCoroutine(TimeOutQuest());
+            if (timer <= questTime)
+            {
+                timer += Time.deltaTime;
+                questSlider.value = Mathf.Lerp(1, 0, timer / questTime);
+            }
+            else
+            {
+                questSlider.value = 0;
+                StartCoroutine(TimeOutQuest());
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                StartCoroutine(FinishQuest());
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            StartCoroutine(FinishQuest());
-        }
-       
         
     }
 
