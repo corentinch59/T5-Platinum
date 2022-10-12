@@ -38,7 +38,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Interact"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""5ccefa9e-183a-41e9-b7aa-39a94f34fce7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
