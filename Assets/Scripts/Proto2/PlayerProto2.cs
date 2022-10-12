@@ -53,14 +53,15 @@ public class PlayerProto2 : MonoBehaviour
         {
             move = ctx.ReadValue<Vector2>();
             orientationVect = ctx.ReadValue<Vector2>();
+            orientationVect.Normalize();
 
             if(Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
             {
-                orientationVect = new Vector2(orientationVect.x, 0);
+                orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
             }
             else
             {
-                orientationVect = new Vector2(0, orientationVect.y);
+                orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
             }
         }
         else
@@ -71,6 +72,7 @@ public class PlayerProto2 : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext ctx)
     {
+        // Start of QTE code
         if (ctx.started)
         {
             Debug.Log("Started");
@@ -101,4 +103,6 @@ public class PlayerProto2 : MonoBehaviour
         canvaQte.gameObject.SetActive(false);
         yield return null;
     }
+
+    //End of QTE code
 }
