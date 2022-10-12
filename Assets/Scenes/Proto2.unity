@@ -770,5 +770,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1016201208724435664, guid: 0af9478465d42564fabc8408e3a7e6de, type: 3}
+      propertyPath: deadZone
+      value: 2.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016201208724435664, guid: 0af9478465d42564fabc8408e3a7e6de, type: 3}
+      propertyPath: raycastRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016201208724435664, guid: 0af9478465d42564fabc8408e3a7e6de, type: 3}
+      propertyPath: raycastMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753427678191222607, guid: 0af9478465d42564fabc8408e3a7e6de, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0af9478465d42564fabc8408e3a7e6de, type: 3}
