@@ -168,10 +168,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-<<<<<<< HEAD
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-=======
->>>>>>> Freddy
         // SelectionScreenControlE
         m_SelectionScreenControlE = asset.FindActionMap("SelectionScreenControlE", throwIfNotFound: true);
         m_SelectionScreenControlE_ChangeLeft = m_SelectionScreenControlE.FindAction("ChangeLeft", throwIfNotFound: true);

@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 8f47a7352193ef249a8d0a88910f0fd8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   request: {fileID: 7000400795465650558}
   requestImg: {fileID: 6921176599661398185}
-  corpseToCreate: {fileID: 0}
+  corpseToCreate: {fileID: 694417260691800150, guid: 2c37c2b4654ba6247b38a9d97dfcfac5, type: 3}
   startLoc: {fileID: 0}
   endLoc: {fileID: 0}
 --- !u!1 &2064347732572522947

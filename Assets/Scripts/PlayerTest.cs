@@ -177,20 +177,10 @@ public class PlayerTest : MonoBehaviour
     {
         if (ctx.performed)
         {
-<<<<<<< HEAD
-            //if (interactableObj == null && carriedObj != null)
-            //{
-            //    //objToPutDown.PutDown(this);
-            //}
-
-            if (interactableObj != null)
-=======
-            Debug.Log(interactableObj);
             if (interactableObj == null && carriedObj != null)
             {
                 carriedObj.PutDown(this);
             } else if (interactableObj != null && isCarrying == false)
->>>>>>> Freddy
             {
                 interactableObj.Interact(this);
             }
