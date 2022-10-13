@@ -2,19 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
+using DG.Tweening;
+using TMPro;
 
 public class StartTheGame : MonoBehaviour
 {
-
     [SerializeField] private List<Transform> listPos = new List<Transform>();
     [SerializeField] private GameObject[] players = new GameObject[4];
     [SerializeField] private PlayerInputManager m;
-    
+    //[SerializeField] private VisualEffect vEffect;
+    [SerializeField] private TextMeshProUGUI timerTMP;
+
+    private Tween t;
+    private Coroutine currentCoroutine;
     
     private void Start()
     {
-        ChoseYourChara.OnReady += ChoseYourChara_OnReady;
+        ChoseYourChara.OnReady += CheckIfAllPlayerOnReady;
+        ChoseYourChara.UnReady += ChoseYourChara_UnReady;
         ChoseYourChara.OnRemovePlayer += ChoseYourChara_OnRemovePlayer;        
+    }
+
+    private void CheckIfAllPlayerOnReady()
+    {
+        //On test si tous les joueurs sont ready
+        int x = 0;
+
+        //vEffect.Play();
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] != null && !players[i].GetComponent<ChoseYourChara>().isReady)
+            {
+                return;
+            }
+            else if (players[i] == null) x++;
+        }
+
+        if (x == players.Length) return;
+
+        //Lancer un timer 3 2 1 GO et le jeu
+        currentCoroutine = StartCoroutine(StartGameCoroutine());
+        //StartGameCoroutine();
+    }
+
+    private void ChoseYourChara_UnReady()
+    {
+        if (currentCoroutine != null)
+        {
+            t.Kill();
+            StopCoroutine(StartGameCoroutine());
+            StopAllCoroutines();
+
+            timerTMP.gameObject.SetActive(false);
+            currentCoroutine = null;
+        }
     }
 
     private void ChoseYourChara_OnRemovePlayer(GameObject player)
@@ -28,31 +71,19 @@ public class StartTheGame : MonoBehaviour
             }
         }
         Destroy(player);
-    }
 
-    private void ChoseYourChara_OnReady()
-    {
-        //On test si tous les joueurs sont ready
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (players[i] != null && !players[i].GetComponent<ChoseYourChara>().isReady)
-            {
-                return;
-            }
-        }
-
-        Debug.Log("ALL READY");
-        //Lancer un timer 3 2 1 GO et le jeu 
+        CheckIfAllPlayerOnReady();
     }
 
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
-        //On recupere le GameObject Du player
+        ChoseYourChara_UnReady();
+
+              //On recupere le GameObject Du player
         GameObject player;
         player = playerInput.gameObject;
-
 
         //Ajout du player dans le tableau + on met dans une position libre de gauche a droite
         for (int i = 0; i < players.Length; i++)
@@ -66,9 +97,32 @@ public class StartTheGame : MonoBehaviour
         }
     }
 
+    private IEnumerator StartGameCoroutine()
+    {
+        timerTMP.gameObject.SetActive(true);
+        timerTMP.transform.localScale = Vector3.one;
+        timerTMP.text = "3";
+        t = timerTMP.transform.DOScale(2f, 1f);
+        yield return t.WaitForCompletion();
+
+        timerTMP.transform.localScale =  Vector3.one;
+        timerTMP.text = "2";
+        t = timerTMP.transform.DOScale(2f, 1f);
+        yield return t.WaitForCompletion();
+
+
+        timerTMP.transform.localScale = Vector3.one;
+        timerTMP.text = "1";
+        t = timerTMP.transform.DOScale(2f, 1f);
+        yield return t.WaitForCompletion();
+
+        timerTMP.text = "GO";
+        currentCoroutine = null;
+    }
     private void OnDestroy()
     {
         ChoseYourChara.OnRemovePlayer -= ChoseYourChara_OnRemovePlayer;
-        ChoseYourChara.OnReady -= ChoseYourChara_OnReady;
+        ChoseYourChara.OnReady -= CheckIfAllPlayerOnReady;
+        ChoseYourChara.UnReady -= ChoseYourChara_UnReady;
     }
 }

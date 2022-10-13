@@ -13,6 +13,7 @@ public class ChoseYourChara : MonoBehaviour
     private GameObject currentChara; 
 
     public static event ReadyEventHandler OnReady;
+    public static event ReadyEventHandler UnReady;
     public static event RemovePlayerEventHandler OnRemovePlayer;
 
     public bool isReady = false;
@@ -90,6 +91,7 @@ public class ChoseYourChara : MonoBehaviour
             {
                 isReady = false;
                 currentChara.transform.DOScale(1f, 0.5f);
+                UnReady?.Invoke();
             }
             else//Remove du player
             {
