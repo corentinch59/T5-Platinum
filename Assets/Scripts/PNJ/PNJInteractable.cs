@@ -41,23 +41,11 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         if(corpseCreated.TryGetComponent(out Corpse c))
         {
             // corpseCreated is taking data from the request
-            c.corpseData = UpdateData(c.corpseData);
+            c.thisQuest = request.quest.GetComponent<Quest>();
 
         }
         Destroy(this); // enable = false not working
         // move back
         Debug.Log("Quest accepted");
-    }
-
-    private CorpseData UpdateData(CorpseData cData)
-    {
-        CorpseData newCD = new CorpseData();
-        newCD.name = request._requestInfos.name;
-        newCD.size = request._requestInfos.siz;
-        newCD.corpseType = request._requestInfos.corps;
-        newCD.localisation = request._requestInfos.loc;
-        newCD.coffinType = request._requestInfos.cof;
-        newCD.specificity = request._requestInfos.spec;
-        return newCD;
     }
 }

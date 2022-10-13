@@ -18,6 +18,15 @@ public class Quest : MonoBehaviour
     private bool isQuestFinished;
     private float timer;
 
+    public enum StateTimer
+    {
+        EXCELLENT,
+        MID,
+        BAD,
+    }
+
+    public StateTimer stateTimer;
+
 
     private void Awake()
     {
@@ -32,6 +41,7 @@ public class Quest : MonoBehaviour
             {
                 timer += Time.deltaTime;
                 questSlider.value = Mathf.Lerp(1, 0, timer / questTime);
+                CheckTimer(timer);
             }
             else
             {
@@ -56,12 +66,31 @@ public class Quest : MonoBehaviour
         coffinImage.texture = coffinT;
     }
 
-    public int CheckScoreQuest(CorpseData data)
+    private int CheckScoreQuest(CorpseData data)
     {
+        if(data.localisation == requestInfos.loc)
+        {
+            // add score
+            switch (stateTimer)
+            {
+                case StateTimer.EXCELLENT:
+                    return 5;
+                case StateTimer.MID:
+                    return 2;
+                case StateTimer.BAD:
+                    return 1;
+                default:
+                    return 0;
+            }
+        }
+        else
+        {
+            // remove score
+        }
         return 1;
     }
     
-    private IEnumerator FinishQuest(CorpseData data)
+    public IEnumerator FinishQuest(CorpseData data)
     {
         _questManager.UpdateScore(CheckScoreQuest(data));
         isQuestFinished = true;
@@ -80,5 +109,21 @@ public class Quest : MonoBehaviour
         _questManager.questFinished.Add(requestInfos);
         _questManager.activeQuests.Remove(requestInfos);
         Destroy(gameObject);
+    }
+
+    private void CheckTimer(float timer)
+    {
+        if (timer >= 4f)
+        {
+            stateTimer = StateTimer.BAD;
+        }
+        else if (timer >= 2.5f && timer < 4f)
+        {
+            stateTimer = StateTimer.MID;
+        }
+        else
+        {
+            stateTimer = StateTimer.EXCELLENT;
+        }
     }
 }
