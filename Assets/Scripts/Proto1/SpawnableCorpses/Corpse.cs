@@ -21,7 +21,7 @@ public class Corpse : Carryable
 
     public override void Interact(PlayerTest player)
     {
-        Debug.Log("Interaction");
+        player.isCarrying = true;
         // need many players
         if((int)corpseData.size > 0)
         {
@@ -45,7 +45,7 @@ public class Corpse : Carryable
     public override void PutDown(PlayerTest player)
     {
         // corpse became grave (sprite)
-        Debug.Log("Corpse put down");
+        player.isCarrying = false;
 
         // Visual Debug 
         player.carriedObj.gameObject.SetActive(true);

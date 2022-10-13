@@ -63,7 +63,6 @@ public class DeuilPNJInteractable : Carryable
             //Destroy(this); // enable = false not working
 
             // move back
-            Debug.Log("Quest accepted");
             isInteractable = false;
         }
     }
@@ -80,7 +79,7 @@ public class DeuilPNJInteractable : Carryable
 
             foreach(Collider info in infos)
             {
-                Debug.Log(info.gameObject.name);
+                //Debug.Log(info.gameObject.name);
                 if(info.gameObject.TryGetComponent(out Corpse c))
                 {
                     float dist = Vector3.Distance(info.gameObject.transform.position, transform.position);
