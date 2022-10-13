@@ -57,6 +57,7 @@ public class DeuilPNJInteractable : Carryable
             deathRequest.AcceptRequest();
 
             player.carriedObj = this;
+            player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
             player.carriedObj.gameObject.SetActive(false);
 
 
@@ -73,6 +74,7 @@ public class DeuilPNJInteractable : Carryable
         {
             player.carriedObj.gameObject.SetActive(true);
 
+            player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
             // Update name and loc that the pnj wants
             Collider[] infos = Physics.OverlapSphere(transform.position, radius);
             float min = float.MaxValue;

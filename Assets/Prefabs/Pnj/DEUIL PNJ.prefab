@@ -113,7 +113,8 @@ GameObject:
   - component: {fileID: 3026082339422642395}
   - component: {fileID: 3026082339422642388}
   - component: {fileID: 3026082339422642389}
-  m_Layer: 0
+  - component: {fileID: 2136006865}
+  m_Layer: 7
   m_Name: DEUIL PNJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,6 +201,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2136006865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026082339422642390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 738d7d02674bea7449de9bb6cc650d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathRequest: {fileID: 44559037398815808}
+  requestImg: {fileID: 6227431622254957648}
+  corpseToCreate: {fileID: 0}
+  startLoc: {fileID: 0}
+  endLoc: {fileID: 0}
+  griefName: 
+  griefLoc: 0
+  radius: 10
 --- !u!1001 &3082349119247911250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,8 +322,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
+--- !u!114 &44559037398815808 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3051463643657018642, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
+  m_PrefabInstance: {fileID: 3082349119247911250}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc30049ce944f8949931f7cceda702bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &639406478323274479 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2457018146436438973, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
+  m_PrefabInstance: {fileID: 3082349119247911250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6227431622254957648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8983269627774115074, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
   m_PrefabInstance: {fileID: 3082349119247911250}
   m_PrefabAsset: {fileID: 0}
