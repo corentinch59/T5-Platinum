@@ -22,6 +22,7 @@ public class PlayerTest : MonoBehaviour
     [HideInInspector] public PlayerMovement playerMovement;
 
     public Sprite playerNotCarrying;
+    public Sprite spriteCarry;
     public Carryable carriedObj;
 
     [Header("Debug")]

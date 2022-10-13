@@ -114,6 +114,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   request: {fileID: 7000400795465650558}
   requestImg: {fileID: 6921176599661398185}
+  corpseToCreate: {fileID: 0}
+  startLoc: {fileID: 0}
+  endLoc: {fileID: 0}
 --- !u!1 &2064347732572522947
 GameObject:
   m_ObjectHideFlags: 0

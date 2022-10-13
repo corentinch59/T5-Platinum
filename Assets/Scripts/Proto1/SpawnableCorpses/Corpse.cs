@@ -12,8 +12,6 @@ public class Corpse : Carryable
     public LayerMask localisationsLayer;
     public Quest thisQuest;
 
-    public Sprite spriteCarry;
- 
     private void Update()
     {
         // players movement
@@ -22,6 +20,7 @@ public class Corpse : Carryable
     public override void Interact(PlayerTest player)
     {
         player.isCarrying = true;
+        player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
         // need many players
         if((int)corpseData.size > 0)
         {
@@ -35,7 +34,6 @@ public class Corpse : Carryable
         // One player
         if(player.carriedObj == null)
         {
-            player.GetComponent<SpriteRenderer>().sprite = spriteCarry;
             player.interactableObj = null;
             player.carriedObj = this;
         }
