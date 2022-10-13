@@ -14,6 +14,8 @@ public class DeuilRequest : MonoBehaviour
     [SerializeField]  private RawImage corpseImage;
     [SerializeField]  private GameObject questToInstantiate;
     [HideInInspector] public GameObject griefQuest;
+    [SerializeField] private Image image;
+    private DeuilPNJInteractable _deuilPnjInteractable;
     private GameObject questParent;
   
 
@@ -21,28 +23,31 @@ public class DeuilRequest : MonoBehaviour
     private void Awake()
     {
         questParent = GameObject.FindGameObjectWithTag("DeuilQuestUI");
+        _deuilPnjInteractable = GetComponentInParent<DeuilPNJInteractable>();
     }
     
 
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.O))
         {
-            SetRequest();
+            SetGriefRequest();
         }
         if (Input.GetKeyDown(KeyCode.P) && QuestManager.instance.questFinished.Count > 0 
                                         && QuestManager.instance.activeDeuilQuests.Count < QuestManager.instance.numberOfDeuilQuests)
         {
             AcceptRequest();
         }
-
+        
     }
 
-    public void SetRequest()
+    public void SetGriefRequest()
     {
         int index = GetRandomNumber(QuestManager.instance.questFinished.Count);
         _requestInfos = QuestManager.instance.questFinished[index];
         UpdateUI();
+        StartCoroutine(_deuilPnjInteractable.Walk(true));
     }
 
     public void AcceptRequest()
@@ -52,7 +57,8 @@ public class DeuilRequest : MonoBehaviour
         QuestManager.instance.questFinished.Remove(_requestInfos);
         if (QuestManager.instance.questFinished.Count > 0)
         {
-            SetRequest();
+            StartCoroutine(_deuilPnjInteractable.Walk(false));
+            StartCoroutine(QuestManager.instance.WaitForNewRequest(3, this));
         }
         else
         {
@@ -68,6 +74,7 @@ public class DeuilRequest : MonoBehaviour
 
     private void UpdateUI()
     {
+        
         nameText.text = _requestInfos.name;
         TextureData tex = _textureData._TextureData;
         corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corps];

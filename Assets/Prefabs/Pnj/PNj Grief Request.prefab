@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 2457018146436438973}
   - component: {fileID: 3051463643657018642}
   m_Layer: 5
-  m_Name: PNj Deuil Request
+  m_Name: PNj Grief Request
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

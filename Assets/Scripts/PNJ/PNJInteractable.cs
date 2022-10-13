@@ -53,17 +53,18 @@ public class PNJInteractable : MonoBehaviour, IInteractable
             c.thisQuest = request.quest.GetComponent<Quest>();
 
         }
-        Destroy(this); // enable = false not working
+        
         StartCoroutine(Walk(false));
+        //Destroy(this); // enable = false not working
     }
 
-    private IEnumerator Walk(bool isWalkingForward)
+    public IEnumerator Walk(bool isWalkingForward)
     {
         //Arrive Avec sa quete
         if (isWalkingForward)
         {
+            requestImg.SetActive(true);
             transform.DOMove(endLoc.position, 1);
-            request.SetRequest();
         }
         //a plus de quete et rentre chez lui
         else

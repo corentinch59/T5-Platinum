@@ -36,4 +36,18 @@ public class QuestManager : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
+    public IEnumerator WaitForNewRequest(float secondsToWait, Request request)
+    {
+        yield return new WaitForSeconds(secondsToWait);
+        request.SetRequest();
+        Debug.Log("LAQUETELA");
+    }
+    
+    public IEnumerator WaitForNewRequest(float secondsToWait, DeuilRequest request)
+    {
+        yield return new WaitForSeconds(secondsToWait);
+        request.SetGriefRequest();
+        Debug.Log("LAQUETELA");
+    }
+
 }

@@ -18,12 +18,14 @@ public class Request : MonoBehaviour
     [SerializeField] private GameObject questToInstantiate;
     [SerializeField] public GameObject quest;
     private GameObject questParent;
+    private PNJInteractable _pnjInteractable;
   
 
 
     private void Awake()
     {
         questParent = GameObject.FindGameObjectWithTag("QuestUI");
+        _pnjInteractable = GetComponentInParent<PNJInteractable>();
     }
 
     private void Start()
@@ -44,6 +46,7 @@ public class Request : MonoBehaviour
     {
         int index = GetRandomNumber(QuestManager.instance.allQuests.Count);
         _requestInfos = QuestManager.instance.allQuests[index];
+        StartCoroutine(_pnjInteractable.Walk(true));
         UpdateUI();
     }
 
@@ -52,9 +55,10 @@ public class Request : MonoBehaviour
         SetQuestInUI();
         QuestManager.instance.activeQuests.Add(_requestInfos);
         QuestManager.instance.allQuests.Remove(_requestInfos);
+        StartCoroutine(_pnjInteractable.Walk(false));
         if (QuestManager.instance.allQuests.Count > 0)
         {
-            SetRequest();
+            StartCoroutine(QuestManager.instance.WaitForNewRequest(3,this));
         }
         else
         {
