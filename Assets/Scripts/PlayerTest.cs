@@ -28,6 +28,7 @@ public class PlayerTest : MonoBehaviour
     public float radiusSphere = 5f;
     public IInteractable interactableObj;
     public LayerMask interactableLayer;
+    public bool isCarrying = false;
 
     private void Start()
     {
@@ -56,28 +57,32 @@ public class PlayerTest : MonoBehaviour
         }
 
         // check interactables
-        Collider[] interactables;
-        interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
-
-        if (interactables.Length > 0)
+        if (!isCarrying)
         {
-            float min = float.MaxValue;
+            Collider[] interactables;
+            interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
 
-            foreach(Collider col in interactables)
+            if (interactables.Length > 0)
             {
-                if (col.gameObject.TryGetComponent(out IInteractable interactable))
+                float min = float.MaxValue;
+
+                foreach (Collider col in interactables)
                 {
-                    float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
-                    if(dist < min)
+                    if (col.gameObject.TryGetComponent(out IInteractable interactable))
                     {
-                        min = dist;
-                        interactableObj = interactable;
+                        float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
+                        if (dist < min)
+                        {
+                            min = dist;
+                            interactableObj = interactable;
+                        }
                     }
                 }
             }
-        } else
-        {
-            interactableObj = null;
+            else
+            {
+                interactableObj = null;
+            }
         }
     }
 
@@ -174,7 +179,7 @@ public class PlayerTest : MonoBehaviour
             if (interactableObj == null && carriedObj != null)
             {
                 carriedObj.PutDown(this);
-            } else if (interactableObj != null)
+            } else if (interactableObj != null && isCarrying == false)
             {
                 interactableObj.Interact(this);
             }
