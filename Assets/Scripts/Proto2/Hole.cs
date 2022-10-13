@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Hole : MonoBehaviour
 {
-    private int HoleSize;
+    private int HoleSize = 1;
     public int SetHoleSize { 
         private get => HoleSize;
 
@@ -19,6 +19,19 @@ public class Hole : MonoBehaviour
     private void ModifyHoleSize(int modifier)
     {
         HoleSize += modifier;
-        transform.DOScale(transform.localScale * scaleRatioModifier * modifier, scaleAnimDuration).SetEase(Ease.OutBounce);
+        if(HoleSize < 1)
+        {
+            StartCoroutine(DeathAnim());
+        }
+        else
+            transform.DOScale(transform.localScale + new Vector3(scaleRatioModifier, 0, scaleRatioModifier) * modifier, scaleAnimDuration).SetEase(Ease.InBounce);
+
+    }
+
+    private IEnumerator DeathAnim()
+    {
+        transform.DOScale(0, scaleAnimDuration).SetEase(Ease.InBounce);
+        yield return new WaitForSeconds(scaleAnimDuration);
+        Destroy(gameObject);
     }
 }
