@@ -1119,7 +1119,7 @@ GameObject:
   - component: {fileID: 662590513}
   m_Layer: 0
   m_Name: GriefPNJRequestLocation
-  m_TagString: EndLoc
+  m_TagString: GriefEndLoc
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1974,7 +1974,7 @@ GameObject:
   - component: {fileID: 1723291374}
   m_Layer: 0
   m_Name: GriefPnjSpawnPoint
-  m_TagString: StartLoc
+  m_TagString: GriefStartLoc
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
