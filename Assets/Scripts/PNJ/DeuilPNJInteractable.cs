@@ -57,6 +57,8 @@ public class DeuilPNJInteractable : Carryable
             deathRequest.AcceptRequest();
 
             player.carriedObj = this;
+            player.interactableObj = null;
+            player.isCarrying = true;
             player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
             player.carriedObj.gameObject.SetActive(false);
 
@@ -70,9 +72,12 @@ public class DeuilPNJInteractable : Carryable
 
     public override void PutDown(PlayerTest player)
     {
+        Debug.Log(isInteractable);
         if (!isInteractable)
         {
             player.carriedObj.gameObject.SetActive(true);
+
+            player.isCarrying = false;
 
             player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
             // Update name and loc that the pnj wants
