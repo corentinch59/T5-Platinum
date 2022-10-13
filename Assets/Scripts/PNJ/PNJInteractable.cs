@@ -55,7 +55,6 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         }
         Destroy(this); // enable = false not working
         StartCoroutine(Walk(true));
-        Debug.Log("Quest accepted");
     }
 
     private IEnumerator Walk(bool isWalkingBack)
