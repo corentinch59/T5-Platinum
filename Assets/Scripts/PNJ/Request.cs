@@ -17,14 +17,12 @@ public class Request : MonoBehaviour
     [SerializeField] private RawImage coffinImage;
     [SerializeField] private GameObject questToInstantiate;
     [SerializeField] public GameObject quest;
-    [SerializeField] public QuestManager _questManager;
     private GameObject questParent;
   
 
 
     private void Awake()
     {
-        _questManager = FindObjectOfType<QuestManager>();
         questParent = GameObject.FindGameObjectWithTag("QuestUI");
     }
 
@@ -35,8 +33,8 @@ public class Request : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D) && _questManager.allQuests.Count > 0 
-                                        && _questManager.activeQuests.Count < _questManager.numberOfQuests)
+        if (Input.GetKeyDown(KeyCode.D) && QuestManager.instance.allQuests.Count > 0 
+                                        && QuestManager.instance.activeQuests.Count < QuestManager.instance.numberOfQuests)
         {
             AcceptRequest();
         }
@@ -44,17 +42,17 @@ public class Request : MonoBehaviour
 
     public void SetRequest()
     {
-        int index = GetRandomNumber(_questManager.allQuests.Count);
-        _requestInfos = _questManager.allQuests[index];
+        int index = GetRandomNumber(QuestManager.instance.allQuests.Count);
+        _requestInfos = QuestManager.instance.allQuests[index];
         UpdateUI();
     }
 
     public void AcceptRequest()
     {
         SetQuestInUI();
-        _questManager.activeQuests.Add(_requestInfos);
-        _questManager.allQuests.Remove(_requestInfos);
-        if (_questManager.allQuests.Count > 0)
+        QuestManager.instance.activeQuests.Add(_requestInfos);
+        QuestManager.instance.allQuests.Remove(_requestInfos);
+        if (QuestManager.instance.allQuests.Count > 0)
         {
             SetRequest();
         }

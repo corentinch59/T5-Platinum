@@ -13,7 +13,6 @@ public class DeuilRequest : MonoBehaviour
     [SerializeField]  private TextMeshProUGUI nameText;
     [SerializeField]  private RawImage corpseImage;
     [SerializeField]  private GameObject questToInstantiate;
-    [SerializeField]  private QuestManager _questManager;
     [HideInInspector] public GameObject griefQuest;
     private GameObject questParent;
   
@@ -21,7 +20,6 @@ public class DeuilRequest : MonoBehaviour
 
     private void Awake()
     {
-        _questManager = FindObjectOfType<QuestManager>();
         questParent = GameObject.FindGameObjectWithTag("DeuilQuestUI");
     }
     
@@ -32,8 +30,8 @@ public class DeuilRequest : MonoBehaviour
         {
             SetRequest();
         }
-        if (Input.GetKeyDown(KeyCode.P) && _questManager.questFinished.Count > 0 
-                                        && _questManager.activeDeuilQuests.Count < _questManager.numberOfDeuilQuests)
+        if (Input.GetKeyDown(KeyCode.P) && QuestManager.instance.questFinished.Count > 0 
+                                        && QuestManager.instance.activeDeuilQuests.Count < QuestManager.instance.numberOfDeuilQuests)
         {
             AcceptRequest();
         }
@@ -42,17 +40,17 @@ public class DeuilRequest : MonoBehaviour
 
     public void SetRequest()
     {
-        int index = GetRandomNumber(_questManager.questFinished.Count);
-        _requestInfos = _questManager.questFinished[index];
+        int index = GetRandomNumber(QuestManager.instance.questFinished.Count);
+        _requestInfos = QuestManager.instance.questFinished[index];
         UpdateUI();
     }
 
     public void AcceptRequest()
     {
         SetQuestInUI();
-        _questManager.activeDeuilQuests.Add(_requestInfos);
-        _questManager.questFinished.Remove(_requestInfos);
-        if (_questManager.questFinished.Count > 0)
+        QuestManager.instance.activeDeuilQuests.Add(_requestInfos);
+        QuestManager.instance.questFinished.Remove(_requestInfos);
+        if (QuestManager.instance.questFinished.Count > 0)
         {
             SetRequest();
         }

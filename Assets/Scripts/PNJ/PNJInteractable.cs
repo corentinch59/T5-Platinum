@@ -21,7 +21,7 @@ public class PNJInteractable : MonoBehaviour, IInteractable
     private void Start()
     {
         transform.position = startLoc.position;
-        StartCoroutine(Walk(false));
+        StartCoroutine(Walk(true));
     }
 
     private void Update()
@@ -54,20 +54,22 @@ public class PNJInteractable : MonoBehaviour, IInteractable
 
         }
         Destroy(this); // enable = false not working
-        StartCoroutine(Walk(true));
+        StartCoroutine(Walk(false));
     }
 
-    private IEnumerator Walk(bool isWalkingBack)
+    private IEnumerator Walk(bool isWalkingForward)
     {
-        if (isWalkingBack)
-        {
-            transform.DOMove(startLoc.position, 1);
-            request.SetRequest();
-            requestImg.SetActive(false);
-        }
-        else
+        //Arrive Avec sa quete
+        if (isWalkingForward)
         {
             transform.DOMove(endLoc.position, 1);
+            request.SetRequest();
+        }
+        //a plus de quete et rentre chez lui
+        else
+        {
+            requestImg.SetActive(false);
+            transform.DOMove(startLoc.position, 1);
         }
         
         yield return new WaitForSeconds(1);

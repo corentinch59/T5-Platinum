@@ -13,6 +13,8 @@ public class QuestManager : MonoBehaviour
     public List<RequestDataBase> questFinished; 
     public int numberOfQuests = 10;
     public int numberOfDeuilQuests = 10;
+    public static QuestManager instance;
+    
 
     public TextMeshProUGUI scoreText;
     public int score;
@@ -20,6 +22,7 @@ public class QuestManager : MonoBehaviour
     private void Awake()
     {
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<TextMeshProUGUI>();
+        instance = this;
         foreach (var quest in _scriptableRequestBase._dataBase)
         {
             allQuests.Add(quest);

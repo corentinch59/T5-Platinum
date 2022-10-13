@@ -7,7 +7,6 @@ using TMPro;
 public class DeuilQuest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
-    private QuestManager _questManager;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private Slider questSlider;
@@ -24,11 +23,7 @@ public class DeuilQuest : MonoBehaviour
     }
 
     public StateTimer stateTimer;
-
-    private void Awake()
-    {
-        _questManager = FindObjectOfType<QuestManager>();
-    }
+    
 
     private void Update()
     {
@@ -90,8 +85,8 @@ public class DeuilQuest : MonoBehaviour
 
     public IEnumerator FinishGriefQuest(string name, RequestDataBase.localisation loc)
     {
-        _questManager.UpdateScore(CheckScoreQuest(name, loc));
-        _questManager.activeDeuilQuests.Remove(requestInfos);
+        QuestManager.instance.UpdateScore(CheckScoreQuest(name, loc));
+        QuestManager.instance.activeDeuilQuests.Remove(requestInfos);
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
@@ -99,7 +94,7 @@ public class DeuilQuest : MonoBehaviour
     private IEnumerator TimeOutQuest()
     {
         image.color = Color.red;
-        _questManager.activeDeuilQuests.Remove(requestInfos);
+        QuestManager.instance.activeDeuilQuests.Remove(requestInfos);
         yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
