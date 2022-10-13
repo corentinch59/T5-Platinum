@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,21 +33,22 @@ public class Corpse : Carryable
             }
         }
         // One player
-        player.GetComponent<SpriteRenderer>().sprite = spriteCarry;
-        player.interactableObj = null;
-        player.carriedObj = this;
+        if(player.carriedObj == null)
+        {
+            player.GetComponent<SpriteRenderer>().sprite = spriteCarry;
+            player.interactableObj = null;
+            player.carriedObj = this;
+        }
         player.carriedObj.gameObject.SetActive(false);
-
     }
 
     public override void PutDown(PlayerTest player)
     {
         // corpse became grave (sprite)
-
+        Debug.Log("Corpse put down");
 
         // Visual Debug 
         player.carriedObj.gameObject.SetActive(true);
-        Debug.Log("Corpse put down");
         player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
         player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
 
@@ -56,14 +58,46 @@ public class Corpse : Carryable
 
         // update CorpseData
         corpseData = UpdateLocalisation();
-        // check if the corpse correspond to the quest -> finish quest
-        StartCoroutine(thisQuest.FinishQuest(corpseData));
+        
+
+        if(thisQuest != null)
+        {
+            // check if the corpse correspond to the quest -> finish quest
+            corpseData = UpdateRequestLocalisation();
+            StartCoroutine(thisQuest.FinishQuest(corpseData));
+        }
 
         player.carriedObj = null;
     }
 
+    private CorpseData UpdateLocalisation()
+    {
+        CorpseData newLoc = new CorpseData();
+
+        newLoc.name = corpseData.name;
+        newLoc.size = corpseData.size;
+        newLoc.corpseType = corpseData.corpseType;
+        newLoc.coffinType = corpseData.coffinType;
+        newLoc.specificity = corpseData.specificity;
+
+        Collider[] corpsInAreas = Physics.OverlapSphere(transform.position, radius, localisationsLayer);
+
+        float min = float.MaxValue;
+
+        foreach (Collider col in corpsInAreas)
+        {
+            float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
+            if (dist < min)
+            {
+                min = dist;
+                newLoc.localisation = AddLocalisation(col.gameObject.tag);
+            }
+        }
+        return newLoc;
+    }
+
     [ContextMenu("Update Localisations")]
-    public CorpseData UpdateLocalisation()
+    public CorpseData UpdateRequestLocalisation()
     {
         CorpseData newLoc = new CorpseData();
 
@@ -79,13 +113,11 @@ public class Corpse : Carryable
 
         foreach (Collider col in corpsInAreas)
         {
-            Debug.Log(col.gameObject.tag);
             float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
             if (dist < min)
             {
                 min = dist;
                 newLoc.localisation = AddLocalisation(col.gameObject.tag);
-                return newLoc;
             }
         }
         return newLoc;
