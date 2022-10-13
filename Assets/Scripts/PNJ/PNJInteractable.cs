@@ -20,7 +20,7 @@ public class PNJInteractable : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        
+        transform.position = startLoc.position;
         StartCoroutine(Walk(false));
     }
 

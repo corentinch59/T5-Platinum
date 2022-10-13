@@ -70,6 +70,7 @@ public class Quest : MonoBehaviour
     {
         if(data.localisation == requestInfos.loc)
         {
+            image.color = Color.green;
             // add score
             switch (stateTimer)
             {
@@ -80,21 +81,21 @@ public class Quest : MonoBehaviour
                 case StateTimer.BAD:
                     return 1;
                 default:
-                    return 0;
+                    return 10;
             }
         }
         else
         {
             // remove score
+            image.color = Color.red;
+            return -5;
         }
-        return 1;
     }
     
     public IEnumerator FinishQuest(CorpseData data)
     {
         _questManager.UpdateScore(CheckScoreQuest(data));
         isQuestFinished = true;
-        image.color = Color.green;
         yield return new WaitForSeconds(1);
         _questManager.questFinished.Add(requestInfos);
         _questManager.activeQuests.Remove(requestInfos);

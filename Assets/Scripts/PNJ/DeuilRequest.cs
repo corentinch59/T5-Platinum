@@ -8,12 +8,13 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 public class DeuilRequest : MonoBehaviour
 {
-    [SerializeField] private RequestDataBase _requestInfos;
-    [SerializeField] private ScriptableTextureData _textureData;
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private RawImage corpseImage;
-    [SerializeField] private GameObject questToInstantiate;
-    [SerializeField] private QuestManager _questManager;
+    [SerializeField]  private RequestDataBase _requestInfos;
+    [SerializeField]  private ScriptableTextureData _textureData;
+    [SerializeField]  private TextMeshProUGUI nameText;
+    [SerializeField]  private RawImage corpseImage;
+    [SerializeField]  private GameObject questToInstantiate;
+    [SerializeField]  private QuestManager _questManager;
+    [HideInInspector] public GameObject griefQuest;
     private GameObject questParent;
   
 
@@ -39,7 +40,7 @@ public class DeuilRequest : MonoBehaviour
 
     }
 
-    private void SetRequest()
+    public void SetRequest()
     {
         int index = GetRandomNumber(_questManager.questFinished.Count);
         _requestInfos = _questManager.questFinished[index];
@@ -60,7 +61,6 @@ public class DeuilRequest : MonoBehaviour
             nameText.text = null;
             corpseImage.texture = null;
         }
-        
     }
 
     private int GetRandomNumber(int arrayCount)
@@ -77,7 +77,7 @@ public class DeuilRequest : MonoBehaviour
 
     public void SetQuestInUI()
     {
-        GameObject quest = Instantiate(questToInstantiate, questParent.transform);
-        quest.GetComponent<DeuilQuest>().InitialiseDeuilQuestUI(_requestInfos, corpseImage.texture);
+        griefQuest = Instantiate(questToInstantiate, questParent.transform);
+        griefQuest.GetComponent<DeuilQuest>().InitialiseDeuilQuestUI(_requestInfos, corpseImage.texture);
     }
 }

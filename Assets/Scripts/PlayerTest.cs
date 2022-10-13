@@ -174,9 +174,7 @@ public class PlayerTest : MonoBehaviour
             if (interactableObj == null && carriedObj != null)
             {
                 carriedObj.PutDown(this);
-            }
-
-            if (interactableObj != null)
+            } else if (interactableObj != null)
             {
                 interactableObj.Interact(this);
             }

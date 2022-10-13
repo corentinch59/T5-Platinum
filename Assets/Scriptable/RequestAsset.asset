@@ -14,30 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataBase:
   - name: Gerad
-    loc: 0
+    siz: 0
+    loc: 1
     cof: 0
-    corp: 0
+    corps: 0
+    spec: 0
   - name: Luc
-    loc: 1
+    siz: 0
+    loc: 2
     cof: 0
-    corp: 0
+    corps: 0
+    spec: 0
   - name: Jean-Marc
+    siz: 0
     loc: 2
     cof: 1
-    corp: 1
+    corps: 0
+    spec: 0
   - name: Sylvie
+    siz: 0
     loc: 2
     cof: 1
-    corp: 0
+    corps: 0
+    spec: 0
   - name: Maceo
+    siz: 0
     loc: 1
     cof: 0
-    corp: 1
+    corps: 0
+    spec: 0
   - name: Arthur
-    loc: 0
-    cof: 0
-    corp: 0
-  - name: Corentin
+    siz: 0
     loc: 1
     cof: 0
-    corp: 1
+    corps: 0
+    spec: 0
+  - name: Corentin
+    siz: 0
+    loc: 1
+    cof: 0
+    corps: 0
+    spec: 0
