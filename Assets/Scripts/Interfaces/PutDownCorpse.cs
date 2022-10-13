@@ -6,7 +6,7 @@ public class PutDownCorpse : IPutDown
 {
     public void PutDown(PlayerTest player)
     {
-        Debug.Log("Corpse put down");
-        player.objToPutDown = null;
+        //Debug.Log("Corpse put down");
+        //player.objToPutDown = null;
     }
 }

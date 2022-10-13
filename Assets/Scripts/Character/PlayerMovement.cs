@@ -18,11 +18,17 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Vector2 orientation;
     private Vector2 move;
+    private IInteractable interactable;
 
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void FixedUpdate()

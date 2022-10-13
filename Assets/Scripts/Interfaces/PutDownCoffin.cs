@@ -6,6 +6,6 @@ public class PutDownCoffin : IPutDown
 {
     public void PutDown(PlayerTest player)
     {
-        player.objToPutDown = null;
+        //player.objToPutDown = null;
     }
 }
