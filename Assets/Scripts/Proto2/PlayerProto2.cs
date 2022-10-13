@@ -102,7 +102,7 @@ public class PlayerProto2 : MonoBehaviour
         // Start of QTE code
         if (ctx.started)
         {
-            myCoroutine = StartTimer();
+            myCoroutine = StartTimer(ctx);
             StartCoroutine(myCoroutine);
             playerInput.currentActionMap.FindAction("Move").Disable();
 
@@ -116,7 +116,7 @@ public class PlayerProto2 : MonoBehaviour
         }
     }
 
-    private IEnumerator StartTimer()
+    private IEnumerator StartTimer(InputAction.CallbackContext ctx)
     {
         canvaQte.gameObject.SetActive(true);
         qteFillImage.fillAmount = 0f;
@@ -130,7 +130,15 @@ public class PlayerProto2 : MonoBehaviour
             yield return null;
         }
 
-        Dig(); // Diggy diggy hole
+        if(ctx.action.name == "Interact")
+        {
+            Dig(1); // Diggy diggy hole
+        }
+        if(ctx.action.name == "Dash")
+        {
+            Dig(-1);
+        }
+
         canvaQte.gameObject.SetActive(false);
         playerInput.currentActionMap.FindAction("Move").Enable();
         yield return null;
@@ -138,12 +146,12 @@ public class PlayerProto2 : MonoBehaviour
 
     //End of QTE code
 
-    private void Dig()
+    private void Dig(int modifier)
     {
-        Debug.Log(detectedHole);
+        //Debug.Log(detectedHole);
         if (detectedHole)
         {
-            detectedHole.SetHoleSize = 1;
+            detectedHole.SetHoleSize = modifier;
         }
         else
         {
