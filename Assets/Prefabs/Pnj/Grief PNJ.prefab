@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathRequest: {fileID: 44559037398815808}
   requestImg: {fileID: 6227431622254957648}
-  corpseToCreate: {fileID: 0}
+  corpseToCreate: {fileID: 694417260691800150, guid: 2c37c2b4654ba6247b38a9d97dfcfac5, type: 3}
   startLoc: {fileID: 0}
   endLoc: {fileID: 0}
   griefName: 

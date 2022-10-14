@@ -101,5 +101,5 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.30196083, g: 0.67972606, b: 0.8117647, a: 0}
+    - _MainColor: {r: 0, g: 0.34253398, b: 0.6320754, a: 0}
   m_BuildTextureStacks: []
