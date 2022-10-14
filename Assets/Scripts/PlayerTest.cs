@@ -19,14 +19,17 @@ public class PlayerTest : MonoBehaviour
     public LayerMask graveLayer;
     public float distGraveCreation;
 
-    private PlayerMovement playerMovement;
+    [HideInInspector] public PlayerMovement playerMovement;
 
-    //public IPutDown objToPutDown;
-    //public Carryable carriedObj;
+    public Sprite playerNotCarrying;
+    public Sprite spriteCarry;
+    public Carryable carriedObj;
 
     [Header("Debug")]
     public float radiusSphere = 5f;
     public IInteractable interactableObj;
+    public LayerMask interactableLayer;
+    public bool isCarrying = false;
 
     private void Start()
     {
@@ -55,18 +58,31 @@ public class PlayerTest : MonoBehaviour
         }
 
         // check interactables
-        Collider[] interactables = Physics.OverlapSphere(transform.position, radiusSphere);
-        float min = float.MaxValue;
-        foreach(Collider col in interactables)
+        if (!isCarrying)
         {
-            if (col.gameObject.TryGetComponent(out IInteractable interactable))
+            Collider[] interactables;
+            interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
+
+            if (interactables.Length > 0)
             {
-                float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
-                if(dist < min)
+                float min = float.MaxValue;
+
+                foreach (Collider col in interactables)
                 {
-                    min = dist;
-                    interactableObj = interactable;
+                    if (col.gameObject.TryGetComponent(out IInteractable interactable))
+                    {
+                        float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
+                        if (dist < min)
+                        {
+                            min = dist;
+                            interactableObj = interactable;
+                        }
+                    }
                 }
+            }
+            else
+            {
+                interactableObj = null;
             }
         }
     }
@@ -161,12 +177,10 @@ public class PlayerTest : MonoBehaviour
     {
         if (ctx.performed)
         {
-            //if (interactableObj == null && carriedObj != null)
-            //{
-            //    //objToPutDown.PutDown(this);
-            //}
-
-            if (interactableObj != null)
+            if (interactableObj == null && carriedObj != null)
+            {
+                carriedObj.PutDown(this);
+            } else if (interactableObj != null && isCarrying == false)
             {
                 interactableObj.Interact(this);
             }

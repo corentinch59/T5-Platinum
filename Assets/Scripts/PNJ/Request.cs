@@ -10,17 +10,22 @@ using Random = UnityEngine.Random;
 public class Request : MonoBehaviour
 {
     [SerializeField] private ScriptableTextureData _textureData;
-    [SerializeField] private RequestDataBase _requestInfos;
-    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] public RequestDataBase _requestInfos;
+    [SerializeField] private TextMeshPro nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
-    private QuestManager _questManager;
+    [SerializeField] private GameObject questToInstantiate;
+    [SerializeField] public GameObject quest;
+    private GameObject questParent;
+    private PNJInteractable _pnjInteractable;
+  
 
 
     private void Awake()
     {
-        _questManager = GameObject.FindObjectOfType<QuestManager>();
+        questParent = GameObject.FindGameObjectWithTag("QuestUI");
+        _pnjInteractable = GetComponentInParent<PNJInteractable>();
     }
 
     private void Start()
@@ -30,26 +35,26 @@ public class Request : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && QuestManager.instance.allQuests.Count > 0 
+                                        && QuestManager.instance.activeQuests.Count < QuestManager.instance.numberOfQuests)
         {
-            _questManager.activeQuests.Add(_requestInfos);
-            _questManager.allQuests.Remove(_requestInfos);
-            SetRequest();
+            AcceptRequest();
         }
     }
 
-    private void SetRequest()
+    public void SetRequest()
     {
-        if (_questManager.allQuests.Count > 0)
-        {
-            int index = GetRandomNumber(_questManager.allQuests.Count);
-            _requestInfos = _questManager.allQuests[index];
-            UpdateUI();
-        }
-        else
-        {
-            Debug.Log("t'as pris toutes les requetes chacal");
-        }
+        int index = GetRandomNumber(QuestManager.instance.allQuests.Count);
+        _requestInfos = QuestManager.instance.allQuests[index];
+        StartCoroutine(_pnjInteractable.Walk(true));
+        UpdateUI();
+    }
+
+    public void AcceptRequest()
+    {
+        SetQuestInUI();
+        QuestManager.instance.activeQuests.Add(_requestInfos);
+        QuestManager.instance.allQuests.Remove(_requestInfos);
         
     }
 
@@ -62,10 +67,33 @@ public class Request : MonoBehaviour
     {
         nameText.text = _requestInfos.name;
         TextureData tex = _textureData._TextureData;
-        corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corp];
+        corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corps];
         localisationImage.texture = tex.localisationTex[(int)_requestInfos.loc];
         coffinImage.texture = tex.coffinTex[(int)_requestInfos.cof];
-        
-        
+    }
+
+    public void SetQuestInUI()
+    {
+        quest = Instantiate(questToInstantiate, questParent.transform);
+        quest.GetComponent<Quest>().InitialiseQuestUI(_requestInfos, corpseImage.texture,
+            localisationImage.texture,coffinImage.texture, this);
+    }
+
+    public void GoodByePnj()
+    {
+        Debug.Log("Ah La moi je pars");
+        StartCoroutine(_pnjInteractable.Walk(false));
+        if (QuestManager.instance.allQuests.Count > 0)
+        {
+            StartCoroutine(QuestManager.instance.WaitForNewRequest(3,this));
+        }
+        else
+        {
+            nameText.text = null;
+            corpseImage.texture = null;
+            localisationImage.texture = null;
+            coffinImage.texture = null;
+        }
+
     }
 }

@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Tree
   - Water
+  - QuestUI
+  - Score
+  - DeuilQuestUI
+  - StartLoc
+  - EndLoc
+  - GriefStartLoc
+  - GriefEndLoc
   layers:
   - Default
   - TransparentFX
@@ -14,7 +21,7 @@ TagManager:
   - Water
   - UI
   - Grave
-  - 
+  - Interactable
   - 
   - 
   - 
