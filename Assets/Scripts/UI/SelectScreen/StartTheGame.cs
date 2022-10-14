@@ -117,7 +117,11 @@ public class StartTheGame : MonoBehaviour
         yield return t.WaitForCompletion();
 
         timerTMP.text = "GO";
+
+
         currentCoroutine = null;
+
+        ChangeSceneClass.ChangeScene("Freedy");
     }
     private void OnDestroy()
     {
