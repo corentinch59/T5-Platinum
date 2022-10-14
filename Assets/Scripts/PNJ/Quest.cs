@@ -7,6 +7,7 @@ using TMPro;
 public class Quest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
+    private Request _request;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
@@ -26,7 +27,7 @@ public class Quest : MonoBehaviour
 
     public StateTimer stateTimer;
     
-
+    
     private void Update()
     {
         if (!isQuestFinished)
@@ -50,10 +51,11 @@ public class Quest : MonoBehaviour
         }
     }
 
-    public void InitialiseQuestUI(RequestDataBase request, Texture corpseT, Texture localisationT,
-        Texture coffinT)
+    public void InitialiseQuestUI(RequestDataBase requestInformation, Texture corpseT, Texture localisationT,
+        Texture coffinT, Request request)
     {
-        requestInfos = request;
+        _request = request; 
+        requestInfos = requestInformation;
         nameText.text = requestInfos.name;
         corpseImage.texture = corpseT;
         localisationImage.texture = localisationT;
@@ -77,6 +79,7 @@ public class Quest : MonoBehaviour
                 default:
                     return 10;
             }
+            
         }
         else
         {
@@ -88,6 +91,7 @@ public class Quest : MonoBehaviour
     
     public IEnumerator FinishQuest(CorpseData data)
     {
+        _request.GoodByePnj();
         QuestManager.instance.UpdateScore(CheckScoreQuest(data));
         isQuestFinished = true;
         yield return new WaitForSeconds(1);
@@ -98,6 +102,7 @@ public class Quest : MonoBehaviour
 
     private IEnumerator TimeOutQuest()
     {
+        _request.GoodByePnj();
         isQuestFinished = true;
         image.color = Color.red;
         yield return new WaitForSeconds(2);

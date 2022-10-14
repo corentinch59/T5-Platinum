@@ -55,18 +55,6 @@ public class Request : MonoBehaviour
         SetQuestInUI();
         QuestManager.instance.activeQuests.Add(_requestInfos);
         QuestManager.instance.allQuests.Remove(_requestInfos);
-        StartCoroutine(_pnjInteractable.Walk(false));
-        if (QuestManager.instance.allQuests.Count > 0)
-        {
-            StartCoroutine(QuestManager.instance.WaitForNewRequest(3,this));
-        }
-        else
-        {
-            nameText.text = null;
-            corpseImage.texture = null;
-            localisationImage.texture = null;
-            coffinImage.texture = null;
-        }
         
     }
 
@@ -88,6 +76,24 @@ public class Request : MonoBehaviour
     {
         quest = Instantiate(questToInstantiate, questParent.transform);
         quest.GetComponent<Quest>().InitialiseQuestUI(_requestInfos, corpseImage.texture,
-            localisationImage.texture,coffinImage.texture);
+            localisationImage.texture,coffinImage.texture, this);
+    }
+
+    public void GoodByePnj()
+    {
+        Debug.Log("Ah La moi je pars");
+        StartCoroutine(_pnjInteractable.Walk(false));
+        if (QuestManager.instance.allQuests.Count > 0)
+        {
+            StartCoroutine(QuestManager.instance.WaitForNewRequest(3,this));
+        }
+        else
+        {
+            nameText.text = null;
+            corpseImage.texture = null;
+            localisationImage.texture = null;
+            coffinImage.texture = null;
+        }
+
     }
 }

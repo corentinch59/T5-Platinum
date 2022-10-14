@@ -135,15 +135,15 @@ public class DeuilPNJInteractable : Carryable
         if (isWalkingForward)
         {
             requestImg.SetActive(true);
-            transform.DOMove(endLoc.position, 1);
-            yield return new WaitForSeconds(1);
+            transform.DOMove(endLoc.position, 2);
+            yield return new WaitForSeconds(2);
         }
         //a plus de quete et rentre chez lui
         else
         {
             requestImg.SetActive(false);
-            transform.DOMove(startLoc.position, 1);
-            yield return new WaitForSeconds(1);
+            transform.DOMove(startLoc.position, 2);
+            yield return new WaitForSeconds(2);
         }
         
         

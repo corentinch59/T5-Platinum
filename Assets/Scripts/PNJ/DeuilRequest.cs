@@ -29,7 +29,7 @@ public class DeuilRequest : MonoBehaviour
 
     private void Update()
     {
-        
+       /* 
         if (Input.GetKeyDown(KeyCode.O))
         {
             SetGriefRequest();
@@ -39,6 +39,7 @@ public class DeuilRequest : MonoBehaviour
         {
             AcceptRequest();
         }
+        */
         
     }
 
@@ -52,18 +53,11 @@ public class DeuilRequest : MonoBehaviour
 
     public void AcceptRequest()
     {
-        SetQuestInUI();
-        QuestManager.instance.activeDeuilQuests.Add(_requestInfos);
-        QuestManager.instance.questFinished.Remove(_requestInfos);
-        if (QuestManager.instance.questFinished.Count > 0)
+        if (QuestManager.instance.questFinished.Count > 0 && QuestManager.instance.activeDeuilQuests.Count < QuestManager.instance.numberOfDeuilQuests )
         {
-            StartCoroutine(_deuilPnjInteractable.Walk(false));
-            StartCoroutine(QuestManager.instance.WaitForNewRequest(3, this));
-        }
-        else
-        {
-            nameText.text = null;
-            corpseImage.texture = null;
+            SetQuestInUI();
+            QuestManager.instance.activeDeuilQuests.Add(_requestInfos);
+            QuestManager.instance.questFinished.Remove(_requestInfos);
         }
     }
 
@@ -83,6 +77,20 @@ public class DeuilRequest : MonoBehaviour
     public void SetQuestInUI()
     {
         griefQuest = Instantiate(questToInstantiate, questParent.transform);
-        griefQuest.GetComponent<DeuilQuest>().InitialiseDeuilQuestUI(_requestInfos, corpseImage.texture);
+        griefQuest.GetComponent<DeuilQuest>().InitialiseDeuilQuestUI(_requestInfos, corpseImage.texture, this);
+    }
+
+    public void GoodByeGriefPNJ()
+    {
+        if (QuestManager.instance.questFinished.Count > 0)
+        {
+            StartCoroutine(_deuilPnjInteractable.Walk(false));
+            StartCoroutine(QuestManager.instance.WaitForNewRequest(3, this));
+        }
+        else
+        {
+            nameText.text = null;
+            corpseImage.texture = null;
+        }
     }
 }
