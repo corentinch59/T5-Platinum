@@ -44,7 +44,7 @@ public class QuestManager : MonoBehaviour
         Debug.Log("LAQUETELA");
     }
     
-    public IEnumerator WaitForNewRequest(float secondsToWait, DeuilRequest request)
+    public IEnumerator WaitForNewRequest(float secondsToWait, GriefRequest request)
     {
         yield return new WaitForSeconds(secondsToWait);
         request.SetGriefRequest();

@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-public class DeuilRequest : MonoBehaviour
+public class GriefRequest : MonoBehaviour
 {
     [SerializeField]  private RequestDataBase _requestInfos;
     [SerializeField]  private ScriptableTextureData _textureData;
@@ -16,7 +16,7 @@ public class DeuilRequest : MonoBehaviour
     [SerializeField]  private GameObject questToInstantiate;
     [HideInInspector] public GameObject griefQuest;
     [SerializeField] private Image image;
-    private DeuilPNJInteractable _deuilPnjInteractable;
+    private GriefPNJInteractable _griefPnjInteractable;
     private GameObject questParent;
     public Coroutine griefCoroutine;
     private float timer;
@@ -26,7 +26,7 @@ public class DeuilRequest : MonoBehaviour
     private void Awake()
     {
         questParent = GameObject.FindGameObjectWithTag("DeuilQuestUI");
-        _deuilPnjInteractable = GetComponentInParent<DeuilPNJInteractable>();
+        _griefPnjInteractable = GetComponentInParent<GriefPNJInteractable>();
     }
     
 
@@ -53,7 +53,7 @@ public class DeuilRequest : MonoBehaviour
            {
                timer = 15;
                griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));
-               StartCoroutine(_deuilPnjInteractable.Walk(true));
+               StartCoroutine(_griefPnjInteractable.Walk(true));
            }
           
        }
@@ -64,7 +64,7 @@ public class DeuilRequest : MonoBehaviour
         int index = GetRandomNumber(QuestManager.instance.questFinished.Count);
         _requestInfos = QuestManager.instance.questFinished[index];
         UpdateUI();
-        StartCoroutine(_deuilPnjInteractable.Walk(true));
+        StartCoroutine(_griefPnjInteractable.Walk(true));
     }
 
     public void AcceptRequest()
@@ -93,14 +93,14 @@ public class DeuilRequest : MonoBehaviour
     public void SetQuestInUI()
     {
         griefQuest = Instantiate(questToInstantiate, questParent.transform);
-        griefQuest.GetComponent<DeuilQuest>().InitialiseDeuilQuestUI(_requestInfos, corpseImage.texture, this);
+        griefQuest.GetComponent<GriefQuest>().InitialiseDeuilQuestUI(_requestInfos, corpseImage.texture, this);
     }
 
     public void GoodByeGriefPNJ()
     {
         if (QuestManager.instance.questFinished.Count > 0)
         {
-            StartCoroutine(_deuilPnjInteractable.Walk(false));
+            StartCoroutine(_griefPnjInteractable.Walk(false));
             StartCoroutine(QuestManager.instance.WaitForNewRequest(3, this));
             griefCoroutine = null;
         }

@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class DeuilQuest : MonoBehaviour
+public class GriefQuest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
-    private DeuilRequest _request;
+    private GriefRequest _request;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private Slider questSlider;
     [SerializeField] private float questTime = 50;
     [SerializeField] private Image image;
     private bool isQuestFinished;
-    private float timer;
+    private float timer =  10f;
 
     public enum StateTimer
     {
@@ -51,7 +51,7 @@ public class DeuilQuest : MonoBehaviour
         
     }
 
-    public void InitialiseDeuilQuestUI(RequestDataBase requestInformation, Texture corpseT, DeuilRequest request)
+    public void InitialiseDeuilQuestUI(RequestDataBase requestInformation, Texture corpseT, GriefRequest request)
     {
         _request = request;
         requestInfos = requestInformation;

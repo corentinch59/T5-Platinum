@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
 
-public class DeuilPNJInteractable : Carryable
+public class GriefPNJInteractable : Carryable
 {
-    [SerializeField] private DeuilRequest deathRequest;
+    [SerializeField] private GriefRequest deathRequest;
     [SerializeField] private GameObject requestImg;
     [SerializeField] private GameObject corpseToCreate;
     [SerializeField] private Transform startLoc;
@@ -17,7 +17,7 @@ public class DeuilPNJInteractable : Carryable
     public string griefName = "";
     public RequestDataBase.localisation griefLoc = RequestDataBase.localisation.NONE;
     public float radius = 10f;
-    public float griefDuration;
+    private float griefDuration = 3f;
 
     public void Awake()
     {
@@ -113,7 +113,7 @@ public class DeuilPNJInteractable : Carryable
             player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
                     player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
 
-            if (deathRequest.griefQuest.TryGetComponent(out DeuilQuest dq))
+            if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
             {
                 StartCoroutine(dq.FinishGriefQuest(griefName, griefLoc));
             }
