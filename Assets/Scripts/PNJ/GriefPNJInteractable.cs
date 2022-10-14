@@ -27,10 +27,10 @@ public class GriefPNJInteractable : Carryable
 
     private void Start()
     {
-        /*
+        
         transform.position = startLoc.position;
-        StartCoroutine(Walk(true));
-        */
+        //StartCoroutine(Walk(true));
+        
     }
 
     private void Update()
