@@ -43,7 +43,7 @@ public class DeuilRequest : MonoBehaviour
         */
        if (QuestManager.instance.questFinished.Count > 0 && griefCoroutine == null)
        {
-           griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(1, this));
+           griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(12, this));
            StartCoroutine(_deuilPnjInteractable.Walk(true));
            
        }
