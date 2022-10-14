@@ -13,48 +13,52 @@ public class DeuilRequest : MonoBehaviour
     [SerializeField]  private TextMeshProUGUI nameText;
     [SerializeField]  private RawImage corpseImage;
     [SerializeField]  private GameObject questToInstantiate;
-    [SerializeField]  private QuestManager _questManager;
     [HideInInspector] public GameObject griefQuest;
+    [SerializeField] private Image image;
+    private DeuilPNJInteractable _deuilPnjInteractable;
     private GameObject questParent;
   
 
 
     private void Awake()
     {
-        _questManager = FindObjectOfType<QuestManager>();
         questParent = GameObject.FindGameObjectWithTag("DeuilQuestUI");
+        _deuilPnjInteractable = GetComponentInParent<DeuilPNJInteractable>();
     }
     
 
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.O))
         {
-            SetRequest();
+            SetGriefRequest();
         }
-        if (Input.GetKeyDown(KeyCode.P) && _questManager.questFinished.Count > 0 
-                                        && _questManager.activeDeuilQuests.Count < _questManager.numberOfDeuilQuests)
+        if (Input.GetKeyDown(KeyCode.P) && QuestManager.instance.questFinished.Count > 0 
+                                        && QuestManager.instance.activeDeuilQuests.Count < QuestManager.instance.numberOfDeuilQuests)
         {
             AcceptRequest();
         }
-
+        
     }
 
-    public void SetRequest()
+    public void SetGriefRequest()
     {
-        int index = GetRandomNumber(_questManager.questFinished.Count);
-        _requestInfos = _questManager.questFinished[index];
+        int index = GetRandomNumber(QuestManager.instance.questFinished.Count);
+        _requestInfos = QuestManager.instance.questFinished[index];
         UpdateUI();
+        StartCoroutine(_deuilPnjInteractable.Walk(true));
     }
 
     public void AcceptRequest()
     {
         SetQuestInUI();
-        _questManager.activeDeuilQuests.Add(_requestInfos);
-        _questManager.questFinished.Remove(_requestInfos);
-        if (_questManager.questFinished.Count > 0)
+        QuestManager.instance.activeDeuilQuests.Add(_requestInfos);
+        QuestManager.instance.questFinished.Remove(_requestInfos);
+        if (QuestManager.instance.questFinished.Count > 0)
         {
-            SetRequest();
+            StartCoroutine(_deuilPnjInteractable.Walk(false));
+            StartCoroutine(QuestManager.instance.WaitForNewRequest(3, this));
         }
         else
         {
@@ -70,6 +74,7 @@ public class DeuilRequest : MonoBehaviour
 
     private void UpdateUI()
     {
+        
         nameText.text = _requestInfos.name;
         TextureData tex = _textureData._TextureData;
         corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corps];

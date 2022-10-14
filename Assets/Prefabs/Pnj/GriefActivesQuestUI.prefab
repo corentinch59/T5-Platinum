@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 8999927999622090272}
   - component: {fileID: -7227399209511015361}
   m_Layer: 5
-  m_Name: DeuilActivesQuestUI
+  m_Name: GriefActivesQuestUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

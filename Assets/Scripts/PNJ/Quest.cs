@@ -7,7 +7,6 @@ using TMPro;
 public class Quest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
-    private QuestManager _questManager;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
@@ -26,12 +25,7 @@ public class Quest : MonoBehaviour
     }
 
     public StateTimer stateTimer;
-
-
-    private void Awake()
-    {
-        _questManager = FindObjectOfType<QuestManager>();
-    }
+    
 
     private void Update()
     {
@@ -94,11 +88,11 @@ public class Quest : MonoBehaviour
     
     public IEnumerator FinishQuest(CorpseData data)
     {
-        _questManager.UpdateScore(CheckScoreQuest(data));
+        QuestManager.instance.UpdateScore(CheckScoreQuest(data));
         isQuestFinished = true;
         yield return new WaitForSeconds(1);
-        _questManager.questFinished.Add(requestInfos);
-        _questManager.activeQuests.Remove(requestInfos);
+        QuestManager.instance.questFinished.Add(requestInfos);
+        QuestManager.instance.activeQuests.Remove(requestInfos);
         Destroy(gameObject);
     }
 
@@ -107,8 +101,8 @@ public class Quest : MonoBehaviour
         isQuestFinished = true;
         image.color = Color.red;
         yield return new WaitForSeconds(2);
-        _questManager.questFinished.Add(requestInfos);
-        _questManager.activeQuests.Remove(requestInfos);
+        QuestManager.instance.questFinished.Add(requestInfos);
+        QuestManager.instance.activeQuests.Remove(requestInfos);
         Destroy(gameObject);
     }
 

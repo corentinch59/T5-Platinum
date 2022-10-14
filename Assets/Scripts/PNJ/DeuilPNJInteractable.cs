@@ -22,12 +22,6 @@ public class DeuilPNJInteractable : Carryable
         startLoc = GameObject.FindGameObjectWithTag("GriefStartLoc").GetComponent<Transform>();
     }
 
-    private void Start()
-    {
-       
-
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
@@ -35,13 +29,13 @@ public class DeuilPNJInteractable : Carryable
             // display quest when arriving in pos
             DisplayQuest();
         }
-        /*
-        if (Input.GetKeyDown(KeyCode.J))
+        
+        if (Input.GetKeyDown(KeyCode.J) && QuestManager.instance.questFinished.Count > 0)
         {
             transform.position = startLoc.position;
-            StartCoroutine(Walk(false));
+            StartCoroutine(Walk(true));
         }
-        */
+        
     }
 
     private void DisplayQuest()
@@ -110,24 +104,27 @@ public class DeuilPNJInteractable : Carryable
             player.carriedObj = null;
 
             // this.moveback()
-            StartCoroutine(Walk(true));
+            StartCoroutine(Walk(false));
         }
     }
-    private IEnumerator Walk(bool isWalkingBack)
+    public IEnumerator Walk(bool isWalkingForward)
     {
-        if (isWalkingBack)
+        //Arrive Avec sa quete
+        if (isWalkingForward)
         {
-            transform.DOMove(startLoc.position, 1);
-            requestImg.SetActive(false);
+            requestImg.SetActive(true);
+            transform.DOMove(endLoc.position, 1);
+            yield return new WaitForSeconds(1);
         }
+        //a plus de quete et rentre chez lui
         else
         {
-            // il avance
-            deathRequest.SetRequest();
-            transform.DOMove(endLoc.position, 1);
+            requestImg.SetActive(false);
+            transform.DOMove(startLoc.position, 1);
+            yield return new WaitForSeconds(1);
         }
-
-        yield return new WaitForSeconds(1);
+        
+        
     }
     private void OnDrawGizmos()
     {
