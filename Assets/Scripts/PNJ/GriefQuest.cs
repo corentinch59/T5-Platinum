@@ -14,7 +14,7 @@ public class GriefQuest : MonoBehaviour
     [SerializeField] private float questTime = 50;
     [SerializeField] private Image image;
     private bool isQuestFinished;
-    private float timer =  10f;
+    private float timer = 0;
 
     public enum StateTimer
     {

@@ -45,15 +45,15 @@ public class GriefRequest : MonoBehaviour
         */
        if (QuestManager.instance.questFinished.Count > 0 && griefCoroutine == null)
        {
-           if (timer <= 15)
+           if (timer <= 5) // 15
            {
                timer += Time.deltaTime;
            }
            else
            {
-               timer = 15;
+               timer = 5; // 15
                griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));
-               StartCoroutine(_griefPnjInteractable.Walk(true));
+               //StartCoroutine(_griefPnjInteractable.Walk(true));
            }
           
        }
