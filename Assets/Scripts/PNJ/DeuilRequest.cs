@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class DeuilRequest : MonoBehaviour
     private DeuilPNJInteractable _deuilPnjInteractable;
     private GameObject questParent;
     public Coroutine griefCoroutine;
+    private float timer;
 
 
 
@@ -43,9 +45,17 @@ public class DeuilRequest : MonoBehaviour
         */
        if (QuestManager.instance.questFinished.Count > 0 && griefCoroutine == null)
        {
-           griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(12, this));
-           StartCoroutine(_deuilPnjInteractable.Walk(true));
-           
+           if (timer <= 15)
+           {
+               timer += Time.deltaTime;
+           }
+           else
+           {
+               timer = 15;
+               griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));
+               StartCoroutine(_deuilPnjInteractable.Walk(true));
+           }
+          
        }
     }
 
