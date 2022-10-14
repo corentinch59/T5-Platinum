@@ -17,7 +17,7 @@ public class DeuilRequest : MonoBehaviour
     [SerializeField] private Image image;
     private DeuilPNJInteractable _deuilPnjInteractable;
     private GameObject questParent;
-    private Coroutine griefCoroutine;
+    public Coroutine griefCoroutine;
 
 
 

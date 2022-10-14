@@ -129,7 +129,7 @@ public class DeuilPNJInteractable : Carryable
     private IEnumerator Grieffing()
     {
         yield return new WaitForSeconds(griefDuration);
-        StartCoroutine(Walk(false));
+        //StartCoroutine(Walk(false));
     }
 
     public IEnumerator Walk(bool isWalkingForward)
