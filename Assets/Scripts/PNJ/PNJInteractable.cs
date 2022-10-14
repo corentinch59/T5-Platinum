@@ -11,6 +11,7 @@ public class PNJInteractable : MonoBehaviour, IInteractable
     [SerializeField] private GameObject corpseToCreate;
     [SerializeField] private Transform startLoc;
     [SerializeField] private Transform endLoc;
+    private bool isInteractable = true;
 
     public void Awake()
     {
@@ -40,22 +41,26 @@ public class PNJInteractable : MonoBehaviour, IInteractable
 
     public void Interact(PlayerTest player)
     {
-        requestImg.SetActive(false);
-        request.AcceptRequest();
-
-        // spawn Corpse To Bury
-        Vector3 spawn = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
-        GameObject corpseCreated = Instantiate(corpseToCreate, spawn, Quaternion.identity);
-
-        if(corpseCreated.TryGetComponent(out Corpse c))
+        if (isInteractable)
         {
-            // corpseCreated is taking data from the request
-            c.thisQuest = request.quest.GetComponent<Quest>();
+            requestImg.SetActive(false);
+            request.AcceptRequest();
 
+            // spawn Corpse To Bury
+            Vector3 spawn = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
+            GameObject corpseCreated = Instantiate(corpseToCreate, spawn, Quaternion.identity);
+
+            if(corpseCreated.TryGetComponent(out Corpse c))
+            {
+                // corpseCreated is taking data from the request
+                c.thisQuest = request.quest.GetComponent<Quest>();
+
+            }
+
+            //StartCoroutine(Walk(false));
+            //Destroy(this); // enable = false not working
+            isInteractable = false;
         }
-        
-        //StartCoroutine(Walk(false));
-        //Destroy(this); // enable = false not working
     }
 
     public IEnumerator Walk(bool isWalkingForward)
@@ -74,5 +79,6 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         }
         
         yield return new WaitForSeconds(2);
+        isInteractable = true;
     }
 }
