@@ -45,6 +45,7 @@ public class PlayerProto2 : MonoBehaviour
     private void Update()
     {
         Debug.DrawLine(transform.position, new Vector3(transform.position.x + orientationVect.x, transform.position.y, transform.position.z + orientationVect.y));
+
         RaycastHit[] colliders = Physics.SphereCastAll(transform.position, raycastRadius, transform.forward, Mathf.Infinity, raycastMask);
         if(colliders.Length > 0)
         {
@@ -102,18 +103,30 @@ public class PlayerProto2 : MonoBehaviour
         // Start of QTE code
         if (ctx.started)
         {
-            myCoroutine = StartTimer(ctx);
-            StartCoroutine(myCoroutine);
-            playerInput.currentActionMap.FindAction("Move").Disable();
+            if (myCoroutine == null) // Code of iteration 2
+            {
+                myCoroutine = StartTimer(ctx);
+                StartCoroutine(myCoroutine);
+                playerInput.currentActionMap.FindAction("Move").Disable();
+            }
+            else if(myCoroutine != null && ctx.action.name == "Dash") // Code of iteration 2
+            {
+                StopCoroutine(myCoroutine);
+                canvaQte.gameObject.SetActive(false);
+                playerInput.currentActionMap.FindAction("Move").Enable();
+                myCoroutine = null; // Code of iteration 2
+            }
 
         }
-        if (ctx.canceled)
-        {
-            StopCoroutine(myCoroutine);
-            canvaQte.gameObject.SetActive(false);
-            playerInput.currentActionMap.FindAction("Move").Enable();
 
-        }
+
+        //if (ctx.canceled)
+        //{
+        //    StopCoroutine(myCoroutine);
+        //    canvaQte.gameObject.SetActive(false);
+        //    playerInput.currentActionMap.FindAction("Move").Enable();
+        //    myCoroutine = null;
+        //}
     }
 
     private IEnumerator StartTimer(InputAction.CallbackContext ctx)
@@ -141,6 +154,7 @@ public class PlayerProto2 : MonoBehaviour
 
         canvaQte.gameObject.SetActive(false);
         playerInput.currentActionMap.FindAction("Move").Enable();
+        myCoroutine = null; // Code of iteration 2
         yield return null;
     }
 
