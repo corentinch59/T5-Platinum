@@ -27,12 +27,15 @@ public class DeuilPNJInteractable : Carryable
 
     private void Start()
     {
+        /*
         transform.position = startLoc.position;
         StartCoroutine(Walk(true));
+        */
     }
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.O))
         {
             // display quest when arriving in pos
@@ -44,7 +47,7 @@ public class DeuilPNJInteractable : Carryable
             transform.position = startLoc.position;
             StartCoroutine(Walk(true));
         }
-        
+        */
     }
 
     private void DisplayQuest()

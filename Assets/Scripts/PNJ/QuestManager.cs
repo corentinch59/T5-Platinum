@@ -28,6 +28,7 @@ public class QuestManager : MonoBehaviour
             allQuests.Add(quest);
         }
     }
+    
 
     public void UpdateScore(int scoreToAdd)
     {

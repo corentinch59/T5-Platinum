@@ -17,7 +17,8 @@ public class DeuilRequest : MonoBehaviour
     [SerializeField] private Image image;
     private DeuilPNJInteractable _deuilPnjInteractable;
     private GameObject questParent;
-  
+    private Coroutine griefCoroutine;
+
 
 
     private void Awake()
@@ -40,7 +41,12 @@ public class DeuilRequest : MonoBehaviour
             AcceptRequest();
         }
         */
-        
+       if (QuestManager.instance.questFinished.Count > 0 && griefCoroutine == null)
+       {
+           griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(1, this));
+           StartCoroutine(_deuilPnjInteractable.Walk(true));
+           
+       }
     }
 
     public void SetGriefRequest()
@@ -86,6 +92,7 @@ public class DeuilRequest : MonoBehaviour
         {
             StartCoroutine(_deuilPnjInteractable.Walk(false));
             StartCoroutine(QuestManager.instance.WaitForNewRequest(3, this));
+            griefCoroutine = null;
         }
         else
         {
