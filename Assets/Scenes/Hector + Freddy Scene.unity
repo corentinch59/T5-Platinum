@@ -2318,10 +2318,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2136006865, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
-      propertyPath: griefDuration
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3026082338358244922, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_Camera
       value: 
@@ -2373,6 +2369,14 @@ PrefabInstance:
     - target: {fileID: 3026082339422642394, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532811497979070868, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876990827147582222, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
