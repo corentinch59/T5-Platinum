@@ -92,7 +92,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""SelectionScreenControlE"",
+            ""name"": ""SelectionScreenControl"",
             ""id"": ""8a54639e-965d-4ebf-a512-0bca53662b6a"",
             ""actions"": [
                 {
@@ -257,12 +257,12 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        // SelectionScreenControlE
-        m_SelectionScreenControlE = asset.FindActionMap("SelectionScreenControlE", throwIfNotFound: true);
-        m_SelectionScreenControlE_ChangeLeft = m_SelectionScreenControlE.FindAction("ChangeLeft", throwIfNotFound: true);
-        m_SelectionScreenControlE_ChangeRight = m_SelectionScreenControlE.FindAction("ChangeRight", throwIfNotFound: true);
-        m_SelectionScreenControlE_Ready = m_SelectionScreenControlE.FindAction("Ready", throwIfNotFound: true);
-        m_SelectionScreenControlE_UnReady = m_SelectionScreenControlE.FindAction("UnReady", throwIfNotFound: true);
+        // SelectionScreenControl
+        m_SelectionScreenControl = asset.FindActionMap("SelectionScreenControl", throwIfNotFound: true);
+        m_SelectionScreenControl_ChangeLeft = m_SelectionScreenControl.FindAction("ChangeLeft", throwIfNotFound: true);
+        m_SelectionScreenControl_ChangeRight = m_SelectionScreenControl.FindAction("ChangeRight", throwIfNotFound: true);
+        m_SelectionScreenControl_Ready = m_SelectionScreenControl.FindAction("Ready", throwIfNotFound: true);
+        m_SelectionScreenControl_UnReady = m_SelectionScreenControl.FindAction("UnReady", throwIfNotFound: true);
         // PlayerProto3
         m_PlayerProto3 = asset.FindActionMap("PlayerProto3", throwIfNotFound: true);
         m_PlayerProto3_Move = m_PlayerProto3.FindAction("Move", throwIfNotFound: true);
@@ -372,44 +372,44 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     }
     public PlayerActions @Player => new PlayerActions(this);
 
-    // SelectionScreenControlE
-    private readonly InputActionMap m_SelectionScreenControlE;
-    private ISelectionScreenControlEActions m_SelectionScreenControlEActionsCallbackInterface;
-    private readonly InputAction m_SelectionScreenControlE_ChangeLeft;
-    private readonly InputAction m_SelectionScreenControlE_ChangeRight;
-    private readonly InputAction m_SelectionScreenControlE_Ready;
-    private readonly InputAction m_SelectionScreenControlE_UnReady;
-    public struct SelectionScreenControlEActions
+    // SelectionScreenControl
+    private readonly InputActionMap m_SelectionScreenControl;
+    private ISelectionScreenControlActions m_SelectionScreenControlActionsCallbackInterface;
+    private readonly InputAction m_SelectionScreenControl_ChangeLeft;
+    private readonly InputAction m_SelectionScreenControl_ChangeRight;
+    private readonly InputAction m_SelectionScreenControl_Ready;
+    private readonly InputAction m_SelectionScreenControl_UnReady;
+    public struct SelectionScreenControlActions
     {
         private @CharacterControls m_Wrapper;
-        public SelectionScreenControlEActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ChangeLeft => m_Wrapper.m_SelectionScreenControlE_ChangeLeft;
-        public InputAction @ChangeRight => m_Wrapper.m_SelectionScreenControlE_ChangeRight;
-        public InputAction @Ready => m_Wrapper.m_SelectionScreenControlE_Ready;
-        public InputAction @UnReady => m_Wrapper.m_SelectionScreenControlE_UnReady;
-        public InputActionMap Get() { return m_Wrapper.m_SelectionScreenControlE; }
+        public SelectionScreenControlActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ChangeLeft => m_Wrapper.m_SelectionScreenControl_ChangeLeft;
+        public InputAction @ChangeRight => m_Wrapper.m_SelectionScreenControl_ChangeRight;
+        public InputAction @Ready => m_Wrapper.m_SelectionScreenControl_Ready;
+        public InputAction @UnReady => m_Wrapper.m_SelectionScreenControl_UnReady;
+        public InputActionMap Get() { return m_Wrapper.m_SelectionScreenControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(SelectionScreenControlEActions set) { return set.Get(); }
-        public void SetCallbacks(ISelectionScreenControlEActions instance)
+        public static implicit operator InputActionMap(SelectionScreenControlActions set) { return set.Get(); }
+        public void SetCallbacks(ISelectionScreenControlActions instance)
         {
-            if (m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface != null)
+            if (m_Wrapper.m_SelectionScreenControlActionsCallbackInterface != null)
             {
-                @ChangeLeft.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeLeft;
-                @ChangeLeft.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeLeft;
-                @ChangeLeft.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeLeft;
-                @ChangeRight.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
-                @ChangeRight.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
-                @ChangeRight.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnChangeRight;
-                @Ready.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnReady;
-                @Ready.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnReady;
-                @Ready.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnReady;
-                @UnReady.started -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnUnReady;
-                @UnReady.performed -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnUnReady;
-                @UnReady.canceled -= m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface.OnUnReady;
+                @ChangeLeft.started -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeLeft;
+                @ChangeLeft.performed -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeLeft;
+                @ChangeLeft.canceled -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeLeft;
+                @ChangeRight.started -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeRight;
+                @ChangeRight.performed -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeRight;
+                @ChangeRight.canceled -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeRight;
+                @Ready.started -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnReady;
+                @Ready.performed -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnReady;
+                @Ready.canceled -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnReady;
+                @UnReady.started -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnUnReady;
+                @UnReady.performed -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnUnReady;
+                @UnReady.canceled -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnUnReady;
             }
-            m_Wrapper.m_SelectionScreenControlEActionsCallbackInterface = instance;
+            m_Wrapper.m_SelectionScreenControlActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @ChangeLeft.started += instance.OnChangeLeft;
@@ -427,7 +427,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
             }
         }
     }
-    public SelectionScreenControlEActions @SelectionScreenControlE => new SelectionScreenControlEActions(this);
+    public SelectionScreenControlActions @SelectionScreenControl => new SelectionScreenControlActions(this);
 
     // PlayerProto3
     private readonly InputActionMap m_PlayerProto3;
@@ -475,7 +475,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
     }
-    public interface ISelectionScreenControlEActions
+    public interface ISelectionScreenControlActions
     {
         void OnChangeLeft(InputAction.CallbackContext context);
         void OnChangeRight(InputAction.CallbackContext context);
