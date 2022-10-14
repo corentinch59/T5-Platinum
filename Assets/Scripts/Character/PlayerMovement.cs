@@ -57,11 +57,11 @@ public class PlayerMovement : MonoBehaviour
                     orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
                     if (orientationVect.x < 0)
                     {
-                        arrowOrientation.Rotate(new Vector3(0, 0, -90));
+                        arrowOrientation.Rotate(new Vector3(90, -90, 0));
                     }
                     else
                     {
-                        arrowOrientation.Rotate(new Vector3(0, 0, 90));
+                        arrowOrientation.Rotate(new Vector3(90, 90, 0));
                     }
                 }
                 else
@@ -69,11 +69,11 @@ public class PlayerMovement : MonoBehaviour
                     orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
                     if(orientationVect.y < 0)
                     {
-                        arrowOrientation.Rotate(new Vector3(0, 0, 0));
+                        arrowOrientation.Rotate(new Vector3(90, 0, 0));
                     }
                     else
                     {
-                        arrowOrientation.Rotate(new Vector3(0, 0, 180));
+                        arrowOrientation.Rotate(new Vector3(90, 180, 0));
                     }
                 }
                 orientationVect.Normalize();
