@@ -13,8 +13,8 @@ public class GriefRequest : MonoBehaviour
     [SerializeField]  private ScriptableTextureData _textureData;
     [SerializeField]  private TextMeshProUGUI nameText;
     [SerializeField]  private RawImage corpseImage;
-    [SerializeField]  private GameObject questToInstantiate;
-    [HideInInspector] public GameObject griefQuest;
+    [SerializeField]  private GameObject questToInstantiate; 
+    public GameObject griefQuest;
     [SerializeField] private Image image;
     private GriefPNJInteractable _griefPnjInteractable;
     private GameObject questParent;

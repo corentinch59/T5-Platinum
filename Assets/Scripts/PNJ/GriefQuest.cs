@@ -88,6 +88,7 @@ public class GriefQuest : MonoBehaviour
     public IEnumerator FinishGriefQuest(string name, RequestDataBase.localisation loc)
     {
         _request.GoodByeGriefPNJ();
+        isQuestFinished = true;
         _request.griefCoroutine = null;
         QuestManager.instance.UpdateScore(CheckScoreQuest(name, loc));
         QuestManager.instance.activeDeuilQuests.Remove(requestInfos);
