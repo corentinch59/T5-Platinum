@@ -8,9 +8,14 @@ using DG.Tweening;
 public class PlayerProto2 : MonoBehaviour
 {
     [Header("Player Controls")]
-    [SerializeField] [Tooltip("The player's movement speed.")]private float playerSpeed;
-    [SerializeField] [Tooltip("The time in seconds it takes for the QTE to finish.")] private float interactionDuration;
-    [SerializeField] [Tooltip("The height at which the hole will spawn in. (can be negative and is adviced to be)")] private float HeightOfHole;
+    [SerializeField] [Tooltip("The player's movement speed.")]
+    private float playerSpeed;
+    [SerializeField] [Tooltip("The time in seconds it takes for the QTE to finish.")]
+    private float interactionDuration;
+    [SerializeField] [Tooltip("The height at which the hole will spawn in. (can be negative and is adviced to be)")]
+    private float HeightOfHole;
+    [SerializeField] [Tooltip("How much time it takes to be able to press again to cancel or start digging again")]
+    private float TimeBetweenInteractionInputs;
 
     [Header("Raycast Handling")]
     [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
@@ -32,6 +37,7 @@ public class PlayerProto2 : MonoBehaviour
     private IEnumerator myCoroutine;
     private Hole detectedHole;
     private PlayerInput playerInput;
+    private bool canInteract = true;
 
     private void Start()
     {
@@ -103,14 +109,16 @@ public class PlayerProto2 : MonoBehaviour
         // Start of QTE code
         if (ctx.started)
         {
-            if (myCoroutine == null) // Code of iteration 2
+            if (myCoroutine == null && canInteract) // Code of iteration 2
             {
+                StartCoroutine(InteractionCooldown(TimeBetweenInteractionInputs)); // Code of Iteration 2
                 myCoroutine = StartTimer(ctx);
                 StartCoroutine(myCoroutine);
                 playerInput.currentActionMap.FindAction("Move").Disable();
             }
-            else if(myCoroutine != null && ctx.action.name == "Dash") // Code of iteration 2
+            else if(myCoroutine != null && ctx.action.name == "Dash" && canInteract) // Code of iteration 2
             {
+                StartCoroutine(InteractionCooldown(TimeBetweenInteractionInputs)); // Code of Iteration 2
                 StopCoroutine(myCoroutine);
                 canvaQte.gameObject.SetActive(false);
                 playerInput.currentActionMap.FindAction("Move").Enable();
@@ -172,5 +180,12 @@ public class PlayerProto2 : MonoBehaviour
             Instantiate(holePrefab, transform.position + new Vector3(orientationVect.x, HeightOfHole, orientationVect.y), Quaternion.identity);
         }
 
+    }
+
+    private IEnumerator InteractionCooldown(float time)
+    {
+        canInteract = false;
+        yield return new WaitForSeconds(time);
+        canInteract = true;
     }
 }

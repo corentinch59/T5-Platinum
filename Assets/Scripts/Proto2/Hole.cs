@@ -18,7 +18,7 @@ public class Hole : MonoBehaviour
 
     private void ModifyHoleSize(int modifier)
     {
-        if(modifier > 0 && HoleSize < 4)
+        if(modifier > 0 && HoleSize < 3)
         {
             HoleSize += modifier;
             transform.DOScale(transform.localScale + new Vector3(scaleAmountToAdd, 0, scaleAmountToAdd) * modifier, scaleAnimDuration).SetEase(Ease.InBounce);
