@@ -100,12 +100,12 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _DistortionSpeed: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _DistortionSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _WaterColor: {r: 0, g: 0.45863837, b: 0.6132076, a: 0}
-    - _WaterSpeedX: {r: 1, g: 0, b: 0, a: 0}
-    - _WaterSpeedY: {r: 0, g: 0.5, b: 0, a: 0}
+    - _WaterSpeedX: {r: 0.1, g: 0, b: 0, a: 0}
+    - _WaterSpeedY: {r: 0, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3850226152270058278
 MonoBehaviour:
