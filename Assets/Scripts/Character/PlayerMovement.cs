@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 orientationVect;
     private Vector2 move;
     private IInteractable interactable;
+    [SerializeField] private Transform arrowOrientation;
 
 
     private void Start()
@@ -28,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -54,10 +55,26 @@ public class PlayerMovement : MonoBehaviour
                 if (Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
                 {
                     orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
+                    if (orientationVect.x < 0)
+                    {
+                        arrowOrientation.Rotate(new Vector3(0, 0, -90));
+                    }
+                    else
+                    {
+                        arrowOrientation.Rotate(new Vector3(0, 0, 90));
+                    }
                 }
                 else
                 {
                     orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
+                    if(orientationVect.y < 0)
+                    {
+                        arrowOrientation.Rotate(new Vector3(0, 0, 0));
+                    }
+                    else
+                    {
+                        arrowOrientation.Rotate(new Vector3(0, 0, 180));
+                    }
                 }
                 orientationVect.Normalize();
             }

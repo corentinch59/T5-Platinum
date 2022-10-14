@@ -5,24 +5,21 @@ using DG.Tweening;
 using UnityEngine.InputSystem;
 
 public delegate void ReadyEventHandler();
+public delegate void RemovePlayerEventHandler(GameObject player);
 public class ChoseYourChara : MonoBehaviour
 {
     [SerializeField] private List<GameObject> charas = new List<GameObject>();
-    //[SerializeField] private Canvas canvas;
 
     private GameObject currentChara; 
 
     public static event ReadyEventHandler OnReady;
+    public static event ReadyEventHandler UnReady;
+    public static event RemovePlayerEventHandler OnRemovePlayer;
 
     public bool isReady = false;
 
-    private Vector3 leftPos;
-    private Vector3 rightPos;
-
     private void Start()
     {
-        //transform.SetParent(canvas.transform);
-
         currentChara = charas[0];
         for (int i = 0; i < charas.Count; i++)
         {
@@ -30,17 +27,13 @@ public class ChoseYourChara : MonoBehaviour
         }
         
         currentChara.SetActive(true);
-
-        leftPos = new Vector3(-25f, 0f, 0f);
-        leftPos = new Vector3(25f, 0f, 0f);
     }
 
-    public void MoveCharas(int move)
+    public void MoveRight(InputAction.CallbackContext context)
     {
-        if (isReady) return;
+        if (isReady) return;//on bloque si le joueur est ready 
 
-        // 0 == on bouge vers la Droite
-        if (move == 0)
+        if (context.performed)
         {
             if (charas.IndexOf(currentChara) == 0)
             {
@@ -50,14 +43,17 @@ public class ChoseYourChara : MonoBehaviour
             }
             else
             {
-
                 currentChara.SetActive(false);
                 currentChara = charas[charas.IndexOf(currentChara) - 1];
                 currentChara.SetActive(true);
             }
-        }
-        // 1 == on bouge vers la gauche
-        else if (move == 1)
+        }       
+    }
+
+    public void MoveLeft(InputAction.CallbackContext context)
+    {
+        if (isReady) return;//on bloque si le joueur est ready 
+        if (context.performed)
         {
             if (charas.IndexOf(currentChara) == charas.Count - 1)
             {
@@ -69,23 +65,38 @@ public class ChoseYourChara : MonoBehaviour
             {
                 currentChara.SetActive(false);
                 currentChara = charas[charas.IndexOf(currentChara) + 1];
-                 currentChara.SetActive(true);
+                currentChara.SetActive(true);
             }
         }
     }
 
-    public void OnReadyButton()
+    public void GetReady(InputAction.CallbackContext context)
     {
-        if (isReady)
+        if (context.performed)
         {
-            isReady = false;
-            currentChara.transform.DOScale(1f, 0.5f);
+            if (!isReady)//activation de l'etat ready 
+            {
+                currentChara.transform.DOScale(2f, 0.5f);
+                isReady = true;
+                OnReady?.Invoke();
+            }
         }
-        else
+    }
+
+    public void RemovePlayer(InputAction.CallbackContext ctx){
+
+        if (ctx.performed)
         {
-            currentChara.transform.DOScale(2f, 0.5f);
-            isReady = true;
-            OnReady?.Invoke();
+            if (isReady)//Cancel l'etat ready 
+            {
+                isReady = false;
+                currentChara.transform.DOScale(1f, 0.5f);
+                UnReady?.Invoke();
+            }
+            else//Remove du player
+            {
+                OnRemovePlayer?.Invoke(gameObject);
+            }
         }
     }
 }

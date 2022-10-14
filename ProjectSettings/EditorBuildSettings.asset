@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LaSceneDeMaceo.unity
+    guid: 58233b638ea6dc047a760f8ce98af673
+  - enabled: 1
+    path: Assets/Scenes/Freddy.unity
+    guid: c18a2e2001fa91341b4cb7c92aeb4571
   m_configObjects: {}

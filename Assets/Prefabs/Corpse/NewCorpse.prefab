@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7901434866790508091
+--- !u!1 &694417260691800150
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7901434866790508071}
-  - component: {fileID: 7901434866790508088}
-  - component: {fileID: 7901434866790508089}
-  - component: {fileID: 7901434866790508090}
-  - component: {fileID: 7901434866790508070}
-  m_Layer: 6
-  m_Name: Hole
+  - component: {fileID: 694417260691800153}
+  - component: {fileID: 694417260691800154}
+  - component: {fileID: 694417260691800155}
+  - component: {fileID: 694417260691800148}
+  - component: {fileID: 694417260691800149}
+  m_Layer: 7
+  m_Name: NewCorpse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7901434866790508071
+--- !u!4 &694417260691800153
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901434866790508091}
+  m_GameObject: {fileID: 694417260691800150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.32365856, y: 5.2354865, z: -8.442551}
-  m_LocalScale: {x: 0.32, y: 0.32, z: 0.32}
+  m_LocalPosition: {x: -8.44168, y: 1.4837143, z: 23}
+  m_LocalScale: {x: 2.7326932, y: 0.96464497, z: 2.8215213}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7901434866790508088
+--- !u!33 &694417260691800154
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901434866790508091}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7901434866790508089
+  m_GameObject: {fileID: 694417260691800150}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &694417260691800155
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901434866790508091}
+  m_GameObject: {fileID: 694417260691800150}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +60,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 257
+  m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
@@ -85,31 +85,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7901434866790508090
-MeshCollider:
+--- !u!65 &694417260691800148
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901434866790508091}
+  m_GameObject: {fileID: 694417260691800150}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &7901434866790508070
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &694417260691800149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901434866790508091}
+  m_GameObject: {fileID: 694417260691800150}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc2be099a4cacd478c63be5fef9c02c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2afd9f134b51381409bfccd5c51228e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleRatioModifier: 0.48
-  scaleAnimDuration: 1
+  corpseData:
+    name: Jean
+    size: 1
+    corpseType: 0
+    localisation: 0
+    coffinType: 2
+    specificity: 0
+  radius: 5
+  localisationsLayer:
+    serializedVersion: 2
+    m_Bits: 24
+  thisQuest: {fileID: 0}

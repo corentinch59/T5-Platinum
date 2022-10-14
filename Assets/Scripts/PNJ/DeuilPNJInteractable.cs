@@ -1,6 +1,8 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 public class DeuilPNJInteractable : Carryable
@@ -15,11 +17,18 @@ public class DeuilPNJInteractable : Carryable
     public string griefName = "";
     public RequestDataBase.localisation griefLoc = RequestDataBase.localisation.NONE;
     public float radius = 10f;
+    public float griefDuration;
 
     public void Awake()
     {
         endLoc = GameObject.FindGameObjectWithTag("GriefEndLoc").GetComponent<Transform>();
         startLoc = GameObject.FindGameObjectWithTag("GriefStartLoc").GetComponent<Transform>();
+    }
+
+    private void Start()
+    {
+        transform.position = startLoc.position;
+        StartCoroutine(Walk(true));
     }
 
     private void Update()
@@ -53,9 +62,13 @@ public class DeuilPNJInteractable : Carryable
             player.carriedObj = this;
             player.interactableObj = null;
             player.isCarrying = true;
-            player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
-            player.carriedObj.gameObject.SetActive(false);
 
+            // player carry PNJ
+            player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
+            player.carriedObj.gameObject.transform.parent = player.transform;
+            player.carriedObj.gameObject.transform.localPosition = transform.up * 14;
+            player.carriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, -90), 1f);
+            //player.carriedObj.gameObject.SetActive(false);
 
             //Destroy(this); // enable = false not working
 
@@ -66,10 +79,11 @@ public class DeuilPNJInteractable : Carryable
 
     public override void PutDown(PlayerTest player)
     {
-        Debug.Log(isInteractable);
         if (!isInteractable)
         {
-            player.carriedObj.gameObject.SetActive(true);
+            //player.carriedObj.gameObject.SetActive(true);
+            player.carriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
+            player.carriedObj.gameObject.transform.parent = null;
 
             player.isCarrying = false;
 
@@ -103,10 +117,18 @@ public class DeuilPNJInteractable : Carryable
 
             player.carriedObj = null;
 
+            StartCoroutine(Grieffing());
             // this.moveback()
-            StartCoroutine(Walk(false));
+            isInteractable = true;
         }
     }
+
+    private IEnumerator Grieffing()
+    {
+        yield return new WaitForSeconds(griefDuration);
+        StartCoroutine(Walk(false));
+    }
+
     public IEnumerator Walk(bool isWalkingForward)
     {
         //Arrive Avec sa quete

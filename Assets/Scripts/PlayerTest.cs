@@ -177,7 +177,6 @@ public class PlayerTest : MonoBehaviour
     {
         if (ctx.performed)
         {
-            Debug.Log(interactableObj);
             if (interactableObj == null && carriedObj != null)
             {
                 carriedObj.PutDown(this);
