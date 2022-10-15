@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graveToCreate: {fileID: 8366753863871105557, guid: 21e8a7e95cd03be4192bafca4eef7cc6, type: 3}
-  corpse: {fileID: 1454460455}
+  corpse: {fileID: 1339094367}
   timerDig: 5
   numberMashDigUp: 5
   graveLayer:
@@ -482,6 +482,42 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: c3909571-cddd-4d00-a05f-e2dfc4ff82c8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: ef91c638-039c-45dc-a7c1-36e036ea2ef2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: c3f7bec8-09dd-46df-a3ad-86e7041874a0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 5da23c4d-cd08-4633-ab9c-e332688df955
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: SelectionScreenControlE/Ready[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: SelectionScreenControlE/UnReady[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: PlayerProto3/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: PlayerProto3/Action[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
+      objectReference: {fileID: 0}
     - target: {fileID: 2596005604130923464, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -533,7 +569,11 @@ PrefabInstance:
     - target: {fileID: 2596005604130923475, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: arrowOrientation
       value: 
-      objectReference: {fileID: 1178560175}
+      objectReference: {fileID: 1600052695}
+    - target: {fileID: 2596005604130923475, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: parentArrowOrientation
+      value: 
+      objectReference: {fileID: 1600052695}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
 --- !u!1 &512682192
@@ -1720,9 +1760,9 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!4 &1178560175 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1178560175, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+--- !u!1 &1339094367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1454460455, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
   m_PrefabInstance: {fileID: 425835384}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1450857499
@@ -1758,11 +1798,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1454460455 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1454460455, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
-  m_PrefabInstance: {fileID: 425835384}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1485419201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,6 +1862,11 @@ Transform:
   m_Father: {fileID: 1485419202}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1600052695 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1178560175, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+  m_PrefabInstance: {fileID: 425835384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1601619097
 GameObject:
   m_ObjectHideFlags: 0
