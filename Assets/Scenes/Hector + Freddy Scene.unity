@@ -2312,6 +2312,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 512682194}
+    - target: {fileID: 3949322027087116386, guid: ef3aeed8aa1996c46b62a3dbed14abd9, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949322027087116386, guid: ef3aeed8aa1996c46b62a3dbed14abd9, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef3aeed8aa1996c46b62a3dbed14abd9, type: 3}
 --- !u!1001 &3212612059173487436
@@ -2327,7 +2335,7 @@ PrefabInstance:
       objectReference: {fileID: 512682194}
     - target: {fileID: 3026082339422642390, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_Name
-      value: DEUIL PNJ
+      value: GRIEF PNJ
       objectReference: {fileID: 0}
     - target: {fileID: 3026082339422642394, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_RootOrder
@@ -2373,13 +2381,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4532811497979070868, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
-      propertyPath: m_Texture
-      value: 
+    - target: {fileID: 5876990827147582222, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
+      propertyPath: m_fontSize
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 5876990827147582222, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
-      propertyPath: m_text
-      value: 
+      propertyPath: m_fontSizeBase
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876990827147582222, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
