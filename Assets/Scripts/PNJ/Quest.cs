@@ -7,7 +7,7 @@ using TMPro;
 public class Quest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
-    private Request _request;
+    private DigRequest _request;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
@@ -52,7 +52,7 @@ public class Quest : MonoBehaviour
     }
 
     public void InitialiseQuestUI(RequestDataBase requestInformation, Texture corpseT, Texture localisationT,
-        Texture coffinT, Request request)
+        Texture coffinT, DigRequest request)
     {
         _request = request; 
         requestInfos = requestInformation;

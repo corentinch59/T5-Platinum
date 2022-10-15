@@ -16,7 +16,7 @@ public class Request : MonoBehaviour
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
     [SerializeField] private GameObject questToInstantiate;
-    [SerializeField] public GameObject quest;
+    public GameObject quest;
     private GameObject questParent;
     private PNJInteractable _pnjInteractable;
   
@@ -33,6 +33,7 @@ public class Request : MonoBehaviour
         SetRequest();
     }
 
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.D) && QuestManager.instance.allQuests.Count > 0 
@@ -41,6 +42,7 @@ public class Request : MonoBehaviour
             AcceptRequest();
         }
     }
+    */
 
     public void SetRequest()
     {
@@ -52,7 +54,7 @@ public class Request : MonoBehaviour
 
     public void AcceptRequest()
     {
-        SetQuestInUI();
+        //SetQuestInUI();
         QuestManager.instance.activeQuests.Add(_requestInfos);
         QuestManager.instance.allQuests.Remove(_requestInfos);
         
@@ -72,12 +74,7 @@ public class Request : MonoBehaviour
         coffinImage.texture = tex.coffinTex[(int)_requestInfos.cof];
     }
 
-    public void SetQuestInUI()
-    {
-        quest = Instantiate(questToInstantiate, questParent.transform);
-        quest.GetComponent<Quest>().InitialiseQuestUI(_requestInfos, corpseImage.texture,
-            localisationImage.texture,coffinImage.texture, this);
-    }
+
 
     public void GoodByePnj()
     {
@@ -85,7 +82,7 @@ public class Request : MonoBehaviour
         StartCoroutine(_pnjInteractable.Walk(false));
         if (QuestManager.instance.allQuests.Count > 0)
         {
-            StartCoroutine(QuestManager.instance.WaitForNewRequest(3,this));
+            //StartCoroutine(QuestManager.instance.WaitForNewRequest(3,this));
         }
         else
         {

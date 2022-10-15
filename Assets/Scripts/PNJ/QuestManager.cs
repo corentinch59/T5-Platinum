@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class QuestManager : MonoBehaviour
 {
@@ -37,10 +38,43 @@ public class QuestManager : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
-    public IEnumerator WaitForNewRequest(float secondsToWait, Request request)
+
+    public void AcceptRequest(Request request, RequestDataBase requestInfo)
+    {
+        activeQuests.Add(requestInfo);
+        allQuests.Remove(requestInfo);
+    }
+    
+    public void AcceptRequest(GriefRequest request, RequestDataBase requestInfo)
+    {
+        activeDeuilQuests.Add(requestInfo);
+        questFinished.Remove(requestInfo);
+    }
+    
+    
+    
+    public RequestDataBase GetRequest(DigRequest request)
+    {
+        int index = GetRandomNumber(allQuests.Count);
+        return allQuests[index];
+    }
+    
+    public RequestDataBase GetRequest(GriefRequest request)
+    {
+        int index = GetRandomNumber(instance.questFinished.Count);
+        return questFinished[index];
+    }
+    
+    private int GetRandomNumber(int arrayCount)
+    {
+        return Random.Range(0, arrayCount);
+    }
+    
+    
+    public IEnumerator WaitForNewRequest(float secondsToWait, DigRequest request)
     {
         yield return new WaitForSeconds(secondsToWait);
-        request.SetRequest();
+        request.SetDigRequest();
         Debug.Log("LAQUETELA");
     }
     
