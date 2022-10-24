@@ -38,10 +38,12 @@ public class Corpse : Carryable
             }
 
             players[0].playerMovement.ChangeInput("Pilote");
+            transform.parent = players[0].transform;
 
             if(players.Count > 1)
             {
                 players[1].playerMovement.ChangeInput("Co-Pilote");
+                players[1].transform.parent = players[0].transform;
             }
 
             // If everyone is up to carry the body then they can move

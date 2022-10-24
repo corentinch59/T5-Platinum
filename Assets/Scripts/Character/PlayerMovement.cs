@@ -46,14 +46,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moveDir = new Vector3(move.x, 0, move.y);
-        controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
+        if(transform.parent == null)
+        {
+            moveDir = new Vector3(move.x, 0, move.y);
+            controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
 
-        if (controller.isGrounded && playerVelocity.y < 0)
-            playerVelocity.y = 0f;
+            if (controller.isGrounded && playerVelocity.y < 0)
+                playerVelocity.y = 0f;
 
-        playerVelocity.y += controller.isGrounded ? 0f : gravityValue * Time.fixedDeltaTime;
-        controller.Move(playerVelocity * Time.fixedDeltaTime);
+            playerVelocity.y += controller.isGrounded ? 0f : gravityValue * Time.fixedDeltaTime;
+            controller.Move(playerVelocity * Time.fixedDeltaTime);
+        }
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
