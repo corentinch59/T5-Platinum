@@ -41,7 +41,7 @@ public class Corpse : Carryable
         player.carriedObj.gameObject.SetActive(false);
     }
 
-    public override void PutDown(PlayerTest player)
+    public override void PutDown(PlayerTest player, bool isTimeOut = false)
     {
         // corpse became grave (sprite)
         player.isCarrying = false;

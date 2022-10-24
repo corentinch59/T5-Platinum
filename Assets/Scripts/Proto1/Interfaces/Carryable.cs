@@ -8,7 +8,7 @@ public class Carryable : MonoBehaviour, IInteractable, IPutDown
     {
     }
 
-    public virtual void PutDown(PlayerTest player)
+    public virtual void PutDown(PlayerTest player, bool isTimeOut = false)
     {
     }
 }
