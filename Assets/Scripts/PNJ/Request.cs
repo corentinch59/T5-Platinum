@@ -67,7 +67,7 @@ public class Request : MonoBehaviour
 
     private void UpdateUI()
     {
-        nameText.text = _requestInfos.name;
+        nameText.text = _requestInfos.corpseName;
         TextureData tex = _textureData._TextureData;
         corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corps];
         localisationImage.texture = tex.localisationTex[(int)_requestInfos.loc];

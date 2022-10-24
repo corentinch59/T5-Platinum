@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class RequestDataBase 
 {
-    public string name;
+    public string corpseName;
     public size siz;
     public localisation loc;
     public coffin cof;

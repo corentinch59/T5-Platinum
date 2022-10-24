@@ -218,6 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2457018146436438973}
   - component: {fileID: 9043336061808264405}
+  - component: {fileID: 4148059782826397712}
   m_Layer: 5
   m_Name: PNJ Request
   m_TagString: Untagged
@@ -261,15 +262,43 @@ MonoBehaviour:
   _textureData: {fileID: 11400000, guid: 1c91b26c7fd3b3d459127a8143bcf1b3, type: 2}
   _requestInfos:
     name: 
+    siz: 0
     loc: 0
     cof: 0
-    corp: 0
+    corps: 0
+    spec: 0
   nameText: {fileID: 573102795083411221}
   corpseImage: {fileID: 1450577151129272518}
   localisationImage: {fileID: 9043967723521533827}
   coffinImage: {fileID: 192509422992928281}
   questToInstantiate: {fileID: 0}
-  _questManager: {fileID: 0}
+  quest: {fileID: 0}
+--- !u!114 &4148059782826397712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683572570302702859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30a0e46e7edc9a4ab0816d20b3c5083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requestInfo:
+    name: 
+    siz: 0
+    loc: 0
+    cof: 0
+    corps: 0
+    spec: 0
+  textureData: {fileID: 11400000, guid: 1c91b26c7fd3b3d459127a8143bcf1b3, type: 2}
+  nameText: {fileID: 8883895847954076252}
+  corpseImage: {fileID: 1450577151129272518}
+  questToInstantiate: {fileID: 8707251112121258463, guid: 6219b7c69facf764db2c06dee32afc1d, type: 3}
+  quest: {fileID: 0}
+  localisationImage: {fileID: 9043967723521533827}
+  coffinImage: {fileID: 192509422992928281}
 --- !u!1 &5154784137471476875
 GameObject:
   m_ObjectHideFlags: 0

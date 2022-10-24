@@ -25,12 +25,14 @@ public class DigRequest : RequestH
     public void SetDigRequest()
     {
         requestInfo = QuestManager.instance.GetRequest(this);
+        StartCoroutine(_pnjInteractable.Walk(true));
         UpdateDigUI();
     }
     
-    private void AcceptDigRequest()
+    public void AcceptDigRequest()
     {
         base.AcceptRequest();
+        SetQuestInUI();
     }
 
     private void UpdateDigUI()
@@ -49,7 +51,10 @@ public class DigRequest : RequestH
 
     public void GoodByePnj()
     {
-        
-        
+        StartCoroutine(_pnjInteractable.Walk(false));
+        if (QuestManager.instance.allQuests.Count > 0)
+        {
+            StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));
+        }
     }
 }

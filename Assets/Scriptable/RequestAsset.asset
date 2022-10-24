@@ -13,43 +13,43 @@ MonoBehaviour:
   m_Name: RequestAsset
   m_EditorClassIdentifier: 
   _dataBase:
-  - name: Gerad
+  - corpseName: Matthieu
     siz: 0
     loc: 1
     cof: 0
     corps: 0
     spec: 0
-  - name: Luc
+  - corpseName: Tanguy
     siz: 0
     loc: 2
     cof: 0
     corps: 0
     spec: 0
-  - name: Jean-Marc
-    siz: 0
-    loc: 2
-    cof: 1
-    corps: 0
-    spec: 0
-  - name: Sylvie
+  - corpseName: Maceo
     siz: 0
     loc: 2
     cof: 1
     corps: 0
     spec: 0
-  - name: Maceo
+  - corpseName: Hector
+    siz: 0
+    loc: 2
+    cof: 1
+    corps: 0
+    spec: 0
+  - corpseName: Arthur
     siz: 0
     loc: 1
     cof: 0
     corps: 0
     spec: 0
-  - name: Arthur
+  - corpseName: Simon
     siz: 0
     loc: 1
     cof: 0
     corps: 0
     spec: 0
-  - name: Corentin
+  - corpseName: Corentin
     siz: 0
     loc: 1
     cof: 0

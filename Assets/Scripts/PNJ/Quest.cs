@@ -56,7 +56,7 @@ public class Quest : MonoBehaviour
     {
         _request = request; 
         requestInfos = requestInformation;
-        nameText.text = requestInfos.name;
+        nameText.text = requestInfos.corpseName;
         corpseImage.texture = corpseT;
         localisationImage.texture = localisationT;
         coffinImage.texture = coffinT;

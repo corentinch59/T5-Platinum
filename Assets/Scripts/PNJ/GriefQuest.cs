@@ -55,13 +55,13 @@ public class GriefQuest : MonoBehaviour
     {
         _request = request;
         requestInfos = requestInformation;
-        nameText.text = requestInfos.name;
+        nameText.text = requestInfos.corpseName;
         corpseImage.texture = corpseT;
     }
 
     private int CheckScoreQuest(string name, RequestDataBase.localisation loc)
     {
-        if (name == requestInfos.name && loc == requestInfos.loc)
+        if (name == requestInfos.corpseName && loc == requestInfos.loc)
         {
             image.color = Color.green;
             // add score

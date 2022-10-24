@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PNJInteractable : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Request request;
+    [SerializeField] private DigRequest request;
     [SerializeField] private GameObject requestImg;
     [SerializeField] private GameObject corpseToCreate;
     [SerializeField] private Transform startLoc;
@@ -44,7 +44,7 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         if (isInteractable)
         {
             requestImg.SetActive(false);
-            request.AcceptRequest();
+            request.AcceptDigRequest();
 
             // spawn Corpse To Bury
             Vector3 spawn = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);

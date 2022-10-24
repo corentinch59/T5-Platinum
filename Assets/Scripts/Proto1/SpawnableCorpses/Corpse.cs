@@ -99,7 +99,7 @@ public class Corpse : Carryable
     {
         CorpseData newLoc = new CorpseData();
 
-        newLoc.name = thisQuest.requestInfos.name;
+        newLoc.name = thisQuest.requestInfos.corpseName;
         newLoc.size = thisQuest.requestInfos.siz;
         newLoc.corpseType = thisQuest.requestInfos.corps;
         newLoc.coffinType = thisQuest.requestInfos.cof;
@@ -146,7 +146,7 @@ public class Corpse : Carryable
     private CorpseData UpdateData(CorpseData cData)
     {
         CorpseData newCD = new CorpseData();
-        newCD.name = thisQuest.requestInfos.name;
+        newCD.name = thisQuest.requestInfos.corpseName;
         newCD.size = thisQuest.requestInfos.siz;
         newCD.corpseType = thisQuest.requestInfos.corps;
         newCD.coffinType = thisQuest.requestInfos.cof;

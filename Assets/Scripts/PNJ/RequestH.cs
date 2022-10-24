@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,17 @@ public class RequestH : MonoBehaviour
 {
     [Header("Heritage")] 
     [SerializeField] public RequestDataBase requestInfo;
-    [SerializeField] private ScriptableTextureData textureData;
-    [SerializeField]  private TextMeshProUGUI nameText;
+    [SerializeField] protected ScriptableTextureData textureData;
+    [SerializeField]  protected TextMeshPro nameText;
     [SerializeField]  protected RawImage corpseImage;
     [SerializeField]  protected GameObject questToInstantiate;
-    protected GameObject questParent;
+    [SerializeField]  protected GameObject questParent;
     public GameObject quest;
+
+    private void Awake()
+    {
+        
+    }
 
     public void AcceptRequest()
     {
@@ -31,7 +37,7 @@ public class RequestH : MonoBehaviour
     
     protected TextureData UpdateUI()
     {
-        nameText.text = requestInfo.name;
+        nameText.text = requestInfo.corpseName;
         TextureData tex = textureData._TextureData;
         corpseImage.texture = tex.corpsesTex[(int)requestInfo.corps];
         return tex;
