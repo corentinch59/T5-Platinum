@@ -21,7 +21,12 @@ public class PlayerMovement : MonoBehaviour
     private float rotate;
     private IInteractable interactable;
     [SerializeField] private Transform arrowOrientation;
+
+    private string currentInput;
+    public string CurrentInput { get; set; }
+
     private PlayerInput playerInput;
+    public PlayerInput PlayerInput => playerInput;
 
 
     private void Awake()
@@ -106,18 +111,23 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMovePilote(InputAction.CallbackContext ctx)
     {
-        OnMove(ctx);
+        if(canMove)
+            OnMove(ctx);
     }
 
     public void OnMoveCoPilote(InputAction.CallbackContext ctx)
     {
-        rotate = ctx.ReadValue<float>();
+        if (canMove)
+        {
+            rotate = ctx.ReadValue<float>();
+
+        }
         Debug.Log(rotate);
     }
 
     public void ChangeInput(string inputActionMap)
     {
         playerInput.SwitchCurrentActionMap(inputActionMap);
-        Debug.Log(playerInput.currentActionMap);
+        CurrentInput = inputActionMap;
     }
 }

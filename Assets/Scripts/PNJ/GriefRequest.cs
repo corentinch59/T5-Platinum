@@ -43,7 +43,6 @@ public class GriefRequest : MonoBehaviour
              AcceptRequest();
          }
          */
-        Debug.Log(griefCoroutine);
         if (QuestManager.instance.questFinished.Count > 0 && griefCoroutine == null)
         {
             if (timer <= 5) // 15
