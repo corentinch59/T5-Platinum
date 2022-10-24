@@ -16,11 +16,7 @@ public class RequestH : MonoBehaviour
     [SerializeField]  protected GameObject questToInstantiate;
     [SerializeField]  protected GameObject questParent;
     public GameObject quest;
-
-    private void Awake()
-    {
-        
-    }
+    
 
     public void AcceptRequest()
     {
