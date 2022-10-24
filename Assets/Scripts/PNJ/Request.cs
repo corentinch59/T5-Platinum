@@ -81,7 +81,6 @@ public class Request : MonoBehaviour
 
     public void GoodByePnj()
     {
-        Debug.Log("Ah La moi je pars");
         StartCoroutine(_pnjInteractable.Walk(false));
         if (QuestManager.instance.allQuests.Count > 0)
         {
