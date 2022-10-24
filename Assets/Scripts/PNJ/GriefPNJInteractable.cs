@@ -81,7 +81,7 @@ public class GriefPNJInteractable : Carryable
         }
     }
 
-    public override void PutDown(PlayerTest player)
+    public override void PutDown(PlayerTest player, bool isTimeOut = false)
     {
         if (!isInteractable)
         {
@@ -114,22 +114,23 @@ public class GriefPNJInteractable : Carryable
             player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
                     player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
 
-            if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
+            if (!isTimeOut)
             {
-                StartCoroutine(dq.FinishGriefQuest(griefName, griefLoc));
+                if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
+                {
+                    StartCoroutine(dq.FinishGriefQuest(griefName, griefLoc));
+                }
             }
 
             player.carriedObj = null;
 
             // this.moveback()
-            isInteractable = true;
         }
     }
 
     public IEnumerator Grieffing()
     {
         yield return new WaitForSeconds(griefDuration);
-        Debug.Log("finish grieffing");
         StartCoroutine(Walk(false));
     }
 
@@ -160,6 +161,7 @@ public class GriefPNJInteractable : Carryable
         distToEnd = Vector3.Distance(agent.destination, transform.position) / agent.speed;
         yield return new WaitForSeconds(distToEnd);
         if(!isWalkingForward) StartCoroutine(QuestManager.instance.WaitForNewRequest(3, deathRequest));
+        isInteractable = true;
     }
     private void OnDrawGizmos()
     {

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PutDownCorpse : IPutDown
 {
-    public void PutDown(PlayerTest player)
+    public void PutDown(PlayerTest player, bool isTimeOut = false)
     {
-        Debug.Log("Corpse put down");
 
         // Visual Debug 
         player.carriedObj.gameObject.SetActive(true);
