@@ -18,8 +18,10 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     public Vector2 orientationVect;
     private Vector2 move;
+    private float rotate;
     private IInteractable interactable;
     [SerializeField] private Transform arrowOrientation;
+    private PlayerInput playerInput;
 
 
     private void Awake()
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Update()
@@ -99,5 +102,22 @@ public class PlayerMovement : MonoBehaviour
     public void OnInteract(InputAction.CallbackContext ctx)
     {
         Debug.Log("Interacted");
+    }
+
+    public void OnMovePilote(InputAction.CallbackContext ctx)
+    {
+        OnMove(ctx);
+    }
+
+    public void OnMoveCoPilote(InputAction.CallbackContext ctx)
+    {
+        rotate = ctx.ReadValue<float>();
+        Debug.Log(rotate);
+    }
+
+    public void ChangeInput(string inputActionMap)
+    {
+        playerInput.SwitchCurrentActionMap(inputActionMap);
+        Debug.Log(playerInput.currentActionMap);
     }
 }

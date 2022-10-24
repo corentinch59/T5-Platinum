@@ -125,7 +125,6 @@ public class GriefPNJInteractable : Carryable
             player.carriedObj = null;
 
             // this.moveback()
-            isInteractable = true;
         }
     }
 
@@ -162,6 +161,7 @@ public class GriefPNJInteractable : Carryable
         distToEnd = Vector3.Distance(agent.destination, transform.position) / agent.speed;
         yield return new WaitForSeconds(distToEnd);
         if(!isWalkingForward) StartCoroutine(QuestManager.instance.WaitForNewRequest(3, deathRequest));
+        isInteractable = true;
     }
     private void OnDrawGizmos()
     {

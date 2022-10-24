@@ -303,6 +303,190 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Pilote"",
+            ""id"": ""2cf4ff88-3d63-422f-9544-b052bad57333"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveWithCorpse"",
+                    ""type"": ""Value"",
+                    ""id"": ""486c4d0b-0bee-4c83-bc5f-1f39e4d5f172"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""105745ca-3069-48a8-b9a1-48931acf5594"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ea4fee41-b670-4894-8900-029950101214"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone(min=0.5)"",
+                    ""groups"": """",
+                    ""action"": ""MoveWithCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""5f938d39-4c44-4e58-ad3e-82bd9a590868"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveWithCorpse"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""232742d8-89d4-4586-a8d2-2bf546131d1d"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveWithCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""47fb9787-f76b-4701-aeac-9c46ce280b93"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveWithCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""f69a599f-1831-40ba-bdc0-5685da95a7f5"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveWithCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""0eef024d-e89d-40ab-8877-423f5583b1a3"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveWithCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f63758d5-87f7-4b2a-b269-4fec0ecc5139"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Co-Pilote"",
+            ""id"": ""f60151be-66ff-4fe0-aad0-196245b1f0ff"",
+            ""actions"": [
+                {
+                    ""name"": ""OrientateCorpse"",
+                    ""type"": ""Value"",
+                    ""id"": ""66887643-a484-4b6c-be4c-70fe7051f592"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""3adfcfb8-e1af-4dee-9499-973aced5b007"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8fb33225-56e7-4465-a540-3e90b10bc5f5"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone(min=0.5)"",
+                    ""groups"": """",
+                    ""action"": ""OrientateCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""5e601040-a76c-42ae-a710-daeed714377b"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OrientateCorpse"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""3a20cef3-1555-4a2f-aaf7-a061e951c722"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OrientateCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""168f3ae4-66ee-422d-9a97-1964ef219c22"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OrientateCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3f90042-e12b-458f-b323-01d1f38f0738"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -322,6 +506,14 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_PlayerProto3 = asset.FindActionMap("PlayerProto3", throwIfNotFound: true);
         m_PlayerProto3_Move = m_PlayerProto3.FindAction("Move", throwIfNotFound: true);
         m_PlayerProto3_Action = m_PlayerProto3.FindAction("Action", throwIfNotFound: true);
+        // Pilote
+        m_Pilote = asset.FindActionMap("Pilote", throwIfNotFound: true);
+        m_Pilote_MoveWithCorpse = m_Pilote.FindAction("MoveWithCorpse", throwIfNotFound: true);
+        m_Pilote_Interact = m_Pilote.FindAction("Interact", throwIfNotFound: true);
+        // Co-Pilote
+        m_CoPilote = asset.FindActionMap("Co-Pilote", throwIfNotFound: true);
+        m_CoPilote_OrientateCorpse = m_CoPilote.FindAction("OrientateCorpse", throwIfNotFound: true);
+        m_CoPilote_Interact = m_CoPilote.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -524,6 +716,88 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerProto3Actions @PlayerProto3 => new PlayerProto3Actions(this);
+
+    // Pilote
+    private readonly InputActionMap m_Pilote;
+    private IPiloteActions m_PiloteActionsCallbackInterface;
+    private readonly InputAction m_Pilote_MoveWithCorpse;
+    private readonly InputAction m_Pilote_Interact;
+    public struct PiloteActions
+    {
+        private @CharacterControls m_Wrapper;
+        public PiloteActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveWithCorpse => m_Wrapper.m_Pilote_MoveWithCorpse;
+        public InputAction @Interact => m_Wrapper.m_Pilote_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Pilote; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PiloteActions set) { return set.Get(); }
+        public void SetCallbacks(IPiloteActions instance)
+        {
+            if (m_Wrapper.m_PiloteActionsCallbackInterface != null)
+            {
+                @MoveWithCorpse.started -= m_Wrapper.m_PiloteActionsCallbackInterface.OnMoveWithCorpse;
+                @MoveWithCorpse.performed -= m_Wrapper.m_PiloteActionsCallbackInterface.OnMoveWithCorpse;
+                @MoveWithCorpse.canceled -= m_Wrapper.m_PiloteActionsCallbackInterface.OnMoveWithCorpse;
+                @Interact.started -= m_Wrapper.m_PiloteActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PiloteActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PiloteActionsCallbackInterface.OnInteract;
+            }
+            m_Wrapper.m_PiloteActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoveWithCorpse.started += instance.OnMoveWithCorpse;
+                @MoveWithCorpse.performed += instance.OnMoveWithCorpse;
+                @MoveWithCorpse.canceled += instance.OnMoveWithCorpse;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+            }
+        }
+    }
+    public PiloteActions @Pilote => new PiloteActions(this);
+
+    // Co-Pilote
+    private readonly InputActionMap m_CoPilote;
+    private ICoPiloteActions m_CoPiloteActionsCallbackInterface;
+    private readonly InputAction m_CoPilote_OrientateCorpse;
+    private readonly InputAction m_CoPilote_Interact;
+    public struct CoPiloteActions
+    {
+        private @CharacterControls m_Wrapper;
+        public CoPiloteActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OrientateCorpse => m_Wrapper.m_CoPilote_OrientateCorpse;
+        public InputAction @Interact => m_Wrapper.m_CoPilote_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_CoPilote; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CoPiloteActions set) { return set.Get(); }
+        public void SetCallbacks(ICoPiloteActions instance)
+        {
+            if (m_Wrapper.m_CoPiloteActionsCallbackInterface != null)
+            {
+                @OrientateCorpse.started -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnOrientateCorpse;
+                @OrientateCorpse.performed -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnOrientateCorpse;
+                @OrientateCorpse.canceled -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnOrientateCorpse;
+                @Interact.started -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnInteract;
+            }
+            m_Wrapper.m_CoPiloteActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @OrientateCorpse.started += instance.OnOrientateCorpse;
+                @OrientateCorpse.performed += instance.OnOrientateCorpse;
+                @OrientateCorpse.canceled += instance.OnOrientateCorpse;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+            }
+        }
+    }
+    public CoPiloteActions @CoPilote => new CoPiloteActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -541,5 +815,15 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
+    }
+    public interface IPiloteActions
+    {
+        void OnMoveWithCorpse(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface ICoPiloteActions
+    {
+        void OnOrientateCorpse(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

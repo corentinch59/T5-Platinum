@@ -19,6 +19,9 @@ public class Corpse : Carryable
 
     public override void Interact(PlayerTest player)
     {
+        // DEBUG CARRING W/ OTHER PLAYER
+        player.playerMovement.ChangeInput("Pilote");
+
         player.isCarrying = true;
         player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
         // need many players
@@ -43,6 +46,9 @@ public class Corpse : Carryable
 
     public override void PutDown(PlayerTest player, bool isTimeOut = false)
     {
+        // DEBUG CARRING W/ OTHER PLAYER
+        player.playerMovement.ChangeInput("Player");
+
         // corpse became grave (sprite)
         player.isCarrying = false;
 
