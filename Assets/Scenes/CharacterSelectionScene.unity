@@ -317,8 +317,7 @@ Transform:
   m_LocalPosition: {x: -2.124807, y: 0, z: 2.6855602}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1390985339}
+  m_Children: []
   m_Father: {fileID: 131338908}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -605,7 +604,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390985336}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 0630c79dbe5e7f742b90e0e74f421673, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: e95fab82ee2562e47b14c17a0e4c662a, type: 3}
   m_InitialEventName: 
   m_InitialEventNameOverriden: 1
   m_StartSeed: 0
@@ -645,12 +644,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390985336}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.5, z: -2.5}
+  m_LocalPosition: {x: -12.715521, y: 0.5, z: 0.18556023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 662025784}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1392039057
 GameObject:
