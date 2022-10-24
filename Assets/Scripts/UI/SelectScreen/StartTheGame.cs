@@ -122,7 +122,6 @@ public class StartTheGame : MonoBehaviour
         timerTMP.text = "GO";
 
 
-        currentCoroutine = null;
 
         
         //Changer de scene + repositionner les joueurs
@@ -134,9 +133,13 @@ public class StartTheGame : MonoBehaviour
                 players[i].GetComponent<ChoseYourChara>().ChangeActionMapToPlayer("Player");
                 players[i].GetComponent<PlayerMovement>().enabled = true;
                 players[i].GetComponent<CharacterController>().enabled = true;
+
+                players[i].transform.DOScale(1f, 0.5f);
             }
         }
-        //ChangeSceneClass.ChangeScene("Freddy");
+        ChangeSceneClass.ChangeScene("Freddy");
+        currentCoroutine = null;
+
     }
     private void OnDestroy()
     {

@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
     private IInteractable interactable;
 
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         controller = GetComponent<CharacterController>();
