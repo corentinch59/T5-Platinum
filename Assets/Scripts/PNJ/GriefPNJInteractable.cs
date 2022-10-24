@@ -1,9 +1,7 @@
 using DG.Tweening;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GriefPNJInteractable : Carryable
 {
@@ -12,6 +10,8 @@ public class GriefPNJInteractable : Carryable
     [SerializeField] private GameObject corpseToCreate;
     [SerializeField] private Transform startLoc;
     [SerializeField] private Transform endLoc;
+    [SerializeField] private NavMeshAgent agent;
+
     private bool isInteractable = true;
 
     public string griefName = "";
@@ -27,14 +27,14 @@ public class GriefPNJInteractable : Carryable
 
     private void Start()
     {
-        
         transform.position = startLoc.position;
         //StartCoroutine(Walk(true));
-        
+
     }
 
     private void Update()
     {
+        //agent.
         /*
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -59,6 +59,7 @@ public class GriefPNJInteractable : Carryable
     {
         if (isInteractable)
         {
+            agent.enabled = false;
             requestImg.SetActive(false);
             deathRequest.AcceptRequest();
 
@@ -95,10 +96,10 @@ public class GriefPNJInteractable : Carryable
             Collider[] infos = Physics.OverlapSphere(transform.position, radius);
             float min = float.MaxValue;
 
-            foreach(Collider info in infos)
+            foreach (Collider info in infos)
             {
                 //Debug.Log(info.gameObject.name);
-                if(info.gameObject.TryGetComponent(out Corpse c))
+                if (info.gameObject.TryGetComponent(out Corpse c))
                 {
                     float dist = Vector3.Distance(info.gameObject.transform.position, transform.position);
                     if (dist < min)
@@ -120,36 +121,45 @@ public class GriefPNJInteractable : Carryable
 
             player.carriedObj = null;
 
-            StartCoroutine(Grieffing());
             // this.moveback()
             isInteractable = true;
         }
     }
 
-    private IEnumerator Grieffing()
+    public IEnumerator Grieffing()
     {
         yield return new WaitForSeconds(griefDuration);
-        //StartCoroutine(Walk(false));
+        Debug.Log("finish grieffing");
+        StartCoroutine(Walk(false));
     }
 
     public IEnumerator Walk(bool isWalkingForward)
     {
+        float distToEnd = 0;
+
+        if (!agent.enabled) agent.enabled = true;
+
         //Arrive Avec sa quete
         if (isWalkingForward)
         {
             requestImg.SetActive(true);
-            transform.DOMove(endLoc.position, 2);
-            yield return new WaitForSeconds(2);
+            agent.destination  = endLoc.position;
+
+            //transform.DOMove(endLoc.position, 2);
+            //yield return new WaitForSeconds(2);
         }
         //a plus de quete et rentre chez lui
         else
         {
             requestImg.SetActive(false);
-            transform.DOMove(startLoc.position, 2);
-            yield return new WaitForSeconds(2);
+            agent.destination = startLoc.position;
+
+            //transform.DOMove(startLoc.position, 2);
+            //yield return new WaitForSeconds(2);
         }
-        
-        
+        distToEnd = Vector3.Distance(agent.destination, transform.position) / agent.speed;
+        yield return new WaitForSeconds(distToEnd);
+        if(!isWalkingForward) StartCoroutine(QuestManager.instance.WaitForNewRequest(3, deathRequest));
     }
     private void OnDrawGizmos()
     {

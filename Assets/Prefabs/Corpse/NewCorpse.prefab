@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 694417260691800155}
   - component: {fileID: 694417260691800148}
   - component: {fileID: 694417260691800149}
+  - component: {fileID: -5864278713313341788}
   m_Layer: 7
   m_Name: NewCorpse
   m_TagString: Untagged
@@ -122,3 +123,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 24
   thisQuest: {fileID: 0}
+--- !u!208 &-5864278713313341788
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694417260691800150}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

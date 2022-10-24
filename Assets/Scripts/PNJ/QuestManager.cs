@@ -41,14 +41,12 @@ public class QuestManager : MonoBehaviour
     {
         yield return new WaitForSeconds(secondsToWait);
         request.SetRequest();
-        Debug.Log("LAQUETELA");
     }
     
     public IEnumerator WaitForNewRequest(float secondsToWait, GriefRequest request)
     {
         yield return new WaitForSeconds(secondsToWait);
         request.SetGriefRequest();
-        Debug.Log("LAQUETELA");
     }
 
 }

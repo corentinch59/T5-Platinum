@@ -32,39 +32,47 @@ public class GriefRequest : MonoBehaviour
 
     private void Update()
     {
-       /* 
-        if (Input.GetKeyDown(KeyCode.O))
+        /* 
+         if (Input.GetKeyDown(KeyCode.O))
+         {
+             SetGriefRequest();
+         }
+         if (Input.GetKeyDown(KeyCode.P) && QuestManager.instance.questFinished.Count > 0 
+                                         && QuestManager.instance.activeDeuilQuests.Count < QuestManager.instance.numberOfDeuilQuests)
+         {
+             AcceptRequest();
+         }
+         */
+        Debug.Log(griefCoroutine);
+        if (QuestManager.instance.questFinished.Count > 0 && griefCoroutine == null)
         {
-            SetGriefRequest();
+            if (timer <= 5) // 15
+            {
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                timer = 5; // 15
+                Debug.Log("Cor");
+                griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));
+                //StartCoroutine(_griefPnjInteractable.Walk(true));
+            }
         }
-        if (Input.GetKeyDown(KeyCode.P) && QuestManager.instance.questFinished.Count > 0 
-                                        && QuestManager.instance.activeDeuilQuests.Count < QuestManager.instance.numberOfDeuilQuests)
+        else
         {
-            AcceptRequest();
+            return;
         }
-        */
-       if (QuestManager.instance.questFinished.Count > 0 && griefCoroutine == null)
-       {
-           if (timer <= 5) // 15
-           {
-               timer += Time.deltaTime;
-           }
-           else
-           {
-               timer = 5; // 15
-               griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));
-               //StartCoroutine(_griefPnjInteractable.Walk(true));
-           }
-          
-       }
     }
 
     public void SetGriefRequest()
     {
-        int index = GetRandomNumber(QuestManager.instance.questFinished.Count);
-        _requestInfos = QuestManager.instance.questFinished[index];
-        UpdateUI();
-        StartCoroutine(_griefPnjInteractable.Walk(true));
+        if(QuestManager.instance.questFinished.Count > 0)
+        {
+            int index = GetRandomNumber(QuestManager.instance.questFinished.Count);
+            _requestInfos = QuestManager.instance.questFinished[index];
+            UpdateUI();
+            StartCoroutine(_griefPnjInteractable.Walk(true));
+        }
     }
 
     public void AcceptRequest()
@@ -100,14 +108,15 @@ public class GriefRequest : MonoBehaviour
     {
         if (QuestManager.instance.questFinished.Count > 0)
         {
-            StartCoroutine(_griefPnjInteractable.Walk(false));
-            StartCoroutine(QuestManager.instance.WaitForNewRequest(3, this));
-            griefCoroutine = null;
+            
+            //griefCoroutine = null;
         }
         else
         {
             nameText.text = null;
             corpseImage.texture = null;
+            griefCoroutine = null;
         }
+        StartCoroutine(_griefPnjInteractable.Grieffing());
     }
 }

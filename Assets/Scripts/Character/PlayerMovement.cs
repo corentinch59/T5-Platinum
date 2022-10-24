@@ -59,28 +59,34 @@ public class PlayerMovement : MonoBehaviour
                 if (Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
                 {
                     orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
-                    if (orientationVect.x < 0)
-                    {
-                        arrowOrientation.Rotate(new Vector3(90, -90, 0));
-                    }
-                    else
-                    {
-                        arrowOrientation.Rotate(new Vector3(90, 90, 0));
-                    }
                 }
                 else
                 {
                     orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
-                    if(orientationVect.y < 0)
-                    {
-                        arrowOrientation.Rotate(new Vector3(90, 0, 0));
-                    }
-                    else
-                    {
-                        arrowOrientation.Rotate(new Vector3(90, 180, 0));
-                    }
+                    
                 }
                 orientationVect.Normalize();
+
+                // Show orientation to the player
+                if (orientationVect.x < 0)
+                {
+                    arrowOrientation.eulerAngles = new Vector3(90, 0, -90);
+                    arrowOrientation.localPosition = Vector3.left;
+                } else if (orientationVect.x > 0)
+                {
+                    arrowOrientation.eulerAngles = new Vector3(90, 0, 90);
+                    arrowOrientation.localPosition = Vector3.right;
+                }
+
+                if (orientationVect.y < 0)
+                {
+                    arrowOrientation.eulerAngles = new Vector3(90, 0, 0);
+                    arrowOrientation.localPosition = Vector3.down;
+                }
+                else if (orientationVect.y > 0){
+                    arrowOrientation.eulerAngles = new Vector3(90, 0, 180);
+                    arrowOrientation.localPosition = Vector3.up;
+                }
             }
         }
         else

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2064347731491413792}
   - component: {fileID: 514334364543981713}
   - component: {fileID: 5971853893805238173}
+  - component: {fileID: 2130302208}
   m_Layer: 7
   m_Name: PNJ
   m_TagString: Untagged
@@ -66,6 +67,7 @@ MonoBehaviour:
   corpseToCreate: {fileID: 694417260691800150, guid: 2c37c2b4654ba6247b38a9d97dfcfac5, type: 3}
   startLoc: {fileID: 0}
   endLoc: {fileID: 0}
+  agent: {fileID: 2130302208}
 --- !u!212 &5971853893805238173
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118,6 +120,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!195 &2130302208
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064347731491413795}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.66
+  m_Speed: 5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.785
+  m_BaseOffset: 0.8925
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2064347732572522947
 GameObject:
   m_ObjectHideFlags: 0

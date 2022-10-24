@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PNJInteractable : MonoBehaviour, IInteractable
 {
@@ -11,6 +12,8 @@ public class PNJInteractable : MonoBehaviour, IInteractable
     [SerializeField] private GameObject corpseToCreate;
     [SerializeField] private Transform startLoc;
     [SerializeField] private Transform endLoc;
+    [SerializeField] private NavMeshAgent agent;
+
     private bool isInteractable = true;
 
     public void Awake()
@@ -69,16 +72,17 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         if (isWalkingForward)
         {
             requestImg.SetActive(true);
-            transform.DOMove(endLoc.position, 2);
+            agent.destination = endLoc.position;
+            //transform.DOMove(endLoc.position, 2);
         }
         //a plus de quete et rentre chez lui
         else
         {
             requestImg.SetActive(false);
-            transform.DOMove(startLoc.position, 2);
+            agent.destination = startLoc.position;
+            //transform.DOMove(startLoc.position, 2);
         }
-        
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(agent.remainingDistance / agent.speed);
         isInteractable = true;
     }
 }
