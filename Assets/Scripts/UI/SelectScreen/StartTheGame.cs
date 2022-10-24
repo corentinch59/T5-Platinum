@@ -15,6 +15,8 @@ public class StartTheGame : MonoBehaviour
     //[SerializeField] private VisualEffect vEffect;
     [SerializeField] private TextMeshProUGUI timerTMP;
 
+    [Tooltip("Name of the scene to load")][SerializeField] private string nameScene;
+
     private Tween t;
     private Coroutine currentCoroutine;
 
@@ -137,7 +139,7 @@ public class StartTheGame : MonoBehaviour
                 players[i].transform.DOScale(1f, 0.5f);
             }
         }
-        ChangeSceneClass.ChangeScene("Freddy");
+        ChangeSceneClass.ChangeScene(nameScene);
         currentCoroutine = null;
 
     }
