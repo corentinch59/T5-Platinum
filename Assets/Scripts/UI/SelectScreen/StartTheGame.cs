@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 using DG.Tweening;
 using TMPro;
 
+public delegate void StartTheGameHandler(GameObject[] players);
 public class StartTheGame : MonoBehaviour
 {
     [SerializeField] private List<Transform> listPos = new List<Transform>();
@@ -16,6 +17,8 @@ public class StartTheGame : MonoBehaviour
 
     private Tween t;
     private Coroutine currentCoroutine;
+
+    public static event StartTheGameHandler OnStartTheGame;
     
     private void Start()
     {
@@ -119,9 +122,24 @@ public class StartTheGame : MonoBehaviour
         timerTMP.text = "GO";
 
 
+
+        
+        //Changer de scene + repositionner les joueurs
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] != null)
+            {
+                
+                players[i].GetComponent<ChoseYourChara>().ChangeActionMapToPlayer("Player");
+                players[i].GetComponent<PlayerMovement>().enabled = true;
+                players[i].GetComponent<CharacterController>().enabled = true;
+
+                players[i].transform.DOScale(1f, 0.5f);
+            }
+        }
+        ChangeSceneClass.ChangeScene("Freddy");
         currentCoroutine = null;
 
-        ChangeSceneClass.ChangeScene("Freedy");
     }
     private void OnDestroy()
     {

@@ -10,13 +10,17 @@ public class ChoseYourChara : MonoBehaviour
 {
     [SerializeField] private List<GameObject> charas = new List<GameObject>();
 
-    private GameObject currentChara; 
-
     public static event ReadyEventHandler OnReady;
     public static event ReadyEventHandler UnReady;
     public static event RemovePlayerEventHandler OnRemovePlayer;
 
+    [HideInInspector]
     public bool isReady = false;
+    [HideInInspector]
+    public GameObject currentChara;
+    [HideInInspector]
+    public PlayerInput input;
+
 
     private void Start()
     {
@@ -27,6 +31,8 @@ public class ChoseYourChara : MonoBehaviour
         }
         
         currentChara.SetActive(true);
+
+        input = GetComponent<PlayerInput>();
     }
 
     public void MoveRight(InputAction.CallbackContext context)
@@ -98,5 +104,11 @@ public class ChoseYourChara : MonoBehaviour
                 OnRemovePlayer?.Invoke(gameObject);
             }
         }
+    }
+
+    public void ChangeActionMapToPlayer(string name)
+    {
+        input.SwitchCurrentActionMap(name);
+        GetComponent<ChoseYourChara>().enabled = false;
     }
 }
