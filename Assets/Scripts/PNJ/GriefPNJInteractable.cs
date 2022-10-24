@@ -121,26 +121,30 @@ public class GriefPNJInteractable : Carryable
 
             player.carriedObj = null;
 
-            StartCoroutine(Grieffing());
             // this.moveback()
             isInteractable = true;
         }
     }
 
-    private IEnumerator Grieffing()
+    public IEnumerator Grieffing()
     {
         yield return new WaitForSeconds(griefDuration);
-        agent.enabled = true;
+        Debug.Log("finish grieffing");
         StartCoroutine(Walk(false));
     }
 
     public IEnumerator Walk(bool isWalkingForward)
     {
+        float distToEnd = 0;
+
+        if (!agent.enabled) agent.enabled = true;
+
         //Arrive Avec sa quete
         if (isWalkingForward)
         {
             requestImg.SetActive(true);
             agent.destination  = endLoc.position;
+
             //transform.DOMove(endLoc.position, 2);
             //yield return new WaitForSeconds(2);
         }
@@ -149,12 +153,13 @@ public class GriefPNJInteractable : Carryable
         {
             requestImg.SetActive(false);
             agent.destination = startLoc.position;
+
             //transform.DOMove(startLoc.position, 2);
             //yield return new WaitForSeconds(2);
         }
-
-        yield return new WaitForSeconds(agent.remainingDistance / agent.speed);
-
+        distToEnd = Vector3.Distance(agent.destination, transform.position) / agent.speed;
+        yield return new WaitForSeconds(distToEnd);
+        if(!isWalkingForward) StartCoroutine(QuestManager.instance.WaitForNewRequest(3, deathRequest));
     }
     private void OnDrawGizmos()
     {

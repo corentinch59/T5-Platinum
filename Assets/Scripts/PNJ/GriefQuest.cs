@@ -89,7 +89,7 @@ public class GriefQuest : MonoBehaviour
     {
         _request.GoodByeGriefPNJ();
         isQuestFinished = true;
-        _request.griefCoroutine = null;
+        //_request.griefCoroutine = null;
         QuestManager.instance.UpdateScore(CheckScoreQuest(name, loc));
         QuestManager.instance.activeDeuilQuests.Remove(requestInfos);
         yield return new WaitForSeconds(1);
@@ -99,7 +99,7 @@ public class GriefQuest : MonoBehaviour
     private IEnumerator TimeOutQuest()
     {
         _request.GoodByeGriefPNJ();
-        _request.griefCoroutine = null;
+        //_request.griefCoroutine = null;
         image.color = Color.red;
         QuestManager.instance.activeDeuilQuests.Remove(requestInfos);
         yield return new WaitForSeconds(2);

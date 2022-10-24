@@ -22,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform arrowOrientation;
 
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         controller = GetComponent<CharacterController>();
