@@ -104,6 +104,7 @@ public class ChoseYourChara : MonoBehaviour
             else//Remove du player
             {
                 OnRemovePlayer?.Invoke(gameObject);
+                //Destroy(gameObject);
             }
         }
     }
