@@ -132,7 +132,8 @@ public class StartTheGame : MonoBehaviour
             if (players[i] != null)
             {
                 
-                players[i].GetComponent<ChoseYourChara>().ChangeActionMapToPlayer("Player");
+                players[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+                players[i].GetComponent<ChoseYourChara>().enabled = false;
                 players[i].GetComponent<PlayerMovement>().enabled = true;
                 players[i].GetComponent<CharacterController>().enabled = true;
 
