@@ -31,6 +31,7 @@ public class Corpse : Carryable
                 player.interactableObj = null;
             }
         }
+
         // One player
         if(player.carriedObj == null)
         {
