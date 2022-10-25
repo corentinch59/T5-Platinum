@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1739694447838856712
+--- !u!114 &-813715841034064806
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23,12 +23,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DistortionEffect
-  m_Shader: {fileID: -6465566751694194690, guid: 738a37b7fd3f80a47a013dfa7ac3a06f, type: 3}
+  m_Name: Sprite
+  m_Shader: {fileID: -6465566751694194690, guid: 9cea5278f7e18354da4c430cec293de9, type: 3}
   m_ValidKeywords:
+  - _ENABLE_FOG_ON_TRANSPARENT
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -43,16 +44,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_52bf1755b2b648709a291852ed9ec262_Texture_1:
-        m_Texture: {fileID: 2800000, guid: e12f874874df4084982e379d5513068a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_d723cfc924f74b1bb7fb30d5689e041c_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 2abeaeb2023c5ed4aad74c8068e579ca, type: 3}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: 7cfd32bb736c7f04aa7add895962af05, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -75,21 +68,18 @@ Material:
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
-    - _Black_Radius: 0.73
     - _BlendMode: 0
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DistortionAmount: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
     - _EnableBlendModePreserveSpecularLighting: 0
-    - _EnableFogOnTransparent: 0
+    - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
-    - _Radius: 0.543
     - _RenderQueueType: 4
     - _SrcBlend: 1
     - _StencilRef: 0
