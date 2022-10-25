@@ -36,7 +36,7 @@ public class PlayerIncineration : MonoBehaviour
     {
         Debug.DrawLine(transform.position, new Vector3(transform.position.x + orientationVect.x, transform.position.y, transform.position.z + orientationVect.y));
 
-        RaycastHit[] colliders = Physics.SphereCastAll(transform.position, raycastRadius, transform.forward, Mathf.Infinity, LeverRaycastMask);
+        RaycastHit[] colliders = Physics.SphereCastAll(transform.position, raycastRadius, transform.forward, raycastRadius, LeverRaycastMask);
 
         if (colliders.Length > 0)
         {

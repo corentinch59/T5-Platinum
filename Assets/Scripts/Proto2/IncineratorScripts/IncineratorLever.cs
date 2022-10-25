@@ -11,13 +11,14 @@ public class IncineratorLever : MonoBehaviour
         {
             hasPLayer = true;
             player.DisableInput("Move");
-            Debug.Log("Interacted with a lever");
+            Debug.Log("Holding an incinerator lever .");
             IncineratorScript.OnPlayerHold?.Invoke();
         }
         else
         {
             hasPLayer = false;
             player.EnableInput("Move");
+            Debug.Log("Stopped Holding an incinerator lever.");
             IncineratorScript.OnPlayerLetgo?.Invoke();
         }
     }
