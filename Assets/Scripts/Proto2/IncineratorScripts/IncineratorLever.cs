@@ -11,6 +11,7 @@ public class IncineratorLever : MonoBehaviour
         {
             hasPLayer = true;
             player.DisableInput("Move");
+            Debug.Log("Interacted with a lever");
             IncineratorScript.OnPlayerHold?.Invoke();
         }
         else

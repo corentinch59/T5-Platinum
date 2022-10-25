@@ -211,8 +211,9 @@ MonoBehaviour:
   playerSpeed: 10
   interactionDuration: 2
   HeightOfHole: 0
-  raycastRadius: 0
-  raycastMask:
+  TimeBetweenInteractionInputs: 0
+  raycastRadius: 2
+  holeRaycastMask:
     serializedVersion: 2
     m_Bits: 64
   holePrefab: {fileID: 7901434866790508091, guid: 4d63c4b30cf348542af2ce42ccb31710, type: 3}
@@ -300,6 +301,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b1334139-407d-4107-86fc-9c849ba2cae9
     m_ActionName: SelectionScreenControlE/ChangeRight[/XInputControllerWindows/leftStick/right,/XInputControllerWindows/dpad/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c3909571-cddd-4d00-a05f-e2dfc4ff82c8
+    m_ActionName: SelectionScreenControl/Ready[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ef91c638-039c-45dc-a7c1-36e036ea2ef2
+    m_ActionName: SelectionScreenControl/UnReady[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c3f7bec8-09dd-46df-a3ad-86e7041874a0
+    m_ActionName: PlayerProto3/Move[/XInputControllerWindows/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5da23c4d-cd08-4633-ab9c-e332688df955
+    m_ActionName: PlayerProto3/Action[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
