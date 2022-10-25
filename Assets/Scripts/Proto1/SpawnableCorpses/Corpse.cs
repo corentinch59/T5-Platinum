@@ -66,6 +66,19 @@ public class Corpse : Carryable
         // If pilote is leaving --> co-pilote become the pilote! -> DONE
         // Make the co-pilote works (can rotate around the pilote)
 
+        // DEBUG CARRYING W/ OTHER PLAYER
+        player.playerMovement.ChangeInput("Player");
+        if (player.playerMovement.canMove && players.Count < 2) // if one player -> put the body anywhere he wants to
+        {
+            //put down corpse in front of a player -> use rotation but now just t.right
+            player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
+                player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
+        }
+        else
+        {
+            player.playerMovement.canMove = true;
+        }
+
         // if multiple players
         if (players.Contains(player) && players.Count > 1)
         {
@@ -76,7 +89,6 @@ public class Corpse : Carryable
                 transform.parent = players[1].transform;
                 players[1].playerMovement.canMove = false;
                 players[1].playerMovement.ChangeInput("Pilote");
-
             }
             else
             {
@@ -91,17 +103,7 @@ public class Corpse : Carryable
             players.Remove(player);
         }
         
-        // DEBUG CARRYING W/ OTHER PLAYER
-        player.playerMovement.ChangeInput("Player");
-        if (player.playerMovement.canMove)
-        {
-            //put down corpse in front of a player -> use rotation but now just t.right
-            player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
-                player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
-        } else
-        {
-            player.playerMovement.canMove = true;
-        }
+        
 
         // corpse became grave (sprite)
         player.isCarrying = false;

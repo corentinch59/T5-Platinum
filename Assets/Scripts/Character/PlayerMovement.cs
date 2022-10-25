@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     public Vector2 orientationVect;
     private Vector2 move;
-    private float rotate;
+    private Vector2 rotate;
     private IInteractable interactable;
     [SerializeField] private Transform arrowOrientation;
 
@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
     public string CurrentInput { get; set; }
 
     private PlayerInput playerInput;
+    private float angle = 0f;
+    [SerializeField] private float rotationSpeed = 5f;
+
     public PlayerInput PlayerInput => playerInput;
 
 
@@ -122,10 +125,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove)
         {
-            rotate = ctx.ReadValue<float>();
-
+            rotate = ctx.ReadValue<Vector2>();
+            float newAngle = Mathf.Atan2(transform.parent.position.y, transform.parent.position.x);
+            if (rotate.x < 0)
+            {
+                transform.RotateAround(transform.parent.position, Vector3.up, -newAngle);
+                // goes left
+            }
+            else if (rotate.x > 0)
+            {
+                // goes right
+                transform.RotateAround(transform.parent.position, Vector3.up, newAngle);
+            }
         }
-        Debug.Log(rotate);
     }
 
     public void ChangeInput(string inputActionMap)
