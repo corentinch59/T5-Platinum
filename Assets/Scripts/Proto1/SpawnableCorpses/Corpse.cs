@@ -40,7 +40,7 @@ public class Corpse : Carryable
             players[0].playerMovement.ChangeInput("Pilote");
             transform.parent = players[0].transform;
 
-            if(players.Count > 1)
+            if (players.Count > 1)
             {
                 players[1].playerMovement.ChangeInput("Co-Pilote");
                 players[1].transform.parent = players[0].transform;
@@ -63,7 +63,7 @@ public class Corpse : Carryable
 
     public override void PutDown(PlayerTest player, bool isTimeOut = false)
     {
-        // If pilote is leaving --> co-pilote become the pilote!
+        // If pilote is leaving --> co-pilote become the pilote! -> DONE
         // Make the co-pilote works (can rotate around the pilote)
 
         // if multiple players
@@ -72,9 +72,11 @@ public class Corpse : Carryable
             // if player is the pilote
             if (players.IndexOf(player) == 0)
             {
-                transform.parent = null;
-                players[1].transform.parent = this.transform;
+                players[1].transform.parent = null;
+                transform.parent = players[1].transform;
                 players[1].playerMovement.canMove = false;
+                players[1].playerMovement.ChangeInput("Pilote");
+
             }
             else
             {
