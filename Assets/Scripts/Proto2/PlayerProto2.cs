@@ -17,9 +17,9 @@ public class PlayerProto2 : MonoBehaviour
     [SerializeField] [Tooltip("How much time it takes to be able to press again to cancel or start digging again")]
     private float TimeBetweenInteractionInputs;
 
-    [Header("Raycast Handling")]
+    [Header("Hole Raycast Handling")]
     [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
-    [SerializeField] private LayerMask raycastMask;
+    [SerializeField] private LayerMask holeRaycastMask;
 
     [Header("Prefabs to spawn")]
     public GameObject holePrefab;
@@ -32,6 +32,7 @@ public class PlayerProto2 : MonoBehaviour
     private CharacterController controller;
     private Vector2 orientationVect;
     private Vector2 move;
+    public Vector2 getMove => move;
     private Transform canvaQte;
     private Image qteFillImage;
     private IEnumerator myCoroutine;
@@ -52,7 +53,7 @@ public class PlayerProto2 : MonoBehaviour
     {
         Debug.DrawLine(transform.position, new Vector3(transform.position.x + orientationVect.x, transform.position.y, transform.position.z + orientationVect.y));
 
-        RaycastHit[] colliders = Physics.SphereCastAll(transform.position, raycastRadius, transform.forward, Mathf.Infinity, raycastMask);
+        RaycastHit[] colliders = Physics.SphereCastAll(transform.position, raycastRadius, transform.forward, Mathf.Infinity, holeRaycastMask);
         if(colliders.Length > 0)
         {
             detectedHole = colliders[0].collider.GetComponent<Hole>();
@@ -126,8 +127,6 @@ public class PlayerProto2 : MonoBehaviour
             }
 
         }
-
-
         //if (ctx.canceled)
         //{
         //    StopCoroutine(myCoroutine);
@@ -179,7 +178,6 @@ public class PlayerProto2 : MonoBehaviour
         {
             Instantiate(holePrefab, transform.position + new Vector3(orientationVect.x, HeightOfHole, orientationVect.y), Quaternion.identity);
         }
-
     }
 
     private IEnumerator InteractionCooldown(float time)
@@ -187,5 +185,15 @@ public class PlayerProto2 : MonoBehaviour
         canInteract = false;
         yield return new WaitForSeconds(time);
         canInteract = true;
+    }
+
+    public void EnableInput(string input)
+    {
+        playerInput.currentActionMap.FindAction(input).Enable();
+    }
+
+    public void DisableInput(string input)
+    {
+        playerInput.currentActionMap.FindAction(input).Disable();
     }
 }

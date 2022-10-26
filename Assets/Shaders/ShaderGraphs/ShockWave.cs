@@ -9,6 +9,7 @@ public class ShockWave : MonoBehaviour
     private PlayerMovement _playerMovement;
     private PlayerMovement _secondPlayerMovement;
     public SpriteRenderer vfx;
+    private Coroutine currentCoroutine;
 
     /*
     private void Awake()
@@ -25,23 +26,25 @@ public class ShockWave : MonoBehaviour
         }
     }
 
-    /*
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        
-        _secondPlayerMovement = gameObject.GetComponent<PlayerMovement>();
-        Debug.Log("Collision");
-        
-        StartCoroutine(CollisionVFX());
+        if(hit.gameObject.CompareTag("Player") && hit.controller != null && currentCoroutine == null)
+        {
+            _secondPlayerMovement = gameObject.GetComponent<PlayerMovement>();
+            Debug.Log("Collision");
+
+            currentCoroutine = StartCoroutine(CollisionVFX());
+        }
     }
-    */ 
 
 
-    IEnumerator CollisionVFX()
+
+    public IEnumerator CollisionVFX()
     {
         vfx.material.DOFloat(0.9f, "_Slider", 1);
         yield return new WaitForSeconds(1);
         vfx.material.SetFloat("_Slider", 0);
-        
+        currentCoroutine = null;
     }
 }

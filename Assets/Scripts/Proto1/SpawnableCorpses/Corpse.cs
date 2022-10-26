@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Corpse : Carryable
 {
@@ -19,30 +20,92 @@ public class Corpse : Carryable
 
     public override void Interact(PlayerTest player)
     {
-        player.isCarrying = true;
-        player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
-        // need many players
-        if((int)corpseData.size > 0)
+        if (player.carriedObj == null)
         {
-            players.Add(player);
-            foreach(PlayerTest p in players)
-            {
-                p.carriedObj = this; // multiple people have to put down or leave the corpse
-                player.interactableObj = null;
-            }
+            player.carriedObj = this;
+            player.interactableObj = null;
+            player.isCarrying = true;
         }
 
-        // One player
-        if(player.carriedObj == null)
+        // DEBUG CARRING W/ OTHER PLAYER
+        if ((int)thisQuest.requestInfos.siz > 0)
         {
-            player.interactableObj = null;
-            player.carriedObj = this;
+            player.playerMovement.canMove = false;
+
+            if (!players.Contains(player))
+            {
+                players.Add(player);
+            }
+
+            players[0].playerMovement.ChangeInput("Pilote");
+            transform.parent = players[0].transform;
+
+            if (players.Count > 1)
+            {
+                transform.parent = players[1].transform;
+                players[1].playerMovement.ChangeInput("Co-Pilote");
+                players[1].transform.parent = players[0].transform;
+                players[0].playerMovement.positionCopilote = players[1].transform;
+            }
+
+            // If everyone is up to carry the body then they can move
+            if ((int)thisQuest.requestInfos.siz + 1 == players.Count)
+            {
+                foreach(PlayerTest p in players)
+                {
+                    p.playerMovement.canMove = true;
+                }
+            }
+        } else if((int)thisQuest.requestInfos.siz <= 0)
+        {
+            player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
+            player.carriedObj.gameObject.SetActive(false);
         }
-        player.carriedObj.gameObject.SetActive(false);
     }
 
-    public override void PutDown(PlayerTest player)
+    public override void PutDown(PlayerTest player, bool isTimeOut = false)
     {
+        // If pilote is leaving --> co-pilote become the pilote! -> DONE
+        // Make the co-pilote works (can rotate around the pilote)
+
+        // DEBUG CARRYING W/ OTHER PLAYER
+        player.playerMovement.ChangeInput("Player");
+        if (player.playerMovement.canMove && players.Count < 2) // if one player -> put the body anywhere he wants to
+        {
+            //put down corpse in front of a player -> use rotation but now just t.right
+            player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
+                player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
+        }
+        else
+        {
+            player.playerMovement.canMove = true;
+        }
+
+        // if multiple players
+        if (players.Contains(player) && players.Count > 1)
+        {
+            // if player is the pilote
+            if (players.IndexOf(player) == 0)
+            {
+                players[1].transform.parent = null;
+                players[1].playerMovement.canMove = false;
+                players[1].playerMovement.ChangeInput("Pilote");
+            }
+            else
+            {
+                transform.parent = players[0].transform;
+                players[0].playerMovement.canMove = false;
+                player.transform.parent = null;
+            }
+            players[0].playerMovement.positionCopilote = null;
+            players.Remove(player);
+        } else if(players.Count < 2) // one player
+        {
+            transform.parent = null;
+            player.transform.parent = null;
+            players.Remove(player);
+        }
+
         // corpse became grave (sprite)
         player.isCarrying = false;
 
@@ -51,9 +114,6 @@ public class Corpse : Carryable
         player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
         player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
 
-        //put down corpse in front of a player -> use rotation but now just t.right
-        player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
-            player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
 
         // update CorpseData
         corpseData = UpdateLocalisation();
