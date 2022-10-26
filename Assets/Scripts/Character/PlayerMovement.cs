@@ -123,19 +123,22 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMoveCoPilote(InputAction.CallbackContext ctx)
     {
-        if (canMove)
+        if (ctx.performed)
         {
-            rotate = ctx.ReadValue<Vector2>();
-            float newAngle = Mathf.Atan2(transform.parent.position.y, transform.parent.position.x);
-            if (rotate.x < 0)
+            if (canMove)
             {
-                transform.RotateAround(transform.parent.position, Vector3.up, -newAngle);
-                // goes left
-            }
-            else if (rotate.x > 0)
-            {
-                // goes right
-                transform.RotateAround(transform.parent.position, Vector3.up, newAngle);
+                rotate = ctx.ReadValue<Vector2>();
+                float newAngle = Mathf.Atan2(transform.parent.position.y, transform.parent.position.x);
+                if (rotate.x < 0)
+                {
+                    transform.RotateAround(transform.parent.position, Vector3.up, newAngle * rotate.x);
+                    // goes left
+                }
+                else if (rotate.x > 0)
+                {
+                    // goes right
+                    transform.RotateAround(transform.parent.position, Vector3.up, newAngle * rotate.x);
+                }
             }
         }
     }

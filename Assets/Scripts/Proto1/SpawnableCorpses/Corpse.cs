@@ -42,6 +42,7 @@ public class Corpse : Carryable
 
             if (players.Count > 1)
             {
+                transform.parent = players[1].transform;
                 players[1].playerMovement.ChangeInput("Co-Pilote");
                 players[1].transform.parent = players[0].transform;
             }
@@ -86,7 +87,7 @@ public class Corpse : Carryable
             if (players.IndexOf(player) == 0)
             {
                 players[1].transform.parent = null;
-                transform.parent = players[1].transform;
+                //transform.parent = players[1].transform;
                 players[1].playerMovement.canMove = false;
                 players[1].playerMovement.ChangeInput("Pilote");
             }
