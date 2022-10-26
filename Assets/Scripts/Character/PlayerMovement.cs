@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     public Vector2 orientationVect;
     private Vector2 move;
-    private float rotate;
+    private Vector2 rotate;
     private IInteractable interactable;
     [SerializeField] private Transform arrowOrientation;
 
@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
     public string CurrentInput { get; set; }
 
     private PlayerInput playerInput;
+    private float angle = 0f;
+    [SerializeField] private float rotationSpeed = 5f;
+
     public PlayerInput PlayerInput => playerInput;
 
 
@@ -46,14 +49,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moveDir = new Vector3(move.x, 0, move.y);
-        controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
+        if(transform.parent == null)
+        {
+            moveDir = new Vector3(move.x, 0, move.y);
+            controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
 
-        if (controller.isGrounded && playerVelocity.y < 0)
-            playerVelocity.y = 0f;
+            if (controller.isGrounded && playerVelocity.y < 0)
+                playerVelocity.y = 0f;
 
-        playerVelocity.y += controller.isGrounded ? 0f : gravityValue * Time.fixedDeltaTime;
-        controller.Move(playerVelocity * Time.fixedDeltaTime);
+            playerVelocity.y += controller.isGrounded ? 0f : gravityValue * Time.fixedDeltaTime;
+            controller.Move(playerVelocity * Time.fixedDeltaTime);
+        }
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -117,12 +123,24 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMoveCoPilote(InputAction.CallbackContext ctx)
     {
-        if (canMove)
+        if (ctx.performed)
         {
-            rotate = ctx.ReadValue<float>();
-
+            if (canMove)
+            {
+                rotate = ctx.ReadValue<Vector2>();
+                float newAngle = Mathf.Atan2(transform.parent.position.y, transform.parent.position.x);
+                if (rotate.x < 0)
+                {
+                    transform.RotateAround(transform.parent.position, Vector3.up, newAngle * rotate.x);
+                    // goes left
+                }
+                else if (rotate.x > 0)
+                {
+                    // goes right
+                    transform.RotateAround(transform.parent.position, Vector3.up, newAngle * rotate.x);
+                }
+            }
         }
-        Debug.Log(rotate);
     }
 
     public void ChangeInput(string inputActionMap)

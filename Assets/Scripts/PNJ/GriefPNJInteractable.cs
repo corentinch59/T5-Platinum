@@ -15,7 +15,6 @@ public class GriefPNJInteractable : Carryable
     private bool isInteractable = true;
 
     public string griefName = "";
-    public RequestDataBase.localisation griefLoc = RequestDataBase.localisation.NONE;
     public float radius = 10f;
     private float griefDuration = 3f;
 
@@ -106,7 +105,6 @@ public class GriefPNJInteractable : Carryable
                     {
                         min = dist;
                         griefName = c.corpseData.name;
-                        griefLoc = c.corpseData.localisation;
                     }
                 }
             }
@@ -118,7 +116,7 @@ public class GriefPNJInteractable : Carryable
             {
                 if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
                 {
-                    StartCoroutine(dq.FinishGriefQuest(griefName, griefLoc));
+                    StartCoroutine(dq.FinishGriefQuest(griefName));
                 }
             }
 

@@ -38,10 +38,13 @@ public class Corpse : Carryable
             }
 
             players[0].playerMovement.ChangeInput("Pilote");
+            transform.parent = players[0].transform;
 
-            if(players.Count > 1)
+            if (players.Count > 1)
             {
+                transform.parent = players[1].transform;
                 players[1].playerMovement.ChangeInput("Co-Pilote");
+                players[1].transform.parent = players[0].transform;
             }
 
             // If everyone is up to carry the body then they can move
@@ -57,41 +60,51 @@ public class Corpse : Carryable
             player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
             player.carriedObj.gameObject.SetActive(false);
         }
-
-        // need many players
-        /* if((int)corpseData.size > 0)
-         {
-             players.Add(player);
-             foreach(PlayerTest p in players)
-             {
-                 p.carriedObj = this; // multiple people have to put down or leave the corpse
-                 player.interactableObj = null;
-             }
-         }*/
-
-        // One player
-        /*if(player.carriedObj == null)
-        {
-            player.interactableObj = null;
-            player.carriedObj = this;
-        }*/
     }
 
     public override void PutDown(PlayerTest player, bool isTimeOut = false)
     {
-        // DEBUG CARRING W/ OTHER PLAYER
+        // If pilote is leaving --> co-pilote become the pilote! -> DONE
+        // Make the co-pilote works (can rotate around the pilote)
+
+        // DEBUG CARRYING W/ OTHER PLAYER
         player.playerMovement.ChangeInput("Player");
-        if (player.playerMovement.canMove)
+        if (player.playerMovement.canMove && players.Count < 2) // if one player -> put the body anywhere he wants to
         {
             //put down corpse in front of a player -> use rotation but now just t.right
             player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
                 player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
         }
-
-        if(!player.playerMovement.canMove)
+        else
         {
             player.playerMovement.canMove = true;
         }
+
+        // if multiple players
+        if (players.Contains(player) && players.Count > 1)
+        {
+            // if player is the pilote
+            if (players.IndexOf(player) == 0)
+            {
+                players[1].transform.parent = null;
+                //transform.parent = players[1].transform;
+                players[1].playerMovement.canMove = false;
+                players[1].playerMovement.ChangeInput("Pilote");
+            }
+            else
+            {
+                players[0].playerMovement.canMove = false;
+                player.transform.parent = null;
+            }
+            players.Remove(player);
+        } else if(players.Count < 2) // one player
+        {
+            transform.parent = null;
+            player.transform.parent = null;
+            players.Remove(player);
+        }
+        
+        
 
         // corpse became grave (sprite)
         player.isCarrying = false;
