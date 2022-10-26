@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncineratorScript : MonoBehaviour
+public class IncineratorScript : MonoBehaviour, IInteractable
 {
     public static Action OnPlayerHold;
     public static Action OnPlayerLetgo;
@@ -54,6 +54,11 @@ public class IncineratorScript : MonoBehaviour
         {
             CloseIncinerator();
         }
+    }
+
+    public void Interact(Player player)
+    {
+        
     }
 }
 

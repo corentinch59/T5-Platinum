@@ -42,7 +42,7 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         requestImg.SetActive(true);
     }
 
-    public void Interact(PlayerTest player)
+    public void Interact(Player player)
     {
         if (isInteractable)
         {

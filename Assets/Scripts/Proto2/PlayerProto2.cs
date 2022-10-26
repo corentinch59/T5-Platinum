@@ -125,15 +125,7 @@ public class PlayerProto2 : MonoBehaviour
                 playerInput.currentActionMap.FindAction("Move").Enable();
                 myCoroutine = null; // Code of iteration 2
             }
-
         }
-        //if (ctx.canceled)
-        //{
-        //    StopCoroutine(myCoroutine);
-        //    canvaQte.gameObject.SetActive(false);
-        //    playerInput.currentActionMap.FindAction("Move").Enable();
-        //    myCoroutine = null;
-        //}
     }
 
     private IEnumerator StartTimer(InputAction.CallbackContext ctx)

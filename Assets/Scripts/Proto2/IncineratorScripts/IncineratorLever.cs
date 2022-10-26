@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncineratorLever : MonoBehaviour
+public class IncineratorLever : MonoBehaviour, IInteractable
 {
-    private bool hasPLayer;
-    public void LeverInteraction(PlayerIncineration player)
+    private Player playerRef;
+
+    public void Interact(Player player)
     {
-        if (!hasPLayer)
+        if (!playerRef)
         {
-            hasPLayer = true;
+            playerRef = player;
             player.DisableInput("Move");
-            Debug.Log("Holding an incinerator lever .");
+            Debug.Log("Holding an incinerator lever.");
             IncineratorScript.OnPlayerHold?.Invoke();
         }
-        else
+
+        if(player == playerRef)
         {
-            hasPLayer = false;
             player.EnableInput("Move");
             Debug.Log("Stopped Holding an incinerator lever.");
             IncineratorScript.OnPlayerLetgo?.Invoke();

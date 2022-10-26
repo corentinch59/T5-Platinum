@@ -16,16 +16,16 @@ public class PlayerMovement : MonoBehaviour
 
     private const float gravityValue = -9.81f;
     private CharacterController controller;
-    public Vector2 orientationVect;
+    private Vector2 orientationVect;
+    public Vector2 getOrientation => orientationVect;
     private Vector2 move;
     private Vector2 rotate;
-    private IInteractable interactable;
     [SerializeField] private Transform arrowOrientation;
 
     private string currentInput;
-    public string CurrentInput { get; set; }
 
     private PlayerInput playerInput;
+    public PlayerInput GetPlayerInput => playerInput;
     private float angle = 0f;
     [SerializeField] private float rotationSpeed = 5f;
 
@@ -40,11 +40,6 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-    }
-
-    private void Update()
-    {
-
     }
 
     private void FixedUpdate()
@@ -110,11 +105,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void OnInteract(InputAction.CallbackContext ctx)
-    {
-        Debug.Log("Interacted");
-    }
-
     public void OnMovePilote(InputAction.CallbackContext ctx)
     {
         if(canMove)
@@ -146,6 +136,6 @@ public class PlayerMovement : MonoBehaviour
     public void ChangeInput(string inputActionMap)
     {
         playerInput.SwitchCurrentActionMap(inputActionMap);
-        CurrentInput = inputActionMap;
+        currentInput = inputActionMap;
     }
 }

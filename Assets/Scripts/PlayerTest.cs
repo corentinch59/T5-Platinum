@@ -60,8 +60,7 @@ public class PlayerTest : MonoBehaviour
         // check interactables
         if (!isCarrying)
         {
-            Collider[] interactables;
-            interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
+            Collider[] interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
 
             if (interactables.Length > 0)
             {
@@ -179,10 +178,10 @@ public class PlayerTest : MonoBehaviour
         {
             if (interactableObj == null && carriedObj != null)
             {
-                carriedObj.PutDown(this);
+                //carriedObj.PutDown(this);
             } else if (interactableObj != null && isCarrying == false)
             {
-                interactableObj.Interact(this);
+                //interactableObj.Interact(this);
             }
         }
     }

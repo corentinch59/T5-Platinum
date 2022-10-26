@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IPutDown
 {
-    void PutDown(PlayerTest player, bool isTimeOut);
+    void PutDown(Player player, bool isTimeOut);
 }
