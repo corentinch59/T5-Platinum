@@ -45,6 +45,7 @@ public class Corpse : Carryable
                 transform.parent = players[1].transform;
                 players[1].playerMovement.ChangeInput("Co-Pilote");
                 players[1].transform.parent = players[0].transform;
+                players[0].playerMovement.positionCopilote = players[1].transform;
             }
 
             // If everyone is up to carry the body then they can move
@@ -87,15 +88,16 @@ public class Corpse : Carryable
             if (players.IndexOf(player) == 0)
             {
                 players[1].transform.parent = null;
-                //transform.parent = players[1].transform;
                 players[1].playerMovement.canMove = false;
                 players[1].playerMovement.ChangeInput("Pilote");
             }
             else
             {
+                transform.parent = players[0].transform;
                 players[0].playerMovement.canMove = false;
                 player.transform.parent = null;
             }
+            players[0].playerMovement.positionCopilote = null;
             players.Remove(player);
         } else if(players.Count < 2) // one player
         {
@@ -103,8 +105,6 @@ public class Corpse : Carryable
             player.transform.parent = null;
             players.Remove(player);
         }
-        
-        
 
         // corpse became grave (sprite)
         player.isCarrying = false;
