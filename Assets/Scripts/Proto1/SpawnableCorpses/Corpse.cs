@@ -1,8 +1,10 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Corpse : Carryable
 {
@@ -13,13 +15,10 @@ public class Corpse : Carryable
     public LayerMask localisationsLayer;
     public Quest thisQuest;
 
-    private void Update()
-    {
-        // players movement
-    }
-
     public override void Interact(PlayerTest player)
     {
+        transform.localScale = new Vector3(2.7f, 0.96f, 2.82f);
+        player.gameObject.transform.DOPause();
         SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
 
         if (player.carriedObj == null)
@@ -67,6 +66,8 @@ public class Corpse : Carryable
 
     public override void PutDown(PlayerTest player, bool isTimeOut = false)
     {
+        transform.localScale = new Vector3(2.7f, 0.96f, 2.82f);
+
         // If pilote is leaving --> co-pilote become the pilote! -> DONE
         // Make the co-pilote works (can rotate around the pilote)
 

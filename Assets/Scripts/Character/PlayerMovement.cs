@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform arrowOrientation;
     public Transform positionCopilote;
     private float moveUpDown;
+    private Coroutine feedback;
 
     private string currentInput;
 
@@ -50,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 moveDir = new Vector3(move.x, 0, move.y);
                 controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
+
+                if(moveDir.magnitude > 0 && feedback == null)
+                {
+                    feedback = StartCoroutine(FeedBackPlayerMoves());
+                }
 
                 if (controller.isGrounded && playerVelocity.y < 0)
                     playerVelocity.y = 0f;
@@ -97,6 +105,17 @@ public class PlayerMovement : MonoBehaviour
                 transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
             }
         }
+    }
+
+    private IEnumerator FeedBackPlayerMoves()
+    {
+        transform.DOScaleX(0.8f, 0.3f);
+        transform.DOScaleY(1.3f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        transform.DOScaleX(1f, 0.3f);
+        transform.DOScaleY(1f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        feedback = null;
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
