@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     private float rotate;
     private IInteractable interactable;
     [SerializeField] private Transform arrowOrientation;
-    [SerializeField] private ParticleSystem steps;
     public Transform positionCopilote;
     private float moveUpDown;
 
@@ -125,28 +124,20 @@ public class PlayerMovement : MonoBehaviour
                 {
                     arrowOrientation.eulerAngles = new Vector3(90, 0, -90);
                     arrowOrientation.localPosition = Vector3.left;
-                    steps.gameObject.transform.localPosition = new Vector3(0.5f, 0f, -0.2f);
-                    steps.gameObject.transform.eulerAngles = new Vector3(0, 90, 0);
                 } else if (orientationVect.x > 0)
                 {
                     arrowOrientation.eulerAngles = new Vector3(90, 0, 90);
                     arrowOrientation.localPosition = Vector3.right;
-                    steps.gameObject.transform.localPosition = new Vector3(-0.5f, 0f, -0.2f);
-                    steps.gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
                 }
 
                 if (orientationVect.y < 0)
                 {
                     arrowOrientation.eulerAngles = new Vector3(90, 0, 0);
                     arrowOrientation.localPosition = Vector3.down;
-                    steps.gameObject.transform.localPosition = new Vector3(0, 0.5f, -0.2f);
-                    steps.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
                 }
                 else if (orientationVect.y > 0){
                     arrowOrientation.eulerAngles = new Vector3(90, 0, 180);
                     arrowOrientation.localPosition = Vector3.up;
-                    steps.gameObject.transform.localPosition = new Vector3(0, -0.5f, -0.2f);
-                    steps.gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
                 }
             }
         }
