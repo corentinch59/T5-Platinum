@@ -24,19 +24,20 @@ public class ChoseYourChara : MonoBehaviour
 
     private void Start()
     {
-        currentChara = charas[0];
-        for (int i = 0; i < charas.Count; i++)
-        {
-            charas[i].SetActive(false);
-        }
+        //currentChara = charas[0];
+        //for (int i = 0; i < charas.Count; i++)
+        //{
+        //    charas[i].SetActive(false);
+        //}
         
-        currentChara.SetActive(true);
+        //currentChara.SetActive(true);
 
         input = GetComponent<PlayerInput>();
     }
 
     public void MoveRight(InputAction.CallbackContext context)
     {
+        if (charas.Count == 0) return;
         if (isReady) return;//on bloque si le joueur est ready 
 
         if (context.performed)
@@ -58,6 +59,7 @@ public class ChoseYourChara : MonoBehaviour
 
     public void MoveLeft(InputAction.CallbackContext context)
     {
+        if (charas.Count == 0) return;
         if (isReady) return;//on bloque si le joueur est ready 
         if (context.performed)
         {
@@ -82,7 +84,7 @@ public class ChoseYourChara : MonoBehaviour
         {
             if (!isReady)//activation de l'etat ready 
             {
-                currentChara.transform.DOScale(2f, 0.5f);
+                transform.DOScale(2f, 0.5f);
                 isReady = true;
                 OnReady?.Invoke();
             }
@@ -96,12 +98,13 @@ public class ChoseYourChara : MonoBehaviour
             if (isReady)//Cancel l'etat ready 
             {
                 isReady = false;
-                currentChara.transform.DOScale(1f, 0.5f);
+                transform.DOScale(1f, 0.5f);
                 UnReady?.Invoke();
             }
             else//Remove du player
             {
                 OnRemovePlayer?.Invoke(gameObject);
+                //Destroy(gameObject);
             }
         }
     }

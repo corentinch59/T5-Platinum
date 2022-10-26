@@ -6,12 +6,12 @@ using UnityEngine.VFX;
 using DG.Tweening;
 using TMPro;
 
-public delegate void StartTheGameHandler(GameObject[] players);
+public delegate void StartTheGameHandler();
 public class StartTheGame : MonoBehaviour
 {
     [SerializeField] private List<Transform> listPos = new List<Transform>();
-    [SerializeField] private GameObject[] players = new GameObject[4];
-    [SerializeField] private PlayerInputManager m;
+    [SerializeField] private List<ChoseYourChara> selectionPlayers = new List<ChoseYourChara>();
+    //[SerializeField] private PlayerInputManager m;
     //[SerializeField] private VisualEffect vEffect;
     [SerializeField] private TextMeshProUGUI timerTMP;
 
@@ -26,7 +26,14 @@ public class StartTheGame : MonoBehaviour
     {
         ChoseYourChara.OnReady += CheckIfAllPlayerOnReady;
         ChoseYourChara.UnReady += ChoseYourChara_UnReady;
-        ChoseYourChara.OnRemovePlayer += ChoseYourChara_OnRemovePlayer;        
+        PlayerManager.OnPlayerJoining += PlayerManager_OnPlayerJoining;
+    }
+
+    private void PlayerManager_OnPlayerJoining(GameObject player, int index)
+    {
+        ChoseYourChara_UnReady();
+        player.transform.position = listPos[index].position;
+        selectionPlayers.Add(player.GetComponent<ChoseYourChara>());
     }
 
     private void CheckIfAllPlayerOnReady()
@@ -36,20 +43,19 @@ public class StartTheGame : MonoBehaviour
 
         //vEffect.Play();
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < selectionPlayers.Count; i++)
         {
-            if (players[i] != null && !players[i].GetComponent<ChoseYourChara>().isReady)
+            if (selectionPlayers[i] != null && !selectionPlayers[i].isReady)
             {
                 return;
             }
-            else if (players[i] == null) x++;
+            //else if (selectionPlayers[i] == null) x++;
         }
 
-        if (x == players.Length) return;
+        if (x == selectionPlayers.Count) return;
 
         //Lancer un timer 3 2 1 GO et le jeu
         currentCoroutine = StartCoroutine(StartGameCoroutine());
-        //StartGameCoroutine();
     }
 
     private void ChoseYourChara_UnReady()
@@ -62,43 +68,6 @@ public class StartTheGame : MonoBehaviour
 
             timerTMP.gameObject.SetActive(false);
             currentCoroutine = null;
-        }
-    }
-
-    private void ChoseYourChara_OnRemovePlayer(GameObject player)
-    {
-        //On enleve le player du tableau + on le detruit
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (players[i] == player)
-            {
-                players[i] = null;
-            }
-        }
-        Destroy(player);
-
-        CheckIfAllPlayerOnReady();
-    }
-
-    private void OnPlayerJoined(PlayerInput playerInput)
-    {
-        Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
-
-        ChoseYourChara_UnReady();
-
-              //On recupere le GameObject Du player
-        GameObject player;
-        player = playerInput.gameObject;
-
-        //Ajout du player dans le tableau + on met dans une position libre de gauche a droite
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (players[i] == null) //test si une place est libre de gauche a droite 
-            {
-                players[i] = player;
-                player.transform.position = listPos[i].position;
-                break;//On break car on a trouve une place
-            }
         }
     }
 
@@ -123,30 +92,34 @@ public class StartTheGame : MonoBehaviour
 
         timerTMP.text = "GO";
 
-
-
-        
-        //Changer de scene + repositionner les joueurs
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (players[i] != null)
-            {
-                
-                players[i].GetComponent<ChoseYourChara>().ChangeActionMapToPlayer("Player");
-                players[i].GetComponent<PlayerMovement>().enabled = true;
-                players[i].GetComponent<CharacterController>().enabled = true;
-
-                players[i].transform.DOScale(1f, 0.5f);
-            }
-        }
-        ChangeSceneClass.ChangeScene(nameScene);
+        OnStartTheGame?.Invoke();
+        ChangingScene();
         currentCoroutine = null;
 
     }
+
+    private void ChangingScene()
+    {
+        for (int i = 0; i < selectionPlayers.Count; i++)
+        {
+            if (selectionPlayers[i] != null)
+            {
+                selectionPlayers[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+
+                selectionPlayers[i].GetComponent<PlayerMovement>().enabled = true;
+                selectionPlayers[i].GetComponent<PlayerTest>().enabled = true;
+                selectionPlayers[i].GetComponent<CharacterController>().enabled = true;
+                selectionPlayers[i].transform.DOScale(1f, 0.5f);
+
+                Destroy(selectionPlayers[i]);
+            }
+        }
+        ChangeSceneClass.ChangeScene(nameScene);
+    }
     private void OnDestroy()
     {
-        ChoseYourChara.OnRemovePlayer -= ChoseYourChara_OnRemovePlayer;
         ChoseYourChara.OnReady -= CheckIfAllPlayerOnReady;
         ChoseYourChara.UnReady -= ChoseYourChara_UnReady;
+        PlayerManager.OnPlayerJoining -= PlayerManager_OnPlayerJoining;
     }
 }
