@@ -20,6 +20,8 @@ public class Corpse : Carryable
 
     public override void Interact(PlayerTest player)
     {
+        SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
+
         if (player.carriedObj == null)
         {
             player.carriedObj = this;
@@ -215,6 +217,7 @@ public class Corpse : Carryable
         //newCD.localisation = AddLocalisation(col.gameObject.tag);
         return newCD;
     }
+
 
     private void OnDrawGizmos()
     {

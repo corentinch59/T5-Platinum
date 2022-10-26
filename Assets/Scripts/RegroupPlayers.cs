@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Haptics;
 
 public class RegroupPlayers : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class RegroupPlayers : MonoBehaviour
     [SerializeField] private GameObject[] players = new GameObject[4];
     [SerializeField] private CinemachineTargetGroup targetGroupCam;
 
+
     private void OnPlayerJoined(PlayerInput playerInput)
     {
+        StartCoroutine(HapticOnJoined(playerInput));
+
         Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
         //ChoseYourChara_UnReady();
@@ -31,5 +35,18 @@ public class RegroupPlayers : MonoBehaviour
                 break;//On break car on a trouve une place
             }
         }
+
+    }
+
+    private void OnPlayerLeft(PlayerInput playerInput)
+    {
+        playerInput.GetDevice<Gamepad>().ResetHaptics();
+    }
+
+    private IEnumerator HapticOnJoined(PlayerInput playerInput)
+    {
+        playerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.2f, 0.2f);
+        yield return new WaitForSeconds(2f);
+        playerInput.GetDevice<Gamepad>().ResetHaptics();
     }
 }

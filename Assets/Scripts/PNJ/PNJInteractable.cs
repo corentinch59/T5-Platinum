@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class PNJInteractable : MonoBehaviour, IInteractable
 {
@@ -84,5 +85,14 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         }
         yield return new WaitForSeconds(agent.remainingDistance / agent.speed);
         isInteractable = true;
+    }
+
+    public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+    }
+
+    public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+        yield break;
     }
 }

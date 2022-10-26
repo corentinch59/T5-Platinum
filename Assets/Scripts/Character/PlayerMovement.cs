@@ -44,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("MoveDir : " + moveDir);
         if(transform.parent == null && positionCopilote == null)
         {
             if (currentInput != "Pilote")
@@ -105,6 +104,15 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             move = ctx.ReadValue<Vector2>();
+            if (move.magnitude > 0)
+            {
+                //this.PlayerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.1f, 0.05f);
+            }
+            else
+            {
+                //this.PlayerInput.GetDevice<Gamepad>().PauseHaptics();
+            }
+
             if (ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
             {
                 orientationVect = ctx.ReadValue<Vector2>();
@@ -153,7 +161,6 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             moveUpDown = ctx.ReadValue<float>();
-            Debug.Log("MoveUpDown : " + moveUpDown);
             /*if(moveUpDown > 0.5f)
             {
                 moveDir = positionCopilote.position - transform.position;
