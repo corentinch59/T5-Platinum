@@ -47,10 +47,8 @@ Shader "Unlit/DistortionEffect"
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
-            void Unity_SceneColor_float(float4 UV, out float3 Out)
-            {
-                
-            }
+
+            
 
             fixed4 frag (v2f i) : SV_Target
             {
