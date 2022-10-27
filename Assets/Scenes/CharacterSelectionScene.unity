@@ -1021,9 +1021,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972855229ba29ce4e9e9477727f82d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charas: []
+  sprites: []
   isReady: 0
-  currentChara: {fileID: 0}
+  currentSprite: {fileID: 0}
   input: {fileID: 0}
 --- !u!1 &1326004713
 GameObject:
@@ -1672,7 +1672,7 @@ MonoBehaviour:
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 967199343}
+  m_PlayerPrefab: {fileID: 2596005604130923474, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1

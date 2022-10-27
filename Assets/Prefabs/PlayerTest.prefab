@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178560174}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0.00000011920929}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 2596005604130923475}
   - component: {fileID: 1676592206633555986}
   - component: {fileID: 1641089447}
+  - component: {fileID: 4719051194784289810}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -230,12 +231,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2596005604130923474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1454460456}
   - {fileID: 1178560175}
+  - {fileID: 4889368507655530694}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -401,11 +403,35 @@ MonoBehaviour:
     m_ActionId: 5ccefa9e-183a-41e9-b7aa-39a94f34fce7
     m_ActionName: Player/Interact[/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4719051194784289810}
+        m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
+        m_MethodName: MoveLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8e17399d-219d-4361-8e40-5d0cb8612fac
     m_ActionName: SelectionScreenControlE/ChangeLeft[/XInputControllerWindows/leftStick/left,/XInputControllerWindows/dpad/left]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4719051194784289810}
+        m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
+        m_MethodName: MoveRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b1334139-407d-4107-86fc-9c849ba2cae9
     m_ActionName: SelectionScreenControlE/ChangeRight[/XInputControllerWindows/leftStick/right,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
@@ -413,11 +439,35 @@ MonoBehaviour:
     m_ActionId: e7be9c4a-f55f-4234-89b6-ec47aeea6552
     m_ActionName: Player/Dash[/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4719051194784289810}
+        m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
+        m_MethodName: GetReady
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c3909571-cddd-4d00-a05f-e2dfc4ff82c8
     m_ActionName: SelectionScreenControl/Ready[/DualShock4GamepadHID/buttonSouth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4719051194784289810}
+        m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
+        m_MethodName: RemovePlayer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: ef91c638-039c-45dc-a7c1-36e036ea2ef2
     m_ActionName: SelectionScreenControl/UnReady[/DualShock4GamepadHID/buttonEast]
   - m_PersistentCalls:
@@ -446,7 +496,7 @@ MonoBehaviour:
     m_ActionName: Co-Pilote/Interact[/DualShock4GamepadHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: f85837f0-ff07-42c3-ac9e-809ccf15e78c
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1641089447
@@ -478,3 +528,85 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isCarrying: 0
+--- !u!114 &4719051194784289810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596005604130923474}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972855229ba29ce4e9e9477727f82d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 1d6cf3eed42760749a2763be7d58bb38, type: 3}
+  - {fileID: 21300000, guid: b4b51065e95a0004f901aed91deacb29, type: 3}
+  - {fileID: 21300000, guid: 8322981113afa424d812f54967807ab7, type: 3}
+  - {fileID: 21300000, guid: 82ae10b035231a640b4257dccdd0ccd4, type: 3}
+  isReady: 0
+  currentSprite: {fileID: 0}
+  input: {fileID: 0}
+--- !u!1001 &9105618533276999839
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2596005604130923464}
+    m_Modifications:
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433548707735685210, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+      propertyPath: m_Name
+      value: TrailChara
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+--- !u!4 &4889368507655530694 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4433548707735685209, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
+  m_PrefabInstance: {fileID: 9105618533276999839}
+  m_PrefabAsset: {fileID: 0}
