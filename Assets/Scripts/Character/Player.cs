@@ -37,9 +37,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        canvaQte = gameObject.transform.GetChild(0);
-        qteFillImage = canvaQte.GetComponentsInChildren<Image>()[1];
-        canvaQte.gameObject.SetActive(false);
+        //canvaQte = gameObject.transform.GetChild(0);
+        //qteFillImage = canvaQte.GetComponentsInChildren<Image>()[1];
+        //canvaQte.gameObject.SetActive(false);
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
     }
@@ -51,7 +51,11 @@ public class Player : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext ctx)
     {
-        interactableObject.GetComponent<IInteractable>().Interact(this);
+        if (ctx.started)
+        {
+            if(interactableObject != null)
+                interactableObject.GetComponent<IInteractable>().Interact(this);
+        }
     }
 
     private IEnumerator InteractionCooldown(float time)

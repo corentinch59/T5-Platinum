@@ -7,18 +7,18 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Controls")]
     [SerializeField] private float playerSpeed;
-    [SerializeField] private float digDistance;
-    [SerializeField] private float interactionRange;
 
-    [HideInInspector] public Vector3 moveDir;
-    [HideInInspector] public Vector3 playerVelocity;
+    private Vector3 moveDir;
+    private Vector3 playerVelocity;
     public bool canMove = true;
 
     private const float gravityValue = -9.81f;
     private CharacterController controller;
+    public CharacterController getController => controller;
     private Vector2 orientationVect;
     public Vector2 getOrientation => orientationVect;
     private Vector2 move;
+    public Vector2 getMove => move;
     private Vector2 rotate;
     [SerializeField] private Transform arrowOrientation;
 
@@ -29,22 +29,16 @@ public class PlayerMovement : MonoBehaviour
     private float angle = 0f;
     [SerializeField] private float rotationSpeed = 5f;
 
-    public PlayerInput PlayerInput => playerInput;
-
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-    }
-    private void Start()
-    {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
     }
 
     private void FixedUpdate()
     {
-        if(transform.parent == null)
+        if(transform.parent == null && canMove)
         {
             moveDir = new Vector3(move.x, 0, move.y);
             controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
@@ -59,50 +53,42 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (canMove)
+        move = ctx.ReadValue<Vector2>();
+        if (ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
         {
-            move = ctx.ReadValue<Vector2>();
-            if (ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
+            orientationVect = ctx.ReadValue<Vector2>();
+            if (Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
             {
-                orientationVect = ctx.ReadValue<Vector2>();
-                if (Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
-                {
-                    orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
-                }
-                else
-                {
-                    orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
+                orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
+            }
+            else
+            {
+                orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
                     
-                }
-                orientationVect.Normalize();
+            }
+            orientationVect.Normalize();
 
-                // Show orientation to the player
-                if (orientationVect.x < 0)
-                {
-                    arrowOrientation.eulerAngles = new Vector3(90, 0, -90);
-                    arrowOrientation.localPosition = Vector3.left;
-                } else if (orientationVect.x > 0)
-                {
-                    arrowOrientation.eulerAngles = new Vector3(90, 0, 90);
-                    arrowOrientation.localPosition = Vector3.right;
-                }
+            // Show orientation to the player
+            if (orientationVect.x < 0)
+            {
+                arrowOrientation.eulerAngles = new Vector3(90, 0, -90);
+                arrowOrientation.localPosition = Vector3.left;
+            } else if (orientationVect.x > 0)
+            {
+                arrowOrientation.eulerAngles = new Vector3(90, 0, 90);
+                arrowOrientation.localPosition = Vector3.right;
+            }
 
-                if (orientationVect.y < 0)
-                {
-                    arrowOrientation.eulerAngles = new Vector3(90, 0, 0);
-                    arrowOrientation.localPosition = Vector3.down;
-                }
-                else if (orientationVect.y > 0){
-                    arrowOrientation.eulerAngles = new Vector3(90, 0, 180);
-                    arrowOrientation.localPosition = Vector3.up;
-                }
+            if (orientationVect.y < 0)
+            {
+                arrowOrientation.eulerAngles = new Vector3(90, 0, 0);
+                arrowOrientation.localPosition = Vector3.down;
+            }
+            else if (orientationVect.y > 0){
+                arrowOrientation.eulerAngles = new Vector3(90, 0, 180);
+                arrowOrientation.localPosition = Vector3.up;
             }
         }
-        else
-        {
-            move = Vector2.zero;
-        }
-
     }
 
     public void OnMovePilote(InputAction.CallbackContext ctx)
@@ -138,4 +124,5 @@ public class PlayerMovement : MonoBehaviour
         playerInput.SwitchCurrentActionMap(inputActionMap);
         currentInput = inputActionMap;
     }
+
 }
