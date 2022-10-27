@@ -18,6 +18,7 @@ public class GriefPNJInteractable : Carryable
     public string griefName = "";
     public float radius = 10f;
     private float griefDuration = 3f;
+    private Coroutine feedback;
 
     public void Awake()
     {
@@ -30,6 +31,15 @@ public class GriefPNJInteractable : Carryable
         transform.position = startLoc.position;
 
     }
+
+    private void Update()
+    {
+        if (!agent.isStopped && feedback == null)
+        {
+            feedback = StartCoroutine(FeedBackPlayerMoves());
+        }
+    }
+
     private void DisplayQuest()
     {
         requestImg.SetActive(true);
@@ -130,9 +140,21 @@ public class GriefPNJInteractable : Carryable
         if(!isWalkingForward) StartCoroutine(QuestManager.instance.WaitForNewRequest(3, deathRequest));
         isInteractable = true;
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    private IEnumerator FeedBackPlayerMoves()
+    {
+        transform.DOScaleX(1.8f, 0.3f);
+        transform.DOScaleY(2.3f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        transform.DOScaleX(2f, 0.3f);
+        transform.DOScaleY(2f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        feedback = null;
     }
 }

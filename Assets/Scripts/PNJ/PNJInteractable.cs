@@ -16,6 +16,7 @@ public class PNJInteractable : MonoBehaviour, IInteractable
     [SerializeField] private NavMeshAgent agent;
 
     private bool isInteractable = true;
+    private Coroutine feedback;
 
     public void Awake()
     {
@@ -35,6 +36,11 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         {
             // display quest when arriving in pos
             DisplayQuest();
+        }
+
+        if (agent.hasPath && feedback == null)
+        {
+            feedback = StartCoroutine(FeedBackPlayerMoves());
         }
     }
 
@@ -88,6 +94,17 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         }
         yield return new WaitForSeconds(agent.remainingDistance / agent.speed);
         isInteractable = true;
+    }
+
+    private IEnumerator FeedBackPlayerMoves()
+    {
+        transform.DOScaleX(1.8f, 0.3f);
+        transform.DOScaleY(2.3f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        transform.DOScaleX(2f, 0.3f);
+        transform.DOScaleY(2f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        feedback = null;
     }
 
     public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)

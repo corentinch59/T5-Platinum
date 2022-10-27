@@ -23,11 +23,18 @@ public class PlayerMovement : MonoBehaviour
     private float rotate;
     private IInteractable interactable;
     [SerializeField] private Transform arrowOrientation;
+    [SerializeField] private GameObject isPilote;
+    public GameObject IsPilote => isPilote;
+
+    [SerializeField] private GameObject isCoPilote;
+    public GameObject IsCoPilote => isCoPilote;
+
     public Transform positionCopilote;
     private float moveUpDown;
     private Coroutine feedback;
 
     private string currentInput;
+    public string CurrentInput => currentInput;
 
     private PlayerInput playerInput;
 
@@ -43,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         currentInput = playerInput.currentActionMap.name;
+        IsPilote.SetActive(false);
+        IsCoPilote.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -97,6 +106,8 @@ public class PlayerMovement : MonoBehaviour
             if (rotate < 0.5f)
             {
                 transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
+                IsCoPilote.transform.eulerAngles = new Vector3(90, 90, 0);
+                //transform.eulerAngles = new Vector3(0, 0, 0);
 
                 //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
                 //transform.LookAt(Camera.main.transform,);
@@ -106,6 +117,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 // goes right
                 transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
+                IsCoPilote.transform.eulerAngles = new Vector3(90, 90, 0);
+                //transform.eulerAngles = new Vector3(0, 0, 0);
 
                 //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
                 //transform.LookAt(Camera.main.transform);

@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Corpse : Carryable
 {
@@ -15,10 +14,32 @@ public class Corpse : Carryable
     public LayerMask localisationsLayer;
     public Quest thisQuest;
 
+    [SerializeField] private List<Transform> snapLocations = new List<Transform>();
+    private List<Transform> transformToReinject = new List<Transform>();
+    private Vector3 snapPlayer;
+
     public override void Interact(PlayerTest player)
     {
         transform.localScale = new Vector3(4, 1, 2);
-        player.gameObject.transform.DOPause();
+
+        // snap player to the corpse
+        float distSnap = float.MaxValue;
+        int transformToRemove = 0;
+        for(int i = 0; i < snapLocations.Count; i++)
+        {
+            if(Vector3.Distance(player.transform.position, snapLocations[i].position) <= distSnap)
+            {
+                distSnap = Vector3.Distance(player.transform.position, snapLocations[i].position);
+                snapPlayer = snapLocations[i].position;
+                transformToRemove = i;
+            }
+        }
+        transformToReinject.Add(snapLocations[transformToRemove]);
+        snapLocations.RemoveAt(transformToRemove);
+        player.transform.position = snapPlayer;
+
+        player.transform.DOComplete();
+        //player.gameObject.transform.DOPause(); -> worked a bit
         SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
 
         if (player.carriedObj == null)
@@ -39,12 +60,14 @@ public class Corpse : Carryable
             }
 
             players[0].playerMovement.ChangeInput("Pilote");
+            players[0].playerMovement.IsPilote.SetActive(true);
             transform.parent = players[0].transform;
 
             if (players.Count > 1)
             {
                 transform.parent = players[1].transform;
                 players[1].playerMovement.ChangeInput("Co-Pilote");
+                players[1].playerMovement.IsCoPilote.SetActive(true);
                 players[1].transform.parent = players[0].transform;
                 players[0].playerMovement.positionCopilote = players[1].transform;
             }
@@ -68,11 +91,36 @@ public class Corpse : Carryable
     {
         transform.localScale = new Vector3(4f, 1, 2);
 
-        // If pilote is leaving --> co-pilote become the pilote! -> DONE
-        // Make the co-pilote works (can rotate around the pilote)
+        for(int i = 0; i < transformToReinject.Count; i++)
+        {
+            // WIP somtimes it's working sometimes not
+            if (transformToReinject[i].position == player.transform.position)
+            {
+                Debug.Log("same pos");
+                if(snapLocations.Count > 0)
+                {
+                    snapLocations.Insert(snapLocations.Count - 1, transformToReinject[i]);
+                }
+                else
+                {
+                    snapLocations.Insert(snapLocations.Count, transformToReinject[i]);
+                }
+                transformToReinject.RemoveAt(i);
+                break;
+            }
+        }
+
+        /*if(player.playerMovement.CurrentInput == "Pilote")
+        {
+            player.playerMovement.IsPilote.SetActive(false);
+        } else if(player.playerMovement.CurrentInput == "Co-Pilote")
+        {
+            player.playerMovement.IsCoPilote.SetActive(false);
+        }*/
 
         // DEBUG CARRYING W/ OTHER PLAYER
         player.playerMovement.ChangeInput("Player");
+
         if (player.playerMovement.canMove && players.Count < 2) // if one player -> put the body anywhere he wants to
         {
             //put down corpse in front of a player -> use rotation but now just t.right
@@ -93,9 +141,12 @@ public class Corpse : Carryable
                 players[1].transform.parent = null;
                 players[1].playerMovement.canMove = false;
                 players[1].playerMovement.ChangeInput("Pilote");
+                players[1].playerMovement.IsPilote.SetActive(true);
+                players[1].playerMovement.IsCoPilote.SetActive(false);
             }
             else
             {
+                player.playerMovement.IsCoPilote.SetActive(false);
                 transform.parent = players[0].transform;
                 players[0].playerMovement.canMove = false;
                 player.transform.parent = null;
