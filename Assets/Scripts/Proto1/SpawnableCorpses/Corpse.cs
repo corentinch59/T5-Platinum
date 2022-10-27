@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class Corpse : Carryable
 {
@@ -12,6 +13,14 @@ public class Corpse : Carryable
     public float radius = 10f;
     public LayerMask localisationsLayer;
     public Quest thisQuest;
+    [SerializeField] private Sprite[] tombSprite = new Sprite[5];
+
+    private SpriteRenderer spriteRenderer;
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void Update()
     {
@@ -112,8 +121,14 @@ public class Corpse : Carryable
         // Visual Debug 
         player.carriedObj.gameObject.SetActive(true);
         player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
-        player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
+        //player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
+        int randomsprite = UnityEngine.Random.Range(0, tombSprite.Length);
+        spriteRenderer.sprite = tombSprite[randomsprite];
 
+        transform.localScale = new Vector3(0f, 0f, 0f);
+        //Sequence sequence = DOTween.Sequence();
+        transform.DOScale(1.25f, 0.5f).SetEase(Ease.OutBounce);
+            //.Append(transform.DOScale(1f, 0.25f));
 
         // update CorpseData
         corpseData = UpdateLocalisation();

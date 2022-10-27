@@ -8,7 +8,8 @@ public delegate void ReadyEventHandler();
 public delegate void RemovePlayerEventHandler(GameObject player);
 public class ChoseYourChara : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> charas = new List<GameObject>();
+    [SerializeField] private List<Sprite> sprites = new List<Sprite>();
+     private SpriteRenderer spriteRenderer;
 
     public static event ReadyEventHandler OnReady;
     public static event ReadyEventHandler UnReady;
@@ -17,14 +18,13 @@ public class ChoseYourChara : MonoBehaviour
     [HideInInspector]
     public bool isReady = false;
     [HideInInspector]
-    public GameObject currentChara;
+    public Sprite currentSprite;
     [HideInInspector]
     public PlayerInput input;
 
 
     private void Start()
     {
-        //currentChara = charas[0];
         //for (int i = 0; i < charas.Count; i++)
         //{
         //    charas[i].SetActive(false);
@@ -33,48 +33,56 @@ public class ChoseYourChara : MonoBehaviour
         //currentChara.SetActive(true);
 
         input = GetComponent<PlayerInput>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        currentSprite = sprites[0];
+        spriteRenderer.sprite = currentSprite;
     }
 
     public void MoveRight(InputAction.CallbackContext context)
     {
-        if (charas.Count == 0) return;
+        if (sprites.Count == 0) return;
         if (isReady) return;//on bloque si le joueur est ready 
 
         if (context.performed)
         {
-            if (charas.IndexOf(currentChara) == 0)
+            if (sprites.IndexOf(currentSprite) == 0)
             {
-                currentChara.SetActive(false);
-                currentChara = charas[charas.Count - 1];
-                currentChara.SetActive(true);
+                //currentChara.SetActive(false);
+                currentSprite = sprites[sprites.Count - 1];
+                //spriteRenderer.sprite = currentSprite;
+                //currentChara.SetActive(true);
             }
             else
             {
-                currentChara.SetActive(false);
-                currentChara = charas[charas.IndexOf(currentChara) - 1];
-                currentChara.SetActive(true);
+                //currentSprite.SetActive(false);
+                currentSprite = sprites[sprites.IndexOf(currentSprite) - 1];
+                
             }
+
+            spriteRenderer.sprite = currentSprite;
         }       
     }
 
     public void MoveLeft(InputAction.CallbackContext context)
     {
-        if (charas.Count == 0) return;
+        if (sprites.Count == 0) return;
         if (isReady) return;//on bloque si le joueur est ready 
         if (context.performed)
         {
-            if (charas.IndexOf(currentChara) == charas.Count - 1)
+            if (sprites.IndexOf(currentSprite) == sprites.Count - 1)
             {
-                currentChara.SetActive(false);
-                currentChara = charas[0];
-                currentChara.SetActive(true);
+                //currentSprite.SetActive(false);
+                currentSprite = sprites[0];
+                //currentSprite.SetActive(true);
             }
             else
             {
-                currentChara.SetActive(false);
-                currentChara = charas[charas.IndexOf(currentChara) + 1];
-                currentChara.SetActive(true);
+                //currentSprite.SetActive(false);
+                currentSprite = sprites[sprites.IndexOf(currentSprite) + 1];
+                //currentSprite.SetActive(true);
             }
+
+            spriteRenderer.sprite = currentSprite;
         }
     }
 
