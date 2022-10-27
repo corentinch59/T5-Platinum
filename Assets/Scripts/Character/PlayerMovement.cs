@@ -128,12 +128,12 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator FeedBackPlayerMoves()
     {
-        transform.DOScaleX(0.8f, 0.3f);
-        transform.DOScaleY(1.3f, 0.3f);
-        yield return new WaitForSeconds(0.3f);
-        transform.DOScaleX(1f, 0.3f);
-        transform.DOScaleY(1f, 0.3f);
-        yield return new WaitForSeconds(0.3f);
+        transform.DOMoveY(2.8f, 0.1f);
+        //transform.DOScaleY(1.3f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+        transform.DOMoveY(2.5f, 0.1f);
+        //transform.DOScaleY(1f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
         feedback = null;
     }
 

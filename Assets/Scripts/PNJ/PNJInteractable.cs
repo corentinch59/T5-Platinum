@@ -60,18 +60,24 @@ public class PNJInteractable : MonoBehaviour, IInteractable
             Vector3 spawn = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
             GameObject corpseCreated = Instantiate(corpseToCreate, spawn, Quaternion.identity);
 
-            // GameFeel
-            corpseCreated.transform.DOScale(new Vector3(4, 1, 2f), 0.5f);
-
             if(corpseCreated.TryGetComponent(out Corpse c))
             {
                 // corpseCreated is taking data from the request
                 c.thisQuest = request.quest.GetComponent<Quest>();
 
+                // GameFeel
+                if((int)c.thisQuest.requestInfos.siz > 0)
+                {
+                    // Big corpse
+                    corpseCreated.transform.DOScale(new Vector3(2, 2, 2), 0.5f);
+                }
+                else
+                {
+                    // small corpse
+                    corpseCreated.transform.DOScale(new Vector3(1, 1, 1), 0.5f);
+                }
             }
 
-            //StartCoroutine(Walk(false));
-            //Destroy(this); // enable = false not working
             isInteractable = false;
         }
     }

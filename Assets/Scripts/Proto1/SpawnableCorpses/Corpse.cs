@@ -9,37 +9,29 @@ public class Corpse : Carryable
 {
     public CorpseData corpseData;
     private Vector2 direction;
-    private List<PlayerTest> players = new List<PlayerTest>();
+    private PlayerTest[] players = new PlayerTest[2];
     public float radius = 10f;
     public LayerMask localisationsLayer;
     public Quest thisQuest;
 
-    [SerializeField] private List<Transform> snapLocations = new List<Transform>();
-    private List<Transform> transformToReinject = new List<Transform>();
+    [SerializeField] private Transform piloteLocation;
+    [SerializeField] private Transform coPiloteLocation;
     private Vector3 snapPlayer;
 
     public override void Interact(PlayerTest player)
     {
-        transform.localScale = new Vector3(4, 1, 2);
-
-        // snap player to the corpse
-        float distSnap = float.MaxValue;
-        int transformToRemove = 0;
-        for(int i = 0; i < snapLocations.Count; i++)
+        // To avoid dotween problem with player increasing scale of this (as a child)
+        if(thisQuest.requestInfos.siz > 0)
         {
-            if(Vector3.Distance(player.transform.position, snapLocations[i].position) <= distSnap)
-            {
-                distSnap = Vector3.Distance(player.transform.position, snapLocations[i].position);
-                snapPlayer = snapLocations[i].position;
-                transformToRemove = i;
-            }
+            transform.localScale = new Vector3(2, 2, 2);
         }
-        transformToReinject.Add(snapLocations[transformToRemove]);
-        snapLocations.RemoveAt(transformToRemove);
-        player.transform.position = snapPlayer;
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
 
-        player.transform.DOComplete();
-        //player.gameObject.transform.DOPause(); -> worked a bit
+        //player.transform.DOComplete();
+        player.gameObject.transform.DOPause(); //-> worked a bit
         SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
 
         if (player.carriedObj == null)
@@ -54,30 +46,32 @@ public class Corpse : Carryable
         {
             player.playerMovement.canMove = false;
 
-            if (!players.Contains(player))
+            // snap player to the corpse
+            if (player.transform.position.x >= transform.position.x)
             {
-                players.Add(player);
+                players[0] = player;
+                player.transform.DOMove(piloteLocation.position, 0.5f, true).SetEase(Ease.Linear);
+                player.playerMovement.ChangeInput("Pilote");
+                player.playerMovement.IsPilote.SetActive(true);
+                transform.parent = player.transform;
             }
-
-            players[0].playerMovement.ChangeInput("Pilote");
-            players[0].playerMovement.IsPilote.SetActive(true);
-            transform.parent = players[0].transform;
-
-            if (players.Count > 1)
+            else
             {
-                transform.parent = players[1].transform;
-                players[1].playerMovement.ChangeInput("Co-Pilote");
-                players[1].playerMovement.IsCoPilote.SetActive(true);
-                players[1].transform.parent = players[0].transform;
-                players[0].playerMovement.positionCopilote = players[1].transform;
+                players[1] = player;
+                player.transform.DOMove(coPiloteLocation.position, 0.5f, true).SetEase(Ease.Linear);
+                player.playerMovement.ChangeInput("Co-Pilote");
+                player.playerMovement.IsCoPilote.SetActive(true);
+                transform.parent = player.transform;
+                player.transform.parent = players[0].transform;
+                players[0].playerMovement.positionCopilote = player.transform;
             }
 
             // If everyone is up to carry the body then they can move
-            if ((int)thisQuest.requestInfos.siz + 1 == players.Count)
+            if ((int)thisQuest.requestInfos.siz + 1 == players.Length)
             {
-                foreach(PlayerTest p in players)
+                for(int i = 0; i < players.Length; ++i)
                 {
-                    p.playerMovement.canMove = true;
+                    players[i].playerMovement.canMove = true;
                 }
             }
         } else if((int)thisQuest.requestInfos.siz <= 0)
@@ -89,39 +83,20 @@ public class Corpse : Carryable
 
     public override void PutDown(PlayerTest player, bool isTimeOut = false)
     {
-        transform.localScale = new Vector3(4f, 1, 2);
-
-        for(int i = 0; i < transformToReinject.Count; i++)
+        // To avoid dotween problem with player increasing scale of this (as a child)
+        if (thisQuest.requestInfos.siz > 0)
         {
-            // WIP somtimes it's working sometimes not
-            if (transformToReinject[i].position == player.transform.position)
-            {
-                Debug.Log("same pos");
-                if(snapLocations.Count > 0)
-                {
-                    snapLocations.Insert(snapLocations.Count - 1, transformToReinject[i]);
-                }
-                else
-                {
-                    snapLocations.Insert(snapLocations.Count, transformToReinject[i]);
-                }
-                transformToReinject.RemoveAt(i);
-                break;
-            }
+            transform.localScale = new Vector3(2, 2, 2);
         }
-
-        /*if(player.playerMovement.CurrentInput == "Pilote")
+        else
         {
-            player.playerMovement.IsPilote.SetActive(false);
-        } else if(player.playerMovement.CurrentInput == "Co-Pilote")
-        {
-            player.playerMovement.IsCoPilote.SetActive(false);
-        }*/
+            transform.localScale = new Vector3(1, 1, 1);
+        }
 
         // DEBUG CARRYING W/ OTHER PLAYER
         player.playerMovement.ChangeInput("Player");
 
-        if (player.playerMovement.canMove && players.Count < 2) // if one player -> put the body anywhere he wants to
+        if (player.playerMovement.canMove && players.Length < 2) // if one player -> put the body anywhere he wants to
         {
             //put down corpse in front of a player -> use rotation but now just t.right
             player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
@@ -133,11 +108,12 @@ public class Corpse : Carryable
         }
 
         // if multiple players
-        if (players.Contains(player) && players.Count > 1)
+        if (players.(player) && players.Count > 1)
         {
             // if player is the pilote
             if (players.IndexOf(player) == 0)
             {
+                players[0].playerMovement.IsPilote.SetActive(false);
                 players[1].transform.parent = null;
                 players[1].playerMovement.canMove = false;
                 players[1].playerMovement.ChangeInput("Pilote");
@@ -155,6 +131,7 @@ public class Corpse : Carryable
             players.Remove(player);
         } else if(players.Count < 2) // one player
         {
+            players[0].playerMovement.IsPilote.SetActive(false);
             transform.parent = null;
             player.transform.parent = null;
             players.Remove(player);
