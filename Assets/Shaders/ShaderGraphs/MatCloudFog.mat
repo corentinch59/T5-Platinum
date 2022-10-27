@@ -65,28 +65,31 @@ Material:
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
-    - _BaseScale: 0.05
-    - _BaseSpeed: 1.17
-    - _BaseStrenght: 3.38
+    - _BaseScale: 0.04
+    - _BaseSpeed: 0.96
+    - _BaseStrenght: 3.32
     - _BlendMode: 0
-    - _CloudSpeed: 5.5
-    - _CloudsHeight: 0.23
+    - _CloudSpeed: 4.97
+    - _CloudsHeight: 0.25
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
+    - _DephtTransparency: 1
     - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
-    - _Emission_Strenght: 1.5
+    - _Emission_Strenght: 4.91
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _FresnelOpacity: 2.86
-    - _FresnelPower: 1.47
+    - _FresnelPower: 1.31
     - _GradientScale: 0.05
-    - _Noise_Edge_1: 0.54
-    - _Noise_Edge_2: 1.33
+    - _MaxAlpha: 0.95
+    - _MinAlpha: 0.88
+    - _Noise_Edge_1: 0.27
+    - _Noise_Edge_2: 1.04
     - _Noise_Power: 1.16
     - _OpaqueCullMode: 2
     - _RenderQueueType: 4
@@ -102,7 +105,7 @@ Material:
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
     - _SurfaceType: 1
-    - _Transparency: 16.78
+    - _Transparency: 27.2
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -116,8 +119,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _ColorPeak: {r: 0.23175506, g: 0.4426328, b: 0.5283019, a: 0}
-    - _ColorValley: {r: 0.26726592, g: 0.3962264, b: 0.28472304, a: 0}
+    - _ColorPeak: {r: 0.23137254, g: 0.5294118, b: 0.38210723, a: 0}
+    - _ColorValley: {r: 0.253649, g: 0.7169812, b: 0.6552036, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _NoiseRemap: {r: 0, g: 1, b: -1.75, a: 1}
