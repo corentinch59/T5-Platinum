@@ -54,6 +54,9 @@ public class PNJInteractable : MonoBehaviour, IInteractable
             Vector3 spawn = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
             GameObject corpseCreated = Instantiate(corpseToCreate, spawn, Quaternion.identity);
 
+            // GameFeel
+            corpseCreated.transform.DOScale(new Vector3(4, 1, 2f), 0.5f);
+
             if(corpseCreated.TryGetComponent(out Corpse c))
             {
                 // corpseCreated is taking data from the request

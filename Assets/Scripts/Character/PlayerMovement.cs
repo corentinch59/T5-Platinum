@@ -97,12 +97,18 @@ public class PlayerMovement : MonoBehaviour
             if (rotate < 0.5f)
             {
                 transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
+
+                //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                //transform.LookAt(Camera.main.transform,);
                 // goes left
             }
             else if (rotate > 0.5f)
             {
                 // goes right
                 transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
+
+                //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                //transform.LookAt(Camera.main.transform);
             }
         }
     }

@@ -11,6 +11,7 @@ public class GriefPNJInteractable : Carryable
     [SerializeField] private Transform startLoc;
     [SerializeField] private Transform endLoc;
     [SerializeField] private NavMeshAgent agent;
+    public NavMeshAgent Agent => agent;
 
     private bool isInteractable = true;
 

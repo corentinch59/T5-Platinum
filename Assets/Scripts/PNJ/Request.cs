@@ -19,8 +19,6 @@ public class Request : MonoBehaviour
     public GameObject quest;
     private GameObject questParent;
     private PNJInteractable _pnjInteractable;
-  
-
 
     private void Awake()
     {
@@ -32,17 +30,6 @@ public class Request : MonoBehaviour
     {
         SetRequest();
     }
-
-    /*
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.D) && QuestManager.instance.allQuests.Count > 0 
-                                        && QuestManager.instance.activeQuests.Count < QuestManager.instance.numberOfQuests)
-        {
-            AcceptRequest();
-        }
-    }
-    */
 
     public void SetRequest()
     {

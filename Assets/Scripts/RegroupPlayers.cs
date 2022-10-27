@@ -46,7 +46,7 @@ public class RegroupPlayers : MonoBehaviour
     private IEnumerator HapticOnJoined(PlayerInput playerInput)
     {
         playerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.2f, 0.2f);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.3f);
         playerInput.GetDevice<Gamepad>().ResetHaptics();
     }
 }
