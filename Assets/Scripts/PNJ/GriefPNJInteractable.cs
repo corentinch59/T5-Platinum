@@ -27,28 +27,8 @@ public class GriefPNJInteractable : Carryable
     private void Start()
     {
         transform.position = startLoc.position;
-        //StartCoroutine(Walk(true));
 
     }
-
-    private void Update()
-    {
-        //agent.
-        /*
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            // display quest when arriving in pos
-            DisplayQuest();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.J) && QuestManager.instance.questFinished.Count > 0)
-        {
-            transform.position = startLoc.position;
-            StartCoroutine(Walk(true));
-        }
-        */
-    }
-
     private void DisplayQuest()
     {
         requestImg.SetActive(true);
@@ -69,11 +49,8 @@ public class GriefPNJInteractable : Carryable
             // player carry PNJ
             player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
             player.carriedObj.gameObject.transform.parent = player.transform;
-            player.carriedObj.gameObject.transform.localPosition = transform.up * 14;
+            player.carriedObj.gameObject.transform.localPosition = transform.up * 4;
             player.carriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, -90), 1f);
-            //player.carriedObj.gameObject.SetActive(false);
-
-            //Destroy(this); // enable = false not working
 
             // move back
             isInteractable = false;
@@ -97,7 +74,6 @@ public class GriefPNJInteractable : Carryable
 
             foreach (Collider info in infos)
             {
-                //Debug.Log(info.gameObject.name);
                 if (info.gameObject.TryGetComponent(out Corpse c))
                 {
                     float dist = Vector3.Distance(info.gameObject.transform.position, transform.position);
@@ -121,8 +97,6 @@ public class GriefPNJInteractable : Carryable
             }
 
             player.carriedObj = null;
-
-            // this.moveback()
         }
     }
 
@@ -143,18 +117,12 @@ public class GriefPNJInteractable : Carryable
         {
             requestImg.SetActive(true);
             agent.destination  = endLoc.position;
-
-            //transform.DOMove(endLoc.position, 2);
-            //yield return new WaitForSeconds(2);
         }
         //a plus de quete et rentre chez lui
         else
         {
             requestImg.SetActive(false);
             agent.destination = startLoc.position;
-
-            //transform.DOMove(startLoc.position, 2);
-            //yield return new WaitForSeconds(2);
         }
         distToEnd = Vector3.Distance(agent.destination, transform.position) / agent.speed;
         yield return new WaitForSeconds(distToEnd);
