@@ -18,6 +18,8 @@ public class RequestDataBase
         TREE,
         WATER,
         INCINERATOR,
+        FLOWER,
+        SHRINE,
     }
 
     public enum coffin
