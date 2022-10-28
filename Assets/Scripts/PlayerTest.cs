@@ -244,7 +244,7 @@ public class PlayerTest : MonoBehaviour
         }
         else
         {
-            Instantiate(holePrefab, -transform.up, Quaternion.identity);
+            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), Quaternion.identity);
         }
     }
 

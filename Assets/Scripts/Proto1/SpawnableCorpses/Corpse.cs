@@ -151,7 +151,8 @@ public class Corpse : Carryable
                 player.isCarrying = true;
             }
             player.playerMovement.SpriteRenderer.sprite = player.spriteCarry;
-            player.carriedObj.transform.position = player.transform.up;
+            player.carriedObj.transform.parent = player.transform;
+            player.carriedObj.transform.localPosition = Vector3.up * 2f;
         }
     }
 
@@ -221,14 +222,19 @@ public class Corpse : Carryable
             //RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, 2f, interactableHole);
             if(canBurry)
             {
+                player.carriedObj.transform.parent = null;
+                // update CorpseData
+                corpseData = UpdateLocalisation();
                 StartCoroutine(BurryingCorpse(holeToBurry));
-                    
             }
             else
             {
                 //put down corpse in front of a player -> use rotation but now just t.right
                 player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
                     player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
+                player.carriedObj.transform.parent = null;
+                // update CorpseData
+                corpseData = UpdateLocalisation();
             }
         }
         else
@@ -245,11 +251,7 @@ public class Corpse : Carryable
 
         //.Append(transform.DOScale(1f, 0.25f));
 
-        // update CorpseData
-        corpseData = UpdateLocalisation();
-        
-
-        if(thisQuest != null)
+        if (thisQuest != null)
         {
             // check if the corpse correspond to the quest -> finish quest
             corpseData = UpdateRequestLocalisation();
