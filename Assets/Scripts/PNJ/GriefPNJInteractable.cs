@@ -11,13 +11,14 @@ public class GriefPNJInteractable : Carryable
     [SerializeField] private Transform startLoc;
     [SerializeField] private Transform endLoc;
     [SerializeField] private NavMeshAgent agent;
+    public NavMeshAgent Agent => agent;
 
     private bool isInteractable = true;
 
     public string griefName = "";
-    public RequestDataBase.localisation griefLoc = RequestDataBase.localisation.NONE;
     public float radius = 10f;
     private float griefDuration = 3f;
+    private Coroutine feedback;
 
     public void Awake()
     {
@@ -28,26 +29,18 @@ public class GriefPNJInteractable : Carryable
     private void Start()
     {
         transform.position = startLoc.position;
-        //StartCoroutine(Walk(true));
 
     }
 
     private void Update()
     {
-        //agent.
-        /*
-        if (Input.GetKeyDown(KeyCode.O))
+        if (agent.isOnNavMesh)
         {
-            // display quest when arriving in pos
-            DisplayQuest();
+            if (!agent.isStopped && feedback == null)
+            {
+                feedback = StartCoroutine(FeedBackPlayerMoves());
+            }
         }
-        
-        if (Input.GetKeyDown(KeyCode.J) && QuestManager.instance.questFinished.Count > 0)
-        {
-            transform.position = startLoc.position;
-            StartCoroutine(Walk(true));
-        }
-        */
     }
 
     private void DisplayQuest()
@@ -70,11 +63,8 @@ public class GriefPNJInteractable : Carryable
             // player carry PNJ
             player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
             player.carriedObj.gameObject.transform.parent = player.transform;
-            player.carriedObj.gameObject.transform.localPosition = transform.up * 14;
+            player.carriedObj.gameObject.transform.localPosition = transform.up * 4;
             player.carriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, -90), 1f);
-            //player.carriedObj.gameObject.SetActive(false);
-
-            //Destroy(this); // enable = false not working
 
             // move back
             isInteractable = false;
@@ -98,7 +88,6 @@ public class GriefPNJInteractable : Carryable
 
             foreach (Collider info in infos)
             {
-                //Debug.Log(info.gameObject.name);
                 if (info.gameObject.TryGetComponent(out Corpse c))
                 {
                     float dist = Vector3.Distance(info.gameObject.transform.position, transform.position);
@@ -106,7 +95,6 @@ public class GriefPNJInteractable : Carryable
                     {
                         min = dist;
                         griefName = c.corpseData.name;
-                        griefLoc = c.corpseData.localisation;
                     }
                 }
             }
@@ -118,13 +106,11 @@ public class GriefPNJInteractable : Carryable
             {
                 if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
                 {
-                    StartCoroutine(dq.FinishGriefQuest(griefName, griefLoc));
+                    StartCoroutine(dq.FinishGriefQuest(griefName));
                 }
             }
 
             player.carriedObj = null;
-
-            // this.moveback()
         }
     }
 
@@ -145,27 +131,33 @@ public class GriefPNJInteractable : Carryable
         {
             requestImg.SetActive(true);
             agent.destination  = endLoc.position;
-
-            //transform.DOMove(endLoc.position, 2);
-            //yield return new WaitForSeconds(2);
         }
         //a plus de quete et rentre chez lui
         else
         {
             requestImg.SetActive(false);
             agent.destination = startLoc.position;
-
-            //transform.DOMove(startLoc.position, 2);
-            //yield return new WaitForSeconds(2);
         }
         distToEnd = Vector3.Distance(agent.destination, transform.position) / agent.speed;
         yield return new WaitForSeconds(distToEnd);
         if(!isWalkingForward) StartCoroutine(QuestManager.instance.WaitForNewRequest(3, deathRequest));
         isInteractable = true;
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    private IEnumerator FeedBackPlayerMoves()
+    {
+        transform.DOScaleX(1.8f, 0.3f);
+        transform.DOScaleY(2.3f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        transform.DOScaleX(2f, 0.3f);
+        transform.DOScaleY(2f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        feedback = null;
     }
 }

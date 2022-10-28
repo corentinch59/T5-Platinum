@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,11 +23,21 @@ public class PlayerMovement : MonoBehaviour
     private float rotate;
     private IInteractable interactable;
     [SerializeField] private Transform arrowOrientation;
+    [SerializeField] private GameObject isPilote;
+    public GameObject IsPilote => isPilote;
+
+    [SerializeField] private GameObject isCoPilote;
+    public GameObject IsCoPilote => isCoPilote;
+
+    public Transform positionCopilote;
+    private float moveUpDown;
+    private Coroutine feedback;
 
     private string currentInput;
-    public string CurrentInput { get; set; }
+    public string CurrentInput => currentInput;
 
     private PlayerInput playerInput;
+
     public PlayerInput PlayerInput => playerInput;
 
 
@@ -37,23 +49,92 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-    }
-
-    private void Update()
-    {
-
+        currentInput = playerInput.currentActionMap.name;
+        IsPilote.SetActive(false);
+        IsCoPilote.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        moveDir = new Vector3(move.x, 0, move.y);
-        controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
+        if(transform.parent == null && positionCopilote == null)
+        {
+            if (currentInput != "Pilote")
+            {
+                moveDir = new Vector3(move.x, 0, move.y);
+                controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
 
-        if (controller.isGrounded && playerVelocity.y < 0)
-            playerVelocity.y = 0f;
+                if(moveDir.magnitude > 0 && feedback == null)
+                {
+                    feedback = StartCoroutine(FeedBackPlayerMoves());
+                }
 
-        playerVelocity.y += controller.isGrounded ? 0f : gravityValue * Time.fixedDeltaTime;
-        controller.Move(playerVelocity * Time.fixedDeltaTime);
+                if (controller.isGrounded && playerVelocity.y < 0)
+                    playerVelocity.y = 0f;
+
+                playerVelocity.y += controller.isGrounded ? 0f : gravityValue * Time.fixedDeltaTime;
+                controller.Move(playerVelocity * Time.fixedDeltaTime);
+            }
+                
+        } 
+        else if(transform.parent == null && positionCopilote != null)
+        {
+            if(currentInput == "Pilote")
+            {
+                moveDir = Vector3.zero;
+                controller.Move(moveDir);
+
+                if (moveUpDown > 0.5f)
+                {
+                    moveDir = (positionCopilote.position - transform.position).normalized;
+                    controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
+                }
+                else if (moveUpDown < -0.5f)
+                {
+                    moveDir = (-(positionCopilote.position - transform.position)).normalized;
+                    controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    controller.Move(Vector3.zero);
+
+                }
+            }
+        }
+
+        if (currentInput == "Co-Pilote" && canMove)
+        {
+            if (rotate < 0.5f)
+            {
+                transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
+                IsCoPilote.transform.eulerAngles = new Vector3(90, 90, 0);
+                //transform.eulerAngles = new Vector3(0, 0, 0);
+
+                //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                //transform.LookAt(Camera.main.transform,);
+                // goes left
+            }
+            else if (rotate > 0.5f)
+            {
+                // goes right
+                transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
+                IsCoPilote.transform.eulerAngles = new Vector3(90, 90, 0);
+                //transform.eulerAngles = new Vector3(0, 0, 0);
+
+                //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                //transform.LookAt(Camera.main.transform);
+            }
+        }
+    }
+
+    private IEnumerator FeedBackPlayerMoves()
+    {
+        transform.DOMoveY(2.8f, 0.1f);
+        //transform.DOScaleY(1.3f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+        transform.DOMoveY(2.5f, 0.1f);
+        //transform.DOScaleY(1f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+        feedback = null;
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -61,6 +142,15 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             move = ctx.ReadValue<Vector2>();
+            if (move.magnitude > 0)
+            {
+                //this.PlayerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.1f, 0.05f);
+            }
+            else
+            {
+                //this.PlayerInput.GetDevice<Gamepad>().PauseHaptics();
+            }
+
             if (ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
             {
                 orientationVect = ctx.ReadValue<Vector2>();
@@ -104,15 +194,21 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void OnInteract(InputAction.CallbackContext ctx)
-    {
-        Debug.Log("Interacted");
-    }
-
     public void OnMovePilote(InputAction.CallbackContext ctx)
     {
-        if(canMove)
-            OnMove(ctx);
+        if (canMove)
+        {
+            moveUpDown = ctx.ReadValue<float>();
+            /*if(moveUpDown > 0.5f)
+            {
+                moveDir = positionCopilote.position - transform.position;
+                moveDir.Normalize();
+            } else if(moveUpDown < 0.5f)
+            {
+                moveDir = -(positionCopilote.position - transform.position);
+                moveDir.Normalize();
+            }*/
+        }
     }
 
     public void OnMoveCoPilote(InputAction.CallbackContext ctx)
@@ -120,14 +216,13 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             rotate = ctx.ReadValue<float>();
-
         }
-        Debug.Log(rotate);
+
     }
 
     public void ChangeInput(string inputActionMap)
     {
         playerInput.SwitchCurrentActionMap(inputActionMap);
-        CurrentInput = inputActionMap;
+        currentInput = inputActionMap;
     }
 }

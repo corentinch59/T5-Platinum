@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class PNJInteractable : MonoBehaviour, IInteractable
 {
@@ -15,6 +16,7 @@ public class PNJInteractable : MonoBehaviour, IInteractable
     [SerializeField] private NavMeshAgent agent;
 
     private bool isInteractable = true;
+    private Coroutine feedback;
 
     public void Awake()
     {
@@ -34,6 +36,11 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         {
             // display quest when arriving in pos
             DisplayQuest();
+        }
+
+        if (agent.hasPath && feedback == null)
+        {
+            feedback = StartCoroutine(FeedBackPlayerMoves());
         }
     }
 
@@ -58,10 +65,19 @@ public class PNJInteractable : MonoBehaviour, IInteractable
                 // corpseCreated is taking data from the request
                 c.thisQuest = request.quest.GetComponent<Quest>();
 
+                // GameFeel
+                if((int)c.thisQuest.requestInfos.siz > 0)
+                {
+                    // Big corpse
+                    corpseCreated.transform.DOScale(new Vector3(2, 2, 2), 0.5f);
+                }
+                else
+                {
+                    // small corpse
+                    corpseCreated.transform.DOScale(new Vector3(1, 1, 1), 0.5f);
+                }
             }
 
-            //StartCoroutine(Walk(false));
-            //Destroy(this); // enable = false not working
             isInteractable = false;
         }
     }
@@ -84,5 +100,25 @@ public class PNJInteractable : MonoBehaviour, IInteractable
         }
         yield return new WaitForSeconds(agent.remainingDistance / agent.speed);
         isInteractable = true;
+    }
+
+    private IEnumerator FeedBackPlayerMoves()
+    {
+        transform.DOScaleX(1.8f, 0.3f);
+        transform.DOScaleY(2.3f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        transform.DOScaleX(2f, 0.3f);
+        transform.DOScaleY(2f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        feedback = null;
+    }
+
+    public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+    }
+
+    public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+        yield break;
     }
 }

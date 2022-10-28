@@ -14,43 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataBase:
   - corpseName: Matthieu
-    siz: 0
+    siz: 1
     loc: 1
     cof: 0
     corps: 0
     spec: 0
   - corpseName: Tanguy
-    siz: 0
+    siz: 1
     loc: 2
     cof: 0
     corps: 0
     spec: 0
   - corpseName: Maceo
-    siz: 0
+    siz: 1
     loc: 2
     cof: 1
     corps: 0
     spec: 0
   - corpseName: Hector
-    siz: 0
+    siz: 1
     loc: 2
     cof: 1
     corps: 0
     spec: 0
   - corpseName: Arthur
-    siz: 0
+    siz: 1
     loc: 1
     cof: 0
     corps: 0
     spec: 0
   - corpseName: Simon
-    siz: 0
+    siz: 1
     loc: 1
     cof: 0
     corps: 0
     spec: 0
   - corpseName: Corentin
-    siz: 0
+    siz: 1
     loc: 1
     cof: 0
     corps: 0
