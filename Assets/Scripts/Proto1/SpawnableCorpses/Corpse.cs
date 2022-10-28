@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using DG.Tweening;
 
 public class Corpse : Carryable
 {
@@ -121,6 +120,13 @@ public class Corpse : Carryable
             }
         } else if((int)thisQuest.requestInfos.siz <= 0)
         {
+
+            if (player.carriedObj == null)
+            {
+                player.carriedObj = this;
+                player.interactableObj = null;
+                player.isCarrying = true;
+            }
             player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
             player.carriedObj.gameObject.SetActive(false);
         }
@@ -141,16 +147,7 @@ public class Corpse : Carryable
         // DEBUG CARRYING W/ OTHER PLAYER
         player.playerMovement.ChangeInput("Player");
 
-        if (player.playerMovement.canMove && players.Length < 2) // if one player -> put the body anywhere he wants to
-        {
-            //put down corpse in front of a player -> use rotation but now just t.right
-            player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
-                player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
-        }
-        else
-        {
-            player.playerMovement.canMove = true;
-        }
+
 
         for(int i = 0; i < players.Length; i++)
         {
@@ -194,6 +191,16 @@ public class Corpse : Carryable
             }
         }
 
+        if (player.playerMovement.canMove && players[0] == null && players[1] == null) // if one player -> put the body anywhere he wants to
+        {
+            //put down corpse in front of a player -> use rotation but now just t.right
+            player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
+                player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
+        }
+        else
+        {
+            player.playerMovement.canMove = true;
+        }
         // corpse became grave (sprite)
         player.isCarrying = false;
 
@@ -204,14 +211,14 @@ public class Corpse : Carryable
 
         int randomsprite = UnityEngine.Random.Range(0, tombSprite.Length);
         spriteRenderer.sprite = tombSprite[randomsprite];
-       
+
         transform.localScale = new Vector3(0f, 0f, 0f);
         transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z);
         //Sequence sequence = DOTween.Sequence();
 
         transform.DOMove(new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), 1f);
         transform.DOScale(1.25f, 0.5f).SetEase(Ease.OutBounce);
-            //.Append(transform.DOScale(1f, 0.25f));
+        //.Append(transform.DOScale(1f, 0.25f));
 
         // update CorpseData
         corpseData = UpdateLocalisation();
