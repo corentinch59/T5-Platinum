@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,11 +23,18 @@ public class PlayerMovement : MonoBehaviour
     private float rotate;
     private IInteractable interactable;
     [SerializeField] private Transform arrowOrientation;
-    [SerializeField] private ParticleSystem steps;
+    [SerializeField] private GameObject isPilote;
+    public GameObject IsPilote => isPilote;
+
+    [SerializeField] private GameObject isCoPilote;
+    public GameObject IsCoPilote => isCoPilote;
+
     public Transform positionCopilote;
     private float moveUpDown;
+    private Coroutine feedback;
 
     private string currentInput;
+    public string CurrentInput => currentInput;
 
     private PlayerInput playerInput;
 
@@ -41,17 +50,23 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         currentInput = playerInput.currentActionMap.name;
+        IsPilote.SetActive(false);
+        IsCoPilote.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        Debug.Log("MoveDir : " + moveDir);
         if(transform.parent == null && positionCopilote == null)
         {
             if (currentInput != "Pilote")
             {
                 moveDir = new Vector3(move.x, 0, move.y);
                 controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
+
+                if(moveDir.magnitude > 0 && feedback == null)
+                {
+                    feedback = StartCoroutine(FeedBackPlayerMoves());
+                }
 
                 if (controller.isGrounded && playerVelocity.y < 0)
                     playerVelocity.y = 0f;
@@ -86,19 +101,40 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (currentInput == "Co-Pilote")
+        if (currentInput == "Co-Pilote" && canMove)
         {
             if (rotate < 0.5f)
             {
                 transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
+                IsCoPilote.transform.eulerAngles = new Vector3(90, 90, 0);
+                //transform.eulerAngles = new Vector3(0, 0, 0);
+
+                //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                //transform.LookAt(Camera.main.transform,);
                 // goes left
             }
             else if (rotate > 0.5f)
             {
                 // goes right
                 transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
+                IsCoPilote.transform.eulerAngles = new Vector3(90, 90, 0);
+                //transform.eulerAngles = new Vector3(0, 0, 0);
+
+                //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                //transform.LookAt(Camera.main.transform);
             }
         }
+    }
+
+    private IEnumerator FeedBackPlayerMoves()
+    {
+        transform.DOMoveY(2.8f, 0.1f);
+        //transform.DOScaleY(1.3f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+        transform.DOMoveY(2.5f, 0.1f);
+        //transform.DOScaleY(1f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+        feedback = null;
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -106,6 +142,15 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             move = ctx.ReadValue<Vector2>();
+            if (move.magnitude > 0)
+            {
+                //this.PlayerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.1f, 0.05f);
+            }
+            else
+            {
+                //this.PlayerInput.GetDevice<Gamepad>().PauseHaptics();
+            }
+
             if (ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
             {
                 orientationVect = ctx.ReadValue<Vector2>();
@@ -125,28 +170,20 @@ public class PlayerMovement : MonoBehaviour
                 {
                     arrowOrientation.eulerAngles = new Vector3(90, 0, -90);
                     arrowOrientation.localPosition = Vector3.left;
-                    steps.gameObject.transform.localPosition = new Vector3(0.5f, 0f, -0.2f);
-                    steps.gameObject.transform.eulerAngles = new Vector3(0, 90, 0);
                 } else if (orientationVect.x > 0)
                 {
                     arrowOrientation.eulerAngles = new Vector3(90, 0, 90);
                     arrowOrientation.localPosition = Vector3.right;
-                    steps.gameObject.transform.localPosition = new Vector3(-0.5f, 0f, -0.2f);
-                    steps.gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
                 }
 
                 if (orientationVect.y < 0)
                 {
                     arrowOrientation.eulerAngles = new Vector3(90, 0, 0);
                     arrowOrientation.localPosition = Vector3.down;
-                    steps.gameObject.transform.localPosition = new Vector3(0, 0.5f, -0.2f);
-                    steps.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
                 }
                 else if (orientationVect.y > 0){
                     arrowOrientation.eulerAngles = new Vector3(90, 0, 180);
                     arrowOrientation.localPosition = Vector3.up;
-                    steps.gameObject.transform.localPosition = new Vector3(0, -0.5f, -0.2f);
-                    steps.gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
                 }
             }
         }
@@ -162,7 +199,6 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             moveUpDown = ctx.ReadValue<float>();
-            Debug.Log("MoveUpDown : " + moveUpDown);
             /*if(moveUpDown > 0.5f)
             {
                 moveDir = positionCopilote.position - transform.position;
