@@ -36,6 +36,8 @@ public class ChoseYourChara : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentSprite = sprites[0];
         spriteRenderer.sprite = currentSprite;
+
+        GetComponent<PlayerTest>().playerNotCarrying = currentSprite;
     }
 
     public void MoveRight(InputAction.CallbackContext context)
@@ -58,9 +60,9 @@ public class ChoseYourChara : MonoBehaviour
                 currentSprite = sprites[sprites.IndexOf(currentSprite) - 1];
                 
             }
-
             spriteRenderer.sprite = currentSprite;
-        }       
+        }
+        GetComponent<PlayerTest>().playerNotCarrying = currentSprite;
     }
 
     public void MoveLeft(InputAction.CallbackContext context)
@@ -84,6 +86,8 @@ public class ChoseYourChara : MonoBehaviour
 
             spriteRenderer.sprite = currentSprite;
         }
+
+        GetComponent<PlayerTest>().playerNotCarrying = currentSprite;
     }
 
     public void GetReady(InputAction.CallbackContext context)

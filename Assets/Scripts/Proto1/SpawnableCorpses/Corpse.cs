@@ -109,11 +109,15 @@ public class Corpse : Carryable
         player.carriedObj.gameObject.SetActive(true);
         player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
         //player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
+
         int randomsprite = UnityEngine.Random.Range(0, tombSprite.Length);
         spriteRenderer.sprite = tombSprite[randomsprite];
-
+       
         transform.localScale = new Vector3(0f, 0f, 0f);
+        transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z);
         //Sequence sequence = DOTween.Sequence();
+
+        transform.DOMove(new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), 1f);
         transform.DOScale(1.25f, 0.5f).SetEase(Ease.OutBounce);
             //.Append(transform.DOScale(1f, 0.25f));
 
@@ -202,6 +206,8 @@ public class Corpse : Carryable
         {
             case "Water": return RequestDataBase.localisation.WATER;
             case "Tree": return RequestDataBase.localisation.TREE;
+            case "Shrine": return RequestDataBase.localisation.SHRINE;
+            case "Flower": return RequestDataBase.localisation.FLOWER;
             default: return RequestDataBase.localisation.NONE;
         }
     }
