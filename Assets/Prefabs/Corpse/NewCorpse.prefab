@@ -125,6 +125,9 @@ MonoBehaviour:
   localisationsLayer:
     serializedVersion: 2
     m_Bits: 792
+  interactableHole:
+    serializedVersion: 2
+    m_Bits: 128
   thisQuest: {fileID: 0}
   tombSprite:
   - {fileID: 21300000, guid: 58f4c99a2881c234f8dcca7cea4deb30, type: 3}
