@@ -903,6 +903,9 @@ MonoBehaviour:
   canMove: 1
   orientationVect: {x: 0, y: 0}
   arrowOrientation: {fileID: 652315655}
+  isPilote: {fileID: 0}
+  isCoPilote: {fileID: 0}
+  positionCopilote: {fileID: 0}
 --- !u!143 &954716987
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2089,7 +2092,7 @@ MonoBehaviour:
   - {fileID: 1681122110}
   selectionPlayers: []
   timerTMP: {fileID: 1392039059}
-  nameScene: MainScene
+  nameScene: HectorScene
 --- !u!4 &2020739051
 Transform:
   m_ObjectHideFlags: 0
