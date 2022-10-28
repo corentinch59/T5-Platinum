@@ -18,6 +18,12 @@ public class Corpse : Carryable
     [SerializeField] private Transform coPiloteLocation;
     private Vector3 snapPlayer;
 
+    private void Update()
+    {
+        if (players[0] != null && players[1] != null)
+            transform.LookAt(Camera.main.transform);
+    }
+
     public override void Interact(PlayerTest player)
     {
         // To avoid dotween problem with player increasing scale of this (as a child)
@@ -38,13 +44,11 @@ public class Corpse : Carryable
         {
 
             // snap player to the corpse
-            //if (player.transform.position.x >= transform.position.x)
-            Debug.Log("Distance : " + Vector3.Distance(player.transform.position, piloteLocation.position));
             if(Vector3.Distance(player.transform.position, piloteLocation.position) <= 5)
             {
                 if (players[0] == null)
                 {
-                    Debug.Log("Player is pilote");
+                    //Debug.Log("Player is pilote");
                     player.playerMovement.canMove = false;
                     player.gameObject.transform.DOPause(); //-> worked a bit
                     SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
@@ -68,7 +72,7 @@ public class Corpse : Carryable
             {
                 if (players[1] == null)
                 {
-                    Debug.Log("Player is co-pilote");
+                    //Debug.Log("Player is co-pilote");
                     player.playerMovement.canMove = false;
                     player.gameObject.transform.DOPause(); //-> worked a bit
                     SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
@@ -146,7 +150,7 @@ public class Corpse : Carryable
                 if(i == 0)
                 {
                     // Pilote is leaving
-                    Debug.Log("Pilote leaves");
+                    //Debug.Log("Pilote leaves");
                     player.playerMovement.IsPilote.SetActive(false);
                     if (players[1] != null)
                     {
@@ -163,7 +167,7 @@ public class Corpse : Carryable
                 else
                 {
                     // Copilote is leaving
-                    Debug.Log("Co-Pilote leaves");
+                    //Debug.Log("Co-Pilote leaves");
                     player.playerMovement.IsCoPilote.SetActive(false);
                     if(players[0] != null)
                     {
