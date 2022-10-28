@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class GriefQuest : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class GriefQuest : MonoBehaviour
     {
         if (name == requestInfos.corpseName)
         {
+            _request.GriefPnjInteractable.transform.DOJump(_request.GriefPnjInteractable.transform.position, 3f, 3, 3f);
             image.color = Color.green;
             // add score
             switch (stateTimer)
@@ -79,6 +81,7 @@ public class GriefQuest : MonoBehaviour
         }
         else
         {
+            _request.GriefPnjInteractable.transform.DOShakePosition(3f, new Vector3(2, 0, 0), 5, 10, false, true, ShakeRandomnessMode.Harmonic);
             // remove score
             image.color = Color.red;
             return -5;

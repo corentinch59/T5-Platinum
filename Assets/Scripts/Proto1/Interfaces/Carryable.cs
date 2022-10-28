@@ -24,6 +24,4 @@ public class Carryable : MonoBehaviour, IInteractable, IPutDown
         yield return new WaitForSeconds(0.5f);
         playerInput.GetDevice<Gamepad>().PauseHaptics();
     }
-    
-    
 }
