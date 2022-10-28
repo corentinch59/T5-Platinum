@@ -150,8 +150,8 @@ public class Corpse : Carryable
                 player.interactableObj = null;
                 player.isCarrying = true;
             }
-            player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
-            player.carriedObj.gameObject.SetActive(false);
+            player.playerMovement.SpriteRenderer.sprite = player.spriteCarry;
+            player.carriedObj.transform.position = player.transform.up;
         }
     }
 
@@ -221,7 +221,6 @@ public class Corpse : Carryable
             //RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, 2f, interactableHole);
             if(canBurry)
             {
-                Debug.Log("burrying");
                 StartCoroutine(BurryingCorpse(holeToBurry));
                     
             }
@@ -240,8 +239,8 @@ public class Corpse : Carryable
         player.isCarrying = false;
 
         // Visual Debug 
-        player.carriedObj.gameObject.SetActive(true);
-        player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
+        //player.carriedObj.gameObject.SetActive(true);
+        player.playerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
         //player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
 
         //.Append(transform.DOScale(1f, 0.25f));

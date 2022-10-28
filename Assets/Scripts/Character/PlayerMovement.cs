@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
+    public SpriteRenderer SpriteRenderer => spriteRenderer;
     private const float gravityValue = -9.81f;
     private CharacterController controller;
     public Vector2 orientationVect;
