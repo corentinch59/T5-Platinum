@@ -157,6 +157,7 @@ public class Corpse : Carryable
                 {
                     // Pilote is leaving
                     //Debug.Log("Pilote leaves");
+                    player.playerMovement.canMove = true;
                     player.playerMovement.IsPilote.SetActive(false);
                     if (players[1] != null)
                     {
@@ -175,7 +176,8 @@ public class Corpse : Carryable
                     // Copilote is leaving
                     //Debug.Log("Co-Pilote leaves");
                     player.playerMovement.IsCoPilote.SetActive(false);
-                    if(players[0] != null)
+                    player.playerMovement.canMove = true;
+                    if (players[0] != null)
                     {
                         players[0].playerMovement.canMove = false;
                         players[0].playerMovement.positionCopilote = null;
@@ -196,6 +198,8 @@ public class Corpse : Carryable
             //put down corpse in front of a player -> use rotation but now just t.right
             player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
                 player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
+
+            Debug.Log("anim");
 
             int randomsprite = UnityEngine.Random.Range(0, tombSprite.Length);
             spriteRenderer.sprite = tombSprite[randomsprite];
