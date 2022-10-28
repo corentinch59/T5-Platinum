@@ -196,6 +196,16 @@ public class Corpse : Carryable
             //put down corpse in front of a player -> use rotation but now just t.right
             player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
                 player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
+
+            int randomsprite = UnityEngine.Random.Range(0, tombSprite.Length);
+            spriteRenderer.sprite = tombSprite[randomsprite];
+
+            transform.localScale = new Vector3(0f, 0f, 0f);
+            transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z);
+            //Sequence sequence = DOTween.Sequence();
+
+            transform.DOMove(new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), 1f);
+            transform.DOScale(1.25f, 0.5f).SetEase(Ease.OutBounce);
         }
         else
         {
@@ -209,15 +219,6 @@ public class Corpse : Carryable
         player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
         //player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
 
-        int randomsprite = UnityEngine.Random.Range(0, tombSprite.Length);
-        spriteRenderer.sprite = tombSprite[randomsprite];
-
-        transform.localScale = new Vector3(0f, 0f, 0f);
-        transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z);
-        //Sequence sequence = DOTween.Sequence();
-
-        transform.DOMove(new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), 1f);
-        transform.DOScale(1.25f, 0.5f).SetEase(Ease.OutBounce);
         //.Append(transform.DOScale(1f, 0.25f));
 
         // update CorpseData
