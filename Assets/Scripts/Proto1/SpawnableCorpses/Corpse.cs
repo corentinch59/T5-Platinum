@@ -12,8 +12,10 @@ public class Corpse : Carryable
     private PlayerTest[] players = new PlayerTest[2];
     public float radius = 10f;
     public LayerMask localisationsLayer;
+    public LayerMask interactableHole;
     public Quest thisQuest;
     [SerializeField] private Sprite[] tombSprite = new Sprite[5];
+    private Hole holeToBurry;
 
     private SpriteRenderer spriteRenderer;
 
@@ -25,11 +27,32 @@ public class Corpse : Carryable
     [SerializeField] private Transform piloteLocation;
     [SerializeField] private Transform coPiloteLocation;
     private Vector3 snapPlayer;
+    private bool canBurry;
 
     private void Update()
     {
         if (players[0] != null && players[1] != null)
             transform.LookAt(Camera.main.transform);
+
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, 20f, interactableHole);
+        if (hits.Length > 0)
+        {
+            foreach (RaycastHit hit in hits)
+            {
+                if (hit.collider.gameObject.TryGetComponent(out Hole hole))
+                {
+                    canBurry = true;
+                    holeToBurry = hole;
+                    Debug.Log(holeToBurry.name);
+                    //StartCoroutine(BurryingCorpse(holeToBurry));
+                }
+            }
+        }
+        else
+        {
+            canBurry = false;
+        }
+        Debug.DrawRay(transform.position, Vector3.down * 20, Color.black);
     }
 
     public override void Interact(PlayerTest player)
@@ -127,8 +150,9 @@ public class Corpse : Carryable
                 player.interactableObj = null;
                 player.isCarrying = true;
             }
-            player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
-            player.carriedObj.gameObject.SetActive(false);
+            player.playerMovement.SpriteRenderer.sprite = player.spriteCarry;
+            player.carriedObj.transform.parent = player.transform;
+            player.carriedObj.transform.localPosition = Vector3.up * 2f;
         }
     }
 
@@ -195,21 +219,23 @@ public class Corpse : Carryable
 
         if (player.playerMovement.canMove && players[0] == null && players[1] == null) // if one player -> put the body anywhere he wants to
         {
-            //put down corpse in front of a player -> use rotation but now just t.right
-            player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
-                player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
-
-            Debug.Log("anim");
-
-            int randomsprite = UnityEngine.Random.Range(0, tombSprite.Length);
-            spriteRenderer.sprite = tombSprite[randomsprite];
-
-            transform.localScale = new Vector3(0f, 0f, 0f);
-            transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z);
-            //Sequence sequence = DOTween.Sequence();
-
-            transform.DOMove(new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), 1f);
-            transform.DOScale(1.25f, 0.5f).SetEase(Ease.OutBounce);
+            //RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, 2f, interactableHole);
+            if(canBurry)
+            {
+                player.carriedObj.transform.parent = null;
+                // update CorpseData
+                corpseData = UpdateLocalisation();
+                StartCoroutine(BurryingCorpse(holeToBurry));
+            }
+            else
+            {
+                //put down corpse in front of a player -> use rotation but now just t.right
+                player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
+                    player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
+                player.carriedObj.transform.parent = null;
+                // update CorpseData
+                corpseData = UpdateLocalisation();
+            }
         }
         else
         {
@@ -219,17 +245,13 @@ public class Corpse : Carryable
         player.isCarrying = false;
 
         // Visual Debug 
-        player.carriedObj.gameObject.SetActive(true);
-        player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
+        //player.carriedObj.gameObject.SetActive(true);
+        player.playerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
         //player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
 
         //.Append(transform.DOScale(1f, 0.25f));
 
-        // update CorpseData
-        corpseData = UpdateLocalisation();
-        
-
-        if(thisQuest != null)
+        if (thisQuest != null)
         {
             // check if the corpse correspond to the quest -> finish quest
             corpseData = UpdateRequestLocalisation();
@@ -237,6 +259,25 @@ public class Corpse : Carryable
         }
 
         player.carriedObj = null;
+    }
+
+    private IEnumerator BurryingCorpse(Hole hole)
+    {
+        // burry corpse
+        hole.Burry();
+        transform.localScale = new Vector3(0f, 0f, 0f);
+        transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z);
+
+        yield return new WaitForSeconds(2f);
+
+        // grave
+        int randomsprite = UnityEngine.Random.Range(0, tombSprite.Length);
+        spriteRenderer.sprite = tombSprite[randomsprite];
+
+        //Sequence sequence = DOTween.Sequence();
+
+        transform.DOMove(new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), 1f);
+        transform.DOScale(1.25f, 0.5f).SetEase(Ease.OutBounce);
     }
 
     private CorpseData UpdateLocalisation()

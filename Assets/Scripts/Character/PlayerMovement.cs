@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public Vector3 playerVelocity;
     public bool canMove = true;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    public SpriteRenderer SpriteRenderer => spriteRenderer;
     private const float gravityValue = -9.81f;
     private CharacterController controller;
     public Vector2 orientationVect;
@@ -107,6 +109,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
                 IsCoPilote.transform.eulerAngles = new Vector3(90, 90, 0);
+                spriteRenderer.transform.LookAt(Camera.main.transform);
+
                 //transform.eulerAngles = new Vector3(0, 0, 0);
 
                 //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
@@ -118,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
                 // goes right
                 transform.RotateAround(transform.parent.position, Vector3.up, 3 * rotate);
                 IsCoPilote.transform.eulerAngles = new Vector3(90, 90, 0);
+                spriteRenderer.transform.LookAt(Camera.main.transform);
                 //transform.eulerAngles = new Vector3(0, 0, 0);
 
                 //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);

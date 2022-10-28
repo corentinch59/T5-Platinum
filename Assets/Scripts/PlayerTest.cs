@@ -31,6 +31,13 @@ public class PlayerTest : MonoBehaviour
     public LayerMask interactableLayer;
     public bool isCarrying = false;
 
+    [Header("Hole")]
+    public GameObject holePrefab;
+    [SerializeField][Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
+    [SerializeField] private LayerMask holeRaycastMask;
+    private Hole detectedHole;
+
+
     private void Start()
     {
         if (corpse != null)
@@ -60,8 +67,7 @@ public class PlayerTest : MonoBehaviour
         // check interactables
         if (!isCarrying)
         {
-            Collider[] interactables;
-            interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
+            Collider[] interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
 
             if (interactables.Length > 0)
             {
@@ -76,15 +82,42 @@ public class PlayerTest : MonoBehaviour
                         {
                             min = dist;
                             interactableObj = interactable;
+                            if(interactableObj is Hole)
+                            {
+                                detectedHole = (Hole)interactableObj;
+                            }
                         }
                     }
                 }
             }
             else
             {
+                // all the time -> NOPE
                 interactableObj = null;
+                detectedHole = null;
             }
         }
+
+        // Hole
+        /*RaycastHit[] colliders = Physics.SphereCastAll(transform.position, raycastRadius, transform.forward, Mathf.Infinity, holeRaycastMask);
+        if (colliders.Length > 0)
+        {
+            detectedHole = colliders[0].collider.GetComponent<Hole>();
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                float distanceCurrent = (colliders[i].transform.position - transform.position).magnitude;
+                float distancePrevious = (detectedHole.transform.position - transform.position).magnitude;
+
+                if (distanceCurrent > distancePrevious)
+                {
+                    detectedHole = colliders[i].collider.GetComponent<Hole>();
+                }
+            }
+        }
+        else
+        {
+            detectedHole = null;
+        }*/
     }
 
     /// <summary>
@@ -183,7 +216,35 @@ public class PlayerTest : MonoBehaviour
             } else if (interactableObj != null && isCarrying == false)
             {
                 interactableObj.Interact(this);
+            } else if (interactableObj == null && isCarrying == false)
+            {
+                Dig(1);
             }
+        }
+    }
+
+    public void BurryInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if(detectedHole != null)
+            {
+                detectedHole.Burry();
+                detectedHole = null;
+            }
+        }
+    }
+
+    private void Dig(int modifier)
+    {
+        //Debug.Log(detectedHole);
+        if (detectedHole)
+        {
+            detectedHole.SetHoleSize = modifier;
+        }
+        else
+        {
+            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), Quaternion.identity);
         }
     }
 
@@ -193,6 +254,5 @@ public class PlayerTest : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + transform.forward * distGraveCreation, graveToCreate.transform.localScale);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
-
     }
 }
