@@ -127,7 +127,7 @@ MonoBehaviour:
     m_Bits: 24
   thisQuest: {fileID: 0}
   piloteLocation: {fileID: 4341562695175836924}
-  CoPiloteLocation: {fileID: 1150108564403625352}
+  coPiloteLocation: {fileID: 1150108564403625352}
 --- !u!208 &-5864278713313341788
 NavMeshObstacle:
   m_ObjectHideFlags: 0

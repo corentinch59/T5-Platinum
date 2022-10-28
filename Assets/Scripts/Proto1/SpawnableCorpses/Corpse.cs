@@ -31,47 +31,79 @@ public class Corpse : Carryable
         }
 
         //player.transform.DOComplete();
-        player.gameObject.transform.DOPause(); //-> worked a bit
-        SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
-
-        if (player.carriedObj == null)
-        {
-            player.carriedObj = this;
-            player.interactableObj = null;
-            player.isCarrying = true;
-        }
+        
 
         // DEBUG CARRING W/ OTHER PLAYER
         if ((int)thisQuest.requestInfos.siz > 0)
         {
-            player.playerMovement.canMove = false;
 
             // snap player to the corpse
-            if (player.transform.position.x >= transform.position.x)
+            //if (player.transform.position.x >= transform.position.x)
+            Debug.Log("Distance : " + Vector3.Distance(player.transform.position, piloteLocation.position));
+            if(Vector3.Distance(player.transform.position, piloteLocation.position) <= 5)
             {
-                players[0] = player;
-                player.transform.DOMove(piloteLocation.position, 0.5f, true).SetEase(Ease.Linear);
-                player.playerMovement.ChangeInput("Pilote");
-                player.playerMovement.IsPilote.SetActive(true);
-                transform.parent = player.transform;
+                if (players[0] == null)
+                {
+                    Debug.Log("Player is pilote");
+                    player.playerMovement.canMove = false;
+                    player.gameObject.transform.DOPause(); //-> worked a bit
+                    SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
+
+                    if (player.carriedObj == null)
+                    {
+                        player.carriedObj = this;
+                        player.interactableObj = null;
+                        player.isCarrying = true;
+                    }
+                    players[0] = player;
+                    //player.transform.DOMove(piloteLocation.position, 0.5f, true).SetEase(Ease.Linear);
+                    player.transform.position = piloteLocation.position;
+                    player.playerMovement.ChangeInput("Pilote");
+                    player.playerMovement.IsPilote.SetActive(true);
+                    if (players[1] != null)
+                        player.playerMovement.positionCopilote = players[1].transform;
+                }
             }
-            else
+            else if(Vector3.Distance(player.transform.position, coPiloteLocation.position) <= 5)
             {
-                players[1] = player;
-                player.transform.DOMove(coPiloteLocation.position, 0.5f, true).SetEase(Ease.Linear);
-                player.playerMovement.ChangeInput("Co-Pilote");
-                player.playerMovement.IsCoPilote.SetActive(true);
-                transform.parent = player.transform;
-                player.transform.parent = players[0].transform;
-                players[0].playerMovement.positionCopilote = player.transform;
+                if (players[1] == null)
+                {
+                    Debug.Log("Player is co-pilote");
+                    player.playerMovement.canMove = false;
+                    player.gameObject.transform.DOPause(); //-> worked a bit
+                    SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
+
+                    if (player.carriedObj == null)
+                    {
+                        player.carriedObj = this;
+                        player.interactableObj = null;
+                        player.isCarrying = true;
+                    }
+                    players[1] = player;
+                    //player.transform.DOMove(coPiloteLocation.position, 0.5f, true).SetEase(Ease.Linear);
+                    player.transform.position = coPiloteLocation.position;
+                    player.playerMovement.ChangeInput("Co-Pilote");
+                    player.playerMovement.IsCoPilote.SetActive(true);
+                    if (players[0] != null)
+                        players[0].playerMovement.positionCopilote = player.transform;
+                }
             }
 
             // If everyone is up to carry the body then they can move
             if ((int)thisQuest.requestInfos.siz + 1 == players.Length)
             {
+                int playersSet = 0;
                 for(int i = 0; i < players.Length; ++i)
                 {
-                    players[i].playerMovement.canMove = true;
+                    if (players[i] != null)
+                        playersSet++;
+                }
+                if(playersSet > 1)
+                {
+                    players[0].playerMovement.canMove = true;
+                    players[1].playerMovement.canMove = true;
+                    transform.parent = players[1].transform;
+                    players[1].transform.parent = players[0].transform;
                 }
             }
         } else if((int)thisQuest.requestInfos.siz <= 0)
@@ -107,34 +139,46 @@ public class Corpse : Carryable
             player.playerMovement.canMove = true;
         }
 
-        // if multiple players
-        if (players.(player) && players.Count > 1)
+        for(int i = 0; i < players.Length; i++)
         {
-            // if player is the pilote
-            if (players.IndexOf(player) == 0)
+            if (players[i] == player)
             {
-                players[0].playerMovement.IsPilote.SetActive(false);
-                players[1].transform.parent = null;
-                players[1].playerMovement.canMove = false;
-                players[1].playerMovement.ChangeInput("Pilote");
-                players[1].playerMovement.IsPilote.SetActive(true);
-                players[1].playerMovement.IsCoPilote.SetActive(false);
+                if(i == 0)
+                {
+                    // Pilote is leaving
+                    Debug.Log("Pilote leaves");
+                    player.playerMovement.IsPilote.SetActive(false);
+                    if (players[1] != null)
+                    {
+                        transform.parent = players[1].transform;
+                        players[1].transform.parent = null;
+                        players[1].playerMovement.canMove = false;
+                    }
+                    else
+                    {
+                        transform.parent = null;
+                    }
+                    player.playerMovement.positionCopilote = null;
+                }
+                else
+                {
+                    // Copilote is leaving
+                    Debug.Log("Co-Pilote leaves");
+                    player.playerMovement.IsCoPilote.SetActive(false);
+                    if(players[0] != null)
+                    {
+                        players[0].playerMovement.canMove = false;
+                        players[0].playerMovement.positionCopilote = null;
+                        player.transform.parent = null;
+                        transform.parent = players[0].transform;
+                    }
+                    else
+                    {
+                        transform.parent = null;
+                    }
+                }
+                players[i] = null;
             }
-            else
-            {
-                player.playerMovement.IsCoPilote.SetActive(false);
-                transform.parent = players[0].transform;
-                players[0].playerMovement.canMove = false;
-                player.transform.parent = null;
-            }
-            players[0].playerMovement.positionCopilote = null;
-            players.Remove(player);
-        } else if(players.Count < 2) // one player
-        {
-            players[0].playerMovement.IsPilote.SetActive(false);
-            transform.parent = null;
-            player.transform.parent = null;
-            players.Remove(player);
         }
 
         // corpse became grave (sprite)
@@ -143,7 +187,6 @@ public class Corpse : Carryable
         // Visual Debug 
         player.carriedObj.gameObject.SetActive(true);
         player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
-        player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
 
 
         // update CorpseData

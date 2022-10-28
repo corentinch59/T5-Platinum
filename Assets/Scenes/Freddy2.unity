@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GriefLocs
       objectReference: {fileID: 0}
+    - target: {fileID: 7797707247170578661, guid: 9573595d3ef9d654bb7f7c7f5ad85590, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.97
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9573595d3ef9d654bb7f7c7f5ad85590, type: 3}
 --- !u!1 &247636536

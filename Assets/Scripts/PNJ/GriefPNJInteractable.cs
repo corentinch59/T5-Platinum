@@ -34,9 +34,12 @@ public class GriefPNJInteractable : Carryable
 
     private void Update()
     {
-        if (!agent.isStopped && feedback == null)
+        if (agent.isOnNavMesh)
         {
-            feedback = StartCoroutine(FeedBackPlayerMoves());
+            if (!agent.isStopped && feedback == null)
+            {
+                feedback = StartCoroutine(FeedBackPlayerMoves());
+            }
         }
     }
 

@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (currentInput == "Co-Pilote")
+        if (currentInput == "Co-Pilote" && canMove)
         {
             if (rotate < 0.5f)
             {
