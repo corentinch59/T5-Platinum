@@ -82,6 +82,10 @@ public class PlayerTest : MonoBehaviour
                         {
                             min = dist;
                             interactableObj = interactable;
+                            if(interactableObj is Hole)
+                            {
+                                detectedHole = (Hole)interactableObj;
+                            }
                         }
                     }
                 }
@@ -89,8 +93,8 @@ public class PlayerTest : MonoBehaviour
             else
             {
                 // all the time -> NOPE
-                Hole newHole = new Hole(holePrefab);
-                interactableObj = newHole;
+                interactableObj = null;
+                detectedHole = null;
             }
         }
 
@@ -212,7 +216,35 @@ public class PlayerTest : MonoBehaviour
             } else if (interactableObj != null && isCarrying == false)
             {
                 interactableObj.Interact(this);
+            } else if (interactableObj == null && isCarrying == false)
+            {
+                Dig(1);
             }
+        }
+    }
+
+    public void BurryInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if(detectedHole != null)
+            {
+                detectedHole.Burry();
+                detectedHole = null;
+            }
+        }
+    }
+
+    private void Dig(int modifier)
+    {
+        //Debug.Log(detectedHole);
+        if (detectedHole)
+        {
+            detectedHole.SetHoleSize = modifier;
+        }
+        else
+        {
+            Instantiate(holePrefab, -transform.up, Quaternion.identity);
         }
     }
 

@@ -52,7 +52,7 @@ public class Hole : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
-    private void Dig(bool isDug, int modifier)
+    /*private void Dig(bool isDug, int modifier)
     {
         if (isDug)
         {
@@ -60,23 +60,19 @@ public class Hole : MonoBehaviour, IInteractable
         }
         else
         {
-            Instantiate(holePrefab, transform.position/*transform.position + new Vector3(orientationVect.x, HeightOfHole, orientationVect.y)*/, Quaternion.identity);
+            Instantiate(holePrefab, transform.position*//*transform.position + new Vector3(orientationVect.x, HeightOfHole, orientationVect.y)*//*, Quaternion.identity);
             isAlreadyDug = true;
         }
-    }
+    }*/
 
     public void Interact(PlayerTest player)
     {
-        if (!isAlreadyDug)
-        {
-            Dig(!isAlreadyDug, -1);
-            player.interactableObj = null;
-        }
-        else
-        {
-            Dig(isAlreadyDug, 1);
-            player.interactableObj = null;
-        }
+        SetHoleSize = 1;
+    }
+
+    public void Burry()
+    {
+        StartCoroutine(BurryAnim());
     }
 
     public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
