@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
-public class Hole : MonoBehaviour
+public class Hole : MonoBehaviour, IInteractable
 {
+    private bool isAlreadyDug = false;
     private int HoleSize = 1;
     public int SetHoleSize { 
         private get => HoleSize;
@@ -13,8 +15,14 @@ public class Hole : MonoBehaviour
     }
 
     [Header("Hole stuff")]
-    [Tooltip("The ratio that will determine how much the hole grows in size when digging more")] public float scaleAmountToAdd;
-    [Tooltip("How quick the hole grows in size when digging more.")] public float scaleAnimDuration;
+    private GameObject holePrefab;
+    [Tooltip("The ratio that will determine how much the hole grows in size when digging more")] public float scaleAmountToAdd = 0.2f;
+    [Tooltip("How quick the hole grows in size when digging more.")] public float scaleAnimDuration = 1;
+
+    public Hole(GameObject prefab)
+    {
+        holePrefab = prefab;
+    }
 
     private void ModifyHoleSize(int modifier)
     {
@@ -42,5 +50,41 @@ public class Hole : MonoBehaviour
         transform.DOScale(0, scaleAnimDuration).SetEase(Ease.InBounce);
         yield return new WaitForSeconds(scaleAnimDuration);
         Destroy(gameObject);
+    }
+
+    private void Dig(bool isDug, int modifier)
+    {
+        if (isDug)
+        {
+            SetHoleSize = modifier;
+        }
+        else
+        {
+            Instantiate(holePrefab, transform.position/*transform.position + new Vector3(orientationVect.x, HeightOfHole, orientationVect.y)*/, Quaternion.identity);
+            isAlreadyDug = true;
+        }
+    }
+
+    public void Interact(PlayerTest player)
+    {
+        if (!isAlreadyDug)
+        {
+            Dig(!isAlreadyDug, -1);
+            player.interactableObj = null;
+        }
+        else
+        {
+            Dig(isAlreadyDug, 1);
+            player.interactableObj = null;
+        }
+    }
+
+    public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+    }
+
+    public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+        yield break;
     }
 }

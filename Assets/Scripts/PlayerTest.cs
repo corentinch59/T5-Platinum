@@ -31,6 +31,13 @@ public class PlayerTest : MonoBehaviour
     public LayerMask interactableLayer;
     public bool isCarrying = false;
 
+    [Header("Hole")]
+    public GameObject holePrefab;
+    [SerializeField][Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
+    [SerializeField] private LayerMask holeRaycastMask;
+    private Hole detectedHole;
+
+
     private void Start()
     {
         if (corpse != null)
@@ -60,8 +67,7 @@ public class PlayerTest : MonoBehaviour
         // check interactables
         if (!isCarrying)
         {
-            Collider[] interactables;
-            interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
+            Collider[] interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
 
             if (interactables.Length > 0)
             {
@@ -82,9 +88,32 @@ public class PlayerTest : MonoBehaviour
             }
             else
             {
-                interactableObj = null;
+                // all the time -> NOPE
+                Hole newHole = new Hole(holePrefab);
+                interactableObj = newHole;
             }
         }
+
+        // Hole
+        /*RaycastHit[] colliders = Physics.SphereCastAll(transform.position, raycastRadius, transform.forward, Mathf.Infinity, holeRaycastMask);
+        if (colliders.Length > 0)
+        {
+            detectedHole = colliders[0].collider.GetComponent<Hole>();
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                float distanceCurrent = (colliders[i].transform.position - transform.position).magnitude;
+                float distancePrevious = (detectedHole.transform.position - transform.position).magnitude;
+
+                if (distanceCurrent > distancePrevious)
+                {
+                    detectedHole = colliders[i].collider.GetComponent<Hole>();
+                }
+            }
+        }
+        else
+        {
+            detectedHole = null;
+        }*/
     }
 
     /// <summary>
@@ -193,6 +222,5 @@ public class PlayerTest : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + transform.forward * distGraveCreation, graveToCreate.transform.localScale);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
-
     }
 }
