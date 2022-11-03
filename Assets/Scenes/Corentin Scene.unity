@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carrySpeed: 3
-  rotationSpeed: 50
-  angleThreshold: 10
+  rotationSpeed: 4
+  angleThreshold: 20
 --- !u!143 &236057617
 CharacterController:
   m_ObjectHideFlags: 0
