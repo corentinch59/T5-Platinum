@@ -89,6 +89,15 @@ public class PlayerTest : MonoBehaviour
                         }
                     }
                 }
+
+                if (interactableObj != null && interactableObj is Hole)
+                {
+                    GetComponent<PlayerVFX>().Outline(true, detectedHole.GetComponent<SpriteRenderer>());
+                }
+                else
+                {
+                    
+                }
             }
             else
             {

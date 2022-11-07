@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class ShockWave : MonoBehaviour
+public class PlayerVFX : MonoBehaviour
 {
     private PlayerMovement _playerMovement;
     private PlayerMovement _secondPlayerMovement;
+    public SpriteRenderer[] listVfx;
     public SpriteRenderer vfx;
     private Coroutine currentCoroutine;
 
@@ -42,11 +43,20 @@ public class ShockWave : MonoBehaviour
 
     public IEnumerator CollisionVFX()
     {
-        vfx.gameObject.SetActive(true);
-        vfx.material.DOFloat(0.9f, "_Slider", 1);
+        listVfx[0].gameObject.SetActive(true);
+        listVfx[0].material.DOFloat(0.9f, "_Slider", 1);
         yield return new WaitForSeconds(1);
-        vfx.material.SetFloat("_Slider", 0);
-        vfx.gameObject.SetActive(false);
+        listVfx[0].material.SetFloat("_Slider", 0);
+        listVfx[0].gameObject.SetActive(false);
         currentCoroutine = null;
+    }
+
+    public IEnumerator Outline(bool isClose, SpriteRenderer nearestHole)
+    {
+        if(isClose)
+            nearestHole.material.SetFloat("_IsOuline", 1);
+        else
+            nearestHole.material.SetFloat("_IsOuline", 0);
+        yield break;
     }
 }
