@@ -11,12 +11,12 @@ public class ShockWave : MonoBehaviour
     public SpriteRenderer vfx;
     private Coroutine currentCoroutine;
 
-    /*
+    
     private void Awake()
     {
-        _playerMovement.GetComponent<PlayerMovement>();
+        vfx.gameObject.SetActive(false);
     }
-    */
+
 
     public void Update()
     {
@@ -42,9 +42,11 @@ public class ShockWave : MonoBehaviour
 
     public IEnumerator CollisionVFX()
     {
+        vfx.gameObject.SetActive(true);
         vfx.material.DOFloat(0.9f, "_Slider", 1);
         yield return new WaitForSeconds(1);
         vfx.material.SetFloat("_Slider", 0);
+        vfx.gameObject.SetActive(false);
         currentCoroutine = null;
     }
 }
