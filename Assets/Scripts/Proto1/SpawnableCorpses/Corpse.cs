@@ -31,6 +31,8 @@ public class Corpse : Carryable
 
     private void Update()
     {
+        Debug.Log(thisQuest);
+
         if (players[0] != null && players[1] != null)
             transform.LookAt(Camera.main.transform);
 
@@ -57,6 +59,12 @@ public class Corpse : Carryable
 
     public override void Interact(PlayerTest player)
     {
+        if(thisQuest != null)
+        {
+            Debug.Log("Pnj is coming");
+            thisQuest._request._pnjInteractable.StartCoroutine(thisQuest._request._pnjInteractable.Walk(true));
+        }
+
         // To avoid dotween problem with player increasing scale of this (as a child)
         if(thisQuest.requestInfos.siz > 0)
         {
@@ -143,7 +151,6 @@ public class Corpse : Carryable
             }
         } else if((int)thisQuest.requestInfos.siz <= 0)
         {
-
             if (player.carriedObj == null)
             {
                 player.carriedObj = this;
@@ -170,8 +177,6 @@ public class Corpse : Carryable
 
         // DEBUG CARRYING W/ OTHER PLAYER
         player.playerMovement.ChangeInput("Player");
-
-
 
         for(int i = 0; i < players.Length; i++)
         {
@@ -245,11 +250,7 @@ public class Corpse : Carryable
         player.isCarrying = false;
 
         // Visual Debug 
-        //player.carriedObj.gameObject.SetActive(true);
         player.playerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
-        //player.carriedObj.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
-
-        //.Append(transform.DOScale(1f, 0.25f));
 
         if (thisQuest != null)
         {
