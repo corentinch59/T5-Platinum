@@ -7,28 +7,28 @@ using UnityEngine.InputSystem;
 
 public class Corpse : Carryable
 {
-    public CorpseData corpseData;
-    private Vector2 direction;
-    private PlayerTest[] players = new PlayerTest[2];
-    public float radius = 10f;
-    public LayerMask localisationsLayer;
-    public LayerMask interactableHole;
-    public Quest thisQuest;
+    [HideInInspector] public CorpseData corpseData;
+    [HideInInspector] public Quest thisQuest;
+
+    [SerializeField] private float radius = 10f;
+    [SerializeField] private LayerMask localisationsLayer;
+    [SerializeField] private LayerMask interactableHole;
     [SerializeField] private Sprite[] tombSprite = new Sprite[5];
-    private Hole holeToBurry;
+    
+    [SerializeField] private Transform piloteLocation;
+    [SerializeField] private Transform coPiloteLocation;
+    private PlayerTest[] players = new PlayerTest[2];
 
     private SpriteRenderer spriteRenderer;
+    private Hole holeToBurry;
+
+    private bool isInHole;
+    private bool canBurry;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    [SerializeField] private Transform piloteLocation;
-    [SerializeField] private Transform coPiloteLocation;
-    private Vector3 snapPlayer;
-    private bool canBurry;
-
     private void Update()
     {
         Debug.Log(thisQuest);
@@ -45,8 +45,6 @@ public class Corpse : Carryable
                 {
                     canBurry = true;
                     holeToBurry = hole;
-                    Debug.Log(holeToBurry.name);
-                    //StartCoroutine(BurryingCorpse(holeToBurry));
                 }
             }
         }
@@ -54,7 +52,7 @@ public class Corpse : Carryable
         {
             canBurry = false;
         }
-        Debug.DrawRay(transform.position, Vector3.down * 20, Color.black);
+        //Debug.DrawRay(transform.position, Vector3.down * 20, Color.black);
     }
 
     public override void Interact(PlayerTest player)
@@ -75,19 +73,14 @@ public class Corpse : Carryable
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        //player.transform.DOComplete();
-        
-
         // DEBUG CARRING W/ OTHER PLAYER
         if ((int)thisQuest.requestInfos.siz > 0)
         {
-
             // snap player to the corpse
             if(Vector3.Distance(player.transform.position, piloteLocation.position) <= 5)
             {
                 if (players[0] == null)
                 {
-                    //Debug.Log("Player is pilote");
                     player.playerMovement.canMove = false;
                     player.gameObject.transform.DOPause(); //-> worked a bit
                     SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
@@ -99,10 +92,10 @@ public class Corpse : Carryable
                         player.isCarrying = true;
                     }
                     players[0] = player;
-                    //player.transform.DOMove(piloteLocation.position, 0.5f, true).SetEase(Ease.Linear);
                     player.transform.position = piloteLocation.position;
                     player.playerMovement.ChangeInput("Pilote");
                     player.playerMovement.IsPilote.SetActive(true);
+
                     if (players[1] != null)
                         player.playerMovement.positionCopilote = players[1].transform;
                 }
@@ -127,6 +120,7 @@ public class Corpse : Carryable
                     player.transform.position = coPiloteLocation.position;
                     player.playerMovement.ChangeInput("Co-Pilote");
                     player.playerMovement.IsCoPilote.SetActive(true);
+
                     if (players[0] != null)
                         players[0].playerMovement.positionCopilote = player.transform;
                 }
@@ -224,12 +218,13 @@ public class Corpse : Carryable
 
         if (player.playerMovement.canMove && players[0] == null && players[1] == null) // if one player -> put the body anywhere he wants to
         {
-            //RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, 2f, interactableHole);
             if(canBurry)
             {
                 player.carriedObj.transform.parent = null;
+
                 // update CorpseData
                 corpseData = UpdateLocalisation();
+                isInHole = true;
                 StartCoroutine(BurryingCorpse(holeToBurry));
             }
             else
@@ -238,15 +233,19 @@ public class Corpse : Carryable
                 player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
                     player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
                 player.carriedObj.transform.parent = null;
-                // update CorpseData
-                corpseData = UpdateLocalisation();
+
+                if (isInHole)
+                {
+                    // update CorpseData
+                    corpseData = UpdateLocalisation();
+                }
             }
         }
         else
         {
             player.playerMovement.canMove = true;
         }
-        // corpse became grave (sprite)
+
         player.isCarrying = false;
 
         // Visual Debug 
@@ -255,7 +254,10 @@ public class Corpse : Carryable
         if (thisQuest != null)
         {
             // check if the corpse correspond to the quest -> finish quest
-            corpseData = UpdateRequestLocalisation();
+            if (isInHole)
+            {
+                corpseData = UpdateRequestLocalisation();
+            }
             StartCoroutine(thisQuest.FinishQuest(corpseData));
         }
 
@@ -334,18 +336,6 @@ public class Corpse : Carryable
         return newLoc;
     }
 
-    [ContextMenu("Remove Localisations")]
-    public void RemoveLocalisations()
-    {
-        CorpseData newLoc;
-        newLoc.localisation = AddLocalisation("");
-        newLoc.name = corpseData.name;
-        newLoc.size = corpseData.size;
-        newLoc.corpseType = corpseData.corpseType;
-        newLoc.coffinType = corpseData.coffinType;
-        newLoc.specificity = corpseData.specificity;
-    }
-
     public RequestDataBase.localisation AddLocalisation(string tag)
     {
         switch (tag)
@@ -357,19 +347,6 @@ public class Corpse : Carryable
             default: return RequestDataBase.localisation.NONE;
         }
     }
-
-    private CorpseData UpdateData(CorpseData cData)
-    {
-        CorpseData newCD = new CorpseData();
-        newCD.name = thisQuest.requestInfos.corpseName;
-        newCD.size = thisQuest.requestInfos.siz;
-        newCD.corpseType = thisQuest.requestInfos.corps;
-        newCD.coffinType = thisQuest.requestInfos.cof;
-        newCD.specificity = thisQuest.requestInfos.spec;
-        //newCD.localisation = AddLocalisation(col.gameObject.tag);
-        return newCD;
-    }
-
 
     private void OnDrawGizmos()
     {
