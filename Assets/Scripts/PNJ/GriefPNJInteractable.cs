@@ -99,8 +99,8 @@ public class GriefPNJInteractable : Carryable
                 }
             }
 
-            player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
-                    player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
+            player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
+                    player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
 
             if (!isTimeOut)
             {

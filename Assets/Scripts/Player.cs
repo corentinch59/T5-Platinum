@@ -20,11 +20,13 @@ public class Player : MonoBehaviour
     public LayerMask graveLayer;
     public float distGraveCreation;
 
-    [HideInInspector] public PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
+    public PlayerMovement getPlayerMovement => playerMovement;
 
     public Sprite playerNotCarrying;
     public Sprite spriteCarry;
     public Carryable carriedObj;
+    private IRaycastBehavior raycastBehavior;
 
     [Header("Debug")]
     public float radiusSphere = 5f;
@@ -32,7 +34,7 @@ public class Player : MonoBehaviour
     public LayerMask interactableLayer;
     public bool isCarrying = false;
 
-    [Header("Hole")]
+    [Header("Hole Section")]
     public GameObject holePrefab;
     [SerializeField][Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
     [SerializeField] private LayerMask holeRaycastMask;
@@ -53,8 +55,6 @@ public class Player : MonoBehaviour
         }
 
         playerMovement = GetComponent<PlayerMovement>();
-         
-        numberMashDigUpInit = numberMashDigUp;
     }
 
     private void Update()
@@ -139,9 +139,6 @@ public class Player : MonoBehaviour
         }*/
     }
 
-    /// <summary>
-    /// Hold an input to call this method
-    /// </summary>
     public void Dig(InputAction.CallbackContext ctx)
     {
         if (corpse.activeSelf)
@@ -187,9 +184,6 @@ public class Player : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Mash an input to call this method
-    /// </summary>
     public void DigUp(InputAction.CallbackContext ctx)
     {
         if (!corpse.activeSelf)
