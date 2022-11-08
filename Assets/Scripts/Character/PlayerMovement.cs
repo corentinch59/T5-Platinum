@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     public SpriteRenderer SpriteRenderer => spriteRenderer;
 
-    [HideInInspector] public Vector3 moveDir;
-    [HideInInspector] public Vector3 playerVelocity;
+    private Vector3 moveDir;
+    private Vector3 playerVelocity;
     public bool canMove = true;
 
     private const float gravityValue = -9.81f;
@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerInput;
     public PlayerInput getPlayerInput => playerInput;
     private Coroutine feedback;
-
 
     private void Awake()
     {
@@ -115,4 +114,5 @@ public class PlayerMovement : MonoBehaviour
         playerInput.SwitchCurrentActionMap(inputActionMap);
         currentInput = inputActionMap;
     }
+
 }

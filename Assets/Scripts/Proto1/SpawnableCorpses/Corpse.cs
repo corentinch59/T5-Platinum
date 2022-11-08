@@ -65,15 +65,15 @@ public class Corpse : Carryable
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        if (player.carriedObj == null)
+        if (player.CarriedObj == null)
         {
-            player.carriedObj = this;
+            player.CarriedObj = this;
             player.interactableObj = null;
             player.isCarrying = true;
         }
         player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
-        player.carriedObj.transform.parent = player.transform;
-        player.carriedObj.transform.localPosition = Vector3.up * 2f;
+        player.CarriedObj.transform.parent = player.transform;
+        player.CarriedObj.transform.localPosition = Vector3.up * 2f;
     }
 
     public override void PutDown(Player player, bool isTimeOut = false)
@@ -93,7 +93,7 @@ public class Corpse : Carryable
         {
             if(canBurry)
             {
-                player.carriedObj.transform.parent = null;
+                player.CarriedObj.transform.parent = null;
 
                 // update CorpseData
                 corpseData = UpdateLocalisation();
@@ -103,9 +103,9 @@ public class Corpse : Carryable
             else
             {
                 //put down corpse in front of a player -> use rotation but now just t.right
-                player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
+                player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
                     player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
-                player.carriedObj.transform.parent = null;
+                player.CarriedObj.transform.parent = null;
 
                 if (isInHole)
                 {
@@ -134,7 +134,7 @@ public class Corpse : Carryable
             StartCoroutine(thisQuest.FinishQuest(corpseData));
         }
 
-        player.carriedObj = null;
+        player.CarriedObj = null;
     }
 
     private IEnumerator BurryingCorpse(Hole hole)

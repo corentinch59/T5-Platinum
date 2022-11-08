@@ -56,15 +56,15 @@ public class GriefPNJInteractable : Carryable
             requestImg.SetActive(false);
             deathRequest.AcceptRequest();
 
-            player.carriedObj = this;
+            player.CarriedObj = this;
             player.interactableObj = null;
             player.isCarrying = true;
 
             // player carry PNJ
             player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
-            player.carriedObj.gameObject.transform.parent = player.transform;
-            player.carriedObj.gameObject.transform.localPosition = transform.up * 4;
-            player.carriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, -90), 1f);
+            player.CarriedObj.gameObject.transform.parent = player.transform;
+            player.CarriedObj.gameObject.transform.localPosition = transform.up * 4;
+            player.CarriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, -90), 1f);
 
             // move back
             isInteractable = false;
@@ -76,8 +76,8 @@ public class GriefPNJInteractable : Carryable
         if (!isInteractable)
         {
             //player.carriedObj.gameObject.SetActive(true);
-            player.carriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
-            player.carriedObj.gameObject.transform.parent = null;
+            player.CarriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
+            player.CarriedObj.gameObject.transform.parent = null;
 
             player.isCarrying = false;
 
@@ -99,7 +99,7 @@ public class GriefPNJInteractable : Carryable
                 }
             }
 
-            player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
+            player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
                     player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
 
             if (!isTimeOut)
@@ -110,7 +110,7 @@ public class GriefPNJInteractable : Carryable
                 }
             }
 
-            player.carriedObj = null;
+            player.CarriedObj = null;
         }
     }
 
