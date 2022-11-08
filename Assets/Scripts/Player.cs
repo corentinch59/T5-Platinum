@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
-public class PlayerTest : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public GameObject graveToCreate;
     private GameObject graveCreated;

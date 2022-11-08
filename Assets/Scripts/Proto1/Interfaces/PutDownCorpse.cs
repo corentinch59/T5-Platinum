@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PutDownCorpse : IPutDown
 {
-    public void PutDown(PlayerTest player, bool isTimeOut = false)
+    public void PutDown(Player player, bool isTimeOut = false)
     {
 
         // Visual Debug 

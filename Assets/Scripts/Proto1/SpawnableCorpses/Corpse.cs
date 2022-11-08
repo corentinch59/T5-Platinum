@@ -17,7 +17,7 @@ public class Corpse : Carryable
     
     [SerializeField] private Transform piloteLocation;
     [SerializeField] private Transform coPiloteLocation;
-    private PlayerTest[] players = new PlayerTest[2];
+    private Player[] players = new Player[2];
 
     private SpriteRenderer spriteRenderer;
     private Hole holeToBurry;
@@ -53,7 +53,7 @@ public class Corpse : Carryable
         //Debug.DrawRay(transform.position, Vector3.down * 20, Color.black);
     }
 
-    public override void Interact(PlayerTest player)
+    public override void Interact(Player player)
     {
         GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
 
@@ -151,7 +151,7 @@ public class Corpse : Carryable
         }
     }
 
-    public override void PutDown(PlayerTest player, bool isTimeOut = false)
+    public override void PutDown(Player player, bool isTimeOut = false)
     {
         // To avoid dotween problem with player increasing scale of this (as a child)
         if (thisQuest.requestInfos.siz > 0)

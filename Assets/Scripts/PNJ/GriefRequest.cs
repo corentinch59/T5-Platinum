@@ -105,7 +105,7 @@ public class GriefRequest : MonoBehaviour
             griefCoroutine = null;
         }
 
-        if(_griefPnjInteractable.transform.parent != null && _griefPnjInteractable.transform.parent.TryGetComponent(out PlayerTest player))
+        if(_griefPnjInteractable.transform.parent != null && _griefPnjInteractable.transform.parent.TryGetComponent(out Player player))
         {
             _griefPnjInteractable.PutDown(player, true);
 

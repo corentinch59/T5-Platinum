@@ -13,6 +13,8 @@ public class PNJInteractable : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [HideInInspector] public Transform returnLoc;
     [HideInInspector] public Transform questLoc;
+    [SerializeField] private float radius;
+    [SerializeField] private LayerMask corpseLayer;
 
     private Coroutine feedback;
 /*
@@ -76,6 +78,11 @@ public class PNJInteractable : MonoBehaviour
         }
 
         StartCoroutine(Walk(false));
+    }
+
+    private void CheckIfAlreadyACorpse()
+    {
+        Collider[] thereAreCorpseAround = Physics.OverlapSphere(transform.position, radius, corpseLayer);
     }
 
     public IEnumerator Walk(bool isWalkingForward)

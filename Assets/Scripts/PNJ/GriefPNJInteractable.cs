@@ -48,7 +48,7 @@ public class GriefPNJInteractable : Carryable
         requestImg.SetActive(true);
     }
 
-    public override void Interact(PlayerTest player)
+    public override void Interact(Player player)
     {
         if (isInteractable)
         {
@@ -71,7 +71,7 @@ public class GriefPNJInteractable : Carryable
         }
     }
 
-    public override void PutDown(PlayerTest player, bool isTimeOut = false)
+    public override void PutDown(Player player, bool isTimeOut = false)
     {
         if (!isInteractable)
         {
