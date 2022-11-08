@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -36,6 +37,7 @@ public class PlayerTest : MonoBehaviour
     [SerializeField][Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
     [SerializeField] private LayerMask holeRaycastMask;
     private Hole detectedHole;
+    private Hole lastdetectedHole;
 
 
     private void Start()
@@ -92,11 +94,13 @@ public class PlayerTest : MonoBehaviour
 
                 if (interactableObj != null && interactableObj is Hole)
                 {
-                    GetComponent<PlayerVFX>().Outline(true, detectedHole.GetComponent<SpriteRenderer>());
+                    lastdetectedHole = detectedHole;
+                    StartCoroutine(GetComponent<PlayerVFX>().Outline(true, detectedHole.GetComponent<SpriteRenderer>()));
                 }
-                else
+                else if(interactableObj == null || !(interactableObj is Hole))
                 {
-                    
+                    StartCoroutine(GetComponent<PlayerVFX>().Outline(false, lastdetectedHole.GetComponent<SpriteRenderer>()));
+                    lastdetectedHole = null;
                 }
             }
             else
@@ -253,7 +257,7 @@ public class PlayerTest : MonoBehaviour
         }
         else
         {
-            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), Quaternion.identity);
+            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), holePrefab.transform.rotation);
         }
     }
 
