@@ -80,9 +80,24 @@ public class PNJInteractable : MonoBehaviour
         StartCoroutine(Walk(false));
     }
 
-    private void CheckIfAlreadyACorpse()
+    private bool CheckIfAlreadyACorpse()
     {
         Collider[] thereAreCorpseAround = Physics.OverlapSphere(transform.position, radius, corpseLayer);
+        if(thereAreCorpseAround.Length > 0)
+        {
+            foreach(Collider corpseSpawned in thereAreCorpseAround)
+            {
+                if(corpseSpawned.gameObject.tag == "Corpse")
+                {
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return true;
     }
 
     public IEnumerator Walk(bool isWalkingForward)
@@ -92,8 +107,15 @@ public class PNJInteractable : MonoBehaviour
         {
             requestImg.SetActive(true);
             agent.destination = questLoc.position;
-            yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
-            AddNewQuest();
+            if (!CheckIfAlreadyACorpse())
+            {
+                yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
+                AddNewQuest();
+            }
+            else
+            {
+                yield return StartCoroutine(Walk(false));
+            }
         }
         //a plus de quete et rentre chez lui
         else

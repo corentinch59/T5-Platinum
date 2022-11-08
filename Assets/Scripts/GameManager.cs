@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void NewPNJComingWithQuest(PNJInteractable previousPnj)
     {
-        PNJInteractable newPnjGivesQuest = new PNJInteractable();
+        PNJInteractable newPnjGivesQuest;
         int randomPnj = Random.Range(0, pnjs.Count);
         newPnjGivesQuest = pnjs[randomPnj].pnj;
         while(pnjs[randomPnj].pnj == previousPnj)
