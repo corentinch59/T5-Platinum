@@ -10,23 +10,25 @@ public class PNJInteractable : MonoBehaviour
     [SerializeField] private DigRequest request;
     [SerializeField] private GameObject requestImg;
     [SerializeField] private GameObject corpseToCreate;
-    [SerializeField] private Transform startLoc;
-    [SerializeField] private Transform endLoc;
     [SerializeField] private NavMeshAgent agent;
+    [HideInInspector] public Transform returnLoc;
+    [HideInInspector] public Transform questLoc;
 
     private Coroutine feedback;
-
+/*
     public void Awake()
     {
+        //startLoc = gameObject.transform.GetChild(0);
+        //endLoc = gameObject.transform.GetChild(1);
         endLoc = GameObject.FindGameObjectWithTag("EndLoc").GetComponent<Transform>();
         startLoc = GameObject.FindGameObjectWithTag("StartLoc").GetComponent<Transform>();
-    }
+    }*/
 
-    private void Start()
+   /* private void Start()
     {
         transform.position = startLoc.position;
         StartCoroutine(Walk(true));
-    }
+    }*/
 
     private void Update()
     {
@@ -82,17 +84,15 @@ public class PNJInteractable : MonoBehaviour
         if (isWalkingForward)
         {
             requestImg.SetActive(true);
-            agent.destination = endLoc.position;
-            Debug.Log("Come with quest : " + agent.destination);
-            yield return new WaitForSeconds(agent.remainingDistance / agent.speed);
+            agent.destination = questLoc.position;
+            yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
             AddNewQuest();
         }
         //a plus de quete et rentre chez lui
         else
         {
             requestImg.SetActive(false);
-            agent.destination = startLoc.position;
-            Debug.Log("Go back : " + agent.destination);
+            agent.destination = returnLoc.position;
             yield return null;
         }
     }

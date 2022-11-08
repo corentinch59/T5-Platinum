@@ -31,17 +31,15 @@ public class Corpse : Carryable
     }
     private void Update()
     {
-        Debug.Log(thisQuest);
-
         if (players[0] != null && players[1] != null)
             transform.LookAt(Camera.main.transform);
 
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, 20f, interactableHole);
+        Collider[] hits = Physics.OverlapSphere(transform.position, radius, interactableHole);
         if (hits.Length > 0)
         {
-            foreach (RaycastHit hit in hits)
+            foreach (Collider hit in hits)
             {
-                if (hit.collider.gameObject.TryGetComponent(out Hole hole))
+                if (hit.gameObject.TryGetComponent(out Hole hole))
                 {
                     canBurry = true;
                     holeToBurry = hole;
@@ -57,11 +55,7 @@ public class Corpse : Carryable
 
     public override void Interact(PlayerTest player)
     {
-        if(thisQuest != null)
-        {
-            Debug.Log("Pnj is coming");
-            thisQuest._request._pnjInteractable.StartCoroutine(thisQuest._request._pnjInteractable.Walk(true));
-        }
+        GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
 
         // To avoid dotween problem with player increasing scale of this (as a child)
         if(thisQuest.requestInfos.siz > 0)
