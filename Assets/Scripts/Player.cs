@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour
     [SerializeField][Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
     [SerializeField] private LayerMask holeRaycastMask;
     private Hole detectedHole;
+    private Hole lastdetectedHole;
+    
 
 
     private void Start()
@@ -85,14 +88,30 @@ public class Player : MonoBehaviour
                             if(interactableObj is Hole)
                             {
                                 detectedHole = (Hole)interactableObj;
+                                if (lastdetectedHole != null)
+                                {
+                                    StartCoroutine(GetComponent<PlayerVFX>().Outline(false, lastdetectedHole.GetComponent<SpriteRenderer>()));
+                                }
                             }
                         }
                     }
                 }
+                
+                if (interactableObj != null && interactableObj is Hole)
+                {
+                    lastdetectedHole = detectedHole;
+                    StartCoroutine(GetComponent<PlayerVFX>().Outline(true, detectedHole.GetComponent<SpriteRenderer>()));
+                }
+                
             }
             else
             {
                 // all the time -> NOPE
+                if (lastdetectedHole != null)
+                {
+                    StartCoroutine(GetComponent<PlayerVFX>().Outline(false, lastdetectedHole.GetComponent<SpriteRenderer>()));
+                    lastdetectedHole = null;
+                }
                 interactableObj = null;
                 detectedHole = null;
             }
@@ -244,7 +263,8 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), Quaternion.identity);
+            detectedHole = Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), 
+                holePrefab.transform.rotation).GetComponent<Hole>();
         }
     }
 
@@ -255,4 +275,6 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
     }
+    
+    
 }
