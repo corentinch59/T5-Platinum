@@ -279,8 +279,8 @@ public class Corpse : Carryable
 
         //Sequence sequence = DOTween.Sequence();
 
-        transform.DOMove(new Vector3(transform.position.x, transform.position.y, transform.position.z), 1f);
-        transform.DOScale(1.25f, 0.5f).SetEase(Ease.OutBounce);
+        transform.DOMove(new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), 1f);
+        transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
     }
 
     private CorpseData UpdateLocalisation()
