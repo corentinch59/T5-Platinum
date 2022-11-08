@@ -26,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerInput playerInput;
     public PlayerInput GetPlayerInput => playerInput;
-    private float angle = 0f;
-    [SerializeField] private float rotationSpeed = 5f;
 
     private void Awake()
     {
