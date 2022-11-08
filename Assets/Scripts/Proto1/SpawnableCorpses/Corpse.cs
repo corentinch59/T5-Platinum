@@ -260,10 +260,13 @@ public class Corpse : Carryable
 
     private IEnumerator BurryingCorpse(Hole hole)
     {
+        Vector3 holepos = hole.transform.position;
         // burry corpse
         hole.Burry();
+        gameObject.layer = 0;
+
         transform.localScale = new Vector3(0f, 0f, 0f);
-        transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z);
+        transform.position = new Vector3(holepos.x, holepos.y - 3, holepos.z);
 
         yield return new WaitForSeconds(2f);
 
@@ -273,8 +276,8 @@ public class Corpse : Carryable
 
         //Sequence sequence = DOTween.Sequence();
 
-        transform.DOMove(new Vector3(transform.position.x, transform.position.y, transform.position.z), 1f);
-        transform.DOScale(1.25f, 0.5f).SetEase(Ease.OutBounce);
+        transform.DOMove(new Vector3(holepos.x, holepos.y, holepos.z), 1f);
+        transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
     }
 
     private CorpseData UpdateLocalisation()
