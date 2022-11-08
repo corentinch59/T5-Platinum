@@ -378,7 +378,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""name"": ""MoveWithCorpse"",
                     ""type"": ""Value"",
                     ""id"": ""486c4d0b-0bee-4c83-bc5f-1f39e4d5f172"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -397,7 +397,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ea4fee41-b670-4894-8900-029950101214"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/leftStick/y"",
                     ""interactions"": """",
                     ""processors"": ""StickDeadzone(min=0.5)"",
                     ""groups"": """",
@@ -406,59 +406,15 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""5f938d39-4c44-4e58-ad3e-82bd9a590868"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""e34184a2-00be-4704-aae1-8c7d2e2e3fca"",
+                    ""path"": ""<Gamepad>/dpad/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MoveWithCorpse"",
-                    ""isComposite"": true,
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""232742d8-89d4-4586-a8d2-2bf546131d1d"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveWithCorpse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""47fb9787-f76b-4701-aeac-9c46ce280b93"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveWithCorpse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""f69a599f-1831-40ba-bdc0-5685da95a7f5"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveWithCorpse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""0eef024d-e89d-40ab-8877-423f5583b1a3"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveWithCorpse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -481,7 +437,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""name"": ""OrientateCorpse"",
                     ""type"": ""Value"",
                     ""id"": ""66887643-a484-4b6c-be4c-70fe7051f592"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -510,8 +466,19 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4c059ee9-b242-4498-bf06-2c472805731d"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""id"": ""bf64a43f-26a3-4e2a-8e56-0aec22fa3567"",
+                    ""path"": ""<Gamepad>/leftStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OrientateCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c47d7c9-f0f0-4e37-9d08-db96a05ee285"",
+                    ""path"": ""<Gamepad>/dpad/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

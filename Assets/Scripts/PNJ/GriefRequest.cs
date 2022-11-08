@@ -17,6 +17,7 @@ public class GriefRequest : MonoBehaviour
     public GameObject griefQuest;
     [SerializeField] private Image image;
     private GriefPNJInteractable _griefPnjInteractable;
+    public GriefPNJInteractable GriefPnjInteractable => _griefPnjInteractable;
     private GameObject questParent;
     public Coroutine griefCoroutine;
     private float timer;
@@ -32,17 +33,6 @@ public class GriefRequest : MonoBehaviour
 
     private void Update()
     {
-        /* 
-         if (Input.GetKeyDown(KeyCode.O))
-         {
-             SetGriefRequest();
-         }
-         if (Input.GetKeyDown(KeyCode.P) && QuestManager.instance.questFinished.Count > 0 
-                                         && QuestManager.instance.activeDeuilQuests.Count < QuestManager.instance.numberOfDeuilQuests)
-         {
-             AcceptRequest();
-         }
-         */
         if (QuestManager.instance.questFinished.Count > 0 && griefCoroutine == null)
         {
             if (timer <= 5) // 15
@@ -53,7 +43,6 @@ public class GriefRequest : MonoBehaviour
             {
                 timer = 5; // 15
                 griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));
-                //StartCoroutine(_griefPnjInteractable.Walk(true));
             }
         }
         else
