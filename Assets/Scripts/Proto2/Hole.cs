@@ -29,7 +29,7 @@ public class Hole : MonoBehaviour, IInteractable
         if(modifier > 0 && HoleSize < 3)
         {
             HoleSize += modifier;
-            transform.DOScale(transform.localScale + new Vector3(scaleAmountToAdd, 0, scaleAmountToAdd) * modifier, scaleAnimDuration).SetEase(Ease.InBounce);
+            transform.DOScale(transform.localScale + new Vector3(scaleAmountToAdd, scaleAmountToAdd, 0) * modifier, scaleAnimDuration).SetEase(Ease.InBounce);
         }
         else if (modifier < 0)
         {

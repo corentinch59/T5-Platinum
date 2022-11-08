@@ -44,6 +44,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Hole:
+        m_Texture: {fileID: 2800000, guid: ea98e2484511be642b7690716d14e41f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_049d1532d2bb4d938c4c80b244c8b649_Texture_1:
         m_Texture: {fileID: 2800000, guid: ea98e2484511be642b7690716d14e41f, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -83,6 +87,7 @@ Material:
     - _DstBlend: 10
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
+    - _IsOuline: 0
     - _OpaqueCullMode: 2
     - _RenderQueueType: 4
     - _SrcBlend: 1

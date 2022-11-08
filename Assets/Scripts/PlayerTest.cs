@@ -38,6 +38,7 @@ public class PlayerTest : MonoBehaviour
     [SerializeField] private LayerMask holeRaycastMask;
     private Hole detectedHole;
     private Hole lastdetectedHole;
+    
 
 
     private void Start()
@@ -87,25 +88,30 @@ public class PlayerTest : MonoBehaviour
                             if(interactableObj is Hole)
                             {
                                 detectedHole = (Hole)interactableObj;
+                                if (lastdetectedHole != null)
+                                {
+                                    StartCoroutine(GetComponent<PlayerVFX>().Outline(false, lastdetectedHole.GetComponent<SpriteRenderer>()));
+                                }
                             }
                         }
                     }
                 }
-
+                
                 if (interactableObj != null && interactableObj is Hole)
                 {
                     lastdetectedHole = detectedHole;
                     StartCoroutine(GetComponent<PlayerVFX>().Outline(true, detectedHole.GetComponent<SpriteRenderer>()));
                 }
-                else if(interactableObj == null || !(interactableObj is Hole))
-                {
-                    StartCoroutine(GetComponent<PlayerVFX>().Outline(false, lastdetectedHole.GetComponent<SpriteRenderer>()));
-                    lastdetectedHole = null;
-                }
+                
             }
             else
             {
                 // all the time -> NOPE
+                if (lastdetectedHole != null)
+                {
+                    StartCoroutine(GetComponent<PlayerVFX>().Outline(false, lastdetectedHole.GetComponent<SpriteRenderer>()));
+                    lastdetectedHole = null;
+                }
                 interactableObj = null;
                 detectedHole = null;
             }
@@ -257,7 +263,8 @@ public class PlayerTest : MonoBehaviour
         }
         else
         {
-            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), holePrefab.transform.rotation);
+            detectedHole = Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), 
+                holePrefab.transform.rotation).GetComponent<Hole>();
         }
     }
 
@@ -268,4 +275,6 @@ public class PlayerTest : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
     }
+    
+    
 }

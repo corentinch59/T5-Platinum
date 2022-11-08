@@ -611,7 +611,19 @@ MonoBehaviour:
     m_ActionId: b1334139-407d-4107-86fc-9c849ba2cae9
     m_ActionName: SelectionScreenControlE/ChangeRight[/XInputControllerWindows/leftStick/right,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1641089447}
+        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
+        m_MethodName: BurryInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e7be9c4a-f55f-4234-89b6-ec47aeea6552
     m_ActionName: Player/Dash[/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
@@ -789,6 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0baa0f16f705cb3419d109e39b178b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listVfx: []
   vfx: {fileID: 3055860833268807091}
 --- !u!1 &3026851649786517161
 GameObject:
