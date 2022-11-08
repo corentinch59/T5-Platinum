@@ -47,7 +47,7 @@ public class BigCorpse : MonoBehaviour, IInteractable
         corpseMovement = new Vector3(player1_move.x + player2_move.x, 0, player1_move.y + player2_move.y);
         controller.Move(corpseMovement * carrySpeed * Time.fixedDeltaTime);
 
-        if (players[0] != null && players[1] != null)
+        if (players[1] != null)
         {
             Vector3 direction = players[0].transform.position - players[1].transform.position;
             transform.position = (direction / 2) + players[1].transform.position;
@@ -56,7 +56,15 @@ public class BigCorpse : MonoBehaviour, IInteractable
             Vector3 tempRotation = transform.localEulerAngles;
             tempRotation.y = -rotationAngle;
             transform.localEulerAngles = tempRotation;
+        }
+        else if (players[0] != null)
+        {
+            Vector3 direction = players[0].transform.position - transform.position;
 
+            float rotationAngle = Vector2.SignedAngle(Vector2.up, new Vector2(direction.x, direction.z));
+            Vector3 tempRotation = transform.localEulerAngles;
+            tempRotation.y = -rotationAngle;
+            transform.localEulerAngles = tempRotation;
         }
 
         if (players[0] != null)
@@ -74,15 +82,15 @@ public class BigCorpse : MonoBehaviour, IInteractable
             }
             else
             {
-                PerformRotation();
+                PerformMovementRotation();
             }
         }
         else
         {
-            PerformRotation();
+            PerformMovementRotation();
         }
     }
-    private void PerformRotation()
+    private void PerformMovementRotation()
     {
         if (player1_move != Vector2.zero)
         {
@@ -181,7 +189,15 @@ public class BigCorpse : MonoBehaviour, IInteractable
         {
             if(player == players[i])
             {
-                players[i] = null;
+                if(i == 0 && players[1] != null)
+                {
+                    players[0] = players[1];
+                    players[1] = null;
+                }
+                else
+                {
+                    players[i] = null;
+                }
             }
         }
         player1_move = Vector2.zero;
