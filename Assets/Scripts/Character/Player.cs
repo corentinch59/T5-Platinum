@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     [Tooltip("How much time it takes to be able to press again to cancel or start digging again")]
     private float TimeBetweenInteractionInputs;
+    [SerializeField]
+    [Tooltip("How much times the player has to mash the button")]
+    private int numberOfTaps;
 
     [Header("Interaction Raycast Handling")]
     [SerializeField][Tooltip("The distance at which an interactible is detected.")] private float raycastRadius;
@@ -27,19 +30,13 @@ public class Player : MonoBehaviour
     private PlayerMovement playerMovement;
     public PlayerMovement getPlayerMovement => playerMovement;
 
-    private Transform canvaQte;
-    private Image qteFillImage;
-    private IEnumerator myCoroutine;
-
     private GameObject interactableObject;
     private IRaycastBehavior raycastBehavior;
-    private bool canInteract = true;
+    private bool isDigging = false;
+    private int internalTaps = 0;
 
     private void Start()
     {
-        //canvaQte = gameObject.transform.GetChild(0);
-        //qteFillImage = canvaQte.GetComponentsInChildren<Image>()[1];
-        //canvaQte.gameObject.SetActive(false);
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
     }
@@ -55,14 +52,22 @@ public class Player : MonoBehaviour
         {
             if(interactableObject != null)
                 interactableObject.GetComponent<IInteractable>().Interact(this);
+            else if(isDigging)
+            {
+                ++internalTaps;
+                if(numberOfTaps == internalTaps)
+                {
+                    isDigging = false;
+                    internalTaps = 0;
+                    //Dig & animation
+                }
+            }
+            else
+            {
+                isDigging = true;
+                internalTaps = 0;
+            }
         }
-    }
-
-    private IEnumerator InteractionCooldown(float time)
-    {
-        canInteract = false;
-        yield return new WaitForSeconds(time);
-        canInteract = true;
     }
 
     public void EnableInput(string input)
@@ -74,4 +79,6 @@ public class Player : MonoBehaviour
     {
         playerMovement.GetPlayerInput.currentActionMap.FindAction(input).Disable();
     }
+
+
 }
