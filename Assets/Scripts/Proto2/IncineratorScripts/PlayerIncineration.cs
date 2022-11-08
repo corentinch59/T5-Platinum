@@ -93,7 +93,7 @@ public class PlayerIncineration : MonoBehaviour
     {
         if (ctx.started)
         {
-            detectedLever.LeverInteraction(this);
+            //detectedLever.Interact(this);
         }
     }
 

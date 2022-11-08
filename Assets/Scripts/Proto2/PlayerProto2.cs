@@ -16,6 +16,7 @@ public class PlayerProto2 : MonoBehaviour
     private float HeightOfHole;
     [SerializeField] [Tooltip("How much time it takes to be able to press again to cancel or start digging again")]
     private float TimeBetweenInteractionInputs;
+    
 
     [Header("Hole Raycast Handling")]
     [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
@@ -125,15 +126,7 @@ public class PlayerProto2 : MonoBehaviour
                 playerInput.currentActionMap.FindAction("Move").Enable();
                 myCoroutine = null; // Code of iteration 2
             }
-
         }
-        //if (ctx.canceled)
-        //{
-        //    StopCoroutine(myCoroutine);
-        //    canvaQte.gameObject.SetActive(false);
-        //    playerInput.currentActionMap.FindAction("Move").Enable();
-        //    myCoroutine = null;
-        //}
     }
 
     private IEnumerator StartTimer(InputAction.CallbackContext ctx)
@@ -195,5 +188,10 @@ public class PlayerProto2 : MonoBehaviour
     public void DisableInput(string input)
     {
         playerInput.currentActionMap.FindAction(input).Disable();
+    }
+
+    private void StartDigging()
+    {
+
     }
 }
