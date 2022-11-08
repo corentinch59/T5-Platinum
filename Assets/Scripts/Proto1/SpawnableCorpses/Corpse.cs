@@ -261,9 +261,9 @@ public class Corpse : Carryable
     private IEnumerator BurryingCorpse(Hole hole)
     {
         Vector3 holepos = hole.transform.position;
-
         // burry corpse
         hole.Burry();
+        gameObject.layer = 0;
 
         transform.localScale = new Vector3(0f, 0f, 0f);
         transform.position = new Vector3(holepos.x, holepos.y - 3, holepos.z);
