@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class IncineratorLever : MonoBehaviour, IInteractable
 {
@@ -11,16 +12,26 @@ public class IncineratorLever : MonoBehaviour, IInteractable
         if (!playerRef)
         {
             playerRef = player;
-            player.DisableInput("Move");
+            //player.DisableInput("Move");
             Debug.Log("Holding an incinerator lever.");
             IncineratorScript.OnPlayerHold?.Invoke();
         }
 
         if(player == playerRef)
         {
-            player.EnableInput("Move");
+            //player.EnableInput("Move");
             Debug.Log("Stopped Holding an incinerator lever.");
             IncineratorScript.OnPlayerLetgo?.Invoke();
         }
+    }
+
+    public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+        throw new System.NotImplementedException();
     }
 }

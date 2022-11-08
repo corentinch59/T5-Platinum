@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BigCorpse : MonoBehaviour, IInteractable
 {
@@ -206,58 +207,68 @@ public class BigCorpse : MonoBehaviour, IInteractable
         Debug.Log($"Detached {player.name} from a big corpse.");
     }
 
+    public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+        throw new System.NotImplementedException();
+    }
+
 
     //private void OnDrawGizmos()
     //{
-        //P1 Debug
-        //if (players[0] != null && players[1] != null)
-        //{
-        //    Gizmos.color = Color.red;
-        //    Gizmos.DrawLine(players[0].transform.position, players[1].transform.position);
+    //P1 Debug
+    //if (players[0] != null && players[1] != null)
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(players[0].transform.position, players[1].transform.position);
 
-        //    Gizmos.color = Color.green;
-        //    Gizmos.DrawLine(players[0].transform.position, new Vector3(player1_move.x, 0, player1_move.y) + players[0].transform.position);
-        //    Gizmos.DrawLine(players[1].transform.position, new Vector3(player1_move.x, 0, player1_move.y) + players[1].transform.position);
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawLine(players[0].transform.position, new Vector3(player1_move.x, 0, player1_move.y) + players[0].transform.position);
+    //    Gizmos.DrawLine(players[1].transform.position, new Vector3(player1_move.x, 0, player1_move.y) + players[1].transform.position);
 
-        //    Gizmos.color = Color.blue;
-        //    Vector3 targetPosition = new Vector3(
-        //        players[1].transform.position.x + directionNormalized.x * distanceBetweenPlayers,
-        //        0,
-        //        players[1].transform.position.z + directionNormalized.y * distanceBetweenPlayers
-        //        );
-        //    Gizmos.DrawLine(players[1].transform.position, targetPosition);
+    //    Gizmos.color = Color.blue;
+    //    Vector3 targetPosition = new Vector3(
+    //        players[1].transform.position.x + directionNormalized.x * distanceBetweenPlayers,
+    //        0,
+    //        players[1].transform.position.z + directionNormalized.y * distanceBetweenPlayers
+    //        );
+    //    Gizmos.DrawLine(players[1].transform.position, targetPosition);
 
-        //    Gizmos.color = Color.magenta;
-        //    Vector3 tempPos = (targetPosition - players[0].transform.position).normalized * rotationSpeed * Time.fixedDeltaTime;
-        //    Gizmos.DrawLine(players[0].transform.position, tempPos + players[0].transform.position);
+    //    Gizmos.color = Color.magenta;
+    //    Vector3 tempPos = (targetPosition - players[0].transform.position).normalized * rotationSpeed * Time.fixedDeltaTime;
+    //    Gizmos.DrawLine(players[0].transform.position, tempPos + players[0].transform.position);
 
-        //    Gizmos.color = Color.black;
-        //    Vector3 rightDirection = ((tempPos + players[0].transform.position) - players[1].transform.position).normalized * distanceBetweenPlayers;
-        //    Gizmos.DrawLine(players[1].transform.position, rightDirection + players[1].transform.position);
+    //    Gizmos.color = Color.black;
+    //    Vector3 rightDirection = ((tempPos + players[0].transform.position) - players[1].transform.position).normalized * distanceBetweenPlayers;
+    //    Gizmos.DrawLine(players[1].transform.position, rightDirection + players[1].transform.position);
 
-        //    Gizmos.color = Color.yellow;
-        //    Vector3 direction = (rightDirection + players[1].transform.position) - players[0].transform.position;
-        //    Gizmos.DrawLine(players[0].transform.position, direction + players[0].transform.position);
-        //}
+    //    Gizmos.color = Color.yellow;
+    //    Vector3 direction = (rightDirection + players[1].transform.position) - players[0].transform.position;
+    //    Gizmos.DrawLine(players[0].transform.position, direction + players[0].transform.position);
+    //}
 
-        // P2 debug
-        //if (players[0] != null && players[1] != null)
-        //{
-        //    Gizmos.color = Color.red;
-        //    Gizmos.DrawLine(players[0].transform.position, players[1].transform.position);
+    // P2 debug
+    //if (players[0] != null && players[1] != null)
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(players[0].transform.position, players[1].transform.position);
 
-        //    Gizmos.color = Color.green;
-        //    Gizmos.DrawLine(players[0].transform.position, new Vector3(player2_move.x, 0, player2_move.y) + players[0].transform.position);
-        //    Gizmos.DrawLine(players[1].transform.position, new Vector3(player2_move.x, 0, player2_move.y) + players[1].transform.position);
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawLine(players[0].transform.position, new Vector3(player2_move.x, 0, player2_move.y) + players[0].transform.position);
+    //    Gizmos.DrawLine(players[1].transform.position, new Vector3(player2_move.x, 0, player2_move.y) + players[1].transform.position);
 
-        //    Gizmos.color = Color.blue;
-        //    Vector3 targetPosition = new Vector3(
-        //                players[0].transform.position.x + directionP2Normalized.x * distanceBetweenPlayers,
-        //                0,
-        //                players[0].transform.position.z + directionP2Normalized.y * distanceBetweenPlayers
-        //                );
-        //    Gizmos.DrawLine(players[0].transform.position, targetPosition);
-        //}
+    //    Gizmos.color = Color.blue;
+    //    Vector3 targetPosition = new Vector3(
+    //                players[0].transform.position.x + directionP2Normalized.x * distanceBetweenPlayers,
+    //                0,
+    //                players[0].transform.position.z + directionP2Normalized.y * distanceBetweenPlayers
+    //                );
+    //    Gizmos.DrawLine(players[0].transform.position, targetPosition);
+    //}
     //}
 
 }

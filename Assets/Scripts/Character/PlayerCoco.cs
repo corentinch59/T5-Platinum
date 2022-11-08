@@ -1,10 +1,10 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class PlayerCoco : MonoBehaviour
 {
     [Header("Player Controls")]
     [SerializeField]
@@ -82,3 +82,4 @@ public class Player : MonoBehaviour
 
 
 }
+*/

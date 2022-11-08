@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class IncineratorScript : MonoBehaviour, IInteractable
 {
@@ -59,6 +60,16 @@ public class IncineratorScript : MonoBehaviour, IInteractable
     public void Interact(Player player)
     {
         
+    }
+
+    public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
+    {
+        throw new NotImplementedException();
     }
 }
 
