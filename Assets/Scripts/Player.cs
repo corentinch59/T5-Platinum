@@ -7,16 +7,6 @@ using UnityEngine.InputSystem.Interactions;
 
 public class Player : MonoBehaviour
 {
-    public GameObject graveToCreate;
-    private GameObject graveCreated;
-
-    [Tooltip("Add this GameObject as a child to the player")] public GameObject corpse;
-
-    public float timerDig;
-
-    private int numberMashDigUpInit;
-    public int numberMashDigUp;
-
     public LayerMask graveLayer;
     public float distGraveCreation;
 
@@ -37,25 +27,14 @@ public class Player : MonoBehaviour
 
     [Header("Debug")]
     public float radiusSphere = 5f;
-    public IInteractable interactableObj;
     public LayerMask interactableLayer;
-    public bool isCarrying = false;
 
     [Header("Hole Section")]
     public GameObject holePrefab;
-    [SerializeField][Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
+    [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
 
-    private void Start()
+    private void Start() 
     {
-        if (corpse != null)
-        {
-            corpse.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("You need to add a corpse in the component");
-        }
-
         playerMovement = GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
     }
@@ -65,129 +44,79 @@ public class Player : MonoBehaviour
         //Debug player vision
         Debug.DrawLine(transform.position, transform.position + transform.forward * distGraveCreation, Color.red);
 
-        if (!corpse.activeSelf)
-        {
-            // can carry corpse
-        }
-
         objectFound = raycastBehavior.PerformRaycast(this, transform.position, raycastRadius, interactableLayer);
-    }
-
-    public void Dig(InputAction.CallbackContext ctx)
-    {
-        if (corpse.activeSelf)
-        {
-            if (ctx.started)
-            {
-                playerMovement.canMove = false;
-            }
-
-            if (ctx.performed)
-            {
-                // need to display QTE
-                Quaternion graveRot = Quaternion.FromToRotation(transform.position, transform.forward);
-                graveRot.x = 0;
-                graveRot.z = 0;
-
-                Collider[] graveHit = Physics.OverlapBox(transform.position + transform.forward * distGraveCreation,
-                    graveToCreate.transform.localScale / 2, graveRot, graveLayer);
-
-                if (graveHit.Length == 0)
-                {
-                    if (ctx.duration >= timerDig)
-                    {
-                        // create grave in front of the player /!\ have to check the rotation in game
-                        graveCreated = Instantiate(graveToCreate, transform.position + transform.forward * distGraveCreation, graveRot);
-
-                        // Create grave at a certain position
-                        if (graveCreated.TryGetComponent(out Grave g))
-                        {
-                            g.UpdateLocalisation();
-                        }
-
-                        // player doesn't carry a corpse anymore
-                        corpse.SetActive(false);
-                        playerMovement.canMove = true;
-                    }
-                }
-            }
-
-            if (ctx.canceled)
-                playerMovement.canMove = true;
-        }
-
-    }
-
-    public void DigUp(InputAction.CallbackContext ctx)
-    {
-        if (!corpse.activeSelf)
-        {
-            bool isHit = Physics.Linecast(transform.position, transform.position + transform.forward * distGraveCreation, out RaycastHit hit,
-                        graveLayer);
-
-            if (isHit)
-            {
-                if (ctx.started)
-                {
-                    playerMovement.canMove = false;
-                }
-
-                if (ctx.performed && ctx.interaction is MultiTapInteraction)
-                {
-                    // Remove info & collider from the corpse to carry it 
-                    if (graveCreated.TryGetComponent(out Grave c))
-                    {
-                        c.RemoveLocalisations();
-                    }
-                    // need to display QTE
-                    corpse.SetActive(true);
-                    Destroy(hit.collider.gameObject); 
-                    playerMovement.canMove = true;
-                }
-            }
-
-            if (ctx.canceled)
-                playerMovement.canMove = true;
-
-        }
-       
     }
 
     public void InteractInput(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            if (interactableObj == null && carriedObj != null)
+            if(objectFound != null)
             {
-                carriedObj.PutDown(this);
-            } else if (interactableObj != null && isCarrying == false)
-            {
-                interactableObj.Interact(this);
-            } else if (interactableObj == null && isCarrying == false)
+                Debug.Log("Object found : " + objectFound.name);
+                if (objectFound.TryGetComponent(out Hole hole))
+                {
+                    hole.Interact(this);
+                }
+                else if (objectFound.TryGetComponent(out GriefPNJInteractable griefPnj) && carriedObj == null)
+                {
+                    griefPnj.Interact(this);
+                }
+                else if (objectFound.TryGetComponent(out Corpse corpse) && carriedObj == null)
+                {
+                    corpse.Interact(this);
+                }
+            }
+            else if (objectFound == null && carriedObj == null)
             {
                 Dig(1);
             }
         }
     }
 
+    public void DashCancelInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if(carriedObj != null)
+            {
+                if (carriedObj.TryGetComponent(out Corpse corpse))
+                {
+                    corpse.PutDown(this);
+                }
+                else if (carriedObj.TryGetComponent(out GriefPNJInteractable griefPnj))
+                {
+                    griefPnj.Cancel(this, null);
+                }
+            }
+            else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && carriedObj == null)
+            {
+                Dig(-1);
+            }
+            else
+            {
+                // player dash
+            }
+        }
+    }
+
     private void Dig(int modifier)
     {
-        //if (detectedHole)
-        //{
-        //    detectedHole.SetHoleSize = modifier;
-        //}
-        //else
-        //{
-        //    detectedHole = Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), 
-        //        holePrefab.transform.rotation).GetComponent<Hole>();
-        //}
+        if (objectFound != null && objectFound.TryGetComponent(out Hole hole))
+        {
+            hole.SetHoleSize = modifier;
+        }
+        else if(objectFound == null)
+        {
+            // Instantiate Hole to where the player is looking
+            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z),
+                holePrefab.transform.rotation);//.GetComponent<Hole>();
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(transform.position + transform.forward * distGraveCreation, graveToCreate.transform.localScale);
-        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
     }
 }

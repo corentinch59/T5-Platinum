@@ -7,6 +7,10 @@ public class IncineratorLever : MonoBehaviour, IInteractable
 {
     private Player playerRef;
 
+    public void Cancel(Player player, Hole holeDetected)
+    {
+    }
+
     public void Interact(Player player)
     {
         if (!playerRef)
@@ -27,11 +31,10 @@ public class IncineratorLever : MonoBehaviour, IInteractable
 
     public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
     {
-        throw new System.NotImplementedException();
     }
 
     public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
     {
-        throw new System.NotImplementedException();
+        yield break;
     }
 }

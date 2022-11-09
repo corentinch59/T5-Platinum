@@ -305,7 +305,7 @@ MonoBehaviour:
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 2596005604130923474, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+  m_PlayerPrefab: {fileID: 2107677554}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -2144,6 +2144,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2107677554 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2596005604130923474, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+  m_PrefabInstance: {fileID: 1600409002}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2131148112 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4581886092418296284, guid: 1c05ef041caf3b84e807d0219d33134b, type: 3}

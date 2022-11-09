@@ -64,12 +64,15 @@ public class IncineratorScript : MonoBehaviour, IInteractable
 
     public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
     {
-        throw new NotImplementedException();
     }
 
     public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
     {
-        throw new NotImplementedException();
+        yield break;
+    }
+
+    public void Cancel(Player player, Hole holeDetected)
+    {
     }
 }
 

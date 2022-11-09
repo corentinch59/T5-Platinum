@@ -43,11 +43,6 @@ public class GriefPNJInteractable : Carryable
         }
     }
 
-    private void DisplayQuest()
-    {
-        requestImg.SetActive(true);
-    }
-
     public override void Interact(Player player)
     {
         if (isInteractable)
@@ -57,8 +52,6 @@ public class GriefPNJInteractable : Carryable
             deathRequest.AcceptRequest();
 
             player.CarriedObj = this;
-            player.interactableObj = null;
-            player.isCarrying = true;
 
             // player carry PNJ
             player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
@@ -66,52 +59,62 @@ public class GriefPNJInteractable : Carryable
             player.CarriedObj.gameObject.transform.localPosition = transform.up * 4;
             player.CarriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, -90), 1f);
 
-            // move back
+            // can't interact with pnj
             isInteractable = false;
+        }
+    }
+
+    public override void Cancel(Player player, Hole holeDetected)
+    {
+        if(holeDetected == null)
+        {
+            PutDown(player);
+            player.CarriedObj = null;
+        } else
+        {
+            CheckLocationWanted(player);
         }
     }
 
     public override void PutDown(Player player, bool isTimeOut = false)
     {
-        if (!isInteractable)
+        //player.carriedObj.gameObject.SetActive(true);
+        player.CarriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
+        player.CarriedObj.gameObject.transform.parent = null;
+
+        player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
+
+        // Update name and loc that the pnj wants
+        Collider[] infos = Physics.OverlapSphere(transform.position, radius);
+        float min = float.MaxValue;
+
+        for(int i = 0; i < infos.Length; ++i)
         {
-            //player.carriedObj.gameObject.SetActive(true);
-            player.CarriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
-            player.CarriedObj.gameObject.transform.parent = null;
-
-            player.isCarrying = false;
-
-            player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
-            // Update name and loc that the pnj wants
-            Collider[] infos = Physics.OverlapSphere(transform.position, radius);
-            float min = float.MaxValue;
-
-            foreach (Collider info in infos)
+            if (infos[i].gameObject.TryGetComponent(out Corpse c))
             {
-                if (info.gameObject.TryGetComponent(out Corpse c))
+                float dist = Vector3.Distance(infos[i].gameObject.transform.position, transform.position);
+                if (dist < min)
                 {
-                    float dist = Vector3.Distance(info.gameObject.transform.position, transform.position);
-                    if (dist < min)
-                    {
-                        min = dist;
-                        griefName = c.corpseData.name;
-                    }
+                    min = dist;
+                    griefName = c.corpseData.name;
                 }
             }
-
-            player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
-                    player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
-
-            if (!isTimeOut)
-            {
-                if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
-                {
-                    StartCoroutine(dq.FinishGriefQuest(griefName));
-                }
-            }
-
-            player.CarriedObj = null;
         }
+
+        player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
+                player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
+
+        isInteractable = true;
+    }
+
+    public void CheckLocationWanted(Player player)
+    {
+        PutDown(player);
+        if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
+        {
+            StartCoroutine(dq.FinishGriefQuest(griefName));
+        }
+        player.CarriedObj = null;
     }
 
     public IEnumerator Grieffing()
