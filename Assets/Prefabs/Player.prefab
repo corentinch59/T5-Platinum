@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3695417495948106568}
   - component: {fileID: 3695417495948106571}
   - component: {fileID: 3695417495948106570}
+  - component: {fileID: 3695417495948106573}
   - component: {fileID: 3695417495948106572}
-  - component: {fileID: 6722909848307004737}
   - component: {fileID: 6483471783306938823}
   m_Layer: 0
   m_Name: Player
@@ -121,6 +121,26 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3695417495948106573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695417495948106575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d0fd2806c91b143ad614cb4f0fe6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeightOfHole: 0
+  interactionDuration: 0
+  TimeBetweenInteractionInputs: 0
+  raycastRadius: 3
+  InteractableRaycastMask:
+    serializedVersion: 2
+    m_Bits: 128
+  holePrefab: {fileID: 0}
 --- !u!114 &3695417495948106572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,29 +154,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
-  spriteRenderer: {fileID: 0}
+  moveDir: {x: 0, y: 0, z: 0}
+  playerVelocity: {x: 0, y: 0, z: 0}
   canMove: 1
---- !u!114 &6722909848307004737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3695417495948106575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d0fd2806c91b143ad614cb4f0fe6b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HeightOfHole: 0.5
-  interactionDuration: 0
-  TimeBetweenInteractionInputs: 0
-  numberOfTaps: 3
-  raycastRadius: 0
-  InteractableRaycastMask:
-    serializedVersion: 2
-    m_Bits: 128
-  holePrefab: {fileID: 0}
+  arrowOrientation: {fileID: 3695417497406607643}
+  rotationSpeed: 5
 --- !u!114 &6483471783306938823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +202,7 @@ MonoBehaviour:
     m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3695417495948106573}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0

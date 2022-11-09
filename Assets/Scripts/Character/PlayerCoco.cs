@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -32,7 +32,7 @@ public class PlayerCoco : MonoBehaviour
 
     private GameObject interactableObject;
     private IRaycastBehavior raycastBehavior;
-    private DiggingBehavior diggingBehavior;
+    private bool isDigging = false;
     private int internalTaps = 0;
 
     private void Start()
@@ -41,40 +41,45 @@ public class PlayerCoco : MonoBehaviour
         raycastBehavior = new RaycastEmptyHand();
     }
 
+    private void Update()
+    {
+        interactableObject = raycastBehavior.PerformRaycast(this, transform.position, raycastRadius, InteractableRaycastMask);
+    }
+
     public void OnInteract(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
         {
-            //if (isDigging)
-            //{
-            //    ++internalTaps;
-            //    if (numberOfTaps == internalTaps)
-            //    {
-            //        isDigging = false;
-            //        internalTaps = 0;
-            //        //Dig & animation
-            //    }
-            //}
-            //else
-            //{
-            //    isDigging = true;
-            //    internalTaps = 0;
-            //}
+            if(interactableObject != null)
+                interactableObject.GetComponent<IInteractable>().Interact(this);
+            else if(isDigging)
+            {
+                ++internalTaps;
+                if(numberOfTaps == internalTaps)
+                {
+                    isDigging = false;
+                    internalTaps = 0;
+                    //Dig & animation
+                }
+            }
+            else
+            {
+                isDigging = true;
+                internalTaps = 0;
+            }
         }
     }
 
     public void EnableInput(string input)
     {
-        playerMovement.getPlayerInput.currentActionMap.FindAction(input).Enable();
+        playerMovement.GetPlayerInput.currentActionMap.FindAction(input).Enable();
     }
 
     public void DisableInput(string input)
     {
-        playerMovement.getPlayerInput.currentActionMap.FindAction(input).Disable();
+        playerMovement.GetPlayerInput.currentActionMap.FindAction(input).Disable();
     }
 
-    public void TransitionDigging(DiggingBehavior newdiggingBehavior)
-    {
-        diggingBehavior = newdiggingBehavior;
-    }
+
 }
+*/
