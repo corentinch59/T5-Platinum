@@ -38,8 +38,13 @@ public class BigCorpse : MonoBehaviour, IInteractable
         if (players[0] != null)
             player1_move = players[0].getPlayerMovement.getMove;
 
+        Debug.Log(player1_move);
+
         if (players[1] != null)
             player2_move = players[1].getPlayerMovement.getMove;
+
+        Debug.Log(player2_move);
+
 
     }
 

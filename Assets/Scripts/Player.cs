@@ -57,17 +57,23 @@ public class Player : MonoBehaviour
         //Test Outline
         if (objectFound != null && objectFound != lastObjectFound)
         {
-            CallOutline(true, objectFound.GetComponent<SpriteRenderer>());
-            if (lastObjectFound != null)
+            if(objectFound.GetComponent<SpriteRenderer>() != null)
             {
-                CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+                CallOutline(true, objectFound.GetComponent<SpriteRenderer>());
+                if (lastObjectFound != null)
+                {
+                    CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+                }
+                lastObjectFound = objectFound;
             }
-            lastObjectFound = objectFound;
         }
         else if (objectFound == null && lastObjectFound != null)
         {
-            CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
-            lastObjectFound = null;
+            if (objectFound.GetComponent<SpriteRenderer>() != null)
+            {
+                CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+                lastObjectFound = null;
+            }
         }
  
     }
@@ -90,6 +96,10 @@ public class Player : MonoBehaviour
                 else if (objectFound.TryGetComponent(out Corpse corpse) && carriedObj == null)
                 {
                     corpse.Interact(this);
+                }
+                else if (objectFound.TryGetComponent(out BigCorpse bigcorpse) && carriedObj == null)
+                {
+                    bigcorpse.Interact(this);
                 }
             }
             else if (objectFound == null && carriedObj == null)
