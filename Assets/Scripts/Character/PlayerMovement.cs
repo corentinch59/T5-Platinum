@@ -34,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInput getPlayerInput => playerInput;
     private Coroutine feedback;
 
+    private bool _isDashing = false;
+    public bool isDashing { get{ return _isDashing; } set { _isDashing = value; } }
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -62,14 +65,20 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(playerVelocity * Time.fixedDeltaTime);
     }
 
-    private IEnumerator FeedBackPlayerMoves()
+    public IEnumerator FeedBackPlayerMoves()
     {
-        transform.DOMoveY(transform.position.y + 2.8f, 0.1f);
-        //transform.DOScaleY(1.3f, 0.3f);
-        yield return new WaitForSeconds(0.1f);
-        transform.DOMoveY(transform.position.y + 2.5f, 0.1f);
-        //transform.DOScaleY(1f, 0.3f);
-        yield return new WaitForSeconds(0.1f);
+        if (!_isDashing)
+        {
+            transform.DOScale(new Vector3(1.3f, 0.7f), 0.15f);
+            yield return new WaitForSeconds(0.15f);
+            //transform.DOMoveY(transform.position.y, 0.15f);
+            transform.DOScale(new Vector3(1f, 1f), 0.1f);
+            //transform.DOScaleY(1f, 0.3f);
+            yield return new WaitForSeconds(0.1f);
+        }
+        else yield return null;
+        //transform.DOMoveY(transform.position.y + 1f, 0.15f);
+        
         feedback = null;
     }
 

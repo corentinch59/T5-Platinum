@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class PlayerDash : MonoBehaviour
 {
@@ -39,15 +40,21 @@ public class PlayerDash : MonoBehaviour
     {
         _controller.enabled = false;
         isDashing = true;
+        _playerMouvement.isDashing = isDashing;
+        //StopCoroutine(_playerMouvement.FeedBackPlayerMoves());
 
-        //_rigidbody.AddForce(transform.forward, ForceMode.Impulse);
-        //Debug.Log(_playerMouvement.getMove.normalized);
 
         _rigidbody.velocity += new Vector3(_playerMouvement.getMove.normalized.x * forceDash, 0f,_playerMouvement.getMove.normalized.y * forceDash);
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(transform.DOScale(new Vector3(1.5f, 0.5f), 0.35f))
+            .Append(transform.DOScale(new Vector3(1f,1f), 0.375f));
+
         yield return new WaitForSeconds(dashTime);
 
         _controller.enabled = true;
         isDashing = false;
+        _playerMouvement.isDashing = isDashing;
 
         if (DidIHitSomething && collisionCharacter != null)
         {
@@ -64,7 +71,6 @@ public class PlayerDash : MonoBehaviour
         {
             DidIHitSomething = true;
             //Debug.Log("Stuned");
-
           
             if (collision.gameObject.GetComponent<CharacterController>())
             {
