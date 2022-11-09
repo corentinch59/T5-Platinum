@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class DiggingBehavior
 {
-    protected PlayerCoco _player;
+    protected Player _player;
 
-    public void SetPlayer(PlayerCoco player)
+    public void SetPlayer(Player player)
     {
         _player = player;
     }

@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int numberOfTaps;
     public int getNumbersOfTaps => numberOfTaps;
 
+    private DiggingBehavior diggingBehavior;
 
     private PlayerVFX vfx;
     
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
         vfx = GetComponent<PlayerVFX>();
+        TransitionDigging(new StartDigging());
     }
 
     private void Update()
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour
             }
             else if (objectFound == null && carriedObj == null)
             {
-                Dig(1);
+                diggingBehavior.PerformAction();
             }
         }
     }
@@ -118,6 +120,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                diggingBehavior.CancelAction();
                 // player dash
             }
         }
@@ -140,6 +143,22 @@ public class Player : MonoBehaviour
     private void CallOutline(bool active, SpriteRenderer renderer)
     {
         StartCoroutine(vfx.Outline(active, renderer));
+    }
+
+    public void TransitionDigging(DiggingBehavior newdiggingBehavior)
+    {
+        diggingBehavior = newdiggingBehavior;
+        diggingBehavior.SetPlayer(this);
+    }
+
+    public void EnableInput(string input)
+    {
+        playerMovement.getPlayerInput.currentActionMap.FindAction(input).Enable();
+    }
+
+    public void DisableInput(string input)
+    {
+        playerMovement.getPlayerInput.currentActionMap.FindAction(input).Disable();
     }
 
     private void OnDrawGizmosSelected()
