@@ -49,11 +49,12 @@ public class PlayerDash : MonoBehaviour
         _controller.enabled = true;
         isDashing = false;
 
-        if (DidIHitSomething)
+        if (DidIHitSomething && collisionCharacter != null)
         {
             collisionCharacter.enabled = true;
-            DidIHitSomething = false;
         }
+
+        DidIHitSomething = false;
         currentCoroutine = null;
     }
 
