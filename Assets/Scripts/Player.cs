@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     [Header("Hole Section")]
     [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
     public GameObject holePrefab;
+    [SerializeField] private float distanceSpawnHole = 2f;
+
     [SerializeField] private int numberOfTaps;
     public int getNumbersOfTaps => numberOfTaps;
 
@@ -85,9 +87,16 @@ public class Player : MonoBehaviour
                 {
                     griefPnj.Interact(this);
                 }
-                else if (objectFound.TryGetComponent(out Corpse corpse) && carriedObj == null)
+                else if (objectFound.TryGetComponent(out Corpse corpse))
                 {
-                    corpse.Interact(this);
+                    if(carriedObj == null)
+                    {
+                        corpse.Interact(this);
+                    }
+                    else if(carriedObj != null && carriedObj.TryGetComponent(out GriefPNJInteractable pnj))
+                    {
+                        pnj.CheckLocationWanted(this);
+                    }
                 }
             }
             else if (objectFound == null && carriedObj == null)
@@ -132,8 +141,8 @@ public class Player : MonoBehaviour
         else if(objectFound == null)
         {
             // Instantiate Hole to where the player is looking
-            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z),
-                holePrefab.transform.rotation);//.GetComponent<Hole>();
+            Instantiate(holePrefab, new Vector3(transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole, transform.position.y - 1f, 
+                transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole), holePrefab.transform.rotation);
         }
     }
 

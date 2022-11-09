@@ -2297,8 +2297,10 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
-  holePrefab: {fileID: 7901434866790508091, guid: cd2d637137505204abb9811ca0f361bc, type: 3}
   raycastRadius: 5
+  holePrefab: {fileID: 7901434866790508091, guid: cd2d637137505204abb9811ca0f361bc, type: 3}
+  distanceSpawnHole: 2.5
+  numberOfTaps: 0
 --- !u!114 &2131148112 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4581886092418296284, guid: 1c05ef041caf3b84e807d0219d33134b, type: 3}
@@ -2645,6 +2647,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2136006865, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
+      propertyPath: layerInteractable.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 2620190660970719590, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_SortingOrder
       value: 1

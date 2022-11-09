@@ -11,6 +11,7 @@ public class GriefPNJInteractable : Carryable
     [SerializeField] private Transform startLoc;
     [SerializeField] private Transform endLoc;
     [SerializeField] private NavMeshAgent agent;
+
     public NavMeshAgent Agent => agent;
 
     private bool isInteractable = true;
@@ -47,6 +48,7 @@ public class GriefPNJInteractable : Carryable
     {
         if (isInteractable)
         {
+            gameObject.layer = 0;
             agent.enabled = false;
             requestImg.SetActive(false);
             deathRequest.AcceptRequest();
@@ -66,6 +68,7 @@ public class GriefPNJInteractable : Carryable
 
     public override void PutDown(Player player, bool isTimeOut = false)
     {
+        gameObject.layer = 7; // -> interactable Layer
         //player.carriedObj.gameObject.SetActive(true);
         player.CarriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
         player.CarriedObj.gameObject.transform.parent = null;
@@ -73,7 +76,7 @@ public class GriefPNJInteractable : Carryable
         player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
 
         // Update name and loc that the pnj wants
-        Collider[] infos = Physics.OverlapSphere(transform.position, radius);
+        Collider[] infos = Physics.OverlapBox(transform.position, transform.position * radius);
         float min = float.MaxValue;
 
         for(int i = 0; i < infos.Length; ++i)
@@ -92,6 +95,8 @@ public class GriefPNJInteractable : Carryable
         player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
                 player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
 
+        player.CarriedObj = null;
+
         isInteractable = true;
     }
 
@@ -100,6 +105,7 @@ public class GriefPNJInteractable : Carryable
         PutDown(player);
         if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
         {
+            Debug.Log("Name found:" + griefName);
             StartCoroutine(dq.FinishGriefQuest(griefName));
         }
         player.CarriedObj = null;
@@ -113,6 +119,8 @@ public class GriefPNJInteractable : Carryable
 
     public IEnumerator Walk(bool isWalkingForward)
     {
+        isInteractable = false;
+
         float distToEnd = 0;
 
         if (!agent.enabled) agent.enabled = true;
@@ -138,7 +146,7 @@ public class GriefPNJInteractable : Carryable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireCube(transform.position, transform.position * radius);
     }
 
     private IEnumerator FeedBackPlayerMoves()
