@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class PlayerProto2 : MonoBehaviour
+public class PlayerQTE : MonoBehaviour
 {
     [Header("Player Controls")]
     [SerializeField] [Tooltip("The player's movement speed.")]
