@@ -1,8 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Sunshine : MonoBehaviour
 {
@@ -12,6 +16,10 @@ public class Sunshine : MonoBehaviour
     private Vector3 startPos;
     private Vector3 center;
     private Vector3 distance;
+    
+    public Sprite sun;
+    public Sprite moon;
+    public Image cadran;
 
     public PostProcessManager postProcessManager;
 
@@ -21,6 +29,7 @@ public class Sunshine : MonoBehaviour
 
     public float ratio { get { return _ratio; } }
 
+    private Coroutine current;
 
 
     private void Start()
@@ -38,6 +47,15 @@ public class Sunshine : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (_ratio >= 0.7 && current == null)
+        {
+            current = StartCoroutine(TimeIsAlmostOver());
+            GetComponent<Image>().sprite = moon;
+        }
+    }
+
     private IEnumerator SunCoroutine()
     {
         float timer = 0f;
@@ -52,5 +70,12 @@ public class Sunshine : MonoBehaviour
             yield return null;
         }
         //timer = 0f;
+    }
+
+    private IEnumerator TimeIsAlmostOver()
+    {
+        cadran.color = Color.red;
+        yield return new WaitForSeconds(2);
+        current = null;
     }
 }

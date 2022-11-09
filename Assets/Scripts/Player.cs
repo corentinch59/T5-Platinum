@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int numberOfTaps;
     public int getNumbersOfTaps => numberOfTaps;
 
+    private DiggingBehavior diggingBehavior;
 
     private PlayerVFX vfx;
     
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
         vfx = GetComponent<PlayerVFX>();
+        TransitionDigging(new StartDigging());
     }
 
     private void Update()
@@ -57,17 +59,23 @@ public class Player : MonoBehaviour
         //Test Outline
         if (objectFound != null && objectFound != lastObjectFound)
         {
-            CallOutline(true, objectFound.GetComponent<SpriteRenderer>());
-            if (lastObjectFound != null)
+            if(objectFound.GetComponent<SpriteRenderer>() != null)
             {
-                CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+                CallOutline(true, objectFound.GetComponent<SpriteRenderer>());
+                if (lastObjectFound != null)
+                {
+                    CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+                }
+                lastObjectFound = objectFound;
             }
-            lastObjectFound = objectFound;
         }
         else if (objectFound == null && lastObjectFound != null)
         {
-            CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
-            lastObjectFound = null;
+            if (objectFound.GetComponent<SpriteRenderer>() != null)
+            {
+                CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+                lastObjectFound = null;
+            }
         }
  
     }
@@ -98,10 +106,14 @@ public class Player : MonoBehaviour
                         pnj.CheckLocationWanted(this);
                     }
                 }
+                else if (objectFound.TryGetComponent(out BigCorpse bigcorpse) && carriedObj == null)
+                {
+                    bigcorpse.Interact(this);
+                }
             }
             else if (objectFound == null && carriedObj == null)
             {
-                Dig(1);
+                diggingBehavior.PerformAction();
             }
         }
     }
@@ -127,6 +139,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                diggingBehavior.CancelAction();
                 // player dash
             }
         }
@@ -149,6 +162,22 @@ public class Player : MonoBehaviour
     private void CallOutline(bool active, SpriteRenderer renderer)
     {
         StartCoroutine(vfx.Outline(active, renderer));
+    }
+
+    public void TransitionDigging(DiggingBehavior newdiggingBehavior)
+    {
+        diggingBehavior = newdiggingBehavior;
+        diggingBehavior.SetPlayer(this);
+    }
+
+    public void EnableInput(string input)
+    {
+        playerMovement.getPlayerInput.currentActionMap.FindAction(input).Enable();
+    }
+
+    public void DisableInput(string input)
+    {
+        playerMovement.getPlayerInput.currentActionMap.FindAction(input).Disable();
     }
 
     private void OnDrawGizmosSelected()
