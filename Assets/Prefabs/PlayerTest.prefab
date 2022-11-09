@@ -497,10 +497,9 @@ GameObject:
   - component: {fileID: 2596005604130923465}
   - component: {fileID: 2596005604130923475}
   - component: {fileID: 1676592206633555986}
+  - component: {fileID: 1641089447}
   - component: {fileID: -9117927903731099442}
   - component: {fileID: 7000738648327963535}
-  - component: {fileID: 7652019968952064915}
-  - component: {fileID: 1340517128}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -681,8 +680,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/SwitchProControllerHID/leftStick,/SwitchProControllerHID1/leftStick,/XInputControllerWindows1/leftStick,/XInputControllerWindows/leftStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7652019968952064915}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 1641089447}
+        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
         m_MethodName: InteractInput
         m_Mode: 0
         m_Arguments:
@@ -729,8 +728,8 @@ MonoBehaviour:
     m_ActionName: SelectionScreenControlE/ChangeRight[/XInputControllerWindows/leftStick/right,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7652019968952064915}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 1641089447}
+        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
         m_MethodName: BurryInput
         m_Mode: 0
         m_Arguments:
@@ -801,8 +800,8 @@ MonoBehaviour:
     m_ActionName: Pilote/MoveWithCorpse[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID/dpad/down,/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID/dpad/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7652019968952064915}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 1641089447}
+        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
         m_MethodName: InteractInput
         m_Mode: 0
         m_Arguments:
@@ -833,8 +832,8 @@ MonoBehaviour:
     m_ActionName: Co-Pilote/OrientateCorpse[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/leftStick/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7652019968952064915}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 1641089447}
+        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
         m_MethodName: InteractInput
         m_Mode: 0
         m_Arguments:
@@ -852,6 +851,40 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1641089447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596005604130923474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f36c2f1bb3a114d861fd33501cc716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graveToCreate: {fileID: 8366753863871105557, guid: 21e8a7e95cd03be4192bafca4eef7cc6, type: 3}
+  corpse: {fileID: 1454460455}
+  timerDig: 3
+  numberMashDigUp: 3
+  graveLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  distGraveCreation: 5
+  playerMovement: {fileID: 0}
+  playerNotCarrying: {fileID: 21300000, guid: 1be856eaf2ba42a4cb4de6255cc5e33e, type: 3}
+  spriteCarry: {fileID: 21300000, guid: 96321a1fba81d6e4993b70b1c2314de1, type: 3}
+  carriedObj: {fileID: 0}
+  radiusSphere: 5
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  isCarrying: 0
+  holePrefab: {fileID: 7901434866790508091, guid: cd2d637137505204abb9811ca0f361bc, type: 3}
+  raycastRadius: 0
+  holeRaycastMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &-9117927903731099442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -885,74 +918,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vfx: {fileID: 0}
---- !u!114 &7652019968952064915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2596005604130923474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37dd15ec6a6cf964e94a59b6773df137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graveToCreate: {fileID: 8366753863871105557, guid: 21e8a7e95cd03be4192bafca4eef7cc6, type: 3}
-  corpse: {fileID: 1454460455}
-  timerDig: 3
-  numberMashDigUp: 3
-  graveLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  distGraveCreation: 5
-  playerMovement: {fileID: 0}
-  playerNotCarrying: {fileID: 21300000, guid: 1be856eaf2ba42a4cb4de6255cc5e33e, type: 3}
-  spriteCarry: {fileID: 21300000, guid: 96321a1fba81d6e4993b70b1c2314de1, type: 3}
-  carriedObj: {fileID: 0}
-  radiusSphere: 5
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  isCarrying: 0
-  holePrefab: {fileID: 7901434866790508091, guid: cd2d637137505204abb9811ca0f361bc, type: 3}
-  raycastRadius: 5
-  holeRaycastMask:
-    serializedVersion: 2
-    m_Bits: 1024
---- !u!114 &1340517128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2596005604130923474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37dd15ec6a6cf964e94a59b6773df137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graveToCreate: {fileID: 8366753863871105557, guid: 21e8a7e95cd03be4192bafca4eef7cc6, type: 3}
-  corpse: {fileID: 1454460455}
-  timerDig: 3
-  numberMashDigUp: 3
-  graveLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  distGraveCreation: 5
-  playerMovement: {fileID: 0}
-  playerNotCarrying: {fileID: 21300000, guid: 1be856eaf2ba42a4cb4de6255cc5e33e, type: 3}
-  spriteCarry: {fileID: 21300000, guid: 96321a1fba81d6e4993b70b1c2314de1, type: 3}
-  carriedObj: {fileID: 0}
-  radiusSphere: 5
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  isCarrying: 0
-  holePrefab: {fileID: 7901434866790508091, guid: cd2d637137505204abb9811ca0f361bc, type: 3}
-  raycastRadius: 0
-  holeRaycastMask:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!1001 &4496607912400992777
 PrefabInstance:
   m_ObjectHideFlags: 0

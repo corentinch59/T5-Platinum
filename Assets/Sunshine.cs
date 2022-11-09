@@ -13,6 +13,8 @@ public class Sunshine : MonoBehaviour
     private Vector3 center;
     private Vector3 distance;
 
+    public PostProcessManager postProcessManager;
+
     private float angle;
     private float radius;
     private float _ratio = 0f;
@@ -32,6 +34,8 @@ public class Sunshine : MonoBehaviour
         radius = distance.magnitude / 2;
 
         StartCoroutine(SunCoroutine());
+        StartCoroutine(postProcessManager.SunshinePostProcess(timing));
+
     }
 
     private IEnumerator SunCoroutine()
