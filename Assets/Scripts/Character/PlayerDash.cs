@@ -15,6 +15,9 @@ public class PlayerDash : MonoBehaviour
     private Coroutine currentCoroutine = null;
 
     private bool isDashing = false;
+    private bool DidIHitSomething = false;
+
+    private CharacterController collisionCharacter;
 
     private void Start()
     {
@@ -45,6 +48,12 @@ public class PlayerDash : MonoBehaviour
 
         _controller.enabled = true;
         isDashing = false;
+
+        if (DidIHitSomething)
+        {
+            collisionCharacter.enabled = true;
+            DidIHitSomething = false;
+        }
         currentCoroutine = null;
     }
 
@@ -52,13 +61,23 @@ public class PlayerDash : MonoBehaviour
     {
         if (isDashing)
         {
+            DidIHitSomething = true;
             //Debug.Log("Stuned");
-            _rigidbody.velocity *= -1;
 
-            //if (collision.gameObject.GetComponent<Rigidbody>())
-            //{
-            //    collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            //}
+          
+            if (collision.gameObject.GetComponent<CharacterController>())
+            {
+                collisionCharacter = collision.gameObject.GetComponent<CharacterController>();
+                collisionCharacter.enabled = false;
+
+
+                _rigidbody.velocity = new Vector3(-_playerMouvement.getMove.normalized.x * (forceDash / 2), 0f, 
+                    -_playerMouvement.getMove.normalized.y * (forceDash / 2));
+
+
+                collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(_playerMouvement.getMove.normalized.x * (forceDash / 2), 0f,
+                    _playerMouvement.getMove.normalized.y * (forceDash / 2));
+            }
             //fait l'effet hector
         }
     }
