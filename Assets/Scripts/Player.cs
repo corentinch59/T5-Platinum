@@ -7,16 +7,6 @@ using UnityEngine.InputSystem.Interactions;
 
 public class Player : MonoBehaviour
 {
-    public GameObject graveToCreate;
-    private GameObject graveCreated;
-
-    [Tooltip("Add this GameObject as a child to the player")] public GameObject corpse;
-
-    public float timerDig;
-
-    private int numberMashDigUpInit;
-    public int numberMashDigUp;
-
     public LayerMask graveLayer;
     public float distGraveCreation;
 
@@ -33,31 +23,24 @@ public class Player : MonoBehaviour
     }
 
     private IRaycastBehavior raycastBehavior;
-    private GameObject objectFound;
+    [SerializeField] private GameObject objectFound;
+    [SerializeField] private GameObject lastObjectFound;
 
     [Header("Debug")]
     public float radiusSphere = 5f;
-    public IInteractable interactableObj;
     public LayerMask interactableLayer;
-    public bool isCarrying = false;
 
     [Header("Hole Section")]
     public GameObject holePrefab;
-    [SerializeField][Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
+    [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
 
-    private void Start()
+    private PlayerVFX vfx;
+    
+    private void Start() 
     {
-        if (corpse != null)
-        {
-            corpse.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("You need to add a corpse in the component");
-        }
-
         playerMovement = GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
+        vfx = GetComponent<PlayerVFX>();
     }
 
     private void Update()
@@ -65,49 +48,100 @@ public class Player : MonoBehaviour
         //Debug player vision
         Debug.DrawLine(transform.position, transform.position + transform.forward * distGraveCreation, Color.red);
 
-        if (!corpse.activeSelf)
-        {
-            // can carry corpse
-        }
-
         objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer);
+        //Test Outline
+        if (objectFound != null && objectFound != lastObjectFound)
+        {
+            CallOutline(true, objectFound.GetComponent<SpriteRenderer>());
+            if (lastObjectFound != null)
+            {
+                CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+            }
+            lastObjectFound = objectFound;
+        }
+        else if (objectFound == null && lastObjectFound != null)
+        {
+            CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+            lastObjectFound = null;
+        }
+ 
     }
 
     public void InteractInput(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            if (interactableObj == null && carriedObj != null)
+            if(objectFound != null)
             {
-                carriedObj.PutDown(this);
-            } else if (interactableObj != null && isCarrying == false)
-            {
-                interactableObj.Interact(this);
-            } else if (interactableObj == null && isCarrying == false)
+                Debug.Log("Object found : " + objectFound.name);
+                if (objectFound.TryGetComponent(out Hole hole))
+                {
+                    hole.Interact(this);
+                }
+                else if (objectFound.TryGetComponent(out GriefPNJInteractable griefPnj) && carriedObj == null)
+                {
+                    griefPnj.Interact(this);
+                }
+                else if (objectFound.TryGetComponent(out Corpse corpse) && carriedObj == null)
+                {
+                    corpse.Interact(this);
+                }
+            }
+            else if (objectFound == null && carriedObj == null)
             {
                 Dig(1);
             }
         }
     }
 
+    public void DashCancelInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if(carriedObj != null)
+            {
+                if (carriedObj.TryGetComponent(out Corpse corpse))
+                {
+                    corpse.PutDown(this);
+                }
+                else if (carriedObj.TryGetComponent(out GriefPNJInteractable griefPnj))
+                {
+                    griefPnj.Cancel(this, null);
+                }
+            }
+            else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && carriedObj == null)
+            {
+                Dig(-1);
+            }
+            else
+            {
+                // player dash
+            }
+        }
+    }
+
     private void Dig(int modifier)
     {
-        //if (detectedHole)
-        //{
-        //    detectedHole.SetHoleSize = modifier;
-        //}
-        //else
-        //{
-        //    detectedHole = Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), 
-        //        holePrefab.transform.rotation).GetComponent<Hole>();
-        //}
+        if (objectFound != null && objectFound.TryGetComponent(out Hole hole))
+        {
+            hole.SetHoleSize = modifier;
+        }
+        else if(objectFound == null)
+        {
+            // Instantiate Hole to where the player is looking
+            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z),
+                holePrefab.transform.rotation);//.GetComponent<Hole>();
+        }
+    }
+
+    private void CallOutline(bool active, SpriteRenderer renderer)
+    {
+        StartCoroutine(vfx.Outline(active, renderer));
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(transform.position + transform.forward * distGraveCreation, graveToCreate.transform.localScale);
-        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
     }
 }
