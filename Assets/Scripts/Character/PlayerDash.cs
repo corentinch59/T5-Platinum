@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerDash : MonoBehaviour
 {
-
     [SerializeField] private float forceDash;
     [SerializeField] private float dashTime;
 
@@ -14,6 +13,11 @@ public class PlayerDash : MonoBehaviour
     private PlayerMovement _playerMouvement;
 
     private Coroutine currentCoroutine = null;
+
+    private bool isDashing = false;
+    private bool DidIHitSomething = false;
+
+    private CharacterController collisionCharacter;
 
     private void Start()
     {
@@ -34,13 +38,47 @@ public class PlayerDash : MonoBehaviour
     private IEnumerator DashCoroutine()
     {
         _controller.enabled = false;
+        isDashing = true;
 
         //_rigidbody.AddForce(transform.forward, ForceMode.Impulse);
-        Debug.Log(_playerMouvement.getMove.normalized);
+        //Debug.Log(_playerMouvement.getMove.normalized);
+
         _rigidbody.velocity += new Vector3(_playerMouvement.getMove.normalized.x * forceDash, 0f,_playerMouvement.getMove.normalized.y * forceDash);
         yield return new WaitForSeconds(dashTime);
 
         _controller.enabled = true;
+        isDashing = false;
+
+        if (DidIHitSomething)
+        {
+            collisionCharacter.enabled = true;
+            DidIHitSomething = false;
+        }
         currentCoroutine = null;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isDashing)
+        {
+            DidIHitSomething = true;
+            //Debug.Log("Stuned");
+
+          
+            if (collision.gameObject.GetComponent<CharacterController>())
+            {
+                collisionCharacter = collision.gameObject.GetComponent<CharacterController>();
+                collisionCharacter.enabled = false;
+
+
+                _rigidbody.velocity = new Vector3(-_playerMouvement.getMove.normalized.x * (forceDash / 2), 0f, 
+                    -_playerMouvement.getMove.normalized.y * (forceDash / 2));
+
+
+                collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(_playerMouvement.getMove.normalized.x * (forceDash / 2), 0f,
+                    _playerMouvement.getMove.normalized.y * (forceDash / 2));
+            }
+            //fait l'effet hector
+        }
     }
 }
