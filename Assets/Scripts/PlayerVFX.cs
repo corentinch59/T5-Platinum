@@ -15,7 +15,7 @@ public class PlayerVFX : MonoBehaviour
     
     private void Awake()
     {
-        vfx.gameObject.SetActive(false);
+        //vfx.gameObject.SetActive(false);
     }
 
 
