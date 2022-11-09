@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Hole : MonoBehaviour, IInteractable
 {
-    private bool isAlreadyDug = false;
     private int HoleSize = 1;
     public int SetHoleSize { 
         private get => HoleSize;
@@ -15,21 +14,15 @@ public class Hole : MonoBehaviour, IInteractable
     }
 
     [Header("Hole stuff")]
-    private GameObject holePrefab;
     [Tooltip("The ratio that will determine how much the hole grows in size when digging more")] public float scaleAmountToAdd = 0.2f;
     [Tooltip("How quick the hole grows in size when digging more.")] public float scaleAnimDuration = 1;
-
-    public Hole(GameObject prefab)
-    {
-        holePrefab = prefab;
-    }
 
     private void ModifyHoleSize(int modifier)
     {
         if(modifier > 0 && HoleSize < 3)
         {
             HoleSize += modifier;
-            transform.DOScale(transform.localScale + new Vector3(scaleAmountToAdd, 0, scaleAmountToAdd) * modifier, scaleAnimDuration).SetEase(Ease.InBounce);
+            transform.DOScale(transform.localScale + new Vector3(scaleAmountToAdd, scaleAmountToAdd, 0) * modifier, scaleAnimDuration).SetEase(Ease.InBounce);
         }
         else if (modifier < 0)
         {
@@ -52,20 +45,7 @@ public class Hole : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
-    /*private void Dig(bool isDug, int modifier)
-    {
-        if (isDug)
-        {
-            SetHoleSize = modifier;
-        }
-        else
-        {
-            Instantiate(holePrefab, transform.position*//*transform.position + new Vector3(orientationVect.x, HeightOfHole, orientationVect.y)*//*, Quaternion.identity);
-            isAlreadyDug = true;
-        }
-    }*/
-
-    public void Interact(PlayerTest player)
+    public void Interact(Player player)
     {
         SetHoleSize = 1;
     }

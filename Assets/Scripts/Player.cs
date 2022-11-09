@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
-public class PlayerTest : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public GameObject graveToCreate;
     private GameObject graveCreated;
@@ -15,15 +16,24 @@ public class PlayerTest : MonoBehaviour
 
     private int numberMashDigUpInit;
     public int numberMashDigUp;
-    
+
     public LayerMask graveLayer;
     public float distGraveCreation;
 
-    [HideInInspector] public PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
+    public PlayerMovement getPlayerMovement => playerMovement;
 
     public Sprite playerNotCarrying;
     public Sprite spriteCarry;
-    public Carryable carriedObj;
+    private Carryable carriedObj;
+    public Carryable CarriedObj
+    {
+        get { return carriedObj; }
+        set { carriedObj = value; }
+    }
+
+    private IRaycastBehavior raycastBehavior;
+    private GameObject objectFound;
 
     [Header("Debug")]
     public float radiusSphere = 5f;
@@ -31,12 +41,9 @@ public class PlayerTest : MonoBehaviour
     public LayerMask interactableLayer;
     public bool isCarrying = false;
 
-    [Header("Hole")]
+    [Header("Hole Section")]
     public GameObject holePrefab;
     [SerializeField][Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
-    [SerializeField] private LayerMask holeRaycastMask;
-    private Hole detectedHole;
-
 
     private void Start()
     {
@@ -50,8 +57,7 @@ public class PlayerTest : MonoBehaviour
         }
 
         playerMovement = GetComponent<PlayerMovement>();
-         
-        numberMashDigUpInit = numberMashDigUp;
+        raycastBehavior = new RaycastEmptyHand();
     }
 
     private void Update()
@@ -64,65 +70,9 @@ public class PlayerTest : MonoBehaviour
             // can carry corpse
         }
 
-        // check interactables
-        if (!isCarrying)
-        {
-            Collider[] interactables = Physics.OverlapSphere(transform.position, radiusSphere, interactableLayer);
-
-            if (interactables.Length > 0)
-            {
-                float min = float.MaxValue;
-
-                foreach (Collider col in interactables)
-                {
-                    if (col.gameObject.TryGetComponent(out IInteractable interactable))
-                    {
-                        float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
-                        if (dist < min)
-                        {
-                            min = dist;
-                            interactableObj = interactable;
-                            if(interactableObj is Hole)
-                            {
-                                detectedHole = (Hole)interactableObj;
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                // all the time -> NOPE
-                interactableObj = null;
-                detectedHole = null;
-            }
-        }
-
-        // Hole
-        /*RaycastHit[] colliders = Physics.SphereCastAll(transform.position, raycastRadius, transform.forward, Mathf.Infinity, holeRaycastMask);
-        if (colliders.Length > 0)
-        {
-            detectedHole = colliders[0].collider.GetComponent<Hole>();
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                float distanceCurrent = (colliders[i].transform.position - transform.position).magnitude;
-                float distancePrevious = (detectedHole.transform.position - transform.position).magnitude;
-
-                if (distanceCurrent > distancePrevious)
-                {
-                    detectedHole = colliders[i].collider.GetComponent<Hole>();
-                }
-            }
-        }
-        else
-        {
-            detectedHole = null;
-        }*/
+        objectFound = raycastBehavior.PerformRaycast(this, transform.position, raycastRadius, interactableLayer);
     }
 
-    /// <summary>
-    /// Hold an input to call this method
-    /// </summary>
     public void Dig(InputAction.CallbackContext ctx)
     {
         if (corpse.activeSelf)
@@ -168,9 +118,6 @@ public class PlayerTest : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Mash an input to call this method
-    /// </summary>
     public void DigUp(InputAction.CallbackContext ctx)
     {
         if (!corpse.activeSelf)
@@ -223,29 +170,17 @@ public class PlayerTest : MonoBehaviour
         }
     }
 
-    public void BurryInput(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            if(detectedHole != null)
-            {
-                detectedHole.Burry();
-                detectedHole = null;
-            }
-        }
-    }
-
     private void Dig(int modifier)
     {
-        //Debug.Log(detectedHole);
-        if (detectedHole)
-        {
-            detectedHole.SetHoleSize = modifier;
-        }
-        else
-        {
-            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), Quaternion.identity);
-        }
+        //if (detectedHole)
+        //{
+        //    detectedHole.SetHoleSize = modifier;
+        //}
+        //else
+        //{
+        //    detectedHole = Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f,transform.position.z), 
+        //        holePrefab.transform.rotation).GetComponent<Hole>();
+        //}
     }
 
     private void OnDrawGizmosSelected()
