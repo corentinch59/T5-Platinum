@@ -9,7 +9,7 @@ public class DigRequest : RequestH
     [Header("DigRequest")]
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
-    private PNJInteractable _pnjInteractable;
+    [HideInInspector] public PNJInteractable _pnjInteractable;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class DigRequest : RequestH
     public void SetDigRequest()
     {
         requestInfo = QuestManager.instance.GetRequest(this);
-        StartCoroutine(_pnjInteractable.Walk(true));
+        //StartCoroutine(_pnjInteractable.Walk(true));
         UpdateDigUI();
     }
     
@@ -51,7 +51,7 @@ public class DigRequest : RequestH
 
     public void GoodByePnj()
     {
-        StartCoroutine(_pnjInteractable.Walk(false));
+        //StartCoroutine(_pnjInteractable.Walk(false));
         if (QuestManager.instance.allQuests.Count > 0)
         {
             StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));

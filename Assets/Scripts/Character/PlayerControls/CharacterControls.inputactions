@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LDashFou",
+                    "type": "Button",
+                    "id": "117b99d2-1128-496e-b443-37f838e3fa42",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -119,6 +128,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d8fc8d8-f1bd-42fa-bed5-796eabd9710a",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LDashFou",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -235,54 +255,6 @@
             ]
         },
         {
-            "name": "PlayerProto3",
-            "id": "aba416ab-22d4-4cd7-873b-ef7a19e0c3ae",
-            "actions": [
-                {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "c3f7bec8-09dd-46df-a3ad-86e7041874a0",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Action",
-                    "type": "Value",
-                    "id": "5da23c4d-cd08-4633-ab9c-e332688df955",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold(duration=1,pressPoint=0.1)",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "4487a69f-99f4-4c5d-b913-8b06581aee78",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "942107ea-7548-4c06-979b-27ac32f16bae",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "Pilote",
             "id": "2cf4ff88-3d63-422f-9544-b052bad57333",
             "actions": [
@@ -312,6 +284,17 @@
                     "path": "<Gamepad>/leftStick/y",
                     "interactions": "",
                     "processors": "StickDeadzone(min=0.5)",
+                    "groups": "",
+                    "action": "MoveWithCorpse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e34184a2-00be-4704-aae1-8c7d2e2e3fca",
+                    "path": "<Gamepad>/dpad/y",
+                    "interactions": "",
+                    "processors": "",
                     "groups": "",
                     "action": "MoveWithCorpse",
                     "isComposite": false,
@@ -369,6 +352,17 @@
                     "name": "",
                     "id": "bf64a43f-26a3-4e2a-8e56-0aec22fa3567",
                     "path": "<Gamepad>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OrientateCorpse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c47d7c9-f0f0-4e37-9d08-db96a05ee285",
+                    "path": "<Gamepad>/dpad/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

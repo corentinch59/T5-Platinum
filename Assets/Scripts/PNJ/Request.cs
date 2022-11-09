@@ -35,7 +35,7 @@ public class Request : MonoBehaviour
     {
         int index = GetRandomNumber(QuestManager.instance.allQuests.Count);
         _requestInfos = QuestManager.instance.allQuests[index];
-        StartCoroutine(_pnjInteractable.Walk(true));
+        //StartCoroutine(_pnjInteractable.Walk(true));
         UpdateUI();
     }
 
@@ -65,7 +65,7 @@ public class Request : MonoBehaviour
 
     public void GoodByePnj()
     {
-        StartCoroutine(_pnjInteractable.Walk(false));
+        //StartCoroutine(_pnjInteractable.Walk(false));
         if (QuestManager.instance.allQuests.Count > 0)
         {
             //StartCoroutine(QuestManager.instance.WaitForNewRequest(3,this));

@@ -53,6 +53,15 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LDashFou"",
+                    ""type"": ""Button"",
+                    ""id"": ""117b99d2-1128-496e-b443-37f838e3fa42"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -141,6 +150,17 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d8fc8d8-f1bd-42fa-bed5-796eabd9710a"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LDashFou"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -257,54 +277,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""PlayerProto3"",
-            ""id"": ""aba416ab-22d4-4cd7-873b-ef7a19e0c3ae"",
-            ""actions"": [
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""c3f7bec8-09dd-46df-a3ad-86e7041874a0"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Action"",
-                    ""type"": ""Value"",
-                    ""id"": ""5da23c4d-cd08-4633-ab9c-e332688df955"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold(duration=1,pressPoint=0.1)"",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""4487a69f-99f4-4c5d-b913-8b06581aee78"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""942107ea-7548-4c06-979b-27ac32f16bae"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Action"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Pilote"",
             ""id"": ""2cf4ff88-3d63-422f-9544-b052bad57333"",
             ""actions"": [
@@ -334,6 +306,17 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/y"",
                     ""interactions"": """",
                     ""processors"": ""StickDeadzone(min=0.5)"",
+                    ""groups"": """",
+                    ""action"": ""MoveWithCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e34184a2-00be-4704-aae1-8c7d2e2e3fca"",
+                    ""path"": ""<Gamepad>/dpad/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MoveWithCorpse"",
                     ""isComposite"": false,
@@ -397,6 +380,17 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""action"": ""OrientateCorpse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c47d7c9-f0f0-4e37-9d08-db96a05ee285"",
+                    ""path"": ""<Gamepad>/dpad/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OrientateCorpse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -408,16 +402,13 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_LDashFou = m_Player.FindAction("LDashFou", throwIfNotFound: true);
         // SelectionScreenControl
         m_SelectionScreenControl = asset.FindActionMap("SelectionScreenControl", throwIfNotFound: true);
         m_SelectionScreenControl_ChangeLeft = m_SelectionScreenControl.FindAction("ChangeLeft", throwIfNotFound: true);
         m_SelectionScreenControl_ChangeRight = m_SelectionScreenControl.FindAction("ChangeRight", throwIfNotFound: true);
         m_SelectionScreenControl_Ready = m_SelectionScreenControl.FindAction("Ready", throwIfNotFound: true);
         m_SelectionScreenControl_UnReady = m_SelectionScreenControl.FindAction("UnReady", throwIfNotFound: true);
-        // PlayerProto3
-        m_PlayerProto3 = asset.FindActionMap("PlayerProto3", throwIfNotFound: true);
-        m_PlayerProto3_Move = m_PlayerProto3.FindAction("Move", throwIfNotFound: true);
-        m_PlayerProto3_Action = m_PlayerProto3.FindAction("Action", throwIfNotFound: true);
         // Pilote
         m_Pilote = asset.FindActionMap("Pilote", throwIfNotFound: true);
         m_Pilote_MoveWithCorpse = m_Pilote.FindAction("MoveWithCorpse", throwIfNotFound: true);
@@ -488,6 +479,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_LDashFou;
     public struct PlayerActions
     {
         private @CharacterControls m_Wrapper;
@@ -495,6 +487,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @LDashFou => m_Wrapper.m_Player_LDashFou;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -513,6 +506,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @LDashFou.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLDashFou;
+                @LDashFou.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLDashFou;
+                @LDashFou.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLDashFou;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -526,6 +522,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @LDashFou.started += instance.OnLDashFou;
+                @LDashFou.performed += instance.OnLDashFou;
+                @LDashFou.canceled += instance.OnLDashFou;
             }
         }
     }
@@ -587,47 +586,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         }
     }
     public SelectionScreenControlActions @SelectionScreenControl => new SelectionScreenControlActions(this);
-
-    // PlayerProto3
-    private readonly InputActionMap m_PlayerProto3;
-    private IPlayerProto3Actions m_PlayerProto3ActionsCallbackInterface;
-    private readonly InputAction m_PlayerProto3_Move;
-    private readonly InputAction m_PlayerProto3_Action;
-    public struct PlayerProto3Actions
-    {
-        private @CharacterControls m_Wrapper;
-        public PlayerProto3Actions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_PlayerProto3_Move;
-        public InputAction @Action => m_Wrapper.m_PlayerProto3_Action;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerProto3; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerProto3Actions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerProto3Actions instance)
-        {
-            if (m_Wrapper.m_PlayerProto3ActionsCallbackInterface != null)
-            {
-                @Move.started -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnMove;
-                @Action.started -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnAction;
-                @Action.performed -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnAction;
-                @Action.canceled -= m_Wrapper.m_PlayerProto3ActionsCallbackInterface.OnAction;
-            }
-            m_Wrapper.m_PlayerProto3ActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Action.started += instance.OnAction;
-                @Action.performed += instance.OnAction;
-                @Action.canceled += instance.OnAction;
-            }
-        }
-    }
-    public PlayerProto3Actions @PlayerProto3 => new PlayerProto3Actions(this);
 
     // Pilote
     private readonly InputActionMap m_Pilote;
@@ -715,6 +673,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnLDashFou(InputAction.CallbackContext context);
     }
     public interface ISelectionScreenControlActions
     {
@@ -722,11 +681,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         void OnChangeRight(InputAction.CallbackContext context);
         void OnReady(InputAction.CallbackContext context);
         void OnUnReady(InputAction.CallbackContext context);
-    }
-    public interface IPlayerProto3Actions
-    {
-        void OnMove(InputAction.CallbackContext context);
-        void OnAction(InputAction.CallbackContext context);
     }
     public interface IPiloteActions
     {

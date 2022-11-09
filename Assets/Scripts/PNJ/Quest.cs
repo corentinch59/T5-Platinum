@@ -7,7 +7,7 @@ using TMPro;
 public class Quest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
-    private DigRequest _request;
+    [HideInInspector] public DigRequest _request;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
@@ -108,7 +108,7 @@ public class Quest : MonoBehaviour
         yield return new WaitForSeconds(2);
         QuestManager.instance.questFinished.Add(requestInfos);
         QuestManager.instance.activeQuests.Remove(requestInfos);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void CheckTimer(float timer)
