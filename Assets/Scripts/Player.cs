@@ -31,8 +31,11 @@ public class Player : MonoBehaviour
     public LayerMask interactableLayer;
 
     [Header("Hole Section")]
-    public GameObject holePrefab;
     [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
+    public GameObject holePrefab;
+    [SerializeField] private int numberOfTaps;
+    public int getNumbersOfTaps => numberOfTaps;
+
 
     private PlayerVFX vfx;
     
@@ -120,7 +123,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Dig(int modifier)
+    public void Dig(int modifier)
     {
         if (objectFound != null && objectFound.TryGetComponent(out Hole hole))
         {
