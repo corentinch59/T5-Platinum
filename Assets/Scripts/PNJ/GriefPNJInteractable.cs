@@ -92,6 +92,8 @@ public class GriefPNJInteractable : Carryable
         player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
                 player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
 
+        player.CarriedObj = null;
+
         isInteractable = true;
     }
 
@@ -113,6 +115,8 @@ public class GriefPNJInteractable : Carryable
 
     public IEnumerator Walk(bool isWalkingForward)
     {
+        isInteractable = false;
+
         float distToEnd = 0;
 
         if (!agent.enabled) agent.enabled = true;
