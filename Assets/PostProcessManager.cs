@@ -11,27 +11,23 @@ public class PostProcessManager : MonoBehaviour
     public Volume _volume;
     private Vignette _vignette;
     private FilmGrain _filmGrain;
+    private WhiteBalance _whiteBalance;
     public float vignetteEndIntensity;
     public float filmGrainEndIntensity;
+    public float whiteBalanceEndIntensity;
+    
 
-    private void Start()
+    private void Awake()
     {
         _volume.GetComponent<Volume>();
         _volume.profile.TryGet(out _vignette);
         _volume.profile.TryGet(out _filmGrain);
+        _volume.profile.TryGet(out _whiteBalance);
         _vignette.intensity.value = 0;
         _filmGrain.intensity.value = 0;
+        _whiteBalance.temperature.value = 70;
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            _vignette.intensity.value = 0.5f;
-            _filmGrain.intensity.value = 0.8f;
-        }
-    }
-
+    
     public IEnumerator SunshinePostProcess(float lerpDuration)
     {
         float timeElapsed = 0;
@@ -39,11 +35,13 @@ public class PostProcessManager : MonoBehaviour
         {
             _vignette.intensity.value = Mathf.Lerp(0, vignetteEndIntensity, timeElapsed / lerpDuration);
             _filmGrain.intensity.value = Mathf.Lerp(0, filmGrainEndIntensity, timeElapsed / lerpDuration);
+            _whiteBalance.temperature.value = Mathf.Lerp(100, whiteBalanceEndIntensity, timeElapsed / lerpDuration);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
         _vignette.intensity.value = vignetteEndIntensity;
         _filmGrain.intensity.value = filmGrainEndIntensity;
+        _whiteBalance.temperature.value = whiteBalanceEndIntensity;
     }
     
 }
