@@ -29,7 +29,7 @@ public class PlayerDash : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && (_playerMouvement.getMove.normalized.x != 0 || _playerMouvement.getMove.normalized.y != 0))
         {
             if (currentCoroutine != null) return;
             currentCoroutine = StartCoroutine(DashCoroutine());
