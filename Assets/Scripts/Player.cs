@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
     }
 
     private IRaycastBehavior raycastBehavior;
-    private GameObject objectFound;
+    [SerializeField] private GameObject objectFound;
+    [SerializeField] private GameObject lastObjectFound;
 
     [Header("Debug")]
     public float radiusSphere = 5f;
@@ -33,10 +34,13 @@ public class Player : MonoBehaviour
     public GameObject holePrefab;
     [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
 
+    private PlayerVFX vfx;
+    
     private void Start() 
     {
         playerMovement = GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
+        vfx = GetComponent<PlayerVFX>();
     }
 
     private void Update()
@@ -44,7 +48,23 @@ public class Player : MonoBehaviour
         //Debug player vision
         Debug.DrawLine(transform.position, transform.position + transform.forward * distGraveCreation, Color.red);
 
-        objectFound = raycastBehavior.PerformRaycast(this, transform.position, raycastRadius, interactableLayer);
+        objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer);
+        //Test Outline
+        if (objectFound != null && objectFound != lastObjectFound)
+        {
+            CallOutline(true, objectFound.GetComponent<SpriteRenderer>());
+            if (lastObjectFound != null)
+            {
+                CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+            }
+            lastObjectFound = objectFound;
+        }
+        else if (objectFound == null && lastObjectFound != null)
+        {
+            CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+            lastObjectFound = null;
+        }
+ 
     }
 
     public void InteractInput(InputAction.CallbackContext ctx)
@@ -112,6 +132,11 @@ public class Player : MonoBehaviour
             Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z),
                 holePrefab.transform.rotation);//.GetComponent<Hole>();
         }
+    }
+
+    private void CallOutline(bool active, SpriteRenderer renderer)
+    {
+        StartCoroutine(vfx.Outline(active, renderer));
     }
 
     private void OnDrawGizmosSelected()
