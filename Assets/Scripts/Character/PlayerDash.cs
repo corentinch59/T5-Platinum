@@ -54,7 +54,6 @@ public class PlayerDash : MonoBehaviour
             collisionCharacter.enabled = true;
         }
 
-        collisionCharacter.enabled = false;
         DidIHitSomething = false;
         currentCoroutine = null;
     }
