@@ -13,13 +13,13 @@ public class Sunshine : MonoBehaviour
     private Vector3 center;
     private Vector3 distance;
 
+    private float angle;
     private float radius;
     private float _ratio = 0f;
 
     public float ratio { get { return _ratio; } }
 
 
-    float angle;
 
     private void Start()
     {
@@ -47,6 +47,6 @@ public class Sunshine : MonoBehaviour
 
             yield return null;
         }
-        timer = 0f;
+        //timer = 0f;
     }
 }

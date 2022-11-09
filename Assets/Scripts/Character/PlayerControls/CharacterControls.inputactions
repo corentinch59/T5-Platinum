@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LDashFou",
+                    "type": "Button",
+                    "id": "117b99d2-1128-496e-b443-37f838e3fa42",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -119,6 +128,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d8fc8d8-f1bd-42fa-bed5-796eabd9710a",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LDashFou",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -229,54 +249,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "UnReady",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "PlayerProto3",
-            "id": "aba416ab-22d4-4cd7-873b-ef7a19e0c3ae",
-            "actions": [
-                {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "c3f7bec8-09dd-46df-a3ad-86e7041874a0",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Action",
-                    "type": "Value",
-                    "id": "5da23c4d-cd08-4633-ab9c-e332688df955",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold(duration=1,pressPoint=0.1)",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "4487a69f-99f4-4c5d-b913-8b06581aee78",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "942107ea-7548-4c06-979b-27ac32f16bae",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
