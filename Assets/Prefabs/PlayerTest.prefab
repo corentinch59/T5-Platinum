@@ -267,7 +267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1178560175
 Transform:
   m_ObjectHideFlags: 0
@@ -497,9 +497,11 @@ GameObject:
   - component: {fileID: 2596005604130923465}
   - component: {fileID: 2596005604130923475}
   - component: {fileID: 1676592206633555986}
-  - component: {fileID: 1641089447}
   - component: {fileID: -9117927903731099442}
   - component: {fileID: 7000738648327963535}
+  - component: {fileID: 2107677573}
+  - component: {fileID: 2107677564}
+  - component: {fileID: 2107677572}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -626,17 +628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 20
-  digDistance: 0
-  interactionRange: 0
-  moveDir: {x: 0, y: 0, z: 0}
-  playerVelocity: {x: 0, y: 0, z: 0}
-  canMove: 1
   spriteRenderer: {fileID: 82249407}
-  orientationVect: {x: 0, y: 0}
-  arrowOrientation: {fileID: 1846672742}
-  isPilote: {fileID: 247636536}
-  isCoPilote: {fileID: 836121912}
-  positionCopilote: {fileID: 0}
+  canMove: 1
 --- !u!114 &1676592206633555986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,8 +673,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/SwitchProControllerHID/leftStick,/SwitchProControllerHID1/leftStick,/XInputControllerWindows1/leftStick,/XInputControllerWindows/leftStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1641089447}
-        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
+      - m_Target: {fileID: 2107677564}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: InteractInput
         m_Mode: 0
         m_Arguments:
@@ -728,9 +721,9 @@ MonoBehaviour:
     m_ActionName: SelectionScreenControlE/ChangeRight[/XInputControllerWindows/leftStick/right,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1641089447}
-        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
-        m_MethodName: BurryInput
+      - m_Target: {fileID: 2107677564}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: DashCancelInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -775,14 +768,6 @@ MonoBehaviour:
     m_ActionId: ef91c638-039c-45dc-a7c1-36e036ea2ef2
     m_ActionName: SelectionScreenControl/UnReady[/DualShock4GamepadHID/buttonEast]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c3f7bec8-09dd-46df-a3ad-86e7041874a0
-    m_ActionName: PlayerProto3/Move[/DualShock4GamepadHID/leftStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5da23c4d-cd08-4633-ab9c-e332688df955
-    m_ActionName: PlayerProto3/Action[/DualShock4GamepadHID/buttonEast]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2596005604130923475}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
@@ -800,7 +785,7 @@ MonoBehaviour:
     m_ActionName: Pilote/MoveWithCorpse[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID/dpad/down,/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID/dpad/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1641089447}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
         m_MethodName: InteractInput
         m_Mode: 0
@@ -832,7 +817,7 @@ MonoBehaviour:
     m_ActionName: Co-Pilote/OrientateCorpse[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/leftStick/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1641089447}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
         m_MethodName: InteractInput
         m_Mode: 0
@@ -846,45 +831,27 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3adfcfb8-e1af-4dee-9499-973aced5b007
     m_ActionName: Co-Pilote/Interact[/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2107677572}
+        m_TargetAssemblyTypeName: PlayerDash, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
+    m_ActionId: 117b99d2-1128-496e-b443-37f838e3fa42
+    m_ActionName: Player/LDashFou[/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1641089447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2596005604130923474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f36c2f1bb3a114d861fd33501cc716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graveToCreate: {fileID: 8366753863871105557, guid: 21e8a7e95cd03be4192bafca4eef7cc6, type: 3}
-  corpse: {fileID: 1454460455}
-  timerDig: 3
-  numberMashDigUp: 3
-  graveLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  distGraveCreation: 5
-  playerMovement: {fileID: 0}
-  playerNotCarrying: {fileID: 21300000, guid: 1be856eaf2ba42a4cb4de6255cc5e33e, type: 3}
-  spriteCarry: {fileID: 21300000, guid: 96321a1fba81d6e4993b70b1c2314de1, type: 3}
-  carriedObj: {fileID: 0}
-  radiusSphere: 5
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  isCarrying: 0
-  holePrefab: {fileID: 7901434866790508091, guid: cd2d637137505204abb9811ca0f361bc, type: 3}
-  raycastRadius: 0
-  holeRaycastMask:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &-9117927903731099442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,7 +884,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0baa0f16f705cb3419d109e39b178b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listVfx: []
   vfx: {fileID: 0}
+--- !u!54 &2107677573
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596005604130923474}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &2107677564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596005604130923474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37dd15ec6a6cf964e94a59b6773df137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceSpawnHole: 2
+  graveLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  distGraveCreation: 5
+  playerNotCarrying: {fileID: 21300000, guid: 1be856eaf2ba42a4cb4de6255cc5e33e, type: 3}
+  spriteCarry: {fileID: 21300000, guid: 96321a1fba81d6e4993b70b1c2314de1, type: 3}
+  objectFound: {fileID: 0}
+  lastObjectFound: {fileID: 0}
+  radiusSphere: 5
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  raycastRadius: 5
+  holePrefab: {fileID: 7901434866790508091, guid: cd2d637137505204abb9811ca0f361bc, type: 3}
+  numberOfTaps: 0
+--- !u!114 &2107677572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596005604130923474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a77e854b905494f943df3ad4abf11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceDash: 20
+  dashTime: 0.75
 --- !u!1001 &4496607912400992777
 PrefabInstance:
   m_ObjectHideFlags: 0
