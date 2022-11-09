@@ -7,6 +7,8 @@ using UnityEngine.InputSystem.Interactions;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private float distanceSpawnHole = 2f;
+
     public LayerMask graveLayer;
     public float distGraveCreation;
 
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int numberOfTaps;
     public int getNumbersOfTaps => numberOfTaps;
 
+    private DiggingBehavior diggingBehavior;
 
     private PlayerVFX vfx;
     
@@ -44,6 +47,7 @@ public class Player : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
         vfx = GetComponent<PlayerVFX>();
+        TransitionDigging(new StartDigging());
     }
 
     private void Update()
@@ -55,17 +59,20 @@ public class Player : MonoBehaviour
         //Test Outline
         if (objectFound != null && objectFound != lastObjectFound)
         {
-            CallOutline(true, objectFound.GetComponent<SpriteRenderer>());
-            if (lastObjectFound != null)
+            if(objectFound.GetComponent<SpriteRenderer>() != null)
             {
-                CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+                CallOutline(true, objectFound.GetComponent<SpriteRenderer>());
+                if (lastObjectFound != null)
+                {
+                    CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+                }
+                lastObjectFound = objectFound;
             }
-            lastObjectFound = objectFound;
         }
         else if (objectFound == null && lastObjectFound != null)
         {
-            CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
-            lastObjectFound = null;
+             CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+             lastObjectFound = null;
         }
  
     }
@@ -85,14 +92,25 @@ public class Player : MonoBehaviour
                 {
                     griefPnj.Interact(this);
                 }
-                else if (objectFound.TryGetComponent(out Corpse corpse) && carriedObj == null)
+                else if (objectFound.TryGetComponent(out Corpse corpse))
                 {
-                    corpse.Interact(this);
+                    if (carriedObj == null)
+                    {
+                        corpse.Interact(this);
+                    }
+                    else if (carriedObj != null && carriedObj.TryGetComponent(out GriefPNJInteractable pnj))
+                    {
+                        pnj.CheckLocationWanted(this);
+                    }
+                }
+                else if (objectFound.TryGetComponent(out BigCorpse bigcorpse) && carriedObj == null)
+                {
+                    bigcorpse.Interact(this);
                 }
             }
             else if (objectFound == null && carriedObj == null)
             {
-                Dig(1);
+                diggingBehavior.PerformAction();
             }
         }
     }
@@ -118,6 +136,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                diggingBehavior.CancelAction();
                 // player dash
             }
         }
@@ -132,14 +151,30 @@ public class Player : MonoBehaviour
         else if(objectFound == null)
         {
             // Instantiate Hole to where the player is looking
-            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z),
-                holePrefab.transform.rotation);//.GetComponent<Hole>();
+            Instantiate(holePrefab, new Vector3(transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole, transform.position.y - 1f,
+                transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole), holePrefab.transform.rotation);
         }
     }
 
     private void CallOutline(bool active, SpriteRenderer renderer)
     {
         StartCoroutine(vfx.Outline(active, renderer));
+    }
+
+    public void TransitionDigging(DiggingBehavior newdiggingBehavior)
+    {
+        diggingBehavior = newdiggingBehavior;
+        diggingBehavior.SetPlayer(this);
+    }
+
+    public void EnableInput(string input)
+    {
+        playerMovement.getPlayerInput.currentActionMap.FindAction(input).Enable();
+    }
+
+    public void DisableInput(string input)
+    {
+        playerMovement.getPlayerInput.currentActionMap.FindAction(input).Disable();
     }
 
     private void OnDrawGizmosSelected()

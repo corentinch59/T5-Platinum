@@ -9,6 +9,6 @@ public class StartDigging : DiggingBehavior
     public override void PerformAction()
     {
         _player.DisableInput("Move");
-        _player.TransitionDigging(new PerformingDig(_player.getNumberOfTaps));
+        _player.TransitionDigging(new PerformingDig(_player.getNumbersOfTaps));
     }
 }

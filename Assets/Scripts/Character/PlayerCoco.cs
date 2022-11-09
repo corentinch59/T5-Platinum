@@ -76,7 +76,7 @@ public class PlayerCoco : MonoBehaviour
     public void TransitionDigging(DiggingBehavior newdiggingBehavior)
     {
         diggingBehavior = newdiggingBehavior;
-        diggingBehavior.SetPlayer(this);
+        //diggingBehavior.SetPlayer(this);
     }
 
     public void Dig(int modifier)

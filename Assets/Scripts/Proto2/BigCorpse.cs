@@ -40,7 +40,6 @@ public class BigCorpse : MonoBehaviour, IInteractable
 
         if (players[1] != null)
             player2_move = players[1].getPlayerMovement.getMove;
-
     }
 
     private void FixedUpdate()
