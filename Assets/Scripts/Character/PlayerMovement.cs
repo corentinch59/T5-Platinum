@@ -64,10 +64,10 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator FeedBackPlayerMoves()
     {
-        transform.DOMoveY(2.8f, 0.1f);
+        transform.DOMoveY(transform.position.y + 2.8f, 0.1f);
         //transform.DOScaleY(1.3f, 0.3f);
         yield return new WaitForSeconds(0.1f);
-        transform.DOMoveY(2.5f, 0.1f);
+        transform.DOMoveY(transform.position.y + 2.5f, 0.1f);
         //transform.DOScaleY(1f, 0.3f);
         yield return new WaitForSeconds(0.1f);
         feedback = null;
