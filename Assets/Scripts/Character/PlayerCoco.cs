@@ -19,6 +19,7 @@ public class PlayerCoco : MonoBehaviour
     [SerializeField]
     [Tooltip("How much times the player has to mash the button")]
     private int numberOfTaps;
+    public int getNumberOfTaps => numberOfTaps;
 
     [Header("Interaction Raycast Handling")]
     [SerializeField][Tooltip("The distance at which an interactible is detected.")] private float raycastRadius;
@@ -33,33 +34,32 @@ public class PlayerCoco : MonoBehaviour
     private GameObject interactableObject;
     private IRaycastBehavior raycastBehavior;
     private DiggingBehavior diggingBehavior;
-    private int internalTaps = 0;
 
     private void Start()
     {
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
+        TransitionDigging(new StartDigging());
+    }
+
+    private void Update()
+    {
+        interactableObject = raycastBehavior.PerformRaycast(transform.position, raycastRadius, InteractableRaycastMask);
     }
 
     public void OnInteract(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
         {
-            //if (isDigging)
-            //{
-            //    ++internalTaps;
-            //    if (numberOfTaps == internalTaps)
-            //    {
-            //        isDigging = false;
-            //        internalTaps = 0;
-            //        //Dig & animation
-            //    }
-            //}
-            //else
-            //{
-            //    isDigging = true;
-            //    internalTaps = 0;
-            //}
+            diggingBehavior.PerformAction();
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            diggingBehavior.CancelAction();
         }
     }
 
@@ -76,5 +76,19 @@ public class PlayerCoco : MonoBehaviour
     public void TransitionDigging(DiggingBehavior newdiggingBehavior)
     {
         diggingBehavior = newdiggingBehavior;
+        diggingBehavior.SetPlayer(this);
+    }
+
+    public void Dig(int modifier)
+    {
+        if (interactableObject != null && interactableObject.TryGetComponent(out Hole hole))
+        {
+            hole.SetHoleSize = modifier;
+        }
+        else if (interactableObject == null)
+        {
+            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z),
+                holePrefab.transform.rotation);
+        }
     }
 }

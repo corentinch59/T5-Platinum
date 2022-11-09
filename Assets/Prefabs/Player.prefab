@@ -152,11 +152,11 @@ MonoBehaviour:
   interactionDuration: 0
   TimeBetweenInteractionInputs: 0
   numberOfTaps: 3
-  raycastRadius: 0
+  raycastRadius: 3
   InteractableRaycastMask:
     serializedVersion: 2
     m_Bits: 128
-  holePrefab: {fileID: 0}
+  holePrefab: {fileID: 7901434866790508091, guid: 4d63c4b30cf348542af2ce42ccb31710, type: 3}
 --- !u!114 &6483471783306938823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,8 +200,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 6722909848307004737}
+        m_TargetAssemblyTypeName: PlayerCoco, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
@@ -215,7 +215,19 @@ MonoBehaviour:
     m_ActionId: 5ccefa9e-183a-41e9-b7aa-39a94f34fce7
     m_ActionName: Player/Interact[/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6722909848307004737}
+        m_TargetAssemblyTypeName: PlayerCoco, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e7be9c4a-f55f-4234-89b6-ec47aeea6552
     m_ActionName: Player/Dash[/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
@@ -236,14 +248,6 @@ MonoBehaviour:
     m_ActionName: SelectionScreenControl/UnReady[/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: c3f7bec8-09dd-46df-a3ad-86e7041874a0
-    m_ActionName: PlayerProto3/Move[/XInputControllerWindows/leftStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5da23c4d-cd08-4633-ab9c-e332688df955
-    m_ActionName: PlayerProto3/Action[/XInputControllerWindows/buttonEast]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 486c4d0b-0bee-4c83-bc5f-1f39e4d5f172
     m_ActionName: Pilote/MoveWithCorpse[/XInputControllerWindows/leftStick,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
@@ -258,6 +262,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3adfcfb8-e1af-4dee-9499-973aced5b007
     m_ActionName: Co-Pilote/Interact[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 117b99d2-1128-496e-b443-37f838e3fa42
+    m_ActionName: Player/LDashFou[/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
