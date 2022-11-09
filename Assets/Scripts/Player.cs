@@ -71,11 +71,8 @@ public class Player : MonoBehaviour
         }
         else if (objectFound == null && lastObjectFound != null)
         {
-            if (objectFound.GetComponent<SpriteRenderer>() != null)
-            {
-                CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
-                lastObjectFound = null;
-            }
+             CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
+             lastObjectFound = null;
         }
  
     }
