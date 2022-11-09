@@ -216,9 +216,6 @@ public class BigCorpse : MonoBehaviour, IInteractable
         yield break;
     }
 
-    public void Cancel(Player player, Hole holeDetected)
-    {
-    }
 
 
     //private void OnDrawGizmos()

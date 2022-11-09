@@ -64,18 +64,6 @@ public class GriefPNJInteractable : Carryable
         }
     }
 
-    public override void Cancel(Player player, Hole holeDetected)
-    {
-        if(holeDetected == null)
-        {
-            PutDown(player);
-            player.CarriedObj = null;
-        } else
-        {
-            CheckLocationWanted(player);
-        }
-    }
-
     public override void PutDown(Player player, bool isTimeOut = false)
     {
         //player.carriedObj.gameObject.SetActive(true);

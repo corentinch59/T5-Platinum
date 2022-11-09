@@ -5,10 +5,6 @@ using UnityEngine.InputSystem;
 
 public class Carryable : MonoBehaviour, IInteractable, IPutDown
 {
-    public virtual void Cancel(Player player, Hole holeDetected)
-    {
-    }
-
     public virtual void Interact(Player player)
     {
     }

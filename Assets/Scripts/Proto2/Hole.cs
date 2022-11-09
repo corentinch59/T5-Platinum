@@ -35,7 +35,7 @@ public class Hole : MonoBehaviour, IInteractable
     {
         transform.DOScale(0, scaleAnimDuration).SetEase(Ease.InBounce);
         yield return new WaitForSeconds(scaleAnimDuration);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public void Interact(Player player)
@@ -53,7 +53,7 @@ public class Hole : MonoBehaviour, IInteractable
             }
             else if(player.CarriedObj.TryGetComponent(out GriefPNJInteractable griefPNJ))
             {
-                griefPNJ.Cancel(player, this);
+                griefPNJ.CheckLocationWanted(player);
             }
         }
         else
@@ -67,27 +67,33 @@ public class Hole : MonoBehaviour, IInteractable
         Vector3 holepos = transform.position;
         // burry corpse
         Burry();
-        gameObject.layer = 0;
+
+        // Cant' interact with the corpse anymore
+        corpse.gameObject.layer = 0;
 
         if (corpse.thisQuest != null)
         {
+            Debug.LogError(corpse.corpseData.localisation);
             corpse.corpseData = corpse.UpdateRequestLocalisation();
             StartCoroutine(corpse.thisQuest.FinishQuest(corpse.corpseData));
+            Debug.LogError(corpse.corpseData.localisation);
+
         }
 
-        transform.localScale = new Vector3(0f, 0f, 0f);
-        transform.position = new Vector3(holepos.x, holepos.y - 3, holepos.z);
+        corpse.transform.localScale = new Vector3(0f, 0f, 0f);
+        corpse.transform.position = new Vector3(holepos.x, holepos.y - 3, holepos.z);
 
+        Debug.Log("here");
         yield return new WaitForSeconds(2f);
 
         // grave
         int randomsprite = UnityEngine.Random.Range(0, corpse.TombSprite.Length);
         corpse.SpriteRenderer.sprite = corpse.TombSprite[randomsprite];
 
-        //Sequence sequence = DOTween.Sequence();
+        Debug.Log(corpse.SpriteRenderer.sprite.name);
 
-        transform.DOMove(new Vector3(holepos.x, holepos.y, holepos.z), 1f);
-        transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
+        corpse.transform.DOMove(new Vector3(holepos.x, holepos.y, holepos.z), 1f);
+        corpse.transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
     }
 
     public void Burry()
@@ -102,9 +108,5 @@ public class Hole : MonoBehaviour, IInteractable
     public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
     {
         yield break;
-    }
-
-    public void Cancel(Player player, Hole holeDetected)
-    {
     }
 }
