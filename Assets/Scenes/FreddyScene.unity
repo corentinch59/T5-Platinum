@@ -2654,63 +2654,51 @@ PrefabInstance:
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[0].pnj
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 221008982}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[1].pnj
       value: 
-      objectReference: {fileID: 221008982}
+      objectReference: {fileID: 1569310732}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[2].pnj
       value: 
-      objectReference: {fileID: 1569310732}
-    - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
-      propertyPath: pnjs.Array.data[3].pnj
-      value: 
       objectReference: {fileID: 2131148112}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
-      propertyPath: pnjs.Array.data[4].pnj
+      propertyPath: pnjs.Array.data[3].pnj
       value: 
       objectReference: {fileID: 2142475050}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[0].questLocation
       value: 
-      objectReference: {fileID: 2064347733092246286}
+      objectReference: {fileID: 1133403016}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[1].questLocation
       value: 
-      objectReference: {fileID: 1133403016}
+      objectReference: {fileID: 1487811223}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[2].questLocation
       value: 
-      objectReference: {fileID: 1487811223}
+      objectReference: {fileID: 1506605618}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[3].questLocation
       value: 
-      objectReference: {fileID: 1506605618}
-    - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
-      propertyPath: pnjs.Array.data[4].questLocation
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2064347733092246286}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[0].returnLocation
       value: 
-      objectReference: {fileID: 2064347732626777577}
+      objectReference: {fileID: 606931224}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[1].returnLocation
       value: 
-      objectReference: {fileID: 1510566396}
+      objectReference: {fileID: 336061617}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[2].returnLocation
       value: 
-      objectReference: {fileID: 336061617}
+      objectReference: {fileID: 1510566396}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[3].returnLocation
       value: 
-      objectReference: {fileID: 606931224}
-    - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
-      propertyPath: pnjs.Array.data[4].returnLocation
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2064347732626777577}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
 --- !u!1001 &7345117023800097086
