@@ -70,9 +70,5 @@ public class IncineratorScript : MonoBehaviour, IInteractable
     {
         yield break;
     }
-
-    public void Cancel(Player player, Hole holeDetected)
-    {
-    }
 }
 

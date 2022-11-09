@@ -7,9 +7,6 @@ public class IncineratorLever : MonoBehaviour, IInteractable
 {
     private Player playerRef;
 
-    public void Cancel(Player player, Hole holeDetected)
-    {
-    }
 
     public void Interact(Player player)
     {

@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
                 }
                 else if (carriedObj.TryGetComponent(out GriefPNJInteractable griefPnj))
                 {
-                    griefPnj.Cancel(this, null);
+                    griefPnj.PutDown(this);
                 }
             }
             else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && carriedObj == null)
