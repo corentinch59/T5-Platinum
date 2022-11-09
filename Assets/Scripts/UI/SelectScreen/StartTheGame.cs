@@ -107,7 +107,7 @@ public class StartTheGame : MonoBehaviour
                 selectionPlayers[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
 
                 selectionPlayers[i].GetComponent<PlayerMovement>().enabled = true;
-                selectionPlayers[i].GetComponent<PlayerTest>().enabled = true;
+                selectionPlayers[i].GetComponent<Player>().enabled = true;
                 selectionPlayers[i].GetComponent<CharacterController>().enabled = true;
                 selectionPlayers[i].transform.DOScale(1f, 0.5f);
 

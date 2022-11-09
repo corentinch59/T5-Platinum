@@ -7,11 +7,11 @@ using UnityEditor;
 //[CustomEditor(typeof(PlayerTest))]
 public class TestEditor : Editor
 {
-    private PlayerTest myPlayer = null;
+    private Player myPlayer = null;
 
     public void OnEnable()
     {
-        this.myPlayer = (PlayerTest)this.target;
+        this.myPlayer = (Player)this.target;
     }
 
     public override void OnInspectorGUI()

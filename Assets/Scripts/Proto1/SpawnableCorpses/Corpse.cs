@@ -15,9 +15,7 @@ public class Corpse : Carryable
     [SerializeField] private LayerMask interactableHole;
     [SerializeField] private Sprite[] tombSprite = new Sprite[5];
     
-    [SerializeField] private Transform piloteLocation;
-    [SerializeField] private Transform coPiloteLocation;
-    private PlayerTest[] players = new PlayerTest[2];
+    private Player[] players = new Player[2];
 
     private SpriteRenderer spriteRenderer;
     private Hole holeToBurry;
@@ -53,7 +51,7 @@ public class Corpse : Carryable
         //Debug.DrawRay(transform.position, Vector3.down * 20, Color.black);
     }
 
-    public override void Interact(PlayerTest player)
+    public override void Interact(Player player)
     {
         GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
 
@@ -67,91 +65,18 @@ public class Corpse : Carryable
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        // DEBUG CARRING W/ OTHER PLAYER
-        if ((int)thisQuest.requestInfos.siz > 0)
+        if (player.CarriedObj == null)
         {
-            // snap player to the corpse
-            if(Vector3.Distance(player.transform.position, piloteLocation.position) <= 5)
-            {
-                if (players[0] == null)
-                {
-                    player.playerMovement.canMove = false;
-                    player.gameObject.transform.DOPause(); //-> worked a bit
-                    SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
-
-                    if (player.carriedObj == null)
-                    {
-                        player.carriedObj = this;
-                        player.interactableObj = null;
-                        player.isCarrying = true;
-                    }
-                    players[0] = player;
-                    player.transform.position = piloteLocation.position;
-                    player.playerMovement.ChangeInput("Pilote");
-                    player.playerMovement.IsPilote.SetActive(true);
-
-                    if (players[1] != null)
-                        player.playerMovement.positionCopilote = players[1].transform;
-                }
-            }
-            else if(Vector3.Distance(player.transform.position, coPiloteLocation.position) <= 5)
-            {
-                if (players[1] == null)
-                {
-                    //Debug.Log("Player is co-pilote");
-                    player.playerMovement.canMove = false;
-                    player.gameObject.transform.DOPause(); //-> worked a bit
-                    SetVibrations(player.playerMovement.PlayerInput, 0.1f, 0.1f);
-
-                    if (player.carriedObj == null)
-                    {
-                        player.carriedObj = this;
-                        player.interactableObj = null;
-                        player.isCarrying = true;
-                    }
-                    players[1] = player;
-                    //player.transform.DOMove(coPiloteLocation.position, 0.5f, true).SetEase(Ease.Linear);
-                    player.transform.position = coPiloteLocation.position;
-                    player.playerMovement.ChangeInput("Co-Pilote");
-                    player.playerMovement.IsCoPilote.SetActive(true);
-
-                    if (players[0] != null)
-                        players[0].playerMovement.positionCopilote = player.transform;
-                }
-            }
-
-            // If everyone is up to carry the body then they can move
-            if ((int)thisQuest.requestInfos.siz + 1 == players.Length)
-            {
-                int playersSet = 0;
-                for(int i = 0; i < players.Length; ++i)
-                {
-                    if (players[i] != null)
-                        playersSet++;
-                }
-                if(playersSet > 1)
-                {
-                    players[0].playerMovement.canMove = true;
-                    players[1].playerMovement.canMove = true;
-                    transform.parent = players[1].transform;
-                    players[1].transform.parent = players[0].transform;
-                }
-            }
-        } else if((int)thisQuest.requestInfos.siz <= 0)
-        {
-            if (player.carriedObj == null)
-            {
-                player.carriedObj = this;
-                player.interactableObj = null;
-                player.isCarrying = true;
-            }
-            player.playerMovement.SpriteRenderer.sprite = player.spriteCarry;
-            player.carriedObj.transform.parent = player.transform;
-            player.carriedObj.transform.localPosition = Vector3.up * 2f;
+            player.CarriedObj = this;
+            player.interactableObj = null;
+            player.isCarrying = true;
         }
+        player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
+        player.CarriedObj.transform.parent = player.transform;
+        player.CarriedObj.transform.localPosition = Vector3.up * 2f;
     }
 
-    public override void PutDown(PlayerTest player, bool isTimeOut = false)
+    public override void PutDown(Player player, bool isTimeOut = false)
     {
         // To avoid dotween problem with player increasing scale of this (as a child)
         if (thisQuest.requestInfos.siz > 0)
@@ -163,58 +88,12 @@ public class Corpse : Carryable
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        // DEBUG CARRYING W/ OTHER PLAYER
-        player.playerMovement.ChangeInput("Player");
 
-        for(int i = 0; i < players.Length; i++)
-        {
-            if (players[i] == player)
-            {
-                if(i == 0)
-                {
-                    // Pilote is leaving
-                    //Debug.Log("Pilote leaves");
-                    player.playerMovement.canMove = true;
-                    player.playerMovement.IsPilote.SetActive(false);
-                    if (players[1] != null)
-                    {
-                        transform.parent = players[1].transform;
-                        players[1].transform.parent = null;
-                        players[1].playerMovement.canMove = false;
-                    }
-                    else
-                    {
-                        transform.parent = null;
-                    }
-                    player.playerMovement.positionCopilote = null;
-                }
-                else
-                {
-                    // Copilote is leaving
-                    //Debug.Log("Co-Pilote leaves");
-                    player.playerMovement.IsCoPilote.SetActive(false);
-                    player.playerMovement.canMove = true;
-                    if (players[0] != null)
-                    {
-                        players[0].playerMovement.canMove = false;
-                        players[0].playerMovement.positionCopilote = null;
-                        player.transform.parent = null;
-                        transform.parent = players[0].transform;
-                    }
-                    else
-                    {
-                        transform.parent = null;
-                    }
-                }
-                players[i] = null;
-            }
-        }
-
-        if (player.playerMovement.canMove && players[0] == null && players[1] == null) // if one player -> put the body anywhere he wants to
+        if (player.getPlayerMovement.canMove && players[0] == null && players[1] == null) // if one player -> put the body anywhere he wants to
         {
             if(canBurry)
             {
-                player.carriedObj.transform.parent = null;
+                player.CarriedObj.transform.parent = null;
 
                 // update CorpseData
                 corpseData = UpdateLocalisation();
@@ -224,9 +103,9 @@ public class Corpse : Carryable
             else
             {
                 //put down corpse in front of a player -> use rotation but now just t.right
-                player.carriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.playerMovement.orientationVect.x * 3f,
-                    player.transform.position.y, player.transform.position.z + player.playerMovement.orientationVect.y * 3f);
-                player.carriedObj.transform.parent = null;
+                player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
+                    player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
+                player.CarriedObj.transform.parent = null;
 
                 if (isInHole)
                 {
@@ -237,13 +116,13 @@ public class Corpse : Carryable
         }
         else
         {
-            player.playerMovement.canMove = true;
+            player.getPlayerMovement.canMove = true;
         }
 
         player.isCarrying = false;
 
         // Visual Debug 
-        player.playerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
+        player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
 
         if (thisQuest != null)
         {
@@ -255,7 +134,7 @@ public class Corpse : Carryable
             StartCoroutine(thisQuest.FinishQuest(corpseData));
         }
 
-        player.carriedObj = null;
+        player.CarriedObj = null;
     }
 
     private IEnumerator BurryingCorpse(Hole hole)
