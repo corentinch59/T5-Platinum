@@ -7,6 +7,8 @@ using UnityEngine.InputSystem.Interactions;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private float distanceSpawnHole = 2f;
+
     public LayerMask graveLayer;
     public float distGraveCreation;
 
@@ -33,8 +35,6 @@ public class Player : MonoBehaviour
     [Header("Hole Section")]
     [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
     public GameObject holePrefab;
-    [SerializeField] private float distanceSpawnHole = 2f;
-
     [SerializeField] private int numberOfTaps;
     public int getNumbersOfTaps => numberOfTaps;
 
@@ -97,11 +97,11 @@ public class Player : MonoBehaviour
                 }
                 else if (objectFound.TryGetComponent(out Corpse corpse))
                 {
-                    if(carriedObj == null)
+                    if (carriedObj == null)
                     {
                         corpse.Interact(this);
                     }
-                    else if(carriedObj != null && carriedObj.TryGetComponent(out GriefPNJInteractable pnj))
+                    else if (carriedObj != null && carriedObj.TryGetComponent(out GriefPNJInteractable pnj))
                     {
                         pnj.CheckLocationWanted(this);
                     }
@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
         else if(objectFound == null)
         {
             // Instantiate Hole to where the player is looking
-            Instantiate(holePrefab, new Vector3(transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole, transform.position.y - 1f, 
+            Instantiate(holePrefab, new Vector3(transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole, transform.position.y - 1f,
                 transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole), holePrefab.transform.rotation);
         }
     }

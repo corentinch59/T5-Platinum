@@ -35,6 +35,7 @@ public class Hole : MonoBehaviour, IInteractable
     {
         transform.DOScale(0, scaleAnimDuration).SetEase(Ease.InBounce);
         yield return new WaitForSeconds(scaleAnimDuration);
+        //gameObject.SetActive(false);
     }
 
     public void Interact(Player player)
@@ -57,8 +58,7 @@ public class Hole : MonoBehaviour, IInteractable
         }
         else
         {
-            if(heldCorpse == null)
-                SetHoleSize = 1;
+            SetHoleSize = 1;
         }
     }
 
@@ -73,23 +73,27 @@ public class Hole : MonoBehaviour, IInteractable
 
         if (corpse.thisQuest != null)
         {
+            Debug.LogError(corpse.corpseData.localisation);
             corpse.corpseData = corpse.UpdateRequestLocalisation();
             StartCoroutine(corpse.thisQuest.FinishQuest(corpse.corpseData));
+            Debug.LogError(corpse.corpseData.localisation);
 
         }
 
         corpse.transform.localScale = new Vector3(0f, 0f, 0f);
         corpse.transform.position = new Vector3(holepos.x, holepos.y - 3, holepos.z);
 
+        Debug.Log("here");
         yield return new WaitForSeconds(2f);
 
         // grave
         int randomsprite = UnityEngine.Random.Range(0, corpse.TombSprite.Length);
         corpse.SpriteRenderer.sprite = corpse.TombSprite[randomsprite];
 
+        Debug.Log(corpse.SpriteRenderer.sprite.name);
+
         corpse.transform.DOMove(new Vector3(holepos.x, holepos.y, holepos.z), 1f);
         corpse.transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
-        this.enabled = false;
     }
 
     public void Burry()
