@@ -2266,7 +2266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a77e854b905494f943df3ad4abf11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceDash: 10
+  forceDash: 20
   dashTime: 0.75
 --- !u!1001 &1221621884
 PrefabInstance:
