@@ -35,7 +35,7 @@ public class PostProcessManager : MonoBehaviour
         {
             _vignette.intensity.value = Mathf.Lerp(0, vignetteEndIntensity, timeElapsed / lerpDuration);
             _filmGrain.intensity.value = Mathf.Lerp(0, filmGrainEndIntensity, timeElapsed / lerpDuration);
-            _whiteBalance.temperature.value = Mathf.Lerp(100, whiteBalanceEndIntensity, timeElapsed / lerpDuration);
+            _whiteBalance.temperature.value = Mathf.Lerp(35, whiteBalanceEndIntensity, timeElapsed / lerpDuration);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
