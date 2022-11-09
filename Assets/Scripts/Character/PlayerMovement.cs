@@ -50,19 +50,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moveDir = new Vector3(move.x, 0, move.y);
-        controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
-
-        if(moveDir.magnitude > 0 && feedback == null)
+        if (canMove)
         {
-            feedback = StartCoroutine(FeedBackPlayerMoves());
+            moveDir = new Vector3(move.x, 0, move.y);
+            controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
+
+            if(moveDir.magnitude > 0 && feedback == null)
+            {
+                feedback = StartCoroutine(FeedBackPlayerMoves());
+            }
+
+            if (controller.isGrounded && playerVelocity.y < 0)
+                playerVelocity.y = 0f;
+
+            playerVelocity.y += controller.isGrounded ? 0f : gravityValue * Time.fixedDeltaTime;
+            controller.Move(playerVelocity * Time.fixedDeltaTime);
         }
-
-        if (controller.isGrounded && playerVelocity.y < 0)
-            playerVelocity.y = 0f;
-
-        playerVelocity.y += controller.isGrounded ? 0f : gravityValue * Time.fixedDeltaTime;
-        controller.Move(playerVelocity * Time.fixedDeltaTime);
     }
 
     public IEnumerator FeedBackPlayerMoves()
@@ -84,38 +87,30 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (canMove)
+        move = ctx.ReadValue<Vector2>();
+        if (move.magnitude > 0)
         {
-            move = ctx.ReadValue<Vector2>();
-            if (move.magnitude > 0)
-            {
-                //this.PlayerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.1f, 0.05f);
-            }
-            else
-            {
-                //this.PlayerInput.GetDevice<Gamepad>().PauseHaptics();
-            }
-
-            if (ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
-            {
-                orientationVect = ctx.ReadValue<Vector2>();
-                if (Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
-                {
-                    orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
-                }
-                else
-                {
-                    orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
-                    
-                }
-                orientationVect.Normalize();
-            }
+            //this.PlayerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.1f, 0.05f);
         }
         else
         {
-            move = Vector2.zero;
+            //this.PlayerInput.GetDevice<Gamepad>().PauseHaptics();
         }
 
+        if (ctx.ReadValue<Vector2>().sqrMagnitude > (controller.minMoveDistance * controller.minMoveDistance))
+        {
+            orientationVect = ctx.ReadValue<Vector2>();
+            if (Mathf.Abs(orientationVect.x) > Mathf.Abs(orientationVect.y))
+            {
+                orientationVect = new Vector2(orientationVect.x + orientationVect.y, 0);
+            }
+            else
+            {
+                orientationVect = new Vector2(0, orientationVect.y + orientationVect.x);
+                    
+            }
+            orientationVect.Normalize();
+        }
     }
 
     public void ChangeInput(string inputActionMap)
