@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
             // can carry corpse
         }
 
-        objectFound = raycastBehavior.PerformRaycast(this, transform.position, raycastRadius, interactableLayer);
+        objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer);
     }
 
     public void InteractInput(InputAction.CallbackContext ctx)
