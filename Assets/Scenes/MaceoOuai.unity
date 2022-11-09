@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -894,6 +894,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1641089447, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1846672742, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -909,6 +913,10 @@ PrefabInstance:
     - target: {fileID: 279232100935496272, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676592206633555986, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2321410641102125202, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_Enabled
@@ -964,7 +972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2596005604130923465, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2596005604130923469, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_Enabled
@@ -976,17 +984,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2596005604130923474, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2596005604130923475, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4889368507655530694, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7000738648327963535, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1641089447, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
 --- !u!1 &658503501 stripped
 GameObject:
@@ -998,20 +1011,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2596005604130923464, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
   m_PrefabInstance: {fileID: 658503500}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &658503503
-MonoBehaviour:
+--- !u!54 &658503503
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658503501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0baa0f16f705cb3419d109e39b178b91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listVfx: []
-  vfx: {fileID: 925739027}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &801206909
 GameObject:
   m_ObjectHideFlags: 0
@@ -2627,9 +2642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431cf71d6cf57514392b602d686096c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 509869856}
-  timeLeft: 100
-  endScene: EndScene
 --- !u!222 &1428840828
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2805,7 +2817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1517525336
 Transform:
   m_ObjectHideFlags: 0
@@ -2995,28 +3007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f36c2f1bb3a114d861fd33501cc716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graveToCreate: {fileID: 8366753863871105557, guid: 21e8a7e95cd03be4192bafca4eef7cc6, type: 3}
-  graveCreated: {fileID: 0}
-  corpse: {fileID: 0}
-  timerDig: 5
-  numberMashDigUpInit: 0
-  numberMashDigUp: 5
-  graveLayer:
-    m_Bits: 64
-  distGraveCreation: 3
-  playerMovement: {fileID: 0}
-  playerNotCarrying: {fileID: 0}
-  spriteCarry: {fileID: 0}
-  carriedObj: {fileID: 0}
-  radiusSphere: 5
-  interactableLayer:
-    m_Bits: 0
-  isCarrying: 0
-  holePrefab: {fileID: 0}
-  raycastRadius: 0
-  holeRaycastMask:
-    m_Bits: 0
-  detectedHole: {fileID: 0}
 --- !u!136 &1730250704
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3303,6 +3293,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6357613033232578423, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6357613033434172769, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_Pivot.x
       value: 0

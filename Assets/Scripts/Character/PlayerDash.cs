@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerDash : MonoBehaviour
 {
-
     [SerializeField] private float forceDash;
     [SerializeField] private float dashTime;
 
@@ -14,6 +13,8 @@ public class PlayerDash : MonoBehaviour
     private PlayerMovement _playerMouvement;
 
     private Coroutine currentCoroutine = null;
+
+    private bool isDashing = false;
 
     private void Start()
     {
@@ -34,13 +35,31 @@ public class PlayerDash : MonoBehaviour
     private IEnumerator DashCoroutine()
     {
         _controller.enabled = false;
+        isDashing = true;
 
         //_rigidbody.AddForce(transform.forward, ForceMode.Impulse);
-        Debug.Log(_playerMouvement.getMove.normalized);
+        //Debug.Log(_playerMouvement.getMove.normalized);
+
         _rigidbody.velocity += new Vector3(_playerMouvement.getMove.normalized.x * forceDash, 0f,_playerMouvement.getMove.normalized.y * forceDash);
         yield return new WaitForSeconds(dashTime);
 
         _controller.enabled = true;
+        isDashing = false;
         currentCoroutine = null;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isDashing)
+        {
+            //Debug.Log("Stuned");
+            _rigidbody.velocity *= -1;
+
+            //if (collision.gameObject.GetComponent<Rigidbody>())
+            //{
+            //    collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //}
+            //fait l'effet hector
+        }
     }
 }
