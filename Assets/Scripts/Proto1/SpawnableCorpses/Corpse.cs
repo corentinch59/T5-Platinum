@@ -22,7 +22,7 @@ public class Corpse : Carryable
     private Player[] players = new Player[2];
 
     private bool isInteractable;
-    public bool IsInteractable { get; set; }
+    public bool IsInteractable { get { return isInteractable; } set { isInteractable = value; } }
 
     private void Start()
     {
@@ -37,7 +37,14 @@ public class Corpse : Carryable
 
     public override void Interact(Player player)
     {
-        GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
+        // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
+        // And tell another pnj to come give player a quest
+        if(gameObject.tag == "Corpse")
+        {
+            gameObject.tag = "Untagged";
+            Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
+            GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
+        }
 
         // To avoid dotween problem with player increasing scale of this (as a child)
         if(thisQuest.requestInfos.siz > 0)
@@ -88,33 +95,6 @@ public class Corpse : Carryable
         player.CarriedObj = null;
     }
 
-    private CorpseData UpdateLocalisation()
-    {
-        CorpseData newLoc = new CorpseData();
-
-        newLoc.name = corpseData.name;
-        newLoc.size = corpseData.size;
-        newLoc.corpseType = corpseData.corpseType;
-        newLoc.coffinType = corpseData.coffinType;
-        newLoc.specificity = corpseData.specificity;
-
-        Collider[] corpsInAreas = Physics.OverlapSphere(transform.position, radius, localisationsLayer);
-
-        float min = float.MaxValue;
-
-        foreach (Collider col in corpsInAreas)
-        {
-            float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
-            if (dist < min)
-            {
-                min = dist;
-                newLoc.localisation = AddLocalisation(col.gameObject.tag);
-            }
-        }
-        return newLoc;
-    }
-
-    [ContextMenu("Update Localisations")]
     public CorpseData UpdateRequestLocalisation()
     {
         CorpseData newLoc = new CorpseData();
@@ -129,13 +109,14 @@ public class Corpse : Carryable
 
         float min = float.MaxValue;
 
-        foreach (Collider col in corpsInAreas)
+        for(int i = 0; i < corpsInAreas.Length; ++i)
         {
-            float dist = Vector3.Distance(col.gameObject.transform.position, transform.position);
+            Debug.Log("HIT");
+            float dist = Vector3.Distance(corpsInAreas[i].gameObject.transform.position, transform.position);
             if (dist < min)
             {
                 min = dist;
-                newLoc.localisation = AddLocalisation(col.gameObject.tag);
+                newLoc.localisation = AddLocalisation(corpsInAreas[i].gameObject.tag);
             }
         }
         return newLoc;

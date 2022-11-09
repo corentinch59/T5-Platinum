@@ -22,8 +22,6 @@ public class GriefRequest : MonoBehaviour
     public Coroutine griefCoroutine;
     private float timer;
 
-
-
     private void Awake()
     {
         questParent = GameObject.FindGameObjectWithTag("DeuilQuestUI");

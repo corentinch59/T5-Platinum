@@ -15,10 +15,13 @@ public class GriefPNJInteractable : Carryable
 
     private bool isInteractable = true;
 
+    private bool questActivated;
+
     public string griefName = "";
     public float radius = 10f;
     private float griefDuration = 3f;
     private Coroutine feedback;
+    private Coroutine finishGriefQuest;
 
     public void Awake()
     {
@@ -45,11 +48,21 @@ public class GriefPNJInteractable : Carryable
 
     public override void Interact(Player player)
     {
-        if (isInteractable)
+        // check if isinteractable and avoid player to take him if he didn't finish his coroutine
+        if (isInteractable && finishGriefQuest == null)
         {
+            // Disable Interactable Layer to avoid player's detection
+            gameObject.layer = 0;
+
             agent.enabled = false;
             requestImg.SetActive(false);
-            deathRequest.AcceptRequest();
+
+            // Avoid pnj to activate twice the same quest
+            if (!questActivated)
+            {
+                deathRequest.AcceptRequest();
+                questActivated = true;
+            }
 
             player.CarriedObj = this;
 
@@ -66,7 +79,9 @@ public class GriefPNJInteractable : Carryable
 
     public override void PutDown(Player player, bool isTimeOut = false)
     {
-        //player.carriedObj.gameObject.SetActive(true);
+        // Give Interactable layer back to be able to interact with him
+        gameObject.layer = 7;
+
         player.CarriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
         player.CarriedObj.gameObject.transform.parent = null;
 
@@ -102,13 +117,18 @@ public class GriefPNJInteractable : Carryable
         PutDown(player);
         if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
         {
-            StartCoroutine(dq.FinishGriefQuest(griefName));
+            finishGriefQuest = StartCoroutine(dq.FinishGriefQuest(griefName));
         }
         player.CarriedObj = null;
     }
 
     public IEnumerator Grieffing()
     {
+        // Pnj has a player as a parent so we put it down
+        if(transform.parent != null && transform.parent.TryGetComponent(out Player player))
+        {
+            PutDown(player);
+        }
         yield return new WaitForSeconds(griefDuration);
         StartCoroutine(Walk(false));
     }
@@ -117,9 +137,8 @@ public class GriefPNJInteractable : Carryable
     {
         isInteractable = false;
 
-        float distToEnd = 0;
-
-        if (!agent.enabled) agent.enabled = true;
+        if (!agent.enabled) 
+            agent.enabled = true;
 
         //Arrive Avec sa quete
         if (isWalkingForward)
@@ -133,10 +152,15 @@ public class GriefPNJInteractable : Carryable
             requestImg.SetActive(false);
             agent.destination = startLoc.position;
         }
-        distToEnd = Vector3.Distance(agent.destination, transform.position) / agent.speed;
+        float distToEnd = Vector3.Distance(agent.destination, transform.position) / agent.speed;
         yield return new WaitForSeconds(distToEnd);
-        if(!isWalkingForward) StartCoroutine(QuestManager.instance.WaitForNewRequest(3, deathRequest));
+
+        if(!isWalkingForward) 
+            StartCoroutine(QuestManager.instance.WaitForNewRequest(3, deathRequest));
+
         isInteractable = true;
+        questActivated = false;
+        finishGriefQuest = null;
     }
 
     private void OnDrawGizmos()

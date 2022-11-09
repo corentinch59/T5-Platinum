@@ -15,6 +15,7 @@ TagManager:
   - GriefEndLoc
   - Shrine
   - Flower
+  - Corpse
   layers:
   - Default
   - TransparentFX

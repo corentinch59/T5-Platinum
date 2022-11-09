@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public void NewPNJComingWithQuest(PNJInteractable previousPnj)
     {
         PNJInteractable newPnjGivesQuest;
+
+        // take random pnj (not the same as before) in the list and tell him to give player a quest
         int randomPnj = Random.Range(0, pnjs.Count);
         newPnjGivesQuest = pnjs[randomPnj].pnj;
         while(pnjs[randomPnj].pnj == previousPnj)
@@ -46,6 +48,8 @@ public class GameManager : MonoBehaviour
             randomPnj = Random.Range(0, pnjs.Count);
             newPnjGivesQuest = pnjs[randomPnj].pnj;
         }
+        Debug.Log("Next Quest From : " + newPnjGivesQuest);
+
         newPnjGivesQuest.StartCoroutine(newPnjGivesQuest.Walk(true));
     }
 }

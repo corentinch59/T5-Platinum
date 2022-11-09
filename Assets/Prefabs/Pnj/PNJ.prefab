@@ -310,9 +310,13 @@ MonoBehaviour:
   request: {fileID: 2126752867567367414}
   requestImg: {fileID: 6393312891690220004}
   corpseToCreate: {fileID: 694417260691800150, guid: 2c37c2b4654ba6247b38a9d97dfcfac5, type: 3}
-  startLoc: {fileID: 0}
-  endLoc: {fileID: 0}
   agent: {fileID: 4086287966202717261}
+  returnLoc: {fileID: 0}
+  questLoc: {fileID: 0}
+  radius: 5
+  corpseLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!212 &7662065769341376208
 SpriteRenderer:
   m_ObjectHideFlags: 0

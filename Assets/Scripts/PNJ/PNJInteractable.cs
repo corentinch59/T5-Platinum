@@ -11,44 +11,21 @@ public class PNJInteractable : MonoBehaviour
     [SerializeField] private GameObject requestImg;
     [SerializeField] private GameObject corpseToCreate;
     [SerializeField] private NavMeshAgent agent;
-    [HideInInspector] public Transform returnLoc;
-    [HideInInspector] public Transform questLoc;
+
+    [Header("PnjChecksSpot")]
     [SerializeField] private float radius;
     [SerializeField] private LayerMask corpseLayer;
 
     private Coroutine feedback;
-/*
-    public void Awake()
-    {
-        //startLoc = gameObject.transform.GetChild(0);
-        //endLoc = gameObject.transform.GetChild(1);
-        endLoc = GameObject.FindGameObjectWithTag("EndLoc").GetComponent<Transform>();
-        startLoc = GameObject.FindGameObjectWithTag("StartLoc").GetComponent<Transform>();
-    }*/
 
-   /* private void Start()
-    {
-        transform.position = startLoc.position;
-        StartCoroutine(Walk(true));
-    }*/
-
+    [HideInInspector] public Transform returnLoc;
+    [HideInInspector] public Transform questLoc;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // display quest when arriving in pos
-            DisplayQuest();
-        }
-
         if (agent.hasPath && feedback == null)
         {
             feedback = StartCoroutine(FeedBackPlayerMoves());
         }
-    }
-
-    private void DisplayQuest()
-    {
-        requestImg.SetActive(true);
     }
 
     public void AddNewQuest()
@@ -64,6 +41,7 @@ public class PNJInteractable : MonoBehaviour
         {
             // corpseCreated is taking data from the request
             c.thisQuest = request.quest.GetComponent<Quest>();
+
             // GameFeel
             if ((int)c.thisQuest.requestInfos.siz > 0)
             {
@@ -85,19 +63,16 @@ public class PNJInteractable : MonoBehaviour
         Collider[] thereAreCorpseAround = Physics.OverlapSphere(transform.position, radius, corpseLayer);
         if(thereAreCorpseAround.Length > 0)
         {
-            foreach(Collider corpseSpawned in thereAreCorpseAround)
+            for(int i = 0; i < thereAreCorpseAround.Length;++i)
             {
-                if(corpseSpawned.gameObject.tag == "Corpse")
+                if (thereAreCorpseAround[i].TryGetComponent(out Corpse c) && thereAreCorpseAround[i].gameObject.tag == "Corpse")
                 {
+                    Debug.Log("Oh il y a déjà un corps au revoir");
                     return true;
                 }
             }
         }
-        else
-        {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     public IEnumerator Walk(bool isWalkingForward)
@@ -114,6 +89,7 @@ public class PNJInteractable : MonoBehaviour
             }
             else
             {
+                Debug.Log("Il y a un corps là");
                 yield return StartCoroutine(Walk(false));
             }
         }
@@ -124,6 +100,12 @@ public class PNJInteractable : MonoBehaviour
             agent.destination = returnLoc.position;
             yield return null;
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 
     private IEnumerator FeedBackPlayerMoves()

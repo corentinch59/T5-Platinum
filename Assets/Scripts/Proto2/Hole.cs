@@ -88,7 +88,6 @@ public class Hole : MonoBehaviour, IInteractable
         {
             corpse.corpseData = corpse.UpdateRequestLocalisation();
             StartCoroutine(corpse.thisQuest.FinishQuest(corpse.corpseData));
-
         }
 
         corpse.transform.localScale = new Vector3(0f, 0f, 0f);
@@ -100,7 +99,13 @@ public class Hole : MonoBehaviour, IInteractable
         int randomsprite = UnityEngine.Random.Range(0, corpse.TombSprite.Length);
         corpse.SpriteRenderer.sprite = corpse.TombSprite[randomsprite];
 
-        corpse.transform.DOMove(new Vector3(holepos.x, holepos.y, holepos.z), 1f);
+        if(randomsprite == 0)
+        {
+            corpse.transform.DOMove(new Vector3(holepos.x, holepos.y + 1f, holepos.z), 1f);
+        } else if(randomsprite == 1)
+        {
+            corpse.transform.DOMove(new Vector3(holepos.x, holepos.y + 0.6f, holepos.z), 1f);
+        }
         corpse.transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
 
         this.enabled = false;

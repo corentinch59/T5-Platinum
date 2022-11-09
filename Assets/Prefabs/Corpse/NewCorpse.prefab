@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5864278713313341788}
   m_Layer: 7
   m_Name: NewCorpse
-  m_TagString: Untagged
+  m_TagString: Corpse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,19 +121,17 @@ MonoBehaviour:
     localisation: 0
     coffinType: 2
     specificity: 0
-  radius: 5
+  thisQuest: {fileID: 0}
+  radius: 7
   localisationsLayer:
     serializedVersion: 2
     m_Bits: 792
   interactableHole:
     serializedVersion: 2
     m_Bits: 128
-  thisQuest: {fileID: 0}
   tombSprite:
   - {fileID: 21300000, guid: 58f4c99a2881c234f8dcca7cea4deb30, type: 3}
   - {fileID: 21300000, guid: add1aec190c91e04f87ee97dca77ea48, type: 3}
-  piloteLocation: {fileID: 4341562695175836924}
-  coPiloteLocation: {fileID: 1150108564403625352}
 --- !u!208 &-5864278713313341788
 NavMeshObstacle:
   m_ObjectHideFlags: 0
