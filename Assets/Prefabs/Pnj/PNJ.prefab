@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 4581886092418296284}
   - component: {fileID: 7662065769341376208}
   - component: {fileID: 4086287966202717261}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PNJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,12 +311,12 @@ MonoBehaviour:
   requestImg: {fileID: 6393312891690220004}
   corpseToCreate: {fileID: 694417260691800150, guid: 2c37c2b4654ba6247b38a9d97dfcfac5, type: 3}
   agent: {fileID: 4086287966202717261}
-  returnLoc: {fileID: 0}
-  questLoc: {fileID: 0}
   radius: 5
   corpseLayer:
     serializedVersion: 2
     m_Bits: 128
+  returnLoc: {fileID: 0}
+  questLoc: {fileID: 0}
 --- !u!212 &7662065769341376208
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -12,6 +12,13 @@ public class GameManager : MonoBehaviour
     [Serializable]
     public struct PnjGivesQuest
     {
+        public PnjGivesQuest(PNJInteractable newPnj, Transform newQuestLocation, Transform newReturnLocation)
+        {
+            pnj = newPnj;
+            questLocation = newQuestLocation;
+            returnLocation = newReturnLocation;
+        }
+
         public PNJInteractable pnj;
         public Transform questLocation;
         public Transform returnLocation;
@@ -43,11 +50,11 @@ public class GameManager : MonoBehaviour
         // take random pnj (not the same as before) in the list and tell him to give player a quest
         int randomPnj = Random.Range(0, pnjs.Count);
         newPnjGivesQuest = pnjs[randomPnj].pnj;
-        while(pnjs[randomPnj].pnj == previousPnj)
+        /*while(pnjs[randomPnj].pnj == previousPnj)
         {
             randomPnj = Random.Range(0, pnjs.Count);
             newPnjGivesQuest = pnjs[randomPnj].pnj;
-        }
+        }*/
         Debug.Log("Next Quest From : " + newPnjGivesQuest);
 
         newPnjGivesQuest.StartCoroutine(newPnjGivesQuest.Walk(true));
