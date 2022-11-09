@@ -14,14 +14,12 @@ public class Corpse : Carryable
     [SerializeField] private LayerMask localisationsLayer;
     [SerializeField] private LayerMask interactableHole;
     [SerializeField] private Sprite[] tombSprite = new Sprite[5];
-    
-    private Player[] players = new Player[2];
+    public Sprite[] TombSprite => tombSprite;
 
     private SpriteRenderer spriteRenderer;
-    private Hole holeToBurry;
+    public SpriteRenderer SpriteRenderer => spriteRenderer;
 
-    private bool isInHole;
-    private bool canBurry;
+    private Player[] players = new Player[2];
 
     private void Start()
     {
@@ -31,24 +29,6 @@ public class Corpse : Carryable
     {
         if (players[0] != null && players[1] != null)
             transform.LookAt(Camera.main.transform);
-
-        Collider[] hits = Physics.OverlapSphere(transform.position, radius, interactableHole);
-        if (hits.Length > 0)
-        {
-            foreach (Collider hit in hits)
-            {
-                if (hit.gameObject.TryGetComponent(out Hole hole))
-                {
-                    canBurry = true;
-                    holeToBurry = hole;
-                }
-            }
-        }
-        else
-        {
-            canBurry = false;
-        }
-        //Debug.DrawRay(transform.position, Vector3.down * 20, Color.black);
     }
 
     public override void Interact(Player player)
@@ -68,8 +48,6 @@ public class Corpse : Carryable
         if (player.CarriedObj == null)
         {
             player.CarriedObj = this;
-            player.interactableObj = null;
-            player.isCarrying = true;
         }
         player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
         player.CarriedObj.transform.parent = player.transform;
@@ -88,75 +66,23 @@ public class Corpse : Carryable
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-
         if (player.getPlayerMovement.canMove && players[0] == null && players[1] == null) // if one player -> put the body anywhere he wants to
         {
-            if(canBurry)
-            {
-                player.CarriedObj.transform.parent = null;
-
-                // update CorpseData
-                corpseData = UpdateLocalisation();
-                isInHole = true;
-                StartCoroutine(BurryingCorpse(holeToBurry));
-            }
-            else
-            {
-                //put down corpse in front of a player -> use rotation but now just t.right
-                player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
-                    player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
-                player.CarriedObj.transform.parent = null;
-
-                if (isInHole)
-                {
-                    // update CorpseData
-                    corpseData = UpdateLocalisation();
-                }
-            }
+            Debug.Log("put down corpse");
+            //put down corpse in front of a player -> use rotation but now just t.right
+            player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
+                player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
+            player.CarriedObj.transform.parent = null;
         }
         else
         {
             player.getPlayerMovement.canMove = true;
         }
 
-        player.isCarrying = false;
-
         // Visual Debug 
         player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
 
-        if (thisQuest != null)
-        {
-            // check if the corpse correspond to the quest -> finish quest
-            if (isInHole)
-            {
-                corpseData = UpdateRequestLocalisation();
-            }
-            StartCoroutine(thisQuest.FinishQuest(corpseData));
-        }
-
         player.CarriedObj = null;
-    }
-
-    private IEnumerator BurryingCorpse(Hole hole)
-    {
-        Vector3 holepos = hole.transform.position;
-        // burry corpse
-        hole.Burry();
-        gameObject.layer = 0;
-
-        transform.localScale = new Vector3(0f, 0f, 0f);
-        transform.position = new Vector3(holepos.x, holepos.y - 3, holepos.z);
-
-        yield return new WaitForSeconds(2f);
-
-        // grave
-        int randomsprite = UnityEngine.Random.Range(0, tombSprite.Length);
-        spriteRenderer.sprite = tombSprite[randomsprite];
-
-        //Sequence sequence = DOTween.Sequence();
-
-        transform.DOMove(new Vector3(holepos.x, holepos.y, holepos.z), 1f);
-        transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
     }
 
     private CorpseData UpdateLocalisation()
