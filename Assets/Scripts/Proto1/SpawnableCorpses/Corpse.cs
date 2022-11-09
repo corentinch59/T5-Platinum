@@ -21,9 +21,13 @@ public class Corpse : Carryable
 
     private Player[] players = new Player[2];
 
+    private bool isInteractable;
+    public bool IsInteractable { get; set; }
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        IsInteractable = true;
     }
     private void Update()
     {

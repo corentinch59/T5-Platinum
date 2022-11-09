@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
                 }
                 else if (objectFound.TryGetComponent(out Corpse corpse))
                 {
-                    if (carriedObj == null)
+                    if (carriedObj == null && corpse.IsInteractable)
                     {
                         corpse.Interact(this);
                     }
