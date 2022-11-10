@@ -5,19 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CharacterSelectionScene.unity
     guid: 58233b638ea6dc047a760f8ce98af673
   - enabled: 0
-    path: Assets/Scenes/Freddy.unity
-    guid: c18a2e2001fa91341b4cb7c92aeb4571
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HectorScene.unity
     guid: d1a29942ae1f85344acff0d955caa8b3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/EndScene.unity
     guid: e447b8ec37a95eb42adb35233d903e2b
+  - enabled: 1
+    path: Assets/Scenes/FreddyScene.unity
+    guid: 1432f7c0386ddbb4aa92760cdab6f26e
   m_configObjects: {}
