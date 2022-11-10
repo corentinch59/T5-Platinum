@@ -22,7 +22,7 @@ public class QuestManager : MonoBehaviour
 
     private void Awake()
     {
-        scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<TextMeshProUGUI>();
+        //scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<TextMeshProUGUI>();
         instance = this;
         foreach (var quest in _scriptableRequestBase._dataBase)
         {
@@ -35,7 +35,7 @@ public class QuestManager : MonoBehaviour
     {
         score += scoreToAdd;
         score = Mathf.Clamp(score, 0, int.MaxValue);
-        scoreText.text = score.ToString();
+        //scoreText.text = score.ToString();
     }
 
 
