@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleAmountToAdd: 0.2
   scaleAnimDuration: 1
+  scaleAnimTombDuration: 0.5
 --- !u!212 &218320910913509318
 SpriteRenderer:
   m_ObjectHideFlags: 0
