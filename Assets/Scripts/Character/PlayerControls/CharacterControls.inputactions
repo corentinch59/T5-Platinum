@@ -199,8 +199,30 @@
                 },
                 {
                     "name": "",
+                    "id": "7e7e4978-5e19-451d-99b8-ed650d5a6e33",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4d8fc8d8-f1bd-42fa-bed5-796eabd9710a",
                     "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LDashFou",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "220cf9b2-dce5-4a63-8a2b-5c208ad3ecc4",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
