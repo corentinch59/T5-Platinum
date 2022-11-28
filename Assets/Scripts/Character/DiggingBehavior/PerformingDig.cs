@@ -20,7 +20,13 @@ public class PerformingDig : DiggingBehavior
 
     public override void CancelAction()
     {
+        #region ITERATION_1
         _player.getButtonMashImage.SetActive(false);
+        #endregion
+        #region ITERATION_2
+        _player.getSlider.value = 0;
+        _player.getSlider.gameObject.SetActive(false);
+        #endregion
         _player.EnableInput("Move");
         _player.TransitionDigging(new StartDigging());
     }
@@ -44,6 +50,8 @@ public class PerformingDig : DiggingBehavior
             //    _player.getButtonMashImage.transform.localScale = new Vector3(0.64f, 0.88f, 0.64f);
             //}
             //b = _player.getButtonMashImage.transform.DOScale(new Vector3(0.64f, 0.88f, 0.64f), 0.17f);
+            //sequence = DOTween.Sequence();
+            //sequence.Append(a).Append(b);
             #endregion
             #region ITERATION_2
 
@@ -51,8 +59,6 @@ public class PerformingDig : DiggingBehavior
 
             #endregion
 
-            //sequence = DOTween.Sequence();
-            //sequence.Append(a).Append(b);
             // TODO: scaling of UI
             // TODO: particules 
             // TODO: SSssshaders
