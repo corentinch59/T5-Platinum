@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
             pnjs[i].pnj.transform.position = pnjs[i].pnj.returnLoc.position;
         }
         NewPNJComingWithQuest(null);
+
+
+        SoundManager.instance.Play("MainLoop");
     }
 
     public void NewPNJComingWithQuest(PNJInteractable previousPnj)

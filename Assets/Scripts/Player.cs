@@ -87,16 +87,21 @@ public class Player : MonoBehaviour
                 if (objectFound.TryGetComponent(out Hole hole))
                 {
                     hole.Interact(this);
+                    
                 }
                 else if (objectFound.TryGetComponent(out GriefPNJInteractable griefPnj) && carriedObj == null)
                 {
                     griefPnj.Interact(this);
+                    int randomint = UnityEngine.Random.Range(1, 3);
+                    SoundManager.instance.Play("Pickup_Npc" + randomint);
                 }
                 else if (objectFound.TryGetComponent(out Corpse corpse))
                 {
                     if (carriedObj == null && corpse.IsInteractable)
                     {
                         corpse.Interact(this);
+                        int randomint = UnityEngine.Random.Range(1, 3);
+                        SoundManager.instance.Play("Grab_Corpse" + randomint);
                     }
                     else if (carriedObj != null && carriedObj.TryGetComponent(out GriefPNJInteractable pnj))
                     {
@@ -111,6 +116,8 @@ public class Player : MonoBehaviour
             else if (objectFound == null && carriedObj == null)
             {
                 diggingBehavior.PerformAction();
+                int randomint = UnityEngine.Random.Range(1, 4);
+                SoundManager.instance.Play("Dig" + randomint);
             }
         }
     }
@@ -123,6 +130,8 @@ public class Player : MonoBehaviour
             {
                 if (carriedObj.TryGetComponent(out Corpse corpse))
                 {
+                    int randomint = UnityEngine.Random.Range(1, 3);
+                    SoundManager.instance.Play("Drop_Corpse" + randomint);
                     corpse.PutDown(this);
                 }
                 else if (carriedObj.TryGetComponent(out GriefPNJInteractable griefPnj))
