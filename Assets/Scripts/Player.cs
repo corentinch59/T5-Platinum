@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     private DiggingBehavior diggingBehavior;
 
     private PlayerVFX vfx;
-    
+
     private void Start() 
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -87,16 +87,17 @@ public class Player : MonoBehaviour
                 if (objectFound.TryGetComponent(out Hole hole))
                 {
                     hole.Interact(this);
-                    
                 }
                 else if (objectFound.TryGetComponent(out GriefPNJInteractable griefPnj) && carriedObj == null)
                 {
+                    objectFound.layer = 0; // <- not interactable for now
                     griefPnj.Interact(this);
                     int randomint = UnityEngine.Random.Range(1, 3);
                     SoundManager.instance.Play("Pickup_Npc" + randomint);
                 }
                 else if (objectFound.TryGetComponent(out Corpse corpse) && corpse.BigCorpse == null)
                 {
+                    objectFound.layer = 0; // <- not interactable for now
                     if (carriedObj == null && corpse.IsInteractable)
                     {
                         corpse.Interact(this);
@@ -133,12 +134,22 @@ public class Player : MonoBehaviour
                 carriedObj.gameObject.layer = 7; // <- Interactable layer 
                 if (carriedObj.TryGetComponent(out Corpse corpse))
                 {
-                    int randomint = UnityEngine.Random.Range(1, 3);
-                    SoundManager.instance.Play("Drop_Corpse" + randomint);
-                    corpse.PutDown(this);
+                    if(carriedObj.TryGetComponent(out BigCorpse bc))
+                    {
+                        carriedObj = null;
+                        bc.Interact(this);
+                    }
+                    else
+                    {
+                        carriedObj.gameObject.layer = 7; // <- Interactable layer 
+                        int randomint = UnityEngine.Random.Range(1, 3);
+                        SoundManager.instance.Play("Drop_Corpse" + randomint);
+                        corpse.PutDown(this);
+                    }
                 }
                 else if (carriedObj.TryGetComponent(out GriefPNJInteractable griefPnj))
                 {
+                    carriedObj.gameObject.layer = 7; // <- Interactable layer 
                     griefPnj.PutDown(this);
                 }
             }

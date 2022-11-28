@@ -175,6 +175,7 @@ public class BigCorpse : MonoBehaviour, IInteractable
                 {
                     Vector3 dirBetweenPlayers = players[0].transform.position - players[1].transform.position;
                     distanceBetweenPlayers = dirBetweenPlayers.magnitude;
+                    gameObject.layer = 0; // <- not interactable for now
                 }
                 else
                 {

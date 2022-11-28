@@ -55,17 +55,20 @@ public class Hole : MonoBehaviour, IInteractable
     {
         if (player.CarriedObj != null && heldCorpse == null)
         {
+            player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
             if(player.CarriedObj.TryGetComponent(out Corpse corpse))
             {
                 heldCorpse = corpse;
                 if(player.CarriedObj.TryGetComponent(out BigCorpse bc))
                 {
                     // Detach both players
-                    for(int i = 0; i < bc.Players.Length; i++)
+                    bc.Players[0].CarriedObj = null;
+                    if(bc.Players[1] != null)
                     {
-                        if(bc.Players[i] != null)
-                            bc.Interact(bc.Players[i]);
+                        bc.Players[1].CarriedObj = null;
+                        bc.Interact(bc.Players[1]);
                     }
+                    bc.Interact(bc.Players[0]);
                 }
                 else
                 {
@@ -96,7 +99,7 @@ public class Hole : MonoBehaviour, IInteractable
         Burry();
 
         // Cant' interact with the corpse anymore
-        //corpse.gameObject.layer = 0;
+        corpse.gameObject.layer = 0;
 
         if (corpse.ThisQuest != null)
         {
