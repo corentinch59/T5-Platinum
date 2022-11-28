@@ -634,10 +634,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   corpseData:
     name: Jean
-    texture: {fileID: 2100000, guid: e505d8887fa04496ea5fa87241adbe9a, type: 2}
-    localisations: 0100000002000000
-    coffinType: 2
     size: 1
+    corpseType: 0
+    localisation: 0
+    coffinType: 2
+    specificity: 0
+  thisQuest: {fileID: 0}
+  radius: 10
+  localisationsLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  interactableHole:
+    serializedVersion: 2
+    m_Bits: 0
+  tombSprite:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!65 &739708695
 BoxCollider:
   m_ObjectHideFlags: 0
