@@ -23,10 +23,13 @@ public class BigCorpse : MonoBehaviour, IInteractable
     private Vector2 directionP1Normalized;
     private Vector2 directionP2Normalized;
 
-    private void Awake()
-    {
-        controller = GetComponent<CharacterController>();
-    }
+    #region Get/Set
+    public Player[] Players { get { return players; } set { players = value; } }
+    public CharacterController Controller { get { return controller; } set { controller = value; } }
+    public float CarrySpeed { get { return carrySpeed; } set { carrySpeed = value; } }
+    public float RotationSpeed { get { return rotationSpeed; } set { rotationSpeed = value; } }
+    public float AngleThreshold { get { return angleThreshold; } set { angleThreshold = value; } }
+    #endregion
 
     private void Start()
     {
@@ -45,26 +48,28 @@ public class BigCorpse : MonoBehaviour, IInteractable
     private void FixedUpdate()
     {
         corpseMovement = new Vector3(player1_move.x + player2_move.x, 0, player1_move.y + player2_move.y);
-        controller.Move(corpseMovement * carrySpeed * Time.fixedDeltaTime);
+
+        if(controller != null)
+            controller.Move(corpseMovement * carrySpeed * Time.fixedDeltaTime);
 
         if (players[1] != null)
         {
             Vector3 direction = players[0].transform.position - players[1].transform.position;
             transform.position = (direction / 2) + players[1].transform.position;
 
-            float rotationAngle = Vector2.SignedAngle(Vector2.up, new Vector2(direction.x, direction.z));
+           /* float rotationAngle = Vector2.SignedAngle(Vector2.up, new Vector2(direction.x, direction.z));
             Vector3 tempRotation = transform.localEulerAngles;
             tempRotation.y = -rotationAngle;
-            transform.localEulerAngles = tempRotation;
+            transform.localEulerAngles = tempRotation;*/
         }
         else if (players[0] != null)
         {
             Vector3 direction = players[0].transform.position - transform.position;
 
-            float rotationAngle = Vector2.SignedAngle(Vector2.up, new Vector2(direction.x, direction.z));
+            /*float rotationAngle = Vector2.SignedAngle(Vector2.up, new Vector2(direction.x, direction.z));
             Vector3 tempRotation = transform.localEulerAngles;
             tempRotation.y = -rotationAngle;
-            transform.localEulerAngles = tempRotation;
+            transform.localEulerAngles = tempRotation;*/
         }
 
         if (players[0] != null)

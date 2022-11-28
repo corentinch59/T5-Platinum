@@ -57,13 +57,25 @@ public class Hole : MonoBehaviour, IInteractable
         {
             if(player.CarriedObj.TryGetComponent(out Corpse corpse))
             {
-                corpse.IsInteractable = false;
-                player.CarriedObj.transform.parent = null;
-                player.CarriedObj = null;
-                player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
-
                 heldCorpse = corpse;
+                if(player.CarriedObj.TryGetComponent(out BigCorpse bc))
+                {
+                    // Detach both players
+                    for(int i = 0; i < bc.Players.Length; i++)
+                    {
+                        if(bc.Players[i] != null)
+                            bc.Interact(bc.Players[i]);
+                    }
+                }
+                else
+                {
+                    corpse.IsInteractable = false;
+                    player.CarriedObj.transform.parent = null;
+                    player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
+
+                }
                 StartCoroutine(BurryingCorpse(corpse));
+                player.CarriedObj = null;
             }
             else if(player.CarriedObj.TryGetComponent(out GriefPNJInteractable griefPNJ))
             {
@@ -86,10 +98,10 @@ public class Hole : MonoBehaviour, IInteractable
         // Cant' interact with the corpse anymore
         //corpse.gameObject.layer = 0;
 
-        if (corpse.thisQuest != null)
+        if (corpse.ThisQuest != null)
         {
-            corpse.corpseData = corpse.UpdateRequestLocalisation();
-            StartCoroutine(corpse.thisQuest.FinishQuest(corpse.corpseData));
+            corpse.CorpseData = corpse.UpdateRequestLocalisation();
+            StartCoroutine(corpse.ThisQuest.FinishQuest(corpse.CorpseData));
         }
 
         corpse.transform.localScale = new Vector3(0f, 0f, 0f);

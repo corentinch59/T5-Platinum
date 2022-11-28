@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
                     int randomint = UnityEngine.Random.Range(1, 3);
                     SoundManager.instance.Play("Pickup_Npc" + randomint);
                 }
-                else if (objectFound.TryGetComponent(out Corpse corpse))
+                else if (objectFound.TryGetComponent(out Corpse corpse) && corpse.BigCorpse == null)
                 {
                     if (carriedObj == null && corpse.IsInteractable)
                     {
@@ -111,6 +111,8 @@ public class Player : MonoBehaviour
                 else if (objectFound.TryGetComponent(out BigCorpse bigcorpse) && carriedObj == null)
                 {
                     bigcorpse.Interact(this);
+                    carriedObj = bigcorpse.gameObject.GetComponent<Corpse>();
+                    carriedObj.Interact(this);
                 }
             }
             else if (objectFound == null && carriedObj == null)
@@ -128,6 +130,7 @@ public class Player : MonoBehaviour
         {
             if(carriedObj != null)
             {
+                carriedObj.gameObject.layer = 7; // <- Interactable layer 
                 if (carriedObj.TryGetComponent(out Corpse corpse))
                 {
                     int randomint = UnityEngine.Random.Range(1, 3);

@@ -99,7 +99,7 @@ public class GriefPNJInteractable : Carryable
                 if (dist < min)
                 {
                     min = dist;
-                    griefName = c.corpseData.name;
+                    griefName = c.CorpseData.name;
                 }
             }
         }

@@ -7,32 +7,33 @@ using UnityEngine.InputSystem;
 
 public class Corpse : Carryable
 {
-    [HideInInspector] public CorpseData corpseData;
-    [HideInInspector] public Quest thisQuest;
+    [SerializeField] private CorpseData corpseData;
+    [SerializeField] private Quest thisQuest;
 
     [SerializeField] private float radius = 10f;
     [SerializeField] private LayerMask localisationsLayer;
     [SerializeField] private LayerMask interactableHole;
     [SerializeField] private Sprite[] tombSprite = new Sprite[5];
+
+    private BigCorpse bigCorpse;
+    private SpriteRenderer spriteRenderer;
+    private bool isInteractable;
+
+    #region get/set
+    public CorpseData CorpseData { get { return corpseData; } set { corpseData = value; } }
+    public Quest ThisQuest { get { return thisQuest; } set { thisQuest = value; } }
+    public BigCorpse BigCorpse { get { return bigCorpse; } set { bigCorpse = value; } }
     public Sprite[] TombSprite => tombSprite;
 
-    private SpriteRenderer spriteRenderer;
     public SpriteRenderer SpriteRenderer => spriteRenderer;
 
-    private Player[] players = new Player[2];
-
-    private bool isInteractable;
     public bool IsInteractable { get { return isInteractable; } set { isInteractable = value; } }
+    #endregion
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         IsInteractable = true;
-    }
-    private void Update()
-    {
-        if (players[0] != null && players[1] != null)
-            transform.LookAt(Camera.main.transform);
     }
 
     public override void Interact(Player player)
@@ -46,23 +47,22 @@ public class Corpse : Carryable
             GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
         }
 
-        // To avoid dotween problem with player increasing scale of this (as a child)
         if(thisQuest.requestInfos.siz > 0)
         {
-            transform.localScale = new Vector3(2, 2, 2);
+            // To avoid dotween problem with player increasing scale of this (as a child)
+            //transform.localScale = new Vector3(2, 2, 2);
         }
         else
         {
+            if (player.CarriedObj == null)
+            {
+                player.CarriedObj = this;
+            }
+            player.CarriedObj.transform.parent = player.transform;
+            player.CarriedObj.transform.localPosition = Vector3.up * 2f;
+            player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
             transform.localScale = new Vector3(1, 1, 1);
         }
-
-        if (player.CarriedObj == null)
-        {
-            player.CarriedObj = this;
-        }
-        player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
-        player.CarriedObj.transform.parent = player.transform;
-        player.CarriedObj.transform.localPosition = Vector3.up * 2f;
     }
 
     public override void PutDown(Player player, bool isTimeOut = false)
@@ -77,7 +77,7 @@ public class Corpse : Carryable
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        if (player.getPlayerMovement.canMove && players[0] == null && players[1] == null) // if one player -> put the body anywhere he wants to
+        if (player.getPlayerMovement.canMove) // if one player -> put the body anywhere he wants to
         {
             //put down corpse in front of a player -> use rotation but now just t.right
             player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
@@ -89,7 +89,6 @@ public class Corpse : Carryable
             player.getPlayerMovement.canMove = true;
         }
 
-        // Visual Debug 
         player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
 
         player.CarriedObj = null;

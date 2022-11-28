@@ -40,12 +40,17 @@ public class PNJInteractable : MonoBehaviour
         if (corpseCreated.TryGetComponent(out Corpse c))
         {
             // corpseCreated is taking data from the request
-            c.thisQuest = request.quest.GetComponent<Quest>();
+            c.ThisQuest = request.quest.GetComponent<Quest>();
 
             // GameFeel
-            if ((int)c.thisQuest.requestInfos.siz > 0)
+            if ((int)c.ThisQuest.requestInfos.siz > 0)
             {
                 // Big corpse
+                c.BigCorpse = c.gameObject.AddComponent<BigCorpse>();
+                c.BigCorpse.CarrySpeed = 3f;
+                c.BigCorpse.RotationSpeed = 4f;
+                c.BigCorpse.AngleThreshold = 20f;
+                c.BigCorpse.Controller = c.gameObject.AddComponent<CharacterController>();
                 corpseCreated.transform.DOScale(new Vector3(2, 2, 2), 0.5f);
             }
             else
