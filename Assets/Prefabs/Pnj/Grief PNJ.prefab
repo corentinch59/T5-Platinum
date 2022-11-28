@@ -170,7 +170,6 @@ MonoBehaviour:
   endLoc: {fileID: 0}
   agent: {fileID: 1215423061}
   griefName: 
-  griefLoc: 0
   radius: 10
 --- !u!212 &2620190660970719590
 SpriteRenderer:
@@ -192,7 +191,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 82badd0c4ca83ec48a7bd4b5a33f7247, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -11,12 +11,7 @@ public class PlayerVFX : MonoBehaviour
     public SpriteRenderer[] listVfx;
     public SpriteRenderer vfx;
     private Coroutine currentCoroutine;
-
     
-    private void Awake()
-    {
-        //vfx.gameObject.SetActive(false);
-    }
 
 
     public void Update()
