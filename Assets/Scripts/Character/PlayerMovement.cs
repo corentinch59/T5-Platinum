@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private Coroutine feedback;
 
     private bool _isDashing = false;
+    private float _t = 0f;
     public bool isDashing { get{ return _isDashing; } set { _isDashing = value; } }
 
     private void Awake()
@@ -54,9 +55,21 @@ public class PlayerMovement : MonoBehaviour
             moveDir = new Vector3(move.x, 0, move.y);
             controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
 
-            if(moveDir.magnitude > 0 && feedback == null)
+            if(moveDir.magnitude > 0)
             {
-                feedback = StartCoroutine(FeedBackPlayerMoves());
+                if (feedback == null)
+                {
+                    feedback = StartCoroutine(FeedBackPlayerMoves());
+                }
+
+                _t += Time.fixedDeltaTime;
+                if (_t >= 0.75f)
+                {
+                    int randomInt = UnityEngine.Random.Range(1, 9);
+                    SoundManager.instance.Play("FootStep" + randomInt);
+                    _t = 0f;
+                }
+
             }
 
             if (controller.isGrounded && playerVelocity.y < 0)
