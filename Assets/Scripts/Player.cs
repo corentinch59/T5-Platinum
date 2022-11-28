@@ -39,8 +39,9 @@ public class Player : MonoBehaviour
     public int getNumbersOfTaps => numberOfTaps;
 
     private DiggingBehavior diggingBehavior;
-
     private PlayerVFX vfx;
+    private GameObject buttonMashImage;
+    public GameObject getButtonMashImage => buttonMashImage;
     
     private void Start() 
     {
@@ -48,6 +49,8 @@ public class Player : MonoBehaviour
         raycastBehavior = new RaycastEmptyHand();
         vfx = GetComponent<PlayerVFX>();
         TransitionDigging(new StartDigging());
+        buttonMashImage = transform.GetChild(transform.childCount - 1).gameObject;
+        buttonMashImage.SetActive(false);
     }
 
     private void Update()

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class PerformingDig : DiggingBehavior
 {
     private int numberOfTaps;
     private int internalTaps;
+    private Tween a;
+    private Tween b;
+    private Sequence sequence;
 
     public PerformingDig(int nb)
     {
@@ -16,6 +20,7 @@ public class PerformingDig : DiggingBehavior
 
     public override void CancelAction()
     {
+        _player.getButtonMashImage.SetActive(false);
         _player.EnableInput("Move");
         _player.TransitionDigging(new StartDigging());
     }
@@ -25,6 +30,7 @@ public class PerformingDig : DiggingBehavior
         if (internalTaps < numberOfTaps)
         {
             ++internalTaps;
+            Animatebutton();
             // TODO: scaling of UI
             // TODO: particules 
             // TODO: SSssshaders
@@ -33,6 +39,9 @@ public class PerformingDig : DiggingBehavior
         {
             _player.Dig(1);
             _player.EnableInput("Move");
+            a.Kill();
+            b.Kill();
+            _player.getButtonMashImage.SetActive(false);
             _player.TransitionDigging(new StartDigging());
         }
     }
