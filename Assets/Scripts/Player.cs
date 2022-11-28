@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -42,7 +43,9 @@ public class Player : MonoBehaviour
     private PlayerVFX vfx;
     private GameObject buttonMashImage;
     public GameObject getButtonMashImage => buttonMashImage;
-    
+    private Slider sliderMashButton;
+    public Slider getSlider => sliderMashButton;
+
     private void Start() 
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour
         TransitionDigging(new StartDigging());
         buttonMashImage = transform.GetChild(transform.childCount - 1).gameObject;
         buttonMashImage.SetActive(false);
+        sliderMashButton = transform.GetChild(transform.childCount - 2).GetChild(0).GetComponent<Slider>();
     }
 
     private void Update()

@@ -6,8 +6,8 @@ using UnityEngine.Rendering;
 
 public class PerformingDig : DiggingBehavior
 {
-    private int numberOfTaps;
-    private int internalTaps;
+    private float numberOfTaps;
+    private float internalTaps;
     private Tween a;
     private Tween b;
     private Sequence sequence;
@@ -27,10 +27,32 @@ public class PerformingDig : DiggingBehavior
 
     public override void PerformAction()
     {
-        if (internalTaps < numberOfTaps)
+        if (internalTaps < numberOfTaps - 1)
         {
             ++internalTaps;
-            Animatebutton();
+            #region ITERATION_1
+            //if(a != null)
+            //{
+            //    CancelAnimation();
+            //    _player.getButtonMashImage.transform.localScale = new Vector3(0.64f, 0.88f, 0.64f);
+            //}
+            //a = _player.getButtonMashImage.transform.DOScale(_player.getButtonMashImage.transform.localScale * 1.5f, 0.17f);
+
+            //if(b != null)
+            //{
+            //    CancelAnimation();
+            //    _player.getButtonMashImage.transform.localScale = new Vector3(0.64f, 0.88f, 0.64f);
+            //}
+            //b = _player.getButtonMashImage.transform.DOScale(new Vector3(0.64f, 0.88f, 0.64f), 0.17f);
+            #endregion
+            #region ITERATION_2
+
+            _player.getSlider.value = internalTaps / numberOfTaps;
+
+            #endregion
+
+            //sequence = DOTween.Sequence();
+            //sequence.Append(a).Append(b);
             // TODO: scaling of UI
             // TODO: particules 
             // TODO: SSssshaders
@@ -39,9 +61,13 @@ public class PerformingDig : DiggingBehavior
         {
             _player.Dig(1);
             _player.EnableInput("Move");
-            a.Kill();
-            b.Kill();
-            _player.getButtonMashImage.SetActive(false);
+            #region ITERATION_1
+            //CancelAnimation();
+            //_player.getButtonMashImage.SetActive(false);
+            #endregion
+            #region ITERATION_2
+            _player.getSlider.gameObject.SetActive(false);
+            #endregion
             _player.TransitionDigging(new StartDigging());
         }
     }
