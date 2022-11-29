@@ -13,8 +13,12 @@ public class StartDigging : DiggingBehavior
         //_player.getButtonMashImage.SetActive(true);
         #endregion
         #region ITERATION_2
-        _player.getSlider.gameObject.SetActive(true);
-        _player.getSlider.value = 0;
+        //_player.getSlider.gameObject.SetActive(true);
+        //_player.getSlider.value = 0;
+        #endregion
+        #region ITERATION_3
+        _player.getMainRect.gameObject.SetActive(true);
+        _player.getIteration3Rect.localScale = Vector3.zero;
         #endregion
         _player.TransitionDigging(new PerformingDig(_player.getNumbersOfTaps));
     }
