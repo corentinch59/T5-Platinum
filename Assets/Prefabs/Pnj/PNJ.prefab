@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   request: {fileID: 2126752867567367414}
-  requestImg: {fileID: 3696927833506775533}
+  requestImg: {fileID: 3266256926193268498}
   corpseToCreate: {fileID: 694417260691800150, guid: 2c37c2b4654ba6247b38a9d97dfcfac5, type: 3}
   agent: {fileID: 4086287966202717261}
   radius: 5
@@ -637,6 +637,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
+--- !u!1 &3266256926193268498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5263935100384352774, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
+  m_PrefabInstance: {fileID: 7230901162654182676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7763366397300572893 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
