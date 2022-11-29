@@ -9,7 +9,7 @@ public class Quest : MonoBehaviour
     public RequestDataBase requestInfos;
     [HideInInspector] public DigRequest _request;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private RawImage corpseImage;
+    [SerializeField] public RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
     [SerializeField] private Slider questSlider;
