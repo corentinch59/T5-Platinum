@@ -58,14 +58,28 @@ public class Player : MonoBehaviour
 
         if(carriedObj != null)
         {
-            objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, "Hole");
+            if(carriedObj.TryGetComponent(out Corpse c))
+            {
+                if(c.ThisQuest.requestInfos.siz > 0)
+                {
+                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, "Hole");
+                    if(objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, "Hole");
+                }
+            }
         }
         else
         {
             objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer);
         }
 
-        //Test Outline
+        // Outline
         if (objectFound != null && objectFound != lastObjectFound)
         {
             if(objectFound.GetComponent<SpriteRenderer>() != null)
@@ -124,7 +138,6 @@ public class Player : MonoBehaviour
                 }
                 else if (objectFound.TryGetComponent(out BigCorpse bigcorpse) && carriedObj == null)
                 {
-                    Debug.Log("BigCorpse Interact");
                     bigcorpse.Interact(this);
                     carriedObj = bigcorpse.gameObject.GetComponent<Corpse>();
                     carriedObj.Interact(this);
