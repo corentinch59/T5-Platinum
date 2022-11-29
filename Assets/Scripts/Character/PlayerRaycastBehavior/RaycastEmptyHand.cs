@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RaycastEmptyHand : IRaycastBehavior
 {
-    public GameObject PerformRaycast(Vector3 position, float radius, LayerMask layer)
+    public GameObject PerformRaycast(Vector3 position, float radius, LayerMask layer, string objTag = "")
     {
         Collider[] colliders = Physics.OverlapSphere(position, radius, layer);
         if (colliders.Length > 0)
@@ -12,6 +12,11 @@ public class RaycastEmptyHand : IRaycastBehavior
             GameObject interactableObject = colliders[0].gameObject;
             for (int i = 0; i < colliders.Length; i++)
             {
+                if(objTag != "" && colliders[i].gameObject.tag == objTag)
+                {
+                    return colliders[i].gameObject;
+                }
+
                 float distanceCurrent = (colliders[i].transform.position - position).magnitude;
                 float distancePrevious = (interactableObject.transform.position - position).magnitude;
 
@@ -20,7 +25,15 @@ public class RaycastEmptyHand : IRaycastBehavior
                     interactableObject = colliders[i].gameObject;
                 }
             }
-            return interactableObject;
+
+            if(objTag != "")
+            {
+                return null;
+            }
+            else
+            {
+                return interactableObject;
+            }
         }
         return null;
     }

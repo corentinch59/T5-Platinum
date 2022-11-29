@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -55,26 +56,38 @@ public class Player : MonoBehaviour
         //Debug player vision
         Debug.DrawLine(transform.position, transform.position + transform.forward * distGraveCreation, Color.red);
 
-        objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer);
+        if(carriedObj != null)
+        {
+            objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, "Hole");
+        }
+        else
+        {
+            objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer);
+        }
+
         //Test Outline
         if (objectFound != null && objectFound != lastObjectFound)
         {
             if(objectFound.GetComponent<SpriteRenderer>() != null)
             {
-                CallOutline(true, objectFound.GetComponent<SpriteRenderer>());
-                if (lastObjectFound != null)
-                {
-                    CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
-                }
+                Outline(objectFound, true);
+                Outline(lastObjectFound, false);
                 lastObjectFound = objectFound;
             }
         }
         else if (objectFound == null && lastObjectFound != null)
         {
-             CallOutline(false,lastObjectFound.GetComponent<SpriteRenderer>());
-             lastObjectFound = null;
+            Outline(lastObjectFound, false);
+            lastObjectFound = null;
         }
- 
+    }
+
+    private void Outline(GameObject obj, bool active)
+    {
+        if(obj != null)
+        {
+            CallOutline(active, obj.GetComponent<SpriteRenderer>());
+        }
     }
 
     public void InteractInput(InputAction.CallbackContext ctx)

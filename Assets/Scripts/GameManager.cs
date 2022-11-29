@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             randomPnj = Random.Range(0, pnjs.Count);
             newPnjGivesQuest = pnjs[randomPnj].pnj;
         }*/
-        Debug.Log("Next Quest From : " + newPnjGivesQuest);
+        //Debug.Log("Next Quest From : " + newPnjGivesQuest);
 
         newPnjGivesQuest.StartCoroutine(newPnjGivesQuest.Walk(true));
     }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3760949234652563782}
   m_Layer: 7
   m_Name: HoleFreddy
-  m_TagString: Untagged
+  m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   scaleAmountToAdd: 0.2
   scaleAnimDuration: 1
   scaleAnimTombDuration: 0.5
+  tombSpawnDuration: 1
 --- !u!212 &218320910913509318
 SpriteRenderer:
   m_ObjectHideFlags: 0

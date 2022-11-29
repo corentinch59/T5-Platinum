@@ -16,6 +16,7 @@ TagManager:
   - Shrine
   - Flower
   - Corpse
+  - Hole
   layers:
   - Default
   - TransparentFX
