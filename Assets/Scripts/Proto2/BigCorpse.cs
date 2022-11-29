@@ -186,7 +186,7 @@ public class BigCorpse : MonoBehaviour, IInteractable
             }
         }
         player.getPlayerMovement.canMove = false;
-        Debug.Log($"Attached {player.name} to a big corpse.");
+        //Debug.Log($"Attached {player.name} to a big corpse.");
     }
 
     public void DetachFromCorpse(Player player)
