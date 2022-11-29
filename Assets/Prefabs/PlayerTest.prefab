@@ -331,9 +331,7 @@ GameObject:
   - component: {fileID: 1676592206633555986}
   - component: {fileID: -9117927903731099442}
   - component: {fileID: 7000738648327963535}
-  - component: {fileID: 2107677573}
   - component: {fileID: 2107677564}
-  - component: {fileID: 2107677572}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -663,7 +661,7 @@ MonoBehaviour:
     m_ActionName: Co-Pilote/Interact[/DualShock4GamepadHID/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2107677572}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerDash, Assembly-CSharp
         m_MethodName: OnDash
         m_Mode: 0
@@ -716,22 +714,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listVfx: []
   vfx: {fileID: 0}
---- !u!54 &2107677573
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2596005604130923474}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!114 &2107677564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,20 +742,6 @@ MonoBehaviour:
   raycastRadius: 5
   holePrefab: {fileID: 7901434866790508091, guid: cd2d637137505204abb9811ca0f361bc, type: 3}
   numberOfTaps: 0
---- !u!114 &2107677572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2596005604130923474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93a77e854b905494f943df3ad4abf11d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceDash: 20
-  dashTime: 0.75
 --- !u!1001 &4496607912400992777
 PrefabInstance:
   m_ObjectHideFlags: 0
