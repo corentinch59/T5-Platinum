@@ -34,7 +34,6 @@ public class RequestH : MonoBehaviour
     {
         nameText.text = requestInfo.corpseName;
         TextureData tex = textureData._TextureData;
-        corpseImage.texture = tex.corpsesTex[(int)requestInfo.corps];
         return tex;
     }
 

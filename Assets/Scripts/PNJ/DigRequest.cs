@@ -26,27 +26,30 @@ public class DigRequest : RequestH
     {
         requestInfo = QuestManager.instance.GetRequest(this);
         //StartCoroutine(_pnjInteractable.Walk(true));
-        UpdateDigUI();
+        //UpdateDigUI();
     }
     
     public void AcceptDigRequest()
     {
-        base.AcceptRequest();
+        AcceptRequest();
         SetQuestInUI();
     }
-
+    
+    /*
     private void UpdateDigUI()
     {
-        TextureData tex = base.UpdateUI();
+        TextureData tex = UpdateUI();
         localisationImage.texture = tex.localisationTex[(int)requestInfo.loc];
         coffinImage.texture = tex.coffinTex[(int)requestInfo.cof];
     }
+    */
     
     public void SetQuestInUI()
     {
+        TextureData tex = UpdateUI();
         quest = Instantiate(questToInstantiate, questParent.transform);
-        quest.GetComponent<Quest>().InitialiseQuestUI(requestInfo, corpseImage.texture,
-            localisationImage.texture,coffinImage.texture, this);
+        quest.GetComponent<Quest>().InitialiseQuestUI(requestInfo, tex.corpsesTex[(int)requestInfo.corps],
+            tex.localisationTex[(int)requestInfo.loc],tex.coffinTex[(int)requestInfo.cof], this);
     }
 
     public void GoodByePnj()
