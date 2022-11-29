@@ -86,7 +86,7 @@ public class PNJInteractable : MonoBehaviour
             {
                 if (thereAreCorpseAround[i].TryGetComponent(out Corpse c) && thereAreCorpseAround[i].gameObject.tag == "Corpse")
                 {
-                    Debug.Log("Oh il y a dÈj‡ un corps au revoir");
+                    Debug.Log("Oh il y a d√©j√† un corps au revoir");
                     return true;
                 }
             }
@@ -108,7 +108,7 @@ public class PNJInteractable : MonoBehaviour
             }
             else
             {
-                Debug.Log("Il y a un corps l‡");
+                Debug.Log("Il y a un corps l√†");
                 yield return StartCoroutine(Walk(false));
             }
         }

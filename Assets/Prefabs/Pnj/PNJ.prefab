@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   request: {fileID: 2126752867567367414}
-  requestImg: {fileID: 6393312891690220004}
+  requestImg: {fileID: 3696927833506775533}
   corpseToCreate: {fileID: 694417260691800150, guid: 2c37c2b4654ba6247b38a9d97dfcfac5, type: 3}
   agent: {fileID: 4086287966202717261}
   radius: 5
@@ -496,7 +496,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4886166696980437176}
   - component: {fileID: 3150803405410242318}
-  - component: {fileID: 7167729631307537556}
   m_Layer: 5
   m_Name: PNJ Request Image
   m_TagString: Untagged
@@ -533,33 +532,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6393312891690220004}
   m_CullTransparentMesh: 1
---- !u!114 &7167729631307537556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6393312891690220004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 71a8c618222510547b639c208d132848, type: 3}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!1001 &7230901162654182676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -604,6 +576,10 @@ PrefabInstance:
       value: 281.21
       objectReference: {fileID: 0}
     - target: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -637,7 +613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -96.7
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -649,6 +625,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5263935100384352774, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
