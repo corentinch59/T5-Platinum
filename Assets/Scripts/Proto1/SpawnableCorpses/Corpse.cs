@@ -43,7 +43,7 @@ public class Corpse : Carryable
         if(gameObject.tag == "Corpse")
         {
             gameObject.tag = "Untagged";
-            Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
+            //Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
             GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
         }
 

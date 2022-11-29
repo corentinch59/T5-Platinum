@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         {
             if(objectFound != null)
             {
-                Debug.Log("Object found : " + objectFound.name);
+                //Debug.Log("Object found : " + objectFound.name);
                 if (objectFound.TryGetComponent(out Hole hole))
                 {
                     hole.Interact(this);
@@ -124,6 +124,7 @@ public class Player : MonoBehaviour
                 }
                 else if (objectFound.TryGetComponent(out BigCorpse bigcorpse) && carriedObj == null)
                 {
+                    Debug.Log("BigCorpse Interact");
                     bigcorpse.Interact(this);
                     carriedObj = bigcorpse.gameObject.GetComponent<Corpse>();
                     carriedObj.Interact(this);

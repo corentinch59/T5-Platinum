@@ -46,11 +46,13 @@ public class PNJInteractable : MonoBehaviour
             if ((int)c.ThisQuest.requestInfos.siz > 0)
             {
                 // Big corpse
-                c.BigCorpse = c.gameObject.AddComponent<BigCorpse>();
-                c.BigCorpse.CarrySpeed = 3f;
+                c = InitBigCorpse(c);
+                /*c.BigCorpse.CarrySpeed = 3f;
                 c.BigCorpse.RotationSpeed = 4f;
                 c.BigCorpse.AngleThreshold = 20f;
                 c.BigCorpse.Controller = c.gameObject.AddComponent<CharacterController>();
+                c.BigCorpse.Controller.radius = 1f; 
+                c.BigCorpse.Controller.height = 0f;*/
                 corpseCreated.transform.DOScale(new Vector3(2, 2, 2), 0.5f);
             }
             else
@@ -61,6 +63,18 @@ public class PNJInteractable : MonoBehaviour
         }
 
         StartCoroutine(Walk(false));
+    }
+
+    private Corpse InitBigCorpse(Corpse c)
+    {
+        c.BigCorpse = c.gameObject.AddComponent<BigCorpse>();
+        c.BigCorpse.CarrySpeed = 3f;
+        c.BigCorpse.RotationSpeed = 4f;
+        c.BigCorpse.AngleThreshold = 20f;
+        c.BigCorpse.Controller = c.gameObject.AddComponent<CharacterController>();
+        c.BigCorpse.Controller.radius = 1f;
+        c.BigCorpse.Controller.height = 0f;
+        return c;
     }
 
     private bool CheckIfAlreadyACorpse()
