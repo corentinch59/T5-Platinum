@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.Audio;
 using System;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
 	public static SoundManager instance;
-
-	//public AudioMixerGroup mixerGroup;
-
 	public Sound[] sounds;
 
+    [SerializeField] private AudioMixerGroup mixerGroup;
 
-	void Awake()
+    void Awake()
 	{
 
 		if (instance != null)
@@ -41,6 +39,7 @@ public class SoundManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.loop = s.loop;
             s.source.playOnAwake = false;
+            s.source.outputAudioMixerGroup = mixerGroup;
         }
     }
 
@@ -80,8 +79,8 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-		//audioSource.Play();
+        //audioSource.Play();
 
-		//Play("MainLoop");
+        Play("MainLoop");
     }
 }
