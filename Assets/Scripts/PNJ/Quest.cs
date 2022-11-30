@@ -82,7 +82,6 @@ public class Quest : MonoBehaviour
                 default:
                     return 0;
             }
-            
         }
         else
         {
