@@ -20,6 +20,8 @@ public class Sound {
 
 	public bool loop = false;
 
+	public SoundType type;
+
     //public AudioMixerGroup mixerGroup;
 
     [HideInInspector]

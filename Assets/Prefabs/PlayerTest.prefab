@@ -572,7 +572,6 @@ GameObject:
   - component: {fileID: 2596005604130923465}
   - component: {fileID: 2596005604130923475}
   - component: {fileID: 1676592206633555986}
-  - component: {fileID: -9117927903731099442}
   - component: {fileID: 7000738648327963535}
   - component: {fileID: 2107677564}
   m_Layer: 0
@@ -761,7 +760,7 @@ MonoBehaviour:
     m_ActionName: Player/Interact[/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -9117927903731099442}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
         m_MethodName: MoveLeft
         m_Mode: 0
@@ -777,7 +776,7 @@ MonoBehaviour:
     m_ActionName: SelectionScreenControlE/ChangeLeft[/XInputControllerWindows/leftStick/left,/XInputControllerWindows/dpad/left]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -9117927903731099442}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
         m_MethodName: MoveRight
         m_Mode: 0
@@ -809,7 +808,7 @@ MonoBehaviour:
     m_ActionName: Player/Dash[/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -9117927903731099442}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
         m_MethodName: GetReady
         m_Mode: 0
@@ -825,7 +824,7 @@ MonoBehaviour:
     m_ActionName: SelectionScreenControl/Ready[/DualShock4GamepadHID/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -9117927903731099442}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
         m_MethodName: RemovePlayer
         m_Mode: 0
@@ -924,26 +923,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &-9117927903731099442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2596005604130923474}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 972855229ba29ce4e9e9477727f82d4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: 1d6cf3eed42760749a2763be7d58bb38, type: 3}
-  - {fileID: 21300000, guid: b4b51065e95a0004f901aed91deacb29, type: 3}
-  - {fileID: 21300000, guid: 8322981113afa424d812f54967807ab7, type: 3}
-  - {fileID: 21300000, guid: 82ae10b035231a640b4257dccdd0ccd4, type: 3}
-  isReady: 0
-  currentSprite: {fileID: 0}
-  input: {fileID: 0}
 --- !u!114 &7000738648327963535
 MonoBehaviour:
   m_ObjectHideFlags: 0

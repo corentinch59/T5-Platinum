@@ -53,6 +53,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 1
+    type: 1
     source: {fileID: 0}
   - name: Grab_Corpse1
     clip: {fileID: 8300000, guid: e4748f5f23cc803439959e9699ebe9f2, type: 3}
@@ -61,6 +62,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: Grab_Corpse2
     clip: {fileID: 8300000, guid: dc6dbd0b342c06d4abee250378ccf5de, type: 3}
@@ -69,6 +71,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: Drop_Corpse1
     clip: {fileID: 8300000, guid: 227a00bde47328646b2967a13095b03b, type: 3}
@@ -77,6 +80,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: Drop_Corpse2
     clip: {fileID: 8300000, guid: 6f0aa17bc0b831549a2c0d7f1d755f1d, type: 3}
@@ -85,6 +89,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: Dig1
     clip: {fileID: 8300000, guid: 7fc38b57a58d6e34fa13be9a16891dd2, type: 3}
@@ -93,6 +98,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: Dig2
     clip: {fileID: 8300000, guid: 8020b6d156f7783439b8c2bf411d546f, type: 3}
@@ -101,6 +107,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: Dig3
     clip: {fileID: 8300000, guid: 9e75a30a503b30f408d39b62dcf57c44, type: 3}
@@ -109,6 +116,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: Pickup_Npc1
     clip: {fileID: 8300000, guid: 96a11ba70b5ae674ab058fa9641ff9ff, type: 3}
@@ -117,6 +125,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: Pickup_Npc2
     clip: {fileID: 8300000, guid: ff07cc5327f07ec4590591a01eb04efd, type: 3}
@@ -125,6 +134,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: FootStep1
     clip: {fileID: 8300000, guid: 0cb25a73da3ebc94ba93bf8639d16b0d, type: 3}
@@ -133,6 +143,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: FootStep2
     clip: {fileID: 8300000, guid: deb79009fc85c0246904f91f08f2fb1f, type: 3}
@@ -141,6 +152,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: FootStep3
     clip: {fileID: 8300000, guid: 23aee7c727c41b046932e5932afb4eea, type: 3}
@@ -149,6 +161,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: FootStep4
     clip: {fileID: 8300000, guid: a1cd5b251ebcee945ac348783c66cb98, type: 3}
@@ -157,6 +170,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: FootStep5
     clip: {fileID: 8300000, guid: e0dce6b91ebb111498401b3faafccc75, type: 3}
@@ -165,6 +179,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: FootStep6
     clip: {fileID: 8300000, guid: bb37285a6ca957c49909036396b0545b, type: 3}
@@ -173,6 +188,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: FootStep7
     clip: {fileID: 8300000, guid: 375c3e0964391fe47b4b727de5450b5d, type: 3}
@@ -181,6 +197,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
   - name: FootStep8
     clip: {fileID: 8300000, guid: b8f16ecc1af391249ad267eaa23d4b66, type: 3}
@@ -189,7 +206,10 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    type: 2
     source: {fileID: 0}
+  MusicGroup: {fileID: -2705797388152085867, guid: bebe7146d0e569f43ac1aca6e98aa12e, type: 2}
+  SFXGroup: {fileID: -9039539242180136081, guid: bebe7146d0e569f43ac1aca6e98aa12e, type: 2}
 --- !u!114 &6693596098904731989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundColor:
     serializedVersion: 2
-    rgba: 4292346111
+    rgba: 4290020667
   textColor:
     serializedVersion: 2
     rgba: 4278190080
