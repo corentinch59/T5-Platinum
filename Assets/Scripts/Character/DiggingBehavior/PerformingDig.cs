@@ -52,7 +52,6 @@ public class PerformingDig : DiggingBehavior
             sequence = DOTween.Sequence();
             sequence.Append(a).Append(b);
             #endregion
-
         }
         else
         {

@@ -46,8 +46,7 @@ public class Corpse : Carryable
     {
         // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
         // And tell another pnj to come give player a quest
-        if(gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0)//&& player.CarriedObj == null && thisQuest != null 
-           
+        if(gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0 && thisQuest != null)
         {
             gameObject.tag = "Untagged";
             //Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
@@ -75,14 +74,17 @@ public class Corpse : Carryable
         }
         else
         {
-            if (player.CarriedObj == null)
+            if(corpseData.size <= 0)
             {
-                player.CarriedObj = this;
+                if (player.CarriedObj == null)
+                {
+                    player.CarriedObj = this;
+                }
+                transform.parent = player.transform;
+                transform.localPosition = Vector3.up * 2f;
+                player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
+                transform.localScale = new Vector3(1, 1, 1);
             }
-            transform.parent = player.transform;
-            transform.localPosition = Vector3.up * 2f;
-            player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
-            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 

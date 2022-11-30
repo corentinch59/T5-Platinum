@@ -8,7 +8,12 @@ public class Hole : MonoBehaviour, IInteractable
 {
     private Corpse heldCorpse;
     private Tween tween;
+    private SpriteRenderer spriteRenderer;
+    private Sprite originalSprite;
     private int HoleSize = 1;
+
+    public Corpse HeldCorpse => heldCorpse;
+
     public int SetHoleSize { 
         get => HoleSize;
 
@@ -20,6 +25,12 @@ public class Hole : MonoBehaviour, IInteractable
     [Tooltip("How quick the hole grows in size when digging more.")] public float scaleAnimDuration = 1;
     [Tooltip("How quick the hole reseals itself before showing a tomb.")] public float scaleAnimTombDuration = 0.5f;
     [Tooltip("How quick the tomb will be show.")] public float tombSpawnDuration = 1;
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalSprite = spriteRenderer.sprite;
+    }
 
     private void ModifyHoleSize(int modifier)
     {
@@ -72,6 +83,8 @@ public class Hole : MonoBehaviour, IInteractable
                         bc.Interact(bc.Players[0]);
                         StartCoroutine(BurryingCorpse(corpse));
                         heldCorpse = corpse;
+                        corpse.gameObject.SetActive(false);
+                        HoleSize = 1;
                         return;
                     }
                     else
@@ -86,9 +99,11 @@ public class Hole : MonoBehaviour, IInteractable
                     player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
                 }
                 player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
-                heldCorpse = corpse;
                 StartCoroutine(BurryingCorpse(corpse));
+                heldCorpse = corpse;
                 player.CarriedObj = null;
+                corpse.gameObject.transform.position = transform.position;
+                corpse.gameObject.SetActive(false);
             }
             else if(player.CarriedObj.TryGetComponent(out GriefPNJInteractable griefPNJ))
             {
@@ -97,8 +112,40 @@ public class Hole : MonoBehaviour, IInteractable
         }
         else
         {
-            if (heldCorpse == null)
-                SetHoleSize = 1;
+            if(player.CarriedObj == null)
+            {
+                if (heldCorpse == null)
+                {
+                    SetHoleSize = 1;
+                }
+                else
+                {
+                    player.DiggingBehavior.PerformAction();
+                    if (player.DiggingBehavior is StartDigging)
+                    {
+                        //player.DiggingBehavior.OnDigCompleted
+                        Debug.Log("Complete");
+
+                        Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+                        heldCorpse.transform.position = posCorpse;
+                        heldCorpse.gameObject.SetActive(true);
+                        heldCorpse.tag = "Corpse";
+                        //player.CarriedObj = heldCorpse;
+                        // if we dug up a big or a little body
+                        if(heldCorpse.CorpseData.size > 0)
+                        {
+                            HoleSize = 1;
+                            //heldCorpse.GetComponent<BigCorpse>().Interact(player);
+                        }
+                        else
+                        {
+                            //heldCorpse.Interact(player);
+                        }
+                        StartCoroutine(BurryingCorpse(heldCorpse));
+                        heldCorpse = null;
+                    }
+                }
+            }
         }
     }
 
@@ -106,36 +153,70 @@ public class Hole : MonoBehaviour, IInteractable
     {
         Vector3 holepos = transform.position;
         // burry corpse
-        Burry();
+        if(heldCorpse == null)
+            Burry();
 
+        // destroy corpse and change sprite Hole
         // Cant' interact with the corpse anymore
-        corpse.gameObject.layer = 0;
+        //corpse.gameObject.layer = 0;
 
         if (corpse.ThisQuest != null)
         {
             corpse.CorpseData = corpse.UpdateRequestLocalisation();
             StartCoroutine(corpse.ThisQuest.FinishQuest(corpse.CorpseData));
         }
+        else
+        {
+            if(heldCorpse == null)
+            {
+                transform.localScale = new Vector3(0f, 0f, 0f);
+                transform.position = new Vector3(holepos.x, holepos.y, holepos.z);
 
-        corpse.transform.localScale = new Vector3(0f, 0f, 0f);
-        corpse.transform.position = new Vector3(holepos.x, holepos.y - 3, holepos.z);
+                yield return new WaitForSeconds(tombSpawnDuration);
+
+                // Test tombsprite -> HoleScript
+                int randomSprite = UnityEngine.Random.Range(0, corpse.TombSprite.Length);
+                spriteRenderer.sprite = corpse.TombSprite[randomSprite];
+
+                if (randomSprite == 0)
+                {
+                    transform.DOMove(new Vector3(holepos.x, holepos.y + 1f, holepos.z), 0.5f);
+                }
+                else if (randomSprite == 1)
+                {
+                    corpse.transform.DOMove(new Vector3(holepos.x, holepos.y + 1, holepos.z), 0.5f);
+                }
+                transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
+            }
+            else
+            {
+                //Dig up
+                spriteRenderer.sprite = originalSprite;
+                gameObject.layer = 0;
+                yield return new WaitForSeconds(2f);
+                gameObject.layer = 7;
+                SetHoleSize = 1;
+            }
+            yield break;
+        }
+
+        transform.localScale = new Vector3(0f, 0f, 0f);
+        transform.position = new Vector3(holepos.x, holepos.y, holepos.z);
 
         yield return new WaitForSeconds(tombSpawnDuration);
 
-        // grave
+        // Test tombsprite -> HoleScript
         int randomsprite = UnityEngine.Random.Range(0, corpse.TombSprite.Length);
-        corpse.SpriteRenderer.sprite = corpse.TombSprite[randomsprite];
+        spriteRenderer.sprite = corpse.TombSprite[randomsprite];
 
-        if(randomsprite == 0)
+        if (randomsprite == 0)
         {
-            corpse.transform.DOMove(new Vector3(holepos.x, holepos.y + 1f, holepos.z), 0.5f);
+            transform.DOMove(new Vector3(holepos.x, holepos.y + 1f, holepos.z), 0.5f);
         } else if(randomsprite == 1)
         {
-            corpse.transform.DOMove(new Vector3(holepos.x, holepos.y + 0.6f, holepos.z), 0.5f);
+            corpse.transform.DOMove(new Vector3(holepos.x, holepos.y + 1, holepos.z), 0.5f);
         }
-        corpse.transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
-
-        this.enabled = false;
+        transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
     }
 
     public void Burry()

@@ -41,7 +41,8 @@ public class Player : MonoBehaviour
     public int getNumbersOfTaps => numberOfTaps;
 
     private DiggingBehavior diggingBehavior;
-    public PlayerVFX vfx;
+    public DiggingBehavior DiggingBehavior => diggingBehavior;
+    private PlayerVFX vfx;
     #region ITERATION_3
     private RectTransform mainRect;
     public RectTransform getMainRect => mainRect;
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour
         {
             if(carriedObj.TryGetComponent(out Corpse c))
             {
-                if(c.ThisQuest.requestInfos.siz > 0)
+                if((c.ThisQuest != null && c.ThisQuest.requestInfos.siz > 0) || (c.ThisQuest == null && c.CorpseData.size > 0))
                 {
                     objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, "Hole");
                     if(objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
@@ -192,7 +193,7 @@ public class Player : MonoBehaviour
                     griefPnj.PutDown(this);
                 }
             }
-            else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && carriedObj == null)
+            else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && hole.HeldCorpse == null && carriedObj == null)
             {
                 Dig(-1);
             }
