@@ -7,7 +7,8 @@ public class SoundManager : MonoBehaviour
 	public static SoundManager instance;
 	public Sound[] sounds;
 
-    [SerializeField] private AudioMixerGroup mixerGroup;
+    [SerializeField] private AudioMixerGroup MusicGroup;
+    [SerializeField] private AudioMixerGroup SFXGroup;
 
     void Awake()
 	{
@@ -39,7 +40,15 @@ public class SoundManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.loop = s.loop;
             s.source.playOnAwake = false;
-            s.source.outputAudioMixerGroup = mixerGroup;
+            if (s.type == SoundType.MUSIC)
+            {
+                s.source.outputAudioMixerGroup = MusicGroup;
+            }
+            else 
+            {
+                s.source.outputAudioMixerGroup = SFXGroup;
+            }
+            
         }
     }
 
@@ -83,4 +92,11 @@ public class SoundManager : MonoBehaviour
 
         Play("MainLoop");
     }
+}
+
+
+public enum SoundType{
+    NONE,
+    MUSIC,
+    SFX
 }

@@ -19,7 +19,7 @@ public class SliderMixSound : MonoBehaviour
         value = transform.Find("Value").GetComponent<TextMeshProUGUI>();
         value.text = slider.value.ToString();
 
-        //m_MixerGroup.audioMixer.SetFloat(m_MixerGroup.name + "Volume", Mathf.Log10(slider.value) - 80);
+        m_MixerGroup.audioMixer.SetFloat(m_MixerGroup.name + "Volume", slider.value - 80);
     }
 
     public void UpdateValue()

@@ -2837,6 +2837,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4595533220097504258, guid: 982591f51bc3f9f4092f71e3b0314202, type: 3}
+      propertyPath: SFXGroup
+      value: 
+      objectReference: {fileID: -9039539242180136081, guid: bebe7146d0e569f43ac1aca6e98aa12e, type: 2}
+    - target: {fileID: 4595533220097504258, guid: 982591f51bc3f9f4092f71e3b0314202, type: 3}
+      propertyPath: MusicGroup
+      value: 
+      objectReference: {fileID: -2705797388152085867, guid: bebe7146d0e569f43ac1aca6e98aa12e, type: 2}
+    - target: {fileID: 4595533220097504258, guid: 982591f51bc3f9f4092f71e3b0314202, type: 3}
       propertyPath: mixerGroup
       value: 
       objectReference: {fileID: -9039539242180136081, guid: bebe7146d0e569f43ac1aca6e98aa12e, type: 2}
