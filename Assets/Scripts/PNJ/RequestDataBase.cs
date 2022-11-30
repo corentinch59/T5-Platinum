@@ -16,9 +16,9 @@ public class RequestDataBase
         NONE,
         TREE,
         WATER,
-        INCINERATOR,
-        FLOWER,
-        SHRINE,
+        //INCINERATOR,
+        //FLOWER,
+        //SHRINE,
     }
 
     public enum coffin

@@ -19,8 +19,8 @@ public class RequestH : MonoBehaviour
 
     public void AcceptRequest()
     {
-        QuestManager.instance.activeQuests.Add(requestInfo);
         QuestManager.instance.allQuests.Remove(requestInfo);
+        QuestManager.instance.activeQuests.Add(requestInfo);
     }
     /*
     public void SetRequest()

@@ -109,6 +109,8 @@ public class PNJInteractable : MonoBehaviour
         else
         {
             requestImg.SetActive(false);
+            //QuestManager.instance.activeQuests.Remove(request.requestInfo);
+            //QuestManager.instance.questFinished.Add(request.requestInfo);
             agent.destination = returnLoc.position;
             yield return null;
         }

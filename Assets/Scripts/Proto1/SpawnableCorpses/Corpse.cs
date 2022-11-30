@@ -43,7 +43,8 @@ public class Corpse : Carryable
     {
         // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
         // And tell another pnj to come give player a quest
-        if(gameObject.tag == "Corpse")
+        if(gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0)//&& player.CarriedObj == null && thisQuest != null 
+           
         {
             gameObject.tag = "Untagged";
             //Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
@@ -129,8 +130,8 @@ public class Corpse : Carryable
         {
             case "Water": return RequestDataBase.localisation.WATER;
             case "Tree": return RequestDataBase.localisation.TREE;
-            case "Shrine": return RequestDataBase.localisation.SHRINE;
-            case "Flower": return RequestDataBase.localisation.FLOWER;
+            //case "Shrine": return RequestDataBase.localisation.SHRINE;
+            //case "Flower": return RequestDataBase.localisation.FLOWER;
             default: return RequestDataBase.localisation.NONE;
         }
     }
