@@ -32,7 +32,7 @@ public class RequestH : MonoBehaviour
     
     protected TextureData UpdateUI()
     {
-        nameText.text = requestInfo.corpseName;
+        //nameText.text = requestInfo.corpseName;
         TextureData tex = textureData._TextureData;
         return tex;
     }

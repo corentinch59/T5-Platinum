@@ -10,7 +10,6 @@ public class RequestDataBase
     public localisation loc;
     public coffin cof;
     public corpseType corps;
-    public specificity spec;
 
     public enum localisation
     {
@@ -32,16 +31,17 @@ public class RequestDataBase
 
     public enum corpseType
     {
-        MONSTERVERT,
-        MONSTREBLEU,
+        CORGNON1,
+        CORGNON2,
+        CORGNON3,
+        CORGNON4,
+        LEZARD1,
+        LEZARD2,
+        LEZARD3,
+        LEZARD4,
+        
     }
-
-    public enum specificity
-    {
-        HAT,
-        GLASSES,
-        EYEPATCH,
-    }
+    
 
     public enum size
     {

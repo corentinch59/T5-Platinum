@@ -105,7 +105,6 @@ public class Corpse : Carryable
         newLoc.size = thisQuest.requestInfos.siz;
         newLoc.corpseType = thisQuest.requestInfos.corps;
         newLoc.coffinType = thisQuest.requestInfos.cof;
-        newLoc.specificity = thisQuest.requestInfos.spec;
 
         Collider[] corpsInAreas = Physics.OverlapSphere(transform.position, radius, localisationsLayer);
 
