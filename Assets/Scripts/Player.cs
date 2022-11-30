@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     public int getNumbersOfTaps => numberOfTaps;
 
     private DiggingBehavior diggingBehavior;
-    private PlayerVFX vfx;
+    public PlayerVFX vfx;
     #region ITERATION_3
     private RectTransform mainRect;
     public RectTransform getMainRect => mainRect;
@@ -156,6 +156,8 @@ public class Player : MonoBehaviour
             else if (objectFound == null && carriedObj == null)
             {
                 diggingBehavior.PerformAction();
+                vfx.hitImpact.gameObject.SetActive(true);
+                vfx.hitImpact.Play();
                 int randomint = UnityEngine.Random.Range(1, 4);
                 SoundManager.instance.Play("Dig" + randomint);
             }
