@@ -9,7 +9,7 @@ public class Quest : MonoBehaviour
     public RequestDataBase requestInfos;
     [HideInInspector] public DigRequest _request;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private RawImage corpseImage;
+    [SerializeField] public RawImage corpseImage;
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
     [SerializeField] private Slider questSlider;
@@ -94,9 +94,9 @@ public class Quest : MonoBehaviour
         _request.GoodByePnj();
         QuestManager.instance.UpdateScore(CheckScoreQuest(data));
         isQuestFinished = true;
-        yield return new WaitForSeconds(1);
         QuestManager.instance.questFinished.Add(requestInfos);
         QuestManager.instance.activeQuests.Remove(requestInfos);
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 
@@ -105,9 +105,9 @@ public class Quest : MonoBehaviour
         _request.GoodByePnj();
         isQuestFinished = true;
         image.color = Color.red;
-        yield return new WaitForSeconds(2);
-        QuestManager.instance.questFinished.Add(requestInfos);
         QuestManager.instance.activeQuests.Remove(requestInfos);
+        QuestManager.instance.questFinished.Add(requestInfos);
+        yield return new WaitForSeconds(2);
         gameObject.SetActive(false);
     }
 

@@ -77,16 +77,18 @@ public class GriefRequest : MonoBehaviour
 
     private void UpdateUI()
     {
-        
+        /*
         nameText.text = _requestInfos.corpseName;
         TextureData tex = _textureData._TextureData;
         corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corps];
+        */
     }
 
     public void SetQuestInUI()
     {
+        TextureData tex = _textureData._TextureData;
         griefQuest = Instantiate(questToInstantiate, questParent.transform);
-        griefQuest.GetComponent<GriefQuest>().InitialiseDeuilQuestUI(_requestInfos, corpseImage.texture, this);
+        griefQuest.GetComponent<GriefQuest>().InitialiseDeuilQuestUI(_requestInfos, tex.corpsesTex[(int)_requestInfos.corps], this);
     }
 
     public void GoodByeGriefPNJ()

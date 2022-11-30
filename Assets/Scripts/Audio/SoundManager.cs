@@ -65,7 +65,7 @@ public class SoundManager : MonoBehaviour
 		s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
 
 		s.source.Play();
-		Debug.Log("Played :" + " " + s.name);
+		//Debug.Log("Played :" + " " + s.name);
 		return s;
 	}
 

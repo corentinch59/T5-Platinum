@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,12 @@ using UnityEngine.Rendering;
 
 public class PerformingDig : DiggingBehavior
 {
-    private int numberOfTaps;
-    private int internalTaps;
+    private float numberOfTaps;
+    private float internalTaps;
+
+    private Tween a;
+    private Tween b;
+    private Sequence sequence;
 
     public PerformingDig(int nb)
     {
@@ -16,23 +21,46 @@ public class PerformingDig : DiggingBehavior
 
     public override void CancelAction()
     {
+        #region ITERATION_3
+        CancelAnimation();
+        _player.getMainRect.gameObject.SetActive(false);
+        #endregion
         _player.EnableInput("Move");
         _player.TransitionDigging(new StartDigging());
     }
 
     public override void PerformAction()
     {
-        if (internalTaps < numberOfTaps)
+        if (internalTaps < numberOfTaps - 1)
         {
             ++internalTaps;
-            // TODO: scaling of UI
-            // TODO: particules 
-            // TODO: SSssshaders
+            #region ITERATION_3
+            if (a != null)
+            {
+                CancelAnimation();
+                _player.getIteration3Rect.localScale = new Vector3(internalTaps / numberOfTaps, internalTaps / numberOfTaps, internalTaps / numberOfTaps); 
+            }
+            a = _player.getIteration3Rect.DOScale(_player.getIteration3Rect.localScale * 1.2f, 0.25f);
+
+            if (b != null)
+            {
+                CancelAnimation();
+                _player.getIteration3Rect.localScale = new Vector3(internalTaps / numberOfTaps, internalTaps / numberOfTaps, internalTaps / numberOfTaps);
+            }
+            b = _player.getIteration3Rect.DOScale(new Vector3(internalTaps / numberOfTaps, internalTaps / numberOfTaps, internalTaps / numberOfTaps), 0.25f);
+            sequence = DOTween.Sequence();
+            sequence.Append(a).Append(b);
+            #endregion
+
         }
         else
         {
             _player.Dig(1);
             _player.EnableInput("Move");
+            #region ITERATION_3
+            CancelAnimation();
+            _player.getMainRect.gameObject.SetActive(false);
+            #endregion
             _player.TransitionDigging(new StartDigging());
         }
     }

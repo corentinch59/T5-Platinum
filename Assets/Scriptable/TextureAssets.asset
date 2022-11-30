@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TextureData:
     corpsesTex:
-    - {fileID: 2800000, guid: 11a155ff946f5934883aac8e472bd8c9, type: 3}
-    - {fileID: 2800000, guid: e8546eca3dd8f8445b5acaa910eb908c, type: 3}
+    - {fileID: 2800000, guid: 233e888bd44132042af49c74f280e13b, type: 3}
+    - {fileID: 2800000, guid: dd483ef6746434a44b2c464be38ecf7b, type: 3}
+    - {fileID: 2800000, guid: 719c53a3392559148a32d8d1de92320a, type: 3}
+    - {fileID: 2800000, guid: 5e79a9cb8017f994aa9fb55f9220fa02, type: 3}
     localisationTex:
     - {fileID: 0}
     - {fileID: 2800000, guid: 35995068f6bd0ae4881661eab8787e7e, type: 3}
     - {fileID: 2800000, guid: c17886af069d2834a82ee71dd017d519, type: 3}
-    - {fileID: 2800000, guid: a6ce8d298d2229146abca16fa6e6c5aa, type: 3}
     coffinTex:
     - {fileID: 2800000, guid: 660cf6c1b3d3a77468c12f1293829f49, type: 3}
-    - {fileID: 2800000, guid: 5934b0c57a8f3ef4ba50b34b902596b2, type: 3}

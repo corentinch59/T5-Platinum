@@ -53,12 +53,12 @@ public class GameManager : MonoBehaviour
         // take random pnj (not the same as before) in the list and tell him to give player a quest
         int randomPnj = Random.Range(0, pnjs.Count);
         newPnjGivesQuest = pnjs[randomPnj].pnj;
-        /*while(pnjs[randomPnj].pnj == previousPnj)
+        while(pnjs[randomPnj].pnj == previousPnj)
         {
             randomPnj = Random.Range(0, pnjs.Count);
             newPnjGivesQuest = pnjs[randomPnj].pnj;
-        }*/
-        Debug.Log("Next Quest From : " + newPnjGivesQuest);
+        }
+        //Debug.Log("Next Quest From : " + newPnjGivesQuest);
 
         newPnjGivesQuest.StartCoroutine(newPnjGivesQuest.Walk(true));
     }

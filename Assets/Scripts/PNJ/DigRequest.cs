@@ -20,33 +20,40 @@ public class DigRequest : RequestH
     public void Start()
     {
         SetDigRequest();
+        QuestManager.instance.allQuests.Remove(requestInfo);
+        //QuestManager.instance.activeQuests.Add(requestInfo);
     }
 
     public void SetDigRequest()
     {
         requestInfo = QuestManager.instance.GetRequest(this);
         //StartCoroutine(_pnjInteractable.Walk(true));
-        UpdateDigUI();
+        //UpdateDigUI();
     }
     
     public void AcceptDigRequest()
     {
-        base.AcceptRequest();
+        AcceptRequest();
         SetQuestInUI();
     }
-
+    
+    /*
     private void UpdateDigUI()
     {
-        TextureData tex = base.UpdateUI();
+        TextureData tex = UpdateUI();
         localisationImage.texture = tex.localisationTex[(int)requestInfo.loc];
         coffinImage.texture = tex.coffinTex[(int)requestInfo.cof];
     }
+    */
     
     public void SetQuestInUI()
     {
+        TextureData tex = UpdateUI();
         quest = Instantiate(questToInstantiate, questParent.transform);
-        quest.GetComponent<Quest>().InitialiseQuestUI(requestInfo, corpseImage.texture,
-            localisationImage.texture,coffinImage.texture, this);
+        //Debug.Log("loc" + (int)requestInfo.loc);
+        //Debug.Log("coff" + (int)requestInfo.cof);
+        quest.GetComponent<Quest>().InitialiseQuestUI(requestInfo, tex.corpsesTex[(int)requestInfo.corps],
+            tex.localisationTex[(int)requestInfo.loc],tex.coffinTex[(int)requestInfo.cof], this);
     }
 
     public void GoodByePnj()

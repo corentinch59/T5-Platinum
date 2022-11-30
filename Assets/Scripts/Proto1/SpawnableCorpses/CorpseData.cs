@@ -10,5 +10,4 @@ public struct CorpseData
     [Header("Corpse Type")]       public RequestDataBase.corpseType corpseType;
     [Header("Localisations")]     public RequestDataBase.localisation localisation;
     [Header("Coffin Type")]       public RequestDataBase.coffin coffinType;
-    [Header("Specificity")]       public RequestDataBase.specificity specificity;
 }

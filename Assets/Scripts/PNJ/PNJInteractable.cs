@@ -40,12 +40,13 @@ public class PNJInteractable : MonoBehaviour
         if (corpseCreated.TryGetComponent(out Corpse c))
         {
             // corpseCreated is taking data from the request
-            c.thisQuest = request.quest.GetComponent<Quest>();
+            c.ThisQuest = request.quest.GetComponent<Quest>();
 
             // GameFeel
-            if ((int)c.thisQuest.requestInfos.siz > 0)
+            if ((int)c.ThisQuest.requestInfos.siz > 0)
             {
                 // Big corpse
+                InitBigCorpse(c);
                 corpseCreated.transform.DOScale(new Vector3(2, 2, 2), 0.5f);
             }
             else
@@ -58,6 +59,17 @@ public class PNJInteractable : MonoBehaviour
         StartCoroutine(Walk(false));
     }
 
+    private void InitBigCorpse(Corpse c)
+    {
+        c.BigCorpse = c.gameObject.AddComponent<BigCorpse>();
+        c.BigCorpse.CarrySpeed = 3f;
+        c.BigCorpse.RotationSpeed = 4f;
+        c.BigCorpse.AngleThreshold = 20f;
+        c.BigCorpse.Controller = c.gameObject.AddComponent<CharacterController>();
+        c.BigCorpse.Controller.radius = 1f;
+        c.BigCorpse.Controller.height = 0f;
+    }
+
     private bool CheckIfAlreadyACorpse()
     {
         Collider[] thereAreCorpseAround = Physics.OverlapSphere(transform.position, radius, corpseLayer);
@@ -67,7 +79,7 @@ public class PNJInteractable : MonoBehaviour
             {
                 if (thereAreCorpseAround[i].TryGetComponent(out Corpse c) && thereAreCorpseAround[i].gameObject.tag == "Corpse")
                 {
-                    Debug.Log("Oh il y a dÈj‡ un corps au revoir");
+                    Debug.Log("Oh il y a d√©j√† un corps au revoir");
                     return true;
                 }
             }
@@ -89,7 +101,7 @@ public class PNJInteractable : MonoBehaviour
             }
             else
             {
-                Debug.Log("Il y a un corps l‡");
+                Debug.Log("Il y a un corps l√†");
                 yield return StartCoroutine(Walk(false));
             }
         }
@@ -97,6 +109,8 @@ public class PNJInteractable : MonoBehaviour
         else
         {
             requestImg.SetActive(false);
+            //QuestManager.instance.activeQuests.Remove(request.requestInfo);
+            //QuestManager.instance.questFinished.Add(request.requestInfo);
             agent.destination = returnLoc.position;
             yield return null;
         }

@@ -19,8 +19,8 @@ public class RequestH : MonoBehaviour
 
     public void AcceptRequest()
     {
-        QuestManager.instance.activeQuests.Add(requestInfo);
         QuestManager.instance.allQuests.Remove(requestInfo);
+        QuestManager.instance.activeQuests.Add(requestInfo);
     }
     /*
     public void SetRequest()
@@ -32,9 +32,8 @@ public class RequestH : MonoBehaviour
     
     protected TextureData UpdateUI()
     {
-        nameText.text = requestInfo.corpseName;
+        //nameText.text = requestInfo.corpseName;
         TextureData tex = textureData._TextureData;
-        corpseImage.texture = tex.corpsesTex[(int)requestInfo.corps];
         return tex;
     }
 

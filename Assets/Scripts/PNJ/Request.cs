@@ -59,6 +59,7 @@ public class Request : MonoBehaviour
         corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corps];
         localisationImage.texture = tex.localisationTex[(int)_requestInfos.loc];
         coffinImage.texture = tex.coffinTex[(int)_requestInfos.cof];
+        
     }
 
 
