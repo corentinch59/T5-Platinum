@@ -62,8 +62,6 @@ public class Request : MonoBehaviour
         
     }
 
-
-
     public void GoodByePnj()
     {
         //StartCoroutine(_pnjInteractable.Walk(false));
@@ -78,6 +76,5 @@ public class Request : MonoBehaviour
             localisationImage.texture = null;
             coffinImage.texture = null;
         }
-
     }
 }

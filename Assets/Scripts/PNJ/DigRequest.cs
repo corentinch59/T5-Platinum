@@ -61,6 +61,7 @@ public class DigRequest : RequestH
         //StartCoroutine(_pnjInteractable.Walk(false));
         if (QuestManager.instance.allQuests.Count > 0)
         {
+            _pnjInteractable.CorpseCreated.GetComponent<Corpse>().ThisQuest = null;
             StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));
         }
     }

@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
             {
                 if((c.ThisQuest != null && c.ThisQuest.requestInfos.siz > 0) || (c.ThisQuest == null && c.CorpseData.size > 0))
                 {
-                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, "Hole");
+                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
                     if(objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
                     {
                         return;
@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, "Hole");
+                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
                 }
             }
         }
@@ -152,6 +152,9 @@ public class Player : MonoBehaviour
                     bigcorpse.Interact(this);
                     carriedObj = bigcorpse.gameObject.GetComponent<Corpse>();
                     carriedObj.Interact(this);
+                } else if(objectFound.TryGetComponent(out DigUpPNJInteractable digUpPnj) && carriedObj != null)
+                {
+                    digUpPnj.Interact(this);
                 }
             }
             else if (objectFound == null && carriedObj == null)

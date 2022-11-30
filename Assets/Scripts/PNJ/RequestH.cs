@@ -68,5 +68,4 @@ public class RequestH : MonoBehaviour
             corpseImage.texture = null;
         }
     }
-    
 }
