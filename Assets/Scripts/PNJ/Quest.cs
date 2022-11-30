@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public delegate void FinishQuestHandler(int value);
 public class Quest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
@@ -17,6 +18,8 @@ public class Quest : MonoBehaviour
     [SerializeField] private Image image;
     private bool isQuestFinished;
     private float timer;
+
+    public static event FinishQuestHandler onFinishQuest;
 
     public enum StateTimer
     {
@@ -71,13 +74,13 @@ public class Quest : MonoBehaviour
             switch (stateTimer)
             {
                 case StateTimer.EXCELLENT:
-                    return 5;
+                    return 8;
                 case StateTimer.MID:
-                    return 2;
+                    return 5;
                 case StateTimer.BAD:
-                    return 1;
+                    return 3;
                 default:
-                    return 10;
+                    return 0;
             }
             
         }
@@ -93,6 +96,7 @@ public class Quest : MonoBehaviour
     {
         _request.GoodByePnj();
         QuestManager.instance.UpdateScore(CheckScoreQuest(data));
+        onFinishQuest?.Invoke(CheckScoreQuest(data));
         isQuestFinished = true;
         QuestManager.instance.questFinished.Add(requestInfos);
         QuestManager.instance.activeQuests.Remove(requestInfos);
