@@ -21,13 +21,6 @@ public class PerformingDig : DiggingBehavior
 
     public override void CancelAction()
     {
-        #region ITERATION_1
-        //_player.getButtonMashImage.SetActive(false);
-        #endregion
-        #region ITERATION_2
-        //_player.getSlider.value = 0;
-        //_player.getSlider.gameObject.SetActive(false);
-        #endregion
         #region ITERATION_3
         CancelAnimation();
         _player.getMainRect.gameObject.SetActive(false);
@@ -41,28 +34,6 @@ public class PerformingDig : DiggingBehavior
         if (internalTaps < numberOfTaps - 1)
         {
             ++internalTaps;
-            #region ITERATION_1
-            //if (a != null)
-            //{
-            //    CancelAnimation();
-            //    _player.getButtonMashImage.transform.localScale = new Vector3(0.64f, 0.88f, 0.64f);
-            //}
-            //a = _player.getButtonMashImage.transform.DOScale(_player.getButtonMashImage.transform.localScale * 1.5f, 0.17f);
-
-            //if (b != null)
-            //{
-            //    CancelAnimation();
-            //    _player.getButtonMashImage.transform.localScale = new Vector3(0.64f, 0.88f, 0.64f);
-            //}
-            //b = _player.getButtonMashImage.transform.DOScale(new Vector3(0.64f, 0.88f, 0.64f), 0.17f);
-            //sequence = DOTween.Sequence();
-            //sequence.Append(a).Append(b);
-            #endregion
-            #region ITERATION_2
-
-            //_player.getSlider.value = internalTaps / numberOfTaps;
-
-            #endregion
             #region ITERATION_3
             if (a != null)
             {
@@ -86,13 +57,6 @@ public class PerformingDig : DiggingBehavior
         {
             _player.Dig(1);
             _player.EnableInput("Move");
-            #region ITERATION_1
-            //CancelAnimation();
-            //_player.getButtonMashImage.SetActive(false);
-            #endregion
-            #region ITERATION_2
-            //_player.getSlider.gameObject.SetActive(false);
-            #endregion
             #region ITERATION_3
             CancelAnimation();
             _player.getMainRect.gameObject.SetActive(false);

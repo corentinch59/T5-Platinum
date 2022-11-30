@@ -42,14 +42,6 @@ public class Player : MonoBehaviour
 
     private DiggingBehavior diggingBehavior;
     private PlayerVFX vfx;
-    #region ITERATION_1
-    private GameObject buttonMashImage;
-    public GameObject getButtonMashImage => buttonMashImage;
-    #endregion
-    #region ITERATION_2
-    private Slider sliderMashButton;
-    public Slider getSlider => sliderMashButton;
-    #endregion
     #region ITERATION_3
     private RectTransform mainRect;
     public RectTransform getMainRect => mainRect;
@@ -63,16 +55,9 @@ public class Player : MonoBehaviour
         raycastBehavior = new RaycastEmptyHand();
         vfx = GetComponent<PlayerVFX>();
         TransitionDigging(new StartDigging());
-        #region ITERATION_1
-        //buttonMashImage = transform.GetChild(transform.childCount - 1).gameObject;
-        //buttonMashImage.SetActive(false);
-        #endregion
-        #region ITERATION_2
-        sliderMashButton = transform.GetChild(transform.childCount - 2).GetChild(0).GetComponent<Slider>();
-        #endregion
         #region ITERATION_3
-        mainRect = transform.GetChild(transform.childCount - 2).GetChild(1).GetComponent<RectTransform>();
-        iteration3rect = transform.GetChild(transform.childCount - 2).GetChild(1).GetChild(2).GetComponent<RectTransform>();
+        mainRect = transform.GetChild(transform.childCount - 1).GetChild(1).GetComponent<RectTransform>();
+        iteration3rect = transform.GetChild(transform.childCount - 1).GetChild(1).GetChild(1).GetComponent<RectTransform>();
         #endregion
     }
 
