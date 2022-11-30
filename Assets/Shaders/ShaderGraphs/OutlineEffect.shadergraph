@@ -16,9 +16,6 @@
             "m_Id": "7918bb2a55cf472eae04f51cd5ae4bb4"
         },
         {
-            "m_Id": "0bb5cf9df9c341dd8aa7ad7f0caeca20"
-        },
-        {
             "m_Id": "8fd907cdd8664e7ca77b013c0f57c932"
         },
         {
@@ -870,35 +867,6 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "0bb5cf9df9c341dd8aa7ad7f0caeca20",
-    "m_Guid": {
-        "m_GuidSerialized": "0d6d5174-b1a1-4d1e-9b75-dfca9f4754b5"
-    },
-    "m_Name": "MainTex",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "MainTex",
-    "m_DefaultReferenceName": "_MainTex",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
 }
 
 {
@@ -3647,7 +3615,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "8e1e92b9227b4e20822b1ca93f17a103",
     "m_Id": 0,
-    "m_DisplayName": "BorderText",
+    "m_DisplayName": "MainTex",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -3810,9 +3778,6 @@
         },
         {
             "m_Id": "7918bb2a55cf472eae04f51cd5ae4bb4"
-        },
-        {
-            "m_Id": "0bb5cf9df9c341dd8aa7ad7f0caeca20"
         },
         {
             "m_Id": "8fd907cdd8664e7ca77b013c0f57c932"
@@ -4265,11 +4230,11 @@
     "m_Guid": {
         "m_GuidSerialized": "8afbf6d1-55d4-4b76-8222-8ca133cfef1c"
     },
-    "m_Name": "BorderText",
+    "m_Name": "MainTex",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "BorderText",
-    "m_DefaultReferenceName": "_BorderText",
-    "m_OverrideReferenceName": "_BorderText",
+    "m_RefNameGeneratedByDisplayName": "MainTex",
+    "m_DefaultReferenceName": "_MainTex",
+    "m_OverrideReferenceName": "_MainTex",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",

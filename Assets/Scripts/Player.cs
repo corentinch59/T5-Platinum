@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -40,8 +41,13 @@ public class Player : MonoBehaviour
     public int getNumbersOfTaps => numberOfTaps;
 
     private DiggingBehavior diggingBehavior;
-
     private PlayerVFX vfx;
+    #region ITERATION_3
+    private RectTransform mainRect;
+    public RectTransform getMainRect => mainRect;
+    private RectTransform iteration3rect;
+    public RectTransform getIteration3Rect => iteration3rect;
+    #endregion
 
     private void Start() 
     {
@@ -49,6 +55,10 @@ public class Player : MonoBehaviour
         raycastBehavior = new RaycastEmptyHand();
         vfx = GetComponent<PlayerVFX>();
         TransitionDigging(new StartDigging());
+        #region ITERATION_3
+        mainRect = transform.GetChild(transform.childCount - 1).GetChild(1).GetComponent<RectTransform>();
+        iteration3rect = transform.GetChild(transform.childCount - 1).GetChild(1).GetChild(1).GetComponent<RectTransform>();
+        #endregion
     }
 
     private void Update()

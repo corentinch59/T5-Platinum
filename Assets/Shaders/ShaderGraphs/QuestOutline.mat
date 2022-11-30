@@ -131,12 +131,12 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _BottomColor: {r: 23.968628, g: 1.6313726, b: 0, a: 0}
+    - _BottomColor: {r: 42.722507, g: 7.2421045, b: 0, a: 0}
     - _Color: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0.21052867, g: 0.5641177, b: 0.7830188, a: 0}
-    - _MiddleColor: {r: 2.6390157, g: 1.1465763, b: 0, a: 0}
+    - _MiddleColor: {r: 2.5261347, g: 2.1651738, b: 0, a: 0}
     - _OutlineColor: {r: 0.8490566, g: 0.12415447, b: 0.12415447, a: 0}
     - _TopColor: {r: 0, g: 0.7490196, b: 0.44705883, a: 0}
   m_BuildTextureStacks: []

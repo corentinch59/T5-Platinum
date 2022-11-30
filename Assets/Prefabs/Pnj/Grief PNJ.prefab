@@ -252,6 +252,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3026082338358244917}
     m_Modifications:
+    - target: {fileID: 573102795083411221, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1450577151129272518, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
       propertyPath: m_Texture
       value: 
@@ -371,6 +375,10 @@ PrefabInstance:
     - target: {fileID: 4635626545358819134, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154784137471476875, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8883895847954076252, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
       propertyPath: m_text
