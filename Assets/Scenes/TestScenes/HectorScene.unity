@@ -2998,26 +2998,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1466538580089937841, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1466538580089937842, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 515224429}
-    - target: {fileID: 1466538580089937842, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466538580089937842, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466538580089937842, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 1466538580089937843, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3053,18 +3037,6 @@ PrefabInstance:
     - target: {fileID: 1466538580089937843, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
       propertyPath: m_SizeDelta.y
       value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466538580089937843, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.04722222
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466538580089937843, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.04722222
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466538580089937843, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.04722222
       objectReference: {fileID: 0}
     - target: {fileID: 1466538580089937843, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3117,14 +3089,6 @@ PrefabInstance:
     - target: {fileID: 1466538580089937855, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
       propertyPath: m_Name
       value: Quests&Score
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466538580089937855, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466538580594988130, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d822bf57cca6c5408d835585a6326cf, type: 3}
