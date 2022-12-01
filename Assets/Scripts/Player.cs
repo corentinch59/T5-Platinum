@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     public int getNumbersOfTaps => numberOfTaps;
 
     private DiggingBehavior diggingBehavior;
+    public DiggingBehavior DiggingBehavior => diggingBehavior;
     private PlayerVFX vfx;
     #region ITERATION_3
     private RectTransform mainRect;
@@ -70,9 +71,9 @@ public class Player : MonoBehaviour
         {
             if(carriedObj.TryGetComponent(out Corpse c))
             {
-                if(c.ThisQuest.requestInfos.siz > 0)
+                if((c.ThisQuest != null && c.ThisQuest.requestInfos.siz > 0) || (c.ThisQuest == null && c.CorpseData.size > 0))
                 {
-                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, "Hole");
+                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
                     if(objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
                     {
                         return;
@@ -80,7 +81,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, "Hole");
+                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
                 }
             }
         }
@@ -151,11 +152,16 @@ public class Player : MonoBehaviour
                     bigcorpse.Interact(this);
                     carriedObj = bigcorpse.gameObject.GetComponent<Corpse>();
                     carriedObj.Interact(this);
+                } else if(objectFound.TryGetComponent(out DigUpPNJInteractable digUpPnj) && carriedObj != null)
+                {
+                    digUpPnj.Interact(this);
                 }
             }
             else if (objectFound == null && carriedObj == null)
             {
                 diggingBehavior.PerformAction();
+                vfx.hitImpact.gameObject.SetActive(true);
+                vfx.hitImpact.Play();
                 int randomint = UnityEngine.Random.Range(1, 4);
                 SoundManager.instance.Play("Dig" + randomint);
             }
@@ -190,7 +196,7 @@ public class Player : MonoBehaviour
                     griefPnj.PutDown(this);
                 }
             }
-            else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && carriedObj == null)
+            else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && hole.HeldCorpse == null && carriedObj == null)
             {
                 Dig(-1);
             }

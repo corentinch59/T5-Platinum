@@ -17,6 +17,7 @@ TagManager:
   - Flower
   - Corpse
   - Hole
+  - DigUpPNJ
   layers:
   - Default
   - TransparentFX

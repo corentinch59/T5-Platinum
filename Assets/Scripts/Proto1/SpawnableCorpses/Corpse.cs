@@ -33,9 +33,12 @@ public class Corpse : Carryable
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Texture2D texture2D = (Texture2D) thisQuest.corpseImage.texture;
-        Sprite sprite = Sprite.Create(texture2D, new Rect(0,0, texture2D.width, texture2D.height), new Vector2(0.5f,0.5f));
-        spriteRenderer.sprite = sprite;
+        if(ThisQuest != null)
+        {
+            Texture2D texture2D = (Texture2D) thisQuest.corpseImage.texture;
+            Sprite sprite = Sprite.Create(texture2D, new Rect(0,0, texture2D.width, texture2D.height), new Vector2(0.5f,0.5f));
+            spriteRenderer.sprite = sprite;
+        }
         IsInteractable = true;
     }
 
@@ -43,36 +46,52 @@ public class Corpse : Carryable
     {
         // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
         // And tell another pnj to come give player a quest
-        if(gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0)//&& player.CarriedObj == null && thisQuest != null 
-           
+        if(gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0 && thisQuest != null)
         {
             gameObject.tag = "Untagged";
             //Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
             GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
         }
 
-        if(thisQuest.requestInfos.siz > 0)
+        if (thisQuest != null)
         {
-            // To avoid dotween problem with player increasing scale of this (as a child)
-            //transform.localScale = new Vector3(2, 2, 2);
+            if(thisQuest.requestInfos.siz > 0)
+            {
+                // To avoid dotween problem with player increasing scale of this (as a child)
+                //transform.localScale = new Vector3(2, 2, 2);
+            }
+            else
+            {
+                if (player.CarriedObj == null)
+                {
+                    player.CarriedObj = this;
+                }
+                transform.parent = player.transform;
+                transform.localPosition = Vector3.up * 2f;
+                player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
+                transform.localScale = new Vector3(1, 1, 1);
+            }
         }
         else
         {
-            if (player.CarriedObj == null)
+            if(corpseData.size <= 0)
             {
-                player.CarriedObj = this;
+                if (player.CarriedObj == null)
+                {
+                    player.CarriedObj = this;
+                }
+                transform.parent = player.transform;
+                transform.localPosition = Vector3.up * 2f;
+                player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
+                transform.localScale = new Vector3(1, 1, 1);
             }
-            player.CarriedObj.transform.parent = player.transform;
-            player.CarriedObj.transform.localPosition = Vector3.up * 2f;
-            player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
-            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
     public override void PutDown(Player player, bool isTimeOut = false)
     {
         // To avoid dotween problem with player increasing scale of this (as a child)
-        if (thisQuest.requestInfos.siz > 0)
+        if ((thisQuest != null && thisQuest.requestInfos.siz > 0) || (thisQuest == null && corpseData.size > 0))
         {
             transform.localScale = new Vector3(2, 2, 2);
         }

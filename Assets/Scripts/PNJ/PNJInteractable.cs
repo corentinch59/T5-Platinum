@@ -10,6 +10,8 @@ public class PNJInteractable : MonoBehaviour
     [SerializeField] private DigRequest request;
     [SerializeField] private GameObject requestImg;
     [SerializeField] private GameObject corpseToCreate;
+    private GameObject corpseCreated;
+    public GameObject CorpseCreated => corpseCreated;
     [SerializeField] private NavMeshAgent agent;
 
     [Header("PnjChecksSpot")]
@@ -35,7 +37,7 @@ public class PNJInteractable : MonoBehaviour
 
         // spawn Corpse To Bury
         Vector3 spawn = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
-        GameObject corpseCreated = Instantiate(corpseToCreate, spawn, Quaternion.identity);
+        corpseCreated = Instantiate(corpseToCreate, spawn, Quaternion.identity);
 
         if (corpseCreated.TryGetComponent(out Corpse c))
         {
@@ -77,9 +79,8 @@ public class PNJInteractable : MonoBehaviour
         {
             for(int i = 0; i < thereAreCorpseAround.Length;++i)
             {
-                if (thereAreCorpseAround[i].TryGetComponent(out Corpse c) && thereAreCorpseAround[i].gameObject.tag == "Corpse")
+                if (thereAreCorpseAround[i].TryGetComponent(out Corpse c) && corpseCreated.TryGetComponent(out Corpse cc) && cc.CorpseData.corpseType == c.CorpseData.corpseType)
                 {
-                    Debug.Log("Oh il y a déjà un corps au revoir");
                     return true;
                 }
             }
@@ -94,14 +95,15 @@ public class PNJInteractable : MonoBehaviour
         {
             requestImg.SetActive(true);
             agent.destination = questLoc.position;
+            yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
             if (!CheckIfAlreadyACorpse())
             {
-                yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
                 AddNewQuest();
             }
             else
             {
                 Debug.Log("Il y a un corps là");
+                GameManager.Instance.NewPNJComingWithQuest(this);
                 yield return StartCoroutine(Walk(false));
             }
         }

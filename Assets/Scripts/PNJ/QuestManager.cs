@@ -10,10 +10,12 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private ScriptableRequest _scriptableRequestBase;
     public List<RequestDataBase> activeQuests;
     public List<RequestDataBase> activeDeuilQuests;
+    public List<RequestDataBase> activeDigUpQuests;
     public List<RequestDataBase> allQuests = new List<RequestDataBase>();
     public List<RequestDataBase> questFinished; 
     public int numberOfQuests = 10;
     public int numberOfDeuilQuests = 10;
+    public int numberOfDigUpQuests = 10;
     public static QuestManager instance;
     
 
@@ -50,15 +52,21 @@ public class QuestManager : MonoBehaviour
         activeDeuilQuests.Add(requestInfo);
         questFinished.Remove(requestInfo);
     }
-    
-    
-    
+
     public RequestDataBase GetRequest(DigRequest request)
     {
         int index = GetRandomNumber(allQuests.Count);
         return allQuests[index];
     }
-    
+    public RequestDataBase GetRequest(DigUpRequest request)
+    {
+        int index = GetRandomNumber(instance.questFinished.Count);
+        RequestDataBase databaseChosen = questFinished[index];
+        activeDigUpQuests.Add(databaseChosen);
+        questFinished.Remove(questFinished[index]);
+        return databaseChosen;
+    }
+
     public RequestDataBase GetRequest(GriefRequest request)
     {
         int index = GetRandomNumber(instance.questFinished.Count);
@@ -75,10 +83,14 @@ public class QuestManager : MonoBehaviour
     {
         yield return new WaitForSeconds(secondsToWait);
         request.SetDigRequest();
-
-
     }
-    
+
+    public IEnumerator WaitForNewRequest(float secondsToWait, DigUpRequest request)
+    {
+        yield return new WaitForSeconds(secondsToWait);
+        request.SetDigUpRequest();
+    }
+
     public IEnumerator WaitForNewRequest(float secondsToWait, GriefRequest request)
     {
         yield return new WaitForSeconds(secondsToWait);

@@ -34,6 +34,7 @@ public class PerformingDig : DiggingBehavior
         if (internalTaps < numberOfTaps - 1)
         {
             ++internalTaps;
+            //_player.vfx.hitImpact.gameObject.SetActive(true);
             #region ITERATION_3
             if (a != null)
             {
@@ -51,11 +52,11 @@ public class PerformingDig : DiggingBehavior
             sequence = DOTween.Sequence();
             sequence.Append(a).Append(b);
             #endregion
-
         }
         else
         {
             _player.Dig(1);
+            //_player.vfx.hitImpact.gameObject.SetActive(true);
             _player.EnableInput("Move");
             #region ITERATION_3
             CancelAnimation();

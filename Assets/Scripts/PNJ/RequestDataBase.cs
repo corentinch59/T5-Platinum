@@ -26,6 +26,7 @@ public class RequestDataBase
         CHEAP,
         CLASSIC,
         LUXURY,
+        NONE,
         JAR,
     }
 

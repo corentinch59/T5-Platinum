@@ -62,6 +62,15 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LDsim1"",
+                    ""type"": ""Button"",
+                    ""id"": ""875f824d-6609-4a35-bb91-17f21faf52af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -249,6 +258,28 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LDashFou"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8eaf4d6a-0c53-4256-b2ee-982f156f8dcd"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LDsim1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebe9fe1d-c7ee-497f-a851-a771069dfc2d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LDsim1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -491,6 +522,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_LDashFou = m_Player.FindAction("LDashFou", throwIfNotFound: true);
+        m_Player_LDsim1 = m_Player.FindAction("LDsim1", throwIfNotFound: true);
         // SelectionScreenControl
         m_SelectionScreenControl = asset.FindActionMap("SelectionScreenControl", throwIfNotFound: true);
         m_SelectionScreenControl_ChangeLeft = m_SelectionScreenControl.FindAction("ChangeLeft", throwIfNotFound: true);
@@ -568,6 +600,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_LDashFou;
+    private readonly InputAction m_Player_LDsim1;
     public struct PlayerActions
     {
         private @CharacterControls m_Wrapper;
@@ -576,6 +609,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @LDashFou => m_Wrapper.m_Player_LDashFou;
+        public InputAction @LDsim1 => m_Wrapper.m_Player_LDsim1;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -597,6 +631,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @LDashFou.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLDashFou;
                 @LDashFou.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLDashFou;
                 @LDashFou.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLDashFou;
+                @LDsim1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLDsim1;
+                @LDsim1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLDsim1;
+                @LDsim1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLDsim1;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -613,6 +650,9 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                 @LDashFou.started += instance.OnLDashFou;
                 @LDashFou.performed += instance.OnLDashFou;
                 @LDashFou.canceled += instance.OnLDashFou;
+                @LDsim1.started += instance.OnLDsim1;
+                @LDsim1.performed += instance.OnLDsim1;
+                @LDsim1.canceled += instance.OnLDsim1;
             }
         }
     }
@@ -762,6 +802,7 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnLDashFou(InputAction.CallbackContext context);
+        void OnLDsim1(InputAction.CallbackContext context);
     }
     public interface ISelectionScreenControlActions
     {

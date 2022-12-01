@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerVFX : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerVFX : MonoBehaviour
     public SpriteRenderer[] listVfx;
     public SpriteRenderer vfx;
     private Coroutine currentCoroutine;
+    public VisualEffect hitImpact;
     
 
 
