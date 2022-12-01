@@ -45,35 +45,10 @@ public class Corpse : Carryable
 
     public override void Interact(Player player)
     {
-        // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
-        // And tell another pnj to come give player a quest
-        if((gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0 && thisQuest != null) || 
-            (thisQuest == null && GameManager.Instance.PnjsAlreadyGaveQuest.Count >= 4))
-        {
-            gameObject.tag = "Untagged";
-            //Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
-            if(GameManager.Instance.PnjsAlreadyGaveQuest.Count > 1 && pnjFrom != null && thisQuest == null)
-            {
-                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
-                GameManager.Instance.NewPNJComingWithQuest(pnjFrom);
-                pnjFrom = null;
-                return;
-            }
-            if(pnjFrom != null)
-            {
-                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
-                GameManager.Instance.NewPNJComingWithQuest(pnjFrom);
-            }
-        }
 
         if (thisQuest != null)
         {
-            if(thisQuest.requestInfos.siz > 0)
-            {
-                // To avoid dotween problem with player increasing scale of this (as a child)
-                //transform.localScale = new Vector3(2, 2, 2);
-            }
-            else
+            if(thisQuest.requestInfos.siz <= 0)
             {
                 if (player.CarriedObj == null)
                 {
@@ -97,6 +72,26 @@ public class Corpse : Carryable
                 transform.localPosition = Vector3.up * 2f;
                 player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
                 transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+        // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
+        // And tell another pnj to come give player a quest
+        if((gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0 && thisQuest != null) || 
+            (thisQuest == null && GameManager.Instance.PnjsAlreadyGaveQuest.Count >= 4))
+        {
+            gameObject.tag = "Untagged";
+            //Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
+            if(GameManager.Instance.PnjsAlreadyGaveQuest.Count > 1 && pnjFrom != null && thisQuest == null)
+            {
+                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
+                GameManager.Instance.NewPNJComingWithQuest(pnjFrom);
+                pnjFrom = null;
+                return;
+            }
+            if(pnjFrom != null)
+            {
+                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
+                GameManager.Instance.NewPNJComingWithQuest(pnjFrom);
             }
         }
     }
