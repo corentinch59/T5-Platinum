@@ -60,9 +60,9 @@ public class GriefQuest : MonoBehaviour
         corpseImage.texture = corpseT;
     }
 
-    private int CheckScoreQuest(string name)
+    private int CheckScoreQuest(RequestDataBase.corpseType corpseType)
     {
-        if (name == requestInfos.corpseName)
+        if (corpseType == requestInfos.corps)
         {
             _request.GriefPnjInteractable.transform.DOJump(_request.GriefPnjInteractable.transform.position, 3f, 3, 3f);
             image.color = Color.green;
@@ -88,12 +88,12 @@ public class GriefQuest : MonoBehaviour
         }
     }
 
-    public IEnumerator FinishGriefQuest(string name)
+    public IEnumerator FinishGriefQuest(RequestDataBase.corpseType corpseType)
     {
         _request.GoodByeGriefPNJ();
         isQuestFinished = true;
         //_request.griefCoroutine = null;
-        QuestManager.instance.UpdateScore(CheckScoreQuest(name));
+        QuestManager.instance.UpdateScore(CheckScoreQuest(corpseType));
         QuestManager.instance.activeDeuilQuests.Remove(requestInfos);
         yield return new WaitForSeconds(1);
         Destroy(gameObject);

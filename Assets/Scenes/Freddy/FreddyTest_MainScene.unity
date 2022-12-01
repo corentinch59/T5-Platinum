@@ -3513,7 +3513,7 @@ PrefabInstance:
     - target: {fileID: 2620190660970719590, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 82badd0c4ca83ec48a7bd4b5a33f7247, type: 2}
     - target: {fileID: 3026082338358244922, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_Camera
       value: 

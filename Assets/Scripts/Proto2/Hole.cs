@@ -64,89 +64,95 @@ public class Hole : MonoBehaviour, IInteractable
 
     public void Interact(Player player)
     {
-        if (player.CarriedObj != null && heldCorpse == null)
+
+        if (player.CarriedObj != null)
         {
-            if (player.CarriedObj.TryGetComponent(out Corpse corpse))
+            if(heldCorpse == null)
             {
-                if(player.CarriedObj.TryGetComponent(out BigCorpse bc))
+                if (player.CarriedObj.TryGetComponent(out Corpse corpse))
                 {
-                    if(SetHoleSize > 1)
+                    if(player.CarriedObj.TryGetComponent(out BigCorpse bc))
                     {
-                        player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
-                        // Detach both players
-                        bc.Players[0].CarriedObj = null;
-                        if(bc.Players[1] != null)
+                        if(SetHoleSize > 1)
                         {
-                            bc.Players[1].CarriedObj = null;
-                            bc.Interact(bc.Players[1]);
+                            player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
+                            // Detach both players
+                            bc.Players[0].CarriedObj = null;
+                            if(bc.Players[1] != null)
+                            {
+                                bc.Players[1].CarriedObj = null;
+                                bc.Interact(bc.Players[1]);
+                            }
+                            bc.Interact(bc.Players[0]);
+                            StartCoroutine(BurryingCorpse(corpse));
+                            heldCorpse = corpse;
+                            corpse.gameObject.SetActive(false);
+                            HoleSize = 1;
+                            return;
                         }
-                        bc.Interact(bc.Players[0]);
-                        StartCoroutine(BurryingCorpse(corpse));
-                        heldCorpse = corpse;
-                        corpse.gameObject.SetActive(false);
-                        HoleSize = 1;
-                        return;
+                        else
+                        {
+                            return;
+                        }
                     }
                     else
                     {
-                        return;
+                        corpse.IsInteractable = false;
+                        player.CarriedObj.transform.parent = null;
+                        player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
                     }
+                    player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
+                    StartCoroutine(BurryingCorpse(corpse));
+                    heldCorpse = corpse;
+                    player.CarriedObj = null;
+                    corpse.gameObject.transform.position = transform.position;
+                    corpse.gameObject.SetActive(false);
                 }
-                else
-                {
-                    corpse.IsInteractable = false;
-                    player.CarriedObj.transform.parent = null;
-                    player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
-                }
-                player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
-                StartCoroutine(BurryingCorpse(corpse));
-                heldCorpse = corpse;
-                player.CarriedObj = null;
-                corpse.gameObject.transform.position = transform.position;
-                corpse.gameObject.SetActive(false);
             }
-            else if(player.CarriedObj.TryGetComponent(out GriefPNJInteractable griefPNJ))
+            else
             {
-                griefPNJ.CheckLocationWanted(player);
+                if (player.CarriedObj.TryGetComponent(out GriefPNJInteractable griefPNJ))
+                {
+                    griefPNJ.CheckLocationWanted(player);
+                }
             }
         }
         else
         {
-            if(player.CarriedObj == null)
+            if (heldCorpse == null)
             {
-                if (heldCorpse == null)
+                // Grow hole size
+                SetHoleSize = 1;
+            }
+            else
+            {
+                // Dig Up Corpse
+                player.DiggingBehavior.PerformAction();
+                if (player.DiggingBehavior is StartDigging)
                 {
-                    SetHoleSize = 1;
-                }
-                else
-                {
-                    player.DiggingBehavior.PerformAction();
-                    if (player.DiggingBehavior is StartDigging)
-                    {
-                        //player.DiggingBehavior.OnDigCompleted
-                        Debug.Log("Complete");
+                    //player.DiggingBehavior.OnDigCompleted
+                    Debug.Log("Complete");
 
-                        Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
-                        heldCorpse.gameObject.layer = 7; // <- is Interactable
-                        Debug.Log("IsInteractable là");
-                        heldCorpse.IsInteractable = true;
-                        heldCorpse.transform.position = posCorpse;
-                        heldCorpse.gameObject.SetActive(true);
-                        heldCorpse.tag = "Corpse";
-                        //player.CarriedObj = heldCorpse;
-                        // if we dug up a big or a little body
-                        if(heldCorpse.CorpseData.size > 0)
-                        {
-                            HoleSize = 1;
-                            //heldCorpse.GetComponent<BigCorpse>().Interact(player);
-                        }
-                        else
-                        {
-                            //heldCorpse.Interact(player);
-                        }
-                        StartCoroutine(BurryingCorpse(heldCorpse));
-                        heldCorpse = null;
+                    Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+                    heldCorpse.gameObject.layer = 7; // <- is Interactable
+                    Debug.Log("IsInteractable là");
+                    heldCorpse.IsInteractable = true;
+                    heldCorpse.transform.position = posCorpse;
+                    heldCorpse.gameObject.SetActive(true);
+                    heldCorpse.tag = "Corpse";
+                    //player.CarriedObj = heldCorpse;
+                    // if we dug up a big or a little body
+                    if (heldCorpse.CorpseData.size > 0)
+                    {
+                        HoleSize = 1;
+                        //heldCorpse.GetComponent<BigCorpse>().Interact(player);
                     }
+                    else
+                    {
+                        //heldCorpse.Interact(player);
+                    }
+                    StartCoroutine(BurryingCorpse(heldCorpse));
+                    heldCorpse = null;
                 }
             }
         }

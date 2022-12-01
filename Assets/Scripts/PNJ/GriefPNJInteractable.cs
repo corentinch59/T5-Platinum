@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,7 +18,7 @@ public class GriefPNJInteractable : Carryable
 
     private bool questActivated;
 
-    public string griefName = "";
+    public RequestDataBase.corpseType griefCorpseType = RequestDataBase.corpseType.NONE;
     public float radius = 10f;
     private float griefDuration = 3f;
     private Coroutine feedback;
@@ -51,9 +52,6 @@ public class GriefPNJInteractable : Carryable
         // check if isinteractable and avoid player to take him if he didn't finish his coroutine
         if (isInteractable && finishGriefQuest == null)
         {
-            // Disable Interactable Layer to avoid player's detection
-            gameObject.layer = 0;
-
             agent.enabled = false;
             requestImg.SetActive(false);
 
@@ -87,7 +85,7 @@ public class GriefPNJInteractable : Carryable
 
         player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
 
-        // Update name and loc that the pnj wants
+        // Update corpseType the pnj wants
         Collider[] infos = Physics.OverlapSphere(transform.position, radius);
         float min = float.MaxValue;
 
@@ -99,7 +97,7 @@ public class GriefPNJInteractable : Carryable
                 if (dist < min)
                 {
                     min = dist;
-                    griefName = c.CorpseData.name;
+                    griefCorpseType = c.CorpseData.corpseType;
                 }
             }
         }
@@ -117,7 +115,7 @@ public class GriefPNJInteractable : Carryable
         PutDown(player);
         if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
         {
-            finishGriefQuest = StartCoroutine(dq.FinishGriefQuest(griefName));
+            finishGriefQuest = StartCoroutine(dq.FinishGriefQuest(griefCorpseType));
         }
         player.CarriedObj = null;
     }
@@ -143,12 +141,14 @@ public class GriefPNJInteractable : Carryable
         //Arrive Avec sa quete
         if (isWalkingForward)
         {
+            gameObject.layer = 7;
             requestImg.SetActive(true);
             agent.destination  = endLoc.position;
         }
         //a plus de quete et rentre chez lui
         else
         {
+            gameObject.layer = 0;
             requestImg.SetActive(false);
             agent.destination = startLoc.position;
         }

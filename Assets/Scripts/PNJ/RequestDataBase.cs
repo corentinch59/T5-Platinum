@@ -32,6 +32,7 @@ public class RequestDataBase
 
     public enum corpseType
     {
+        NONE,
         CORGNON1,
         CORGNON2,
         CORGNON3,

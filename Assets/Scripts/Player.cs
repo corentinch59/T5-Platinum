@@ -84,6 +84,10 @@ public class Player : MonoBehaviour
                     objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
                 }
             }
+            if(carriedObj.TryGetComponent(out GriefPNJInteractable griefPnj))
+            {
+                objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole" }, new string[] { "DigUpPNJ" });
+            }
         }
         else
         {
@@ -141,10 +145,6 @@ public class Player : MonoBehaviour
                         corpse.Interact(this);
                         int randomint = UnityEngine.Random.Range(1, 3);
                         SoundManager.instance.Play("Grab_Corpse" + randomint);
-                    }
-                    else if (carriedObj != null && carriedObj.TryGetComponent(out GriefPNJInteractable pnj))
-                    {
-                        pnj.CheckLocationWanted(this);
                     }
                 }
                 else if (objectFound.TryGetComponent(out BigCorpse bigcorpse) && carriedObj == null)
