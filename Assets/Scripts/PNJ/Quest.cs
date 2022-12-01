@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public delegate void FinishQuestHandler(int value);
+
 public class Quest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
@@ -19,7 +19,7 @@ public class Quest : MonoBehaviour
     private bool isQuestFinished;
     private float timer;
 
-    public static event FinishQuestHandler onFinishQuest;
+   
 
     public enum StateTimer
     {
@@ -65,7 +65,7 @@ public class Quest : MonoBehaviour
         coffinImage.texture = coffinT;
     }
 
-    private int CheckScoreQuest(CorpseData data)
+    private float CheckScoreQuest(CorpseData data)
     {
         if(data.localisation == requestInfos.loc)
         {
@@ -74,20 +74,20 @@ public class Quest : MonoBehaviour
             switch (stateTimer)
             {
                 case StateTimer.EXCELLENT:
-                    return 8;
+                    return 8f;
                 case StateTimer.MID:
-                    return 5;
+                    return 5f;
                 case StateTimer.BAD:
-                    return 3;
+                    return 3f;
                 default:
-                    return 0;
+                    return 0f;
             }
         }
         else
         {
             // remove score
             image.color = Color.red;
-            return -5;
+            return -5f;
         }
     }
     
@@ -95,7 +95,7 @@ public class Quest : MonoBehaviour
     {
         _request.GoodByePnj();
         QuestManager.instance.UpdateScore(CheckScoreQuest(data));
-        onFinishQuest?.Invoke(CheckScoreQuest(data));
+        QuestManager.onFinishQuest?.Invoke(CheckScoreQuest(data));
         isQuestFinished = true;
         QuestManager.instance.questFinished.Add(requestInfos);
         QuestManager.instance.activeQuests.Remove(requestInfos);
@@ -110,6 +110,7 @@ public class Quest : MonoBehaviour
         image.color = Color.red;
         QuestManager.instance.activeQuests.Remove(requestInfos);
         QuestManager.instance.questFinished.Add(requestInfos);
+        QuestManager.onFinishQuest?.Invoke(-5f);
         yield return new WaitForSeconds(2);
         gameObject.SetActive(false);
         GameManager.Instance.NewPNJComingWithQuest(_request._pnjInteractable);

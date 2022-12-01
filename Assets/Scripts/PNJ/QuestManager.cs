@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public delegate void FinishQuestHandler(float value);
 public class QuestManager : MonoBehaviour
 {
     [SerializeField] private ScriptableRequest _scriptableRequestBase;
@@ -20,7 +21,9 @@ public class QuestManager : MonoBehaviour
     
 
     public TextMeshProUGUI scoreText;
-    public int score;
+    public float score;
+
+    public static FinishQuestHandler onFinishQuest;
 
     private void Awake()
     {
@@ -33,7 +36,7 @@ public class QuestManager : MonoBehaviour
     }
     
 
-    public void UpdateScore(int scoreToAdd)
+    public void UpdateScore(float scoreToAdd)
     {
         score += scoreToAdd;
         score = Mathf.Clamp(score, 0, int.MaxValue);
