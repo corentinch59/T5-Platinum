@@ -151,6 +151,7 @@ public class Hole : MonoBehaviour, IInteractable
 
     public IEnumerator BurryingCorpse(Corpse corpse)
     {
+        
         Vector3 holepos = transform.position;
         // burry corpse
         if(heldCorpse == null)
@@ -169,6 +170,9 @@ public class Hole : MonoBehaviour, IInteractable
         {
             if(heldCorpse == null)
             {
+                int randomInt1 = Random.Range(1, 5);
+                SoundManager.instance.Play("TombSpawn" + randomInt1);
+
                 transform.localScale = new Vector3(0f, 0f, 0f);
                 transform.position = new Vector3(holepos.x, holepos.y, holepos.z);
 
@@ -202,6 +206,9 @@ public class Hole : MonoBehaviour, IInteractable
 
         transform.localScale = new Vector3(0f, 0f, 0f);
         transform.position = new Vector3(holepos.x, holepos.y, holepos.z);
+
+        int randomInt2 = Random.Range(1, 5);
+        SoundManager.instance.Play("TombSpawn" + randomInt2);
 
         yield return new WaitForSeconds(tombSpawnDuration);
 

@@ -48,7 +48,7 @@ MonoBehaviour:
   sounds:
   - name: MainLoop
     clip: {fileID: 8300000, guid: f0567ca47e8d99942a512bedac640390, type: 3}
-    volume: 0.4
+    volume: 0.8
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FootStep1
     clip: {fileID: 8300000, guid: 0cb25a73da3ebc94ba93bf8639d16b0d, type: 3}
-    volume: 0.4
+    volume: 0.3
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FootStep2
     clip: {fileID: 8300000, guid: deb79009fc85c0246904f91f08f2fb1f, type: 3}
-    volume: 0.4
+    volume: 0.3
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FootStep3
     clip: {fileID: 8300000, guid: 23aee7c727c41b046932e5932afb4eea, type: 3}
-    volume: 0.4
+    volume: 0.3
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FootStep4
     clip: {fileID: 8300000, guid: a1cd5b251ebcee945ac348783c66cb98, type: 3}
-    volume: 0.4
+    volume: 0.3
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FootStep5
     clip: {fileID: 8300000, guid: e0dce6b91ebb111498401b3faafccc75, type: 3}
-    volume: 0.4
+    volume: 0.3
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FootStep6
     clip: {fileID: 8300000, guid: bb37285a6ca957c49909036396b0545b, type: 3}
-    volume: 0.4
+    volume: 0.3
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FootStep7
     clip: {fileID: 8300000, guid: 375c3e0964391fe47b4b727de5450b5d, type: 3}
-    volume: 0.4
+    volume: 0.3
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
@@ -201,10 +201,46 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FootStep8
     clip: {fileID: 8300000, guid: b8f16ecc1af391249ad267eaa23d4b66, type: 3}
-    volume: 0.4
+    volume: 0.3
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
+    loop: 0
+    type: 2
+    source: {fileID: 0}
+  - name: TombSpawn1
+    clip: {fileID: 8300000, guid: d50f7256de300d640a6550795c728496, type: 3}
+    volume: 0.7
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    type: 2
+    source: {fileID: 0}
+  - name: TombSpawn2
+    clip: {fileID: 8300000, guid: 0ee98eac216999d449c596b9189b58e1, type: 3}
+    volume: 0.7
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    type: 2
+    source: {fileID: 0}
+  - name: TombSpawn3
+    clip: {fileID: 8300000, guid: 1943f03b4b3279a4e82d09f7fcc03a01, type: 3}
+    volume: 0.7
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    type: 2
+    source: {fileID: 0}
+  - name: TombSpawn4
+    clip: {fileID: 8300000, guid: 4a3bc6dd062de5041b8849c33ffd04dc, type: 3}
+    volume: 0.7
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
     loop: 0
     type: 2
     source: {fileID: 0}

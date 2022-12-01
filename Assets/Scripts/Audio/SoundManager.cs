@@ -86,12 +86,12 @@ public class SoundManager : MonoBehaviour
         return s;
     }
 
-    private void Start()
-    {
-        //audioSource.Play();
+    //private void Start()
+    //{
+    //    //audioSource.Play();
 
-        Play("MainLoop");
-    }
+    //    Play("MainLoop");
+    //}
 }
 
 
