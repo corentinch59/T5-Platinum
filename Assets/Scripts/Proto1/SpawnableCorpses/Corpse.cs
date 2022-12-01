@@ -117,7 +117,7 @@ public class Corpse : Carryable
         player.CarriedObj = null;
     }
 
-    public CorpseData UpdateRequestLocalisation()
+    public CorpseData UpdateRequestLocalisation(bool locationToo = false)
     {
         CorpseData newLoc = new CorpseData();
 
@@ -126,18 +126,21 @@ public class Corpse : Carryable
         newLoc.corpseType = thisQuest.requestInfos.corps;
         newLoc.coffinType = thisQuest.requestInfos.cof;
 
-        Collider[] corpsInAreas = Physics.OverlapSphere(transform.position, radius, localisationsLayer);
-
-        float min = float.MaxValue;
-
-        for(int i = 0; i < corpsInAreas.Length; ++i)
+        if (!locationToo)
         {
-            Debug.Log("HIT");
-            float dist = Vector3.Distance(corpsInAreas[i].gameObject.transform.position, transform.position);
-            if (dist < min)
+            Collider[] corpsInAreas = Physics.OverlapSphere(transform.position, radius, localisationsLayer);
+
+            float min = float.MaxValue;
+
+            for(int i = 0; i < corpsInAreas.Length; ++i)
             {
-                min = dist;
-                newLoc.localisation = AddLocalisation(corpsInAreas[i].gameObject.tag);
+                Debug.Log("HIT");
+                float dist = Vector3.Distance(corpsInAreas[i].gameObject.transform.position, transform.position);
+                if (dist < min)
+                {
+                    min = dist;
+                    newLoc.localisation = AddLocalisation(corpsInAreas[i].gameObject.tag);
+                }
             }
         }
         return newLoc;

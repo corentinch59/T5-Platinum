@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IRaycastBehavior
 {
-    public abstract GameObject PerformRaycast(Vector3 position, float radius, LayerMask layer, string[] objTag = null);
+    public abstract GameObject PerformRaycast(Vector3 position, float radius, LayerMask layer, string[] objTag = null, string[] exceptions = null);
 }
