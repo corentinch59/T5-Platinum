@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer);
+            objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, null, new string[] { "DigUpPNJ" });
         }
 
         // Outline
