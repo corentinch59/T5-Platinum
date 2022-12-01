@@ -127,6 +127,9 @@ public class Hole : MonoBehaviour, IInteractable
                         Debug.Log("Complete");
 
                         Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+                        heldCorpse.gameObject.layer = 7; // <- is Interactable
+                        Debug.Log("IsInteractable là");
+                        heldCorpse.IsInteractable = true;
                         heldCorpse.transform.position = posCorpse;
                         heldCorpse.gameObject.SetActive(true);
                         heldCorpse.tag = "Corpse";

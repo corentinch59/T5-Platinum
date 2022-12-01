@@ -9,6 +9,7 @@ public class Corpse : Carryable
 {
     [SerializeField] private CorpseData corpseData;
     [SerializeField] private Quest thisQuest;
+    private PNJInteractable pnjFrom;
 
     [SerializeField] private float radius = 10f;
     [SerializeField] private LayerMask localisationsLayer;
@@ -26,7 +27,7 @@ public class Corpse : Carryable
     public Sprite[] TombSprite => tombSprite;
 
     public SpriteRenderer SpriteRenderer => spriteRenderer;
-
+    public PNJInteractable PnjFrom { get { return pnjFrom; } set { pnjFrom = value; } }
     public bool IsInteractable { get { return isInteractable; } set { isInteractable = value; } }
     #endregion
 
@@ -46,11 +47,23 @@ public class Corpse : Carryable
     {
         // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
         // And tell another pnj to come give player a quest
-        if(gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0 && thisQuest != null)
+        if((gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0 && thisQuest != null) || 
+            (thisQuest == null && GameManager.Instance.PnjsAlreadyGaveQuest.Count >= 4))
         {
             gameObject.tag = "Untagged";
             //Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
-            GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
+            if(GameManager.Instance.PnjsAlreadyGaveQuest.Count > 1 && pnjFrom != null && thisQuest == null)
+            {
+                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
+                GameManager.Instance.NewPNJComingWithQuest(pnjFrom);
+                pnjFrom = null;
+                return;
+            }
+            if(pnjFrom != null)
+            {
+                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
+                GameManager.Instance.NewPNJComingWithQuest(pnjFrom);
+            }
         }
 
         if (thisQuest != null)
@@ -90,6 +103,8 @@ public class Corpse : Carryable
 
     public override void PutDown(Player player, bool isTimeOut = false)
     {
+        gameObject.layer = 7; // <-is Interactable
+        isInteractable = true;
         // To avoid dotween problem with player increasing scale of this (as a child)
         if ((thisQuest != null && thisQuest.requestInfos.siz > 0) || (thisQuest == null && corpseData.size > 0))
         {

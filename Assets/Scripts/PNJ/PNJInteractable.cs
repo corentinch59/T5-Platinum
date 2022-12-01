@@ -44,6 +44,8 @@ public class PNJInteractable : MonoBehaviour
             // corpseCreated is taking data from the request
             c.ThisQuest = request.quest.GetComponent<Quest>();
             c.CorpseData = c.UpdateRequestLocalisation(true);
+            c.PnjFrom = this;
+            c.gameObject.layer = 7;
 
             // GameFeel
             if ((int)c.ThisQuest.requestInfos.siz > 0)

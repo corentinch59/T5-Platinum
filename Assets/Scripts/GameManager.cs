@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public List<PnjGivesQuest> pnjs;
 
+    [SerializeField] private List<PNJInteractable> pnjsAlreadyGaveQuest;
+    public List<PNJInteractable> PnjsAlreadyGaveQuest => pnjsAlreadyGaveQuest;
+
     protected virtual void Awake()
     {
         if (Instance == null)
@@ -48,18 +51,42 @@ public class GameManager : MonoBehaviour
 
     public void NewPNJComingWithQuest(PNJInteractable previousPnj)
     {
-        PNJInteractable newPnjGivesQuest;
+        if(pnjsAlreadyGaveQuest.Count >= 4)
+        {
+            return;
+        }
 
         // take random pnj (not the same as before) in the list and tell him to give player a quest
-        int randomPnj = Random.Range(0, pnjs.Count);
-        newPnjGivesQuest = pnjs[randomPnj].pnj;
-        while(pnjs[randomPnj].pnj == previousPnj)
+        if(pnjsAlreadyGaveQuest.Count <= 0)
         {
-            randomPnj = Random.Range(0, pnjs.Count);
+            PNJInteractable newPnjGivesQuest;
+            int randomPnj = Random.Range(0, pnjs.Count);
             newPnjGivesQuest = pnjs[randomPnj].pnj;
-        }
-        //Debug.Log("Next Quest From : " + newPnjGivesQuest);
 
-        newPnjGivesQuest.StartCoroutine(newPnjGivesQuest.Walk(true));
+            while(pnjs[randomPnj].pnj == previousPnj)
+            {
+                randomPnj = Random.Range(0, pnjs.Count);
+                newPnjGivesQuest = pnjs[randomPnj].pnj;
+            }
+            pnjsAlreadyGaveQuest.Add(newPnjGivesQuest);
+            newPnjGivesQuest.StartCoroutine(newPnjGivesQuest.Walk(true));
+        }
+        else
+        {
+            PNJInteractable newPnjGivesQuest;
+            int randomPnj = Random.Range(0, pnjs.Count);
+            newPnjGivesQuest = pnjs[randomPnj].pnj;
+
+            if(pnjsAlreadyGaveQuest.Count >= 1 && pnjsAlreadyGaveQuest.Count < 4)
+            {
+                while (pnjsAlreadyGaveQuest.Contains(newPnjGivesQuest))
+                {
+                    randomPnj = Random.Range(0, pnjs.Count);
+                    newPnjGivesQuest = pnjs[randomPnj].pnj;
+                }
+            }
+            pnjsAlreadyGaveQuest.Add(newPnjGivesQuest);
+            newPnjGivesQuest.StartCoroutine(newPnjGivesQuest.Walk(true));
+        }
     }
 }
