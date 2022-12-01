@@ -13,7 +13,7 @@ public class ActivateCollisonParticle : MonoBehaviour
     //[SerializeField] private Transform target;
     //[SerializeField] private float speed;
 
-    [Tooltip("The time before the particles start moving in second")]
+    [Tooltip("The time before the particles do smoethings in second")]
     [SerializeField] private float TimeBeforeActivation = 1f;
 
 
@@ -53,7 +53,6 @@ public class ActivateCollisonParticle : MonoBehaviour
         {
             elapsedTime = 0f;
         }
-
         // Change only the particles that are alive
     }
 
@@ -65,5 +64,4 @@ public class ActivateCollisonParticle : MonoBehaviour
         if (particles == null || particles.Length < particleEmitter.main.maxParticles)
             particles = new ParticleSystem.Particle[particleEmitter.main.maxParticles];
     }
-
 }
