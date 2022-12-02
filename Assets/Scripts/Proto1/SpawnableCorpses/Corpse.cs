@@ -47,7 +47,8 @@ public class Corpse : Carryable
     {
         if (thisQuest != null)
         {
-            thisQuest.ActivateOulineUI();
+            thisQuest.ActivateOulineUI(player.id);
+            Debug.Log(player.id);
             if(thisQuest.requestInfos.siz <= 0)
             {
                 if (player.CarriedObj == null)
