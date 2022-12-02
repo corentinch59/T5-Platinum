@@ -3522,6 +3522,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DEUIL PNJ
       objectReference: {fileID: 0}
+    - target: {fileID: 3026082339422642390, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3026082339422642394, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_RootOrder
       value: 6

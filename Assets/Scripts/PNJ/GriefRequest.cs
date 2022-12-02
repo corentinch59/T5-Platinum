@@ -101,7 +101,7 @@ public class GriefRequest : MonoBehaviour
         }
         else
         {
-            nameText.text = null;
+            //nameText.text = null;
             corpseImage.texture = null;
             griefCoroutine = null;
         }

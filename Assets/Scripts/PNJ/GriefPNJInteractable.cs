@@ -33,7 +33,6 @@ public class GriefPNJInteractable : Carryable
     private void Start()
     {
         transform.position = startLoc.position;
-
     }
 
     private void Update()
@@ -65,7 +64,7 @@ public class GriefPNJInteractable : Carryable
             player.CarriedObj = this;
 
             // player carry PNJ
-            player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
+            //player.GetComponent<SpriteRenderer>().sprite = player.spriteCarry;
             player.CarriedObj.gameObject.transform.parent = player.transform;
             player.CarriedObj.gameObject.transform.localPosition = transform.up * 4;
             player.CarriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, -90), 1f);

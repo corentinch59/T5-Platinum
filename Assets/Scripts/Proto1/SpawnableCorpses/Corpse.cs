@@ -84,14 +84,17 @@ public class Corpse : Carryable
             if(GameManager.Instance.PnjsAlreadyGaveQuest.Count > 1 && pnjFrom != null && thisQuest == null)
             {
                 GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
-                GameManager.Instance.NewPNJComingWithQuest(pnjFrom);
+                if (GameManager.Instance.PnjsAlreadyGaveQuest.Count <= 2)
+                {
+                    GameManager.Instance.NewPNJComingWithQuest();
+                }
                 pnjFrom = null;
-                return;
             }
+
             if(pnjFrom != null)
             {
                 GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
-                GameManager.Instance.NewPNJComingWithQuest(pnjFrom);
+                GameManager.Instance.NewPNJComingWithQuest();
             }
         }
     }
