@@ -38,13 +38,13 @@ public class PNJInteractable : MonoBehaviour
         // spawn Corpse To Bury
         Vector3 spawn = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
         corpseCreated = Instantiate(corpseToCreate, spawn, Quaternion.identity);
+        corpseCreated.transform.localScale = Vector3.zero;
 
         if (corpseCreated.TryGetComponent(out Corpse c))
         {
             // corpseCreated is taking data from the request
             c.ThisQuest = request.quest.GetComponent<Quest>();
             c.CorpseData = c.UpdateRequestLocalisation(true);
-            Debug.Log(c.CorpseData.corpseType);
             c.PnjFrom = this;
             c.gameObject.layer = 7;
 
@@ -53,11 +53,13 @@ public class PNJInteractable : MonoBehaviour
             {
                 // Big corpse
                 InitBigCorpse(c);
+                //c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y + 0.7f, c.transform.position.z);
                 corpseCreated.transform.DOScale(new Vector3(2, 2, 2), 0.5f);
             }
             else
             {
                 // small corpse
+                c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y + 0.7f, c.transform.position.z);
                 corpseCreated.transform.DOScale(new Vector3(1, 1, 1), 0.5f);
             }
         }
