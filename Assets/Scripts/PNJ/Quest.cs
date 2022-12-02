@@ -100,7 +100,6 @@ public class Quest : MonoBehaviour
     {
         _request.GoodByePnj();
         QuestManager.instance.UpdateScore(CheckScoreQuest(data));
-        QuestManager.onFinishQuest?.Invoke(CheckScoreQuest(data));
         isQuestFinished = true;
         QuestManager.instance.questFinished.Add(requestInfos);
         QuestManager.instance.activeQuests.Remove(requestInfos);

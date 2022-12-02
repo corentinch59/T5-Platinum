@@ -53,7 +53,7 @@ public class PNJInteractable : MonoBehaviour
             {
                 // Big corpse
                 InitBigCorpse(c);
-                //c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y + 0.7f, c.transform.position.z);
+                c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y + 2f, c.transform.position.z);
                 corpseCreated.transform.DOScale(new Vector3(2, 2, 2), 0.5f);
             }
             else
