@@ -34,7 +34,6 @@ public class QuestManager : MonoBehaviour
             allQuests.Add(quest);
         }
     }
-    
 
     public void UpdateScore(float scoreToAdd)
     {
@@ -42,7 +41,6 @@ public class QuestManager : MonoBehaviour
         score = Mathf.Clamp(score, 0, int.MaxValue);
         //scoreText.text = score.ToString();
     }
-
 
     public void AcceptRequest(Request request, RequestDataBase requestInfo)
     {

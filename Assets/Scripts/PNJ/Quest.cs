@@ -113,7 +113,7 @@ public class Quest : MonoBehaviour
         QuestManager.onFinishQuest?.Invoke(-5f);
         yield return new WaitForSeconds(2);
         gameObject.SetActive(false);
-        GameManager.Instance.NewPNJComingWithQuest(_request._pnjInteractable);
+        GameManager.Instance.NewPNJComingWithQuest();
     }
 
     private void CheckTimer(float timer)

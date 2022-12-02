@@ -40,6 +40,7 @@ public class GriefRequest : MonoBehaviour
             else
             {
                 timer = 5; // 15
+                _griefPnjInteractable.gameObject.layer = 0;
                 griefCoroutine = StartCoroutine(QuestManager.instance.WaitForNewRequest(2, this));
             }
         }
@@ -100,7 +101,7 @@ public class GriefRequest : MonoBehaviour
         }
         else
         {
-            nameText.text = null;
+            //nameText.text = null;
             corpseImage.texture = null;
             griefCoroutine = null;
         }
@@ -110,7 +111,7 @@ public class GriefRequest : MonoBehaviour
             //_griefPnjInteractable.PutDown(player, true);
 
         }
-
+        _griefPnjInteractable.gameObject.layer = 0;
         StartCoroutine(_griefPnjInteractable.Grieffing());
     }
 }

@@ -89,6 +89,7 @@ Material:
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
     - _DissolveAmountOutline: 0
+    - _DissolveSlider: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2

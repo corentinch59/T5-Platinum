@@ -9,6 +9,7 @@ public class Corpse : Carryable
 {
     [SerializeField] private CorpseData corpseData;
     [SerializeField] private Quest thisQuest;
+    private PNJInteractable pnjFrom;
 
     [SerializeField] private float radius = 10f;
     [SerializeField] private LayerMask localisationsLayer;
@@ -26,7 +27,7 @@ public class Corpse : Carryable
     public Sprite[] TombSprite => tombSprite;
 
     public SpriteRenderer SpriteRenderer => spriteRenderer;
-
+    public PNJInteractable PnjFrom { get { return pnjFrom; } set { pnjFrom = value; } }
     public bool IsInteractable { get { return isInteractable; } set { isInteractable = value; } }
     #endregion
 
@@ -44,23 +45,9 @@ public class Corpse : Carryable
 
     public override void Interact(Player player)
     {
-        // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
-        // And tell another pnj to come give player a quest
-        if(gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0 && thisQuest != null)
-        {
-            gameObject.tag = "Untagged";
-            //Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
-            GameManager.Instance.NewPNJComingWithQuest(thisQuest._request._pnjInteractable);
-        }
-
         if (thisQuest != null)
         {
-            if(thisQuest.requestInfos.siz > 0)
-            {
-                // To avoid dotween problem with player increasing scale of this (as a child)
-                //transform.localScale = new Vector3(2, 2, 2);
-            }
-            else
+            if(thisQuest.requestInfos.siz <= 0)
             {
                 if (player.CarriedObj == null)
                 {
@@ -86,10 +73,34 @@ public class Corpse : Carryable
                 transform.localScale = new Vector3(1, 1, 1);
             }
         }
+        // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
+        // And tell another pnj to come give player a quest
+        if((gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0 && thisQuest != null) || 
+            (thisQuest == null && pnjFrom != null))
+        {
+            gameObject.tag = "Untagged";
+            if(thisQuest == null)
+            {
+                if (GameManager.Instance.PnjsAlreadyGaveQuest.Count <= 2)
+                {
+                    GameManager.Instance.NewPNJComingWithQuest();
+                }
+                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
+                pnjFrom = null;
+            }
+            else
+            {
+                GameManager.Instance.NewPNJComingWithQuest();
+                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
+                pnjFrom = null;
+            }
+        }
     }
 
     public override void PutDown(Player player, bool isTimeOut = false)
     {
+        gameObject.layer = 7; // <-is Interactable
+        isInteractable = true;
         // To avoid dotween problem with player increasing scale of this (as a child)
         if ((thisQuest != null && thisQuest.requestInfos.siz > 0) || (thisQuest == null && corpseData.size > 0))
         {
