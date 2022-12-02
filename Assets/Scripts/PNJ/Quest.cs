@@ -137,8 +137,9 @@ public class Quest : MonoBehaviour
         }
     }
 
-    public void ActivateOulineUI()
+    public void ActivateOulineUI(int playerID)
     {
+        Outline.material.SetInt("_PlayerIDColor", playerID);
         Outline.material.SetFloat("_IsOutline", 1);
     }
     
