@@ -18,6 +18,9 @@ MonoBehaviour:
     - {fileID: 2800000, guid: dd483ef6746434a44b2c464be38ecf7b, type: 3}
     - {fileID: 2800000, guid: 719c53a3392559148a32d8d1de92320a, type: 3}
     - {fileID: 2800000, guid: 5e79a9cb8017f994aa9fb55f9220fa02, type: 3}
+    - {fileID: 2800000, guid: b137192fdbab55742b2f0b36f0ffc371, type: 3}
+    - {fileID: 2800000, guid: 22b9ec25a417dd2469012f31157a25d9, type: 3}
+    - {fileID: 2800000, guid: 79ac8cf084f32124a9f0aa69101327aa, type: 3}
     localisationTex:
     - {fileID: 0}
     - {fileID: 2800000, guid: 35995068f6bd0ae4881661eab8787e7e, type: 3}

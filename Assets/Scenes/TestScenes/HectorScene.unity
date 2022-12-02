@@ -2168,6 +2168,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PNJ 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3266256926193268498, guid: 1c05ef041caf3b84e807d0219d33134b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4581886092418296284, guid: 1c05ef041caf3b84e807d0219d33134b, type: 3}
       propertyPath: radius
       value: 5
