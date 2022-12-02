@@ -88,22 +88,22 @@ public class SatisfactionManager : MonoBehaviour
             timerEndMeshPro.gameObject.SetActive(true);
             elapsedTimeBeforeGO += Time.deltaTime;
             displayTimerFloat = endTimeDuration - elapsedTimeBeforeGO;
-            timerEndMeshPro.text = displayTimerFloat.ToString("0.00");
-            timerEndMeshPro.transform.DOShakePosition(5f);
+            timerEndMeshPro.text = displayTimerFloat.ToString("0.");
+            timerEndMeshPro.transform.DOShakePosition(5f, 2f);
+            //Faire un effet de scale
         }
         else
         {
             elapsedTimeBeforeGO = 0f;
             timerEndMeshPro.gameObject.SetActive(false);
         }
-
         #endregion
 
 
         if (displayTimerFloat <= 0)
         {
             IsGameOver = true;
-            timerEndMeshPro.text = "0.00";
+            timerEndMeshPro.text = "0";
             Debug.Log("GameOver");
         }
         if (displayTimer <= 0)
