@@ -37,17 +37,17 @@ MonoBehaviour:
     siz: 0
     loc: 1
     cof: 0
-    corps: 5
+    corps: 4
   - corpseName: Simon
     siz: 0
     loc: 1
     cof: 0
-    corps: 6
+    corps: 3
   - corpseName: Corentin
     siz: 0
     loc: 1
     cof: 0
-    corps: 3
+    corps: 2
   - corpseName: Jack
     siz: 1
     loc: 1
