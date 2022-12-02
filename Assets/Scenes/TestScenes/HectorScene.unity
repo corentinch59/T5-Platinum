@@ -1018,7 +1018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6357613033232578423, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: timing
-      value: 30
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 6357613033232578423, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: postProcessManager

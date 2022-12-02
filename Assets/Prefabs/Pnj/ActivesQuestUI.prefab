@@ -673,7 +673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &326581084352232349
 RectTransform:
   m_ObjectHideFlags: 0
@@ -929,4 +929,5 @@ MonoBehaviour:
   questSlider: {fileID: 6185174995862996059}
   questTime: 10
   image: {fileID: 8999927999622090272}
+  Outline: {fileID: 6113753872093889044}
   stateTimer: 0

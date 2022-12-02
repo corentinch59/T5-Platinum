@@ -183,7 +183,10 @@ public class Player : MonoBehaviour
                     if(carriedObj.TryGetComponent(out BigCorpse bc))
                     {
                         carriedObj = null;
+                        if(corpse.ThisQuest != null)
+                            corpse.ThisQuest.DesactivateOulineUI();
                         bc.Interact(this);
+                        
                     }
                     else
                     {

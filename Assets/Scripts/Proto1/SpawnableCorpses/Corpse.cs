@@ -45,8 +45,10 @@ public class Corpse : Carryable
 
     public override void Interact(Player player)
     {
+        
         if (thisQuest != null)
         {
+            thisQuest.ActivateOulineUI();
             if(thisQuest.requestInfos.siz <= 0)
             {
                 if (player.CarriedObj == null)
@@ -101,6 +103,10 @@ public class Corpse : Carryable
     {
         gameObject.layer = 7; // <-is Interactable
         isInteractable = true;
+        if (thisQuest != null)
+        {
+            thisQuest.DesactivateOulineUI();
+        }
         // To avoid dotween problem with player increasing scale of this (as a child)
         if ((thisQuest != null && thisQuest.requestInfos.siz > 0) || (thisQuest == null && corpseData.size > 0))
         {

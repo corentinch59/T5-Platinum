@@ -16,10 +16,15 @@ public class Quest : MonoBehaviour
     [SerializeField] private Slider questSlider;
     [SerializeField] private float questTime = 5;
     [SerializeField] private Image image;
+    [SerializeField] private RawImage Outline;
     private bool isQuestFinished;
     private float timer;
 
-   
+    private void Start()
+    {
+        Material mat = Instantiate(Outline.material);
+        Outline.material = mat;
+    }
 
     public enum StateTimer
     {
@@ -130,5 +135,15 @@ public class Quest : MonoBehaviour
         {
             stateTimer = StateTimer.EXCELLENT;
         }
+    }
+
+    public void ActivateOulineUI()
+    {
+        Outline.material.SetFloat("_IsOutline", 1);
+    }
+    
+    public void DesactivateOulineUI()
+    {
+        Outline.material.SetFloat("_IsOutline", 0);
     }
 }
