@@ -47,8 +47,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: MainLoop
-    clip: {fileID: 8300000, guid: f0567ca47e8d99942a512bedac640390, type: 3}
+    clip: {fileID: 8300000, guid: d91251087612a17438417e8a958545c2, type: 3}
     volume: 0.8
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    type: 1
+    source: {fileID: 0}
+  - name: Ambiance
+    clip: {fileID: 8300000, guid: f0567ca47e8d99942a512bedac640390, type: 3}
+    volume: 0.6
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
