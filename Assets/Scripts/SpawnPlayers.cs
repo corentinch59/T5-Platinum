@@ -6,8 +6,10 @@ using UnityEngine.InputSystem;
 public class SpawnPlayers : MonoBehaviour
 {
     [SerializeField] private List<Sprite> _sprites = new List<Sprite>();
-
+    
     private PlayerInputManager playerInputManager;
+
+
 
 
     private void Start()
@@ -20,9 +22,6 @@ public class SpawnPlayers : MonoBehaviour
         GameObject player = playerInput.gameObject;
 
         player.GetComponent<SpriteRenderer>().sprite = _sprites[playerInputManager.playerCount - 1];
-
+        player.GetComponent<Player>().id = playerInputManager.playerCount;
     }
-
-
-
 }

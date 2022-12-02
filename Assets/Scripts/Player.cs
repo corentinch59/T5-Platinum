@@ -50,6 +50,9 @@ public class Player : MonoBehaviour
     public RectTransform getIteration3Rect => iteration3rect;
     #endregion
 
+    [HideInInspector]
+    public int id;
+
     private void Start() 
     {
         playerMovement = GetComponent<PlayerMovement>();
