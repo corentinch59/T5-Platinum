@@ -163,8 +163,8 @@ public class Corpse : Carryable
         {
             case "Water": return RequestDataBase.localisation.WATER;
             case "Tree": return RequestDataBase.localisation.TREE;
-            //case "Shrine": return RequestDataBase.localisation.SHRINE;
-            //case "Flower": return RequestDataBase.localisation.FLOWER;
+            case "Shrine": return RequestDataBase.localisation.SHRINE;
+            case "Flower": return RequestDataBase.localisation.FLOWER;
             default: return RequestDataBase.localisation.NONE;
         }
     }
