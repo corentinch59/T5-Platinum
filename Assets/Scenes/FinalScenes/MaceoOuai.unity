@@ -2600,7 +2600,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4967584945326103150, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_Value
-      value: 68
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4967584945326103150, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_Interactable
@@ -2681,6 +2681,10 @@ PrefabInstance:
     - target: {fileID: 6357613033434172768, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_RenderMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6357613033434172768, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6357613033434172769, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_Pivot.x

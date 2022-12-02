@@ -50,6 +50,9 @@ public class Player : MonoBehaviour
     public RectTransform getIteration3Rect => iteration3rect;
     #endregion
 
+    [HideInInspector]
+    public int id;
+
     private void Start() 
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -180,7 +183,10 @@ public class Player : MonoBehaviour
                     if(carriedObj.TryGetComponent(out BigCorpse bc))
                     {
                         carriedObj = null;
+                        if(corpse.ThisQuest != null)
+                            corpse.ThisQuest.DesactivateOulineUI();
                         bc.Interact(this);
+                        
                     }
                     else
                     {
