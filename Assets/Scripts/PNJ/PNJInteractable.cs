@@ -52,9 +52,9 @@ public class PNJInteractable : MonoBehaviour
             if ((int)c.ThisQuest.requestInfos.siz > 0)
             {
                 // Big corpse
-                InitBigCorpse(c);
                 c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y + 2f, c.transform.position.z);
                 corpseCreated.transform.DOScale(new Vector3(2, 2, 2), 0.5f);
+                InitBigCorpse(c);
             }
             else
             {
@@ -73,9 +73,6 @@ public class PNJInteractable : MonoBehaviour
         c.BigCorpse.CarrySpeed = 3f;
         c.BigCorpse.RotationSpeed = 4f;
         c.BigCorpse.AngleThreshold = 20f;
-        c.BigCorpse.Controller = c.gameObject.AddComponent<CharacterController>();
-        c.BigCorpse.Controller.radius = 1f;
-        c.BigCorpse.Controller.height = 0f;
     }
 
     private bool CheckIfAlreadyACorpse()

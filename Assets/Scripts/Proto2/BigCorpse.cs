@@ -34,6 +34,8 @@ public class BigCorpse : MonoBehaviour, IInteractable
     private void Start()
     {
         players = new Player[2];
+        controller = GetComponent<CharacterController>();
+        controller.enabled = true;
     }
 
     private void Update()
