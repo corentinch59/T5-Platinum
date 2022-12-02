@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         NewPNJComingWithQuest();
 
         SoundManager.instance.Play("MainLoop");
+        SoundManager.instance.Play("Ambiance");
     }
 
     public void NewPNJComingWithQuest()

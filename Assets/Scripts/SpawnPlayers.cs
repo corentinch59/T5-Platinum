@@ -9,9 +9,6 @@ public class SpawnPlayers : MonoBehaviour
     
     private PlayerInputManager playerInputManager;
 
-
-
-
     private void Start()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
