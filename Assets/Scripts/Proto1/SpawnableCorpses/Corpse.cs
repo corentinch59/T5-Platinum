@@ -45,7 +45,6 @@ public class Corpse : Carryable
 
     public override void Interact(Player player)
     {
-
         if (thisQuest != null)
         {
             if(thisQuest.requestInfos.siz <= 0)
@@ -77,24 +76,23 @@ public class Corpse : Carryable
         // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
         // And tell another pnj to come give player a quest
         if((gameObject.tag == "Corpse" && QuestManager.instance.allQuests.Count >= 0 && thisQuest != null) || 
-            (thisQuest == null && GameManager.Instance.PnjsAlreadyGaveQuest.Count >= 4))
+            (thisQuest == null && pnjFrom != null))
         {
             gameObject.tag = "Untagged";
-            //Debug.Log("Previous Quest Giver : " + thisQuest._request._pnjInteractable);
-            if(GameManager.Instance.PnjsAlreadyGaveQuest.Count > 1 && pnjFrom != null && thisQuest == null)
+            if(thisQuest == null)
             {
-                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
                 if (GameManager.Instance.PnjsAlreadyGaveQuest.Count <= 2)
                 {
                     GameManager.Instance.NewPNJComingWithQuest();
                 }
+                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
                 pnjFrom = null;
             }
-
-            if(pnjFrom != null)
+            else
             {
-                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
                 GameManager.Instance.NewPNJComingWithQuest();
+                GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
+                pnjFrom = null;
             }
         }
     }
