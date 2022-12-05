@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4595533220097504257}
   - component: {fileID: 4595533220097504258}
-  - component: {fileID: 6693596098904731989}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -253,25 +252,32 @@ MonoBehaviour:
     loop: 0
     type: 2
     source: {fileID: 0}
+  - name: DragDirt
+    clip: {fileID: 8300000, guid: 878844dab17035d46bb6457f67c8d122, type: 3}
+    volume: 0.7
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 1
+    type: 2
+    source: {fileID: 0}
+  - name: DragMug
+    clip: {fileID: 8300000, guid: d703ebdb5e3417941a686464b08f833e, type: 3}
+    volume: 0.7
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 1
+    type: 2
+    source: {fileID: 0}
+  - name: DragStone
+    clip: {fileID: 8300000, guid: 649fedac0cd974548aff163106388710, type: 3}
+    volume: 0.7
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 1
+    type: 2
+    source: {fileID: 0}
   MusicGroup: {fileID: -2705797388152085867, guid: bebe7146d0e569f43ac1aca6e98aa12e, type: 2}
   SFXGroup: {fileID: -9039539242180136081, guid: bebe7146d0e569f43ac1aca6e98aa12e, type: 2}
---- !u!114 &6693596098904731989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4595533220097504260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf5c9d55ea18a9a44b05dc6c75d76f5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backgroundColor:
-    serializedVersion: 2
-    rgba: 4290020667
-  textColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  fontSize: 12
-  fontStyle: 1
