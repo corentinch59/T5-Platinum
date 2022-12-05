@@ -18,6 +18,7 @@ TagManager:
   - Corpse
   - Hole
   - DigUpPNJ
+  - Sunshine
   layers:
   - Default
   - TransparentFX
