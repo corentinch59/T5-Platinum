@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Hole : MonoBehaviour, IInteractable
 {
@@ -14,13 +13,6 @@ public class Hole : MonoBehaviour, IInteractable
     private BoxCollider colliderHole;
     private Vector3 originalSize;
     private int HoleSize = 1;
-    private RectTransform bubbleParent;
-    private Image bubbleIMage;
-    private bool imageShown = false;
-    private Sequence showBubbleSequence;
-    private Sequence hideBubbleSequence;
-
-    private const float BUBBLE_HEIGHT = 2.75f;
 
     public Corpse HeldCorpse => heldCorpse;
 
@@ -42,9 +34,6 @@ public class Hole : MonoBehaviour, IInteractable
         originalSprite = spriteRenderer.sprite;
         colliderHole = GetComponent<BoxCollider>();
         originalSize = colliderHole.size;
-        bubbleParent = transform.GetChild(1).GetChild(0).GetComponent<RectTransform>();
-        bubbleIMage = bubbleParent.GetChild(0).GetComponent<Image>();
-        bubbleParent.gameObject.SetActive(false);
     }
 
     private void ModifyHoleSize(int modifier)
@@ -101,8 +90,6 @@ public class Hole : MonoBehaviour, IInteractable
                             bc.Interact(bc.Players[0]);
                             StartCoroutine(BurryingCorpse(corpse));
                             heldCorpse = corpse;
-                            bubbleIMage.sprite = heldCorpse.SpriteRenderer.sprite;
-                            ShowBubble();
                             corpse.gameObject.SetActive(false);
                             HoleSize = 1;
                             return;
@@ -122,8 +109,6 @@ public class Hole : MonoBehaviour, IInteractable
                     player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
                     StartCoroutine(BurryingCorpse(corpse));
                     heldCorpse = corpse;
-                    bubbleIMage.sprite = heldCorpse.SpriteRenderer.sprite;
-                    ShowBubble();
                     player.CarriedObj = null;
                     corpse.gameObject.transform.position = transform.position;
                     corpse.gameObject.SetActive(false);
@@ -150,33 +135,22 @@ public class Hole : MonoBehaviour, IInteractable
                 player.DiggingBehavior.PerformAction();
                 if (player.DiggingBehavior is StartDigging)
                 {
-                    SetHoleSize = 1;
-                }
-                else
-                {
-                    player.DiggingBehavior.PerformAction();
-                    if (player.DiggingBehavior is StartDigging)
-                    {
-                        //player.DiggingBehavior.OnDigCompleted
+                    //player.DiggingBehavior.OnDigCompleted
+                    Debug.Log("Complete");
 
-                        Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
-                        heldCorpse.transform.position = posCorpse;
-                        heldCorpse.gameObject.SetActive(true);
-                        heldCorpse.tag = "Corpse";
-                        //player.CarriedObj = heldCorpse;
-                        // if we dug up a big or a little body
-                        if(heldCorpse.CorpseData.size > 0)
-                        {
-                            HoleSize = 1;
-                            //heldCorpse.GetComponent<BigCorpse>().Interact(player);
-                        }
-                        else
-                        {
-                            //heldCorpse.Interact(player);
-                        }
-                        StartCoroutine(BurryingCorpse(heldCorpse));
-                        Hidebubble();
-                        heldCorpse = null;
+                    Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+                    heldCorpse.gameObject.layer = 7; // <- is Interactable
+                    Debug.Log("IsInteractable là");
+                    heldCorpse.IsInteractable = true;
+                    heldCorpse.transform.position = posCorpse;
+                    heldCorpse.gameObject.SetActive(true);
+                    heldCorpse.tag = "Corpse";
+                    //player.CarriedObj = heldCorpse;
+                    // if we dug up a big or a little body
+                    if (heldCorpse.CorpseData.size > 0)
+                    {
+                        HoleSize = 1;
+                        //heldCorpse.GetComponent<BigCorpse>().Interact(player);
                     }
                     else
                     {
@@ -281,33 +255,5 @@ public class Hole : MonoBehaviour, IInteractable
     public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
     {
         yield break;
-    }
-
-    public void ShowBubble()
-    {
-        if (imageShown || heldCorpse == null)
-            return;
-
-        bubbleParent.gameObject.SetActive(true);
-        bubbleParent.transform.localScale = Vector3.zero;
-        bubbleParent.transform.localPosition = Vector3.zero;
-        bubbleParent.transform.DOScale( new Vector3( 1f,1f,1f), 0.5f);
-        bubbleParent.transform.DOLocalMove(new Vector3 (0f, BUBBLE_HEIGHT, 0f), 0.5f);
-        imageShown = true;
-    }
-
-    public void Hidebubble()
-    {
-        if (!imageShown)
-            return;
-
-        bubbleParent.transform.DOLocalMove(Vector3.zero, 0.5f);
-        bubbleParent.transform.DOScale(Vector3.zero, 0.5f);
-        imageShown = false;
-    }
-
-    public void CancelbubbleAnim()
-    {
-
     }
 }
