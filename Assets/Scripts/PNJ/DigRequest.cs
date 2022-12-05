@@ -50,9 +50,9 @@ public class DigRequest : RequestH
     {
         TextureData tex = UpdateUI();
         quest = Instantiate(questToInstantiate, questParent.transform);
-        //Debug.Log("loc" + (int)requestInfo.loc);
-        //Debug.Log("coff" + (int)requestInfo.cof);
-        quest.GetComponent<Quest>().InitialiseQuestUI(requestInfo, tex.corpsesTex[(int)requestInfo.corps],
+        /*Debug.Log("loc" + (int)requestInfo.loc);
+        Debug.Log("corpse" + ((int)requestInfo.corps - 1));*/
+        quest.GetComponent<Quest>().InitialiseQuestUI(requestInfo, tex.corpsesTex[(int)requestInfo.corps - 1],
             tex.localisationTex[(int)requestInfo.loc],tex.coffinTex[(int)requestInfo.cof], this);
     }
 

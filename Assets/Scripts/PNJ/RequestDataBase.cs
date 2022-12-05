@@ -17,8 +17,8 @@ public class RequestDataBase
         TREE,
         WATER,
         //INCINERATOR,
-        //FLOWER,
-        //SHRINE,
+        FLOWER,
+        SHRINE,
     }
 
     public enum coffin
@@ -33,14 +33,14 @@ public class RequestDataBase
     public enum corpseType
     {
         NONE,
-        CORGNON1,
-        CORGNON2,
-        CORGNON3,
-        CORGNON4,
-        LEZARD1,
-        LEZARD2,
-        LEZARD3,
-        LEZARD4,
+        CORGNON1 = 1,
+        CORGNON2 = 2,
+        CORGNON3 = 3,
+        CORGNON4 = 4,
+        LEZARD1 = 5,
+        LEZARD2 = 6,
+        LEZARD3 = 7,
+        LEZARD4 = 8,
         
     }
     

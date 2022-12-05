@@ -10,6 +10,8 @@ public class Hole : MonoBehaviour, IInteractable
     private Tween tween;
     private SpriteRenderer spriteRenderer;
     private Sprite originalSprite;
+    private BoxCollider colliderHole;
+    private Vector3 originalSize;
     private int HoleSize = 1;
 
     public Corpse HeldCorpse => heldCorpse;
@@ -30,6 +32,8 @@ public class Hole : MonoBehaviour, IInteractable
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalSprite = spriteRenderer.sprite;
+        colliderHole = GetComponent<BoxCollider>();
+        originalSize = colliderHole.size;
     }
 
     private void ModifyHoleSize(int modifier)
@@ -197,13 +201,15 @@ public class Hole : MonoBehaviour, IInteractable
                 }
                 else if (randomSprite == 1)
                 {
-                    corpse.transform.DOMove(new Vector3(holepos.x, holepos.y + 1, holepos.z), 0.5f);
+                    transform.DOMove(new Vector3(holepos.x, holepos.y + 1f, holepos.z), 0.5f);
+                    colliderHole.size = new Vector3(colliderHole.size.x, colliderHole.size.y - 1f, colliderHole.size.z);
                 }
                 transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
             }
             else
             {
                 //Dig up
+                colliderHole.size = originalSize;
                 spriteRenderer.sprite = originalSprite;
                 gameObject.layer = 0;
                 yield return new WaitForSeconds(2f);
@@ -230,7 +236,8 @@ public class Hole : MonoBehaviour, IInteractable
             transform.DOMove(new Vector3(holepos.x, holepos.y + 1f, holepos.z), 0.5f);
         } else if(randomsprite == 1)
         {
-            corpse.transform.DOMove(new Vector3(holepos.x, holepos.y + 1, holepos.z), 0.5f);
+            transform.DOMove(new Vector3(holepos.x, holepos.y + 1, holepos.z), 0.5f);
+            colliderHole.size = new Vector3(colliderHole.size.x, colliderHole.size.y - 1f, colliderHole.size.z);
         }
         transform.DOScale(1f, 0.5f).SetEase(Ease.OutBounce);
     }

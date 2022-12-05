@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 694417260691800148}
   - component: {fileID: 694417260691800149}
   - component: {fileID: -5864278713313341788}
+  - component: {fileID: 6229820759404922605}
   m_Layer: 7
   m_Name: NewCorpse
   m_TagString: Corpse
@@ -146,6 +147,24 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!143 &6229820759404922605
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694417260691800150}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Height: 0
+  m_Radius: 1
+  m_SlopeLimit: 45
+  m_StepOffset: 0
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5825466099745569437
 GameObject:
   m_ObjectHideFlags: 0

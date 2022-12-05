@@ -45,10 +45,10 @@ public class Corpse : Carryable
 
     public override void Interact(Player player)
     {
-        
         if (thisQuest != null)
         {
-            thisQuest.ActivateOulineUI();
+            thisQuest.ActivateOulineUI(player.id);
+            Debug.Log(player.id);
             if(thisQuest.requestInfos.siz <= 0)
             {
                 if (player.CarriedObj == null)
@@ -73,6 +73,10 @@ public class Corpse : Carryable
                 transform.localPosition = Vector3.up * 2f;
                 player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
                 transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(2, 2, 2);
             }
         }
         // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
@@ -107,15 +111,6 @@ public class Corpse : Carryable
         {
             thisQuest.DesactivateOulineUI();
         }
-        // To avoid dotween problem with player increasing scale of this (as a child)
-        if ((thisQuest != null && thisQuest.requestInfos.siz > 0) || (thisQuest == null && corpseData.size > 0))
-        {
-            transform.localScale = new Vector3(2, 2, 2);
-        }
-        else
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
 
         if (player.getPlayerMovement.canMove) // if one player -> put the body anywhere he wants to
         {
@@ -132,6 +127,15 @@ public class Corpse : Carryable
         player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
 
         player.CarriedObj = null;
+        // To avoid dotween problem with player increasing scale of this (as a child)
+        if (corpseData.size > 0)
+        {
+            transform.localScale = new Vector3(2, 2, 2);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     public CorpseData UpdateRequestLocalisation(bool locationToo = false)
@@ -169,8 +173,8 @@ public class Corpse : Carryable
         {
             case "Water": return RequestDataBase.localisation.WATER;
             case "Tree": return RequestDataBase.localisation.TREE;
-            //case "Shrine": return RequestDataBase.localisation.SHRINE;
-            //case "Flower": return RequestDataBase.localisation.FLOWER;
+            case "Shrine": return RequestDataBase.localisation.SHRINE;
+            case "Flower": return RequestDataBase.localisation.FLOWER;
             default: return RequestDataBase.localisation.NONE;
         }
     }

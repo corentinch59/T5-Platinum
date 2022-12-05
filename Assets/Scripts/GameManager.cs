@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         else
         {
             // < of the max pnjs in scene
-            if(pnjsAlreadyGaveQuest.Count < 4)
+            if(pnjsAlreadyGaveQuest.Count < 3)
             {
                 // change pnj
                 while (pnjsAlreadyGaveQuest.Contains(newPnjGivesQuest))

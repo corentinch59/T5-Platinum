@@ -39,6 +39,7 @@ public class QuestManager : MonoBehaviour
     {
         score += scoreToAdd;
         score = Mathf.Clamp(score, 0, int.MaxValue);
+        onFinishQuest?.Invoke(scoreToAdd);
         //scoreText.text = score.ToString();
     }
 
