@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
     private DiggingBehavior diggingBehavior;
     public DiggingBehavior DiggingBehavior => diggingBehavior;
     private PlayerVFX vfx;
+    public GameObject crackToInstantiate;
+    private GameObject lastCrack;
     #region ITERATION_3
     private RectTransform mainRect;
     public RectTransform getMainRect => mainRect;
@@ -232,7 +234,23 @@ public class Player : MonoBehaviour
             // Instantiate Hole to where the player is looking
             Instantiate(holePrefab, new Vector3(transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole, transform.position.y - 1f,
                 transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole), holePrefab.transform.rotation);
+            DestroyCrackHole();
+
         }
+    }
+    
+    public void SetCrackHole()
+    {
+        lastCrack = Instantiate(crackToInstantiate, new Vector3(
+                transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole,
+                transform.position.y - 1f,
+                transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole),
+            crackToInstantiate.transform.rotation);
+    }
+
+    public void DestroyCrackHole()
+    {
+        Destroy(lastCrack);
     }
 
     private void CallOutline(bool active, SpriteRenderer renderer)

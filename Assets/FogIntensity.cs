@@ -17,12 +17,7 @@ public class FogIntensity : MonoBehaviour
         sunshineTime = _sunshine.timing;
         SetIntensity();
     }
-
-    void Update()
-    {
-        
-    }
-
+    
     void SetIntensity()
     {
         fog.DOFloat(endIntensity, "_Intensity", sunshineTime);
