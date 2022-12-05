@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             {
                 objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
 
-                if((c.CorpseData.size > 0))
+                if(c.CorpseData.size > 0)
                 {
                     if(objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
                     {

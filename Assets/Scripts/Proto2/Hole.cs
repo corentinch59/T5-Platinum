@@ -150,39 +150,26 @@ public class Hole : MonoBehaviour, IInteractable
                 player.DiggingBehavior.PerformAction();
                 if (player.DiggingBehavior is StartDigging)
                 {
-                    SetHoleSize = 1;
-                }
-                else
-                {
-                    player.DiggingBehavior.PerformAction();
-                    if (player.DiggingBehavior is StartDigging)
-                    {
-                        //player.DiggingBehavior.OnDigCompleted
+                    //player.DiggingBehavior.OnDigCompleted
 
-                        Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
-                        heldCorpse.transform.position = posCorpse;
-                        heldCorpse.gameObject.SetActive(true);
-                        heldCorpse.tag = "Corpse";
-                        //player.CarriedObj = heldCorpse;
-                        // if we dug up a big or a little body
-                        if(heldCorpse.CorpseData.size > 0)
-                        {
-                            HoleSize = 1;
-                            //heldCorpse.GetComponent<BigCorpse>().Interact(player);
-                        }
-                        else
-                        {
-                            //heldCorpse.Interact(player);
-                        }
-                        StartCoroutine(BurryingCorpse(heldCorpse));
-                        Hidebubble();
-                        heldCorpse = null;
+                    Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+                    heldCorpse.gameObject.layer = 7; // <- is Interactable
+                    heldCorpse.transform.position = posCorpse;
+                    heldCorpse.gameObject.SetActive(true);
+                    heldCorpse.tag = "Corpse";
+                    //player.CarriedObj = heldCorpse;
+                    // if we dug up a big or a little body
+                    if (heldCorpse.CorpseData.size > 0)
+                    {
+                        HoleSize = 1;
+                        //heldCorpse.GetComponent<BigCorpse>().Interact(player);
                     }
                     else
                     {
                         //heldCorpse.Interact(player);
                     }
                     StartCoroutine(BurryingCorpse(heldCorpse));
+                    Hidebubble();
                     heldCorpse = null;
                 }
             }

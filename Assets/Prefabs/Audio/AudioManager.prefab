@@ -47,7 +47,7 @@ MonoBehaviour:
   sounds:
   - name: MainLoop
     clip: {fileID: 8300000, guid: d91251087612a17438417e8a958545c2, type: 3}
-    volume: 0.8
+    volume: 0.1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
     loop: 1
     type: 2
     source: {fileID: 0}
-  - name: DragMug
+  - name: DragMud
     clip: {fileID: 8300000, guid: d703ebdb5e3417941a686464b08f833e, type: 3}
     volume: 0.7
     volumeVariance: 0.1
