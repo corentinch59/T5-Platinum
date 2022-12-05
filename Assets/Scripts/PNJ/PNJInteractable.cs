@@ -83,7 +83,7 @@ public class PNJInteractable : MonoBehaviour
         {
             for(int i = 0; i < thereAreCorpseAround.Length;++i)
             {
-                if (thereAreCorpseAround[i].TryGetComponent(out Corpse c) && corpseCreated.TryGetComponent(out Corpse cc) && cc.CorpseData.corpseType == c.CorpseData.corpseType)
+                if (thereAreCorpseAround[i].TryGetComponent(out Corpse c) && corpseCreated != null && corpseCreated.TryGetComponent(out Corpse cc) && cc.CorpseData.corpseType == c.CorpseData.corpseType)
                 {
                     return true;
                 }
