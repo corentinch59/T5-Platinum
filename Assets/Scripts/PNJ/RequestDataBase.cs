@@ -8,7 +8,6 @@ public class RequestDataBase
     public string corpseName;
     public size siz;
     public localisation loc;
-    public coffin cof;
     public corpseType corps;
 
     public enum localisation
@@ -16,19 +15,10 @@ public class RequestDataBase
         NONE,
         TREE,
         WATER,
-        //INCINERATOR,
         FLOWER,
         SHRINE,
     }
 
-    public enum coffin
-    {
-        CHEAP,
-        CLASSIC,
-        LUXURY,
-        NONE,
-        JAR,
-    }
 
     public enum corpseType
     {
@@ -49,6 +39,5 @@ public class RequestDataBase
     {
         SMALL,
         MEDIUM,
-        LARGE,
     }
 }

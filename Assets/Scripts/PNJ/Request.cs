@@ -58,8 +58,6 @@ public class Request : MonoBehaviour
         TextureData tex = _textureData._TextureData;
         corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corps];
         localisationImage.texture = tex.localisationTex[(int)_requestInfos.loc];
-        coffinImage.texture = tex.coffinTex[(int)_requestInfos.cof];
-        
     }
 
     public void GoodByePnj()

@@ -152,7 +152,6 @@ public class Corpse : Carryable
         newLoc.name = thisQuest.requestInfos.corpseName;
         newLoc.size = thisQuest.requestInfos.siz;
         newLoc.corpseType = thisQuest.requestInfos.corps;
-        newLoc.coffinType = thisQuest.requestInfos.cof;
 
         if (!locationToo)
         {
