@@ -47,6 +47,7 @@ public class PNJInteractable : MonoBehaviour
             c.CorpseData = c.UpdateRequestLocalisation(true);
             c.PnjFrom = this;
             c.gameObject.layer = 7;
+            StartCoroutine(c.DeactivateExclamationPointIfTimeOutQuest(c.ThisQuest.QuestTime)); // <- Deactivate outline at the end of the timer
 
             // GameFeel
             if ((int)c.ThisQuest.requestInfos.siz > 0)
