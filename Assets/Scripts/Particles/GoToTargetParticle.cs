@@ -33,12 +33,12 @@ public class GoToTargetParticle : MonoBehaviour
 
         if (elapsedTime > TimeBeforeGo)
         {
-            Debug.Log("hehe");
+            
 
             for (int i = 0; i < numParticlesAlive; i++)
             {
                 int ratio = i / numParticlesAlive;
-                particles[i].position = Vector3.MoveTowards(particles[i].position, target.position, Time.deltaTime * speed);
+                particles[i].position = Vector3.MoveTowards(particles[i].position, target.localPosition, Time.deltaTime * speed);
             }
 
             // Apply the particle changes to the Particle System
@@ -47,6 +47,7 @@ public class GoToTargetParticle : MonoBehaviour
 
         if (numParticlesAlive == 0)
         {
+            Debug.Log("hehe");
             elapsedTime = 0f;
         }
 

@@ -8,6 +8,7 @@ using TMPro;
 public class SatisfactionManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerEndMeshPro;
+    [SerializeField] private GameObject gameOverScreen;
 
     private Slider satisfactionSlider = default;
 
@@ -87,6 +88,8 @@ public class SatisfactionManager : MonoBehaviour
             IsGameOver = true;
             timerEndMeshPro.text = "0";
             Debug.Log("GameOver");
+            gameOverScreen.SetActive(true);
+            timerEndMeshPro.gameObject.SetActive(false);
         }
     }
 
