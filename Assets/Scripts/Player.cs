@@ -265,7 +265,7 @@ public class Player : MonoBehaviour
     // Activate DragSounds
     private void OnTriggerEnter(Collider collision)
     {
-        if (carriedObj != null && carriedObj.TryGetComponent(out BigCorpse bc))
+        if (playerMovement.getMove.magnitude > 0 && carriedObj != null && carriedObj.TryGetComponent(out BigCorpse bc))
         {
             if (collision.gameObject.CompareTag("Water"))
             {
@@ -287,7 +287,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (carriedObj != null && carriedObj.TryGetComponent(out BigCorpse c))
+        if (playerMovement.getMove.magnitude > 0 && carriedObj != null && carriedObj.TryGetComponent(out BigCorpse c))
         {
             if (collision.gameObject.CompareTag("Water"))
             {

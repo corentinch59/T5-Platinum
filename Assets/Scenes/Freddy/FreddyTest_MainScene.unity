@@ -3317,22 +3317,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DigUPPNJ
       objectReference: {fileID: 0}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: spritesCorpse.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: spritesCorpse.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a16b0b4ea205964dabc3adf16fe009c, type: 3}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: spritesCorpse.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: b151d69015cd4e247a315bf53bf9a4cf, type: 3}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: spritesCorpse.Array.data[6]
-      value: 
-      objectReference: {fileID: 21300000, guid: be8105895642ed94098a0b915b508905, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
 --- !u!1001 &511009233678569286
