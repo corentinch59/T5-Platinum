@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6224845415569593043}
   - component: {fileID: 6224845415569593042}
   m_Layer: 7
-  m_Name: BigCorps
+  m_Name: BigCorps(obsolete)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
