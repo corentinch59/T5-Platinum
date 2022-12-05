@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float distanceSpawnHole = 2f;
 
-    public LayerMask graveLayer;
+    public LayerMask locationLayers;
     public float distGraveCreation;
 
     private PlayerMovement playerMovement;
@@ -82,7 +83,31 @@ public class Player : MonoBehaviour
 
                 if(c.CorpseData.size > 0)
                 {
-                    if(objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
+                    // Drag sound
+                    /*GameObject area = raycastBehavior.PerformRaycast(c.transform.position, raycastRadius, locationLayers);
+                    if(area != null && playerMovement.getMove.sqrMagnitude > 0)
+                    {
+                        if(area.tag == "Water")
+                        {
+                            SoundManager.instance.Play("DragMud");
+                        }
+                        else if(area.tag == "Shrine")
+                        {
+                            SoundManager.instance.Play("DragStone");
+                        }
+                        else 
+                        {
+                            SoundManager.instance.Play("DragDirt");
+                        }
+                    }
+                    else
+                    {
+                        SoundManager.instance.Stop("DragMud");
+                        SoundManager.instance.Stop("DragStone");
+                        SoundManager.instance.Stop("DragDirt");
+                    }*/
+
+                    if (objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
                     {
                         return;
                     }
@@ -241,11 +266,14 @@ public class Player : MonoBehaviour
     
     public void SetCrackHole()
     {
-        lastCrack = Instantiate(crackToInstantiate, new Vector3(
+        if(crackToInstantiate != null)
+        {
+            lastCrack = Instantiate(crackToInstantiate, new Vector3(
                 transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole,
                 transform.position.y - 1f,
                 transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole),
             crackToInstantiate.transform.rotation);
+        }
     }
 
     public void DestroyCrackHole()
@@ -280,7 +308,7 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
     }
 
-    // Activate DragSounds
+    /*// Activate DragSounds
     private void OnTriggerEnter(Collider collision)
     {
         if (playerMovement.getMove.magnitude > 0 && carriedObj != null && carriedObj.TryGetComponent(out BigCorpse bc))
@@ -305,23 +333,20 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (playerMovement.getMove.magnitude > 0 && carriedObj != null && carriedObj.TryGetComponent(out BigCorpse c))
+        if (collision.gameObject.CompareTag("Water"))
         {
-            if (collision.gameObject.CompareTag("Water"))
-            {
-                Debug.Log("Stop mug");
-                SoundManager.instance.Stop("DragMud");
-            }
-            else if (collision.gameObject.CompareTag("Shrine"))
-            {
-                Debug.Log("Stop Stone");
-                SoundManager.instance.Stop("DragStone");
-            }
-            else
-            {
-                Debug.Log("Stop dirt");
-                SoundManager.instance.Stop("DragDirt");
-            }
+            Debug.Log("Stop mug");
+            SoundManager.instance.Stop("DragMud");
         }
-    }
+        else if (collision.gameObject.CompareTag("Shrine"))
+        {
+            Debug.Log("Stop Stone");
+            SoundManager.instance.Stop("DragStone");
+        }
+        else
+        {
+            Debug.Log("Stop dirt");
+            SoundManager.instance.Stop("DragDirt");
+        }
+    }*/
 }

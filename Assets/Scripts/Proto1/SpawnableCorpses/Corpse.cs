@@ -49,7 +49,7 @@ public class Corpse : Carryable
         if (thisQuest != null)
         {
             thisQuest.ActivateOulineUI(player.id);
-            Debug.Log(player.id);
+            //Debug.Log(player.id);
             if(thisQuest.requestInfos.siz <= 0)
             {
                 if (player.CarriedObj == null)
@@ -161,7 +161,6 @@ public class Corpse : Carryable
 
             for(int i = 0; i < corpsInAreas.Length; ++i)
             {
-                Debug.Log("HIT");
                 float dist = Vector3.Distance(corpsInAreas[i].gameObject.transform.position, transform.position);
                 if (dist < min)
                 {

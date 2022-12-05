@@ -58,6 +58,19 @@ public class SoundManager : MonoBehaviour
         s.source.Play();
         //Debug.Log("Played :" + " " + s.name);
         return s;
+
+        // check if playing for drag or bug
+        // vvvvv
+        /*if (!s.source.isPlaying)
+        {
+            s.source.volume = s.volume * (1f + UnityEngine.Random.Range(-s.volumeVariance / 2f, s.volumeVariance / 2f));
+            s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
+
+            s.source.Play();
+            //Debug.Log("Played :" + " " + s.name);
+            return s;
+        }
+        return null;*/
     }
 
     public Sound Stop(string sound)

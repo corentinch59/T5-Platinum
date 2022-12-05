@@ -157,7 +157,6 @@ GameObject:
   - component: {fileID: 2651872619894105381}
   - component: {fileID: 3509716914285164816}
   - component: {fileID: 8999927999622090272}
-  - component: {fileID: 685816240475756379}
   m_Layer: 5
   m_Name: DigUPUI
   m_TagString: Untagged
@@ -226,33 +225,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &685816240475756379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8707251112121258463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 289072b1d885b0440b00e4b90530efab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requestInfos:
-    corpseName: 
-    siz: 0
-    loc: 0
-    corps: 0
-  _request: {fileID: 0}
-  nameText: {fileID: 0}
-  corpseImage: {fileID: 735907266}
-  localisationImage: {fileID: 0}
-  coffinImage: {fileID: 0}
-  questSlider: {fileID: 0}
-  questTime: 10
-  image: {fileID: 8999927999622090272}
-  Outline: {fileID: 6113753872093889044}
-  stateTimer: 0
 --- !u!1 &8926567031409441223
 GameObject:
   m_ObjectHideFlags: 0

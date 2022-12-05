@@ -41,6 +41,7 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         // if good quest : same body as asked
         if(player.CarriedObj.TryGetComponent(out Corpse c) && c.CorpseData.corpseType == digUpRequest.RequestInfo.corps)
         {
+            Destroy(digUpRequest.RequestInUI);
             digUpRequest.RequestCorpseImg.transform.DOScale(0, 0.5f);
             gameObject.layer = 0; // <- can't be interact with
             transform.DOJump(transform.position, 3f, 3, 3f);
