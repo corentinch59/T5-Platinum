@@ -105,6 +105,9 @@ public class Player : MonoBehaviour
                 Outline(lastObjectFound, false);
                 if (objectFound.TryGetComponent(out Hole a))
                     a.ShowBubble();
+                if (lastObjectFound != null && lastObjectFound.TryGetComponent(out Hole b))
+                    b.Hidebubble();
+
                 lastObjectFound = objectFound;
             }
         }
