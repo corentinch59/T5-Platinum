@@ -1094,7 +1094,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539688531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.983772, y: 2.5, z: 8.506972}
+  m_LocalPosition: {x: 20.721369, y: 2.5, z: 8.506972}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1501,6 +1501,10 @@ PrefabInstance:
       propertyPath: spriteCarry
       value: 
       objectReference: {fileID: 21300000, guid: b4b51065e95a0004f901aed91deacb29, type: 3}
+    - target: {fileID: 2107677564, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: numberOfTaps
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2107677564, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: playerNotCarrying
       value: 
