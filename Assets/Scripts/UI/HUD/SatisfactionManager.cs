@@ -18,7 +18,6 @@ public class SatisfactionManager : MonoBehaviour
     private float elapsedTimeBeforeGO = 0f;
 
     private float displayTimerFloat = 5f;
-    private int displayTimer = 5;
 
     private bool IsGameOver = false;
 
@@ -43,7 +42,6 @@ public class SatisfactionManager : MonoBehaviour
             currentCoroutine = StartCoroutine(JuicyCoroutine(value));
         }
         else currentCoroutine = StartCoroutine(JuicyCoroutine(value));
-
     }
 
     private IEnumerator JuicyCoroutine(float value)
@@ -66,21 +64,6 @@ public class SatisfactionManager : MonoBehaviour
     {
         if (IsGameOver) return;
 
-        #region 1er itération int
-        //if (satisfactionSlider.value == 0)
-        //{
-        //    textMeshProUGUI.gameObject.SetActive(true);
-        //    elapsedTimeBeforeGO += Time.deltaTime;
-        //    displayTimer = (int)(endTimeDuration - elapsedTimeBeforeGO) + 1; // On met un +1 car unity arrondi au supérieur les int. ex : 0.1f -> 1 int
-        //    textMeshProUGUI.text = displayTimer.ToString();
-        //}
-        //else
-        //{
-        //    elapsedTimeBeforeGO = 0f;
-        //    textMeshProUGUI.gameObject.SetActive(false);
-        //}
-        #endregion
-
         #region 2eme itération float 
 
         if (satisfactionSlider.value == 0)
@@ -99,16 +82,10 @@ public class SatisfactionManager : MonoBehaviour
         }
         #endregion
 
-
         if (displayTimerFloat <= 0)
         {
             IsGameOver = true;
             timerEndMeshPro.text = "0";
-            Debug.Log("GameOver");
-        }
-        if (displayTimer <= 0)
-        {
-            IsGameOver = true;
             Debug.Log("GameOver");
         }
     }
