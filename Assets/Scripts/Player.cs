@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private PlayerMovement playerMovement;
     public PlayerMovement getPlayerMovement => playerMovement;
 
+    #region CARRY_AND_RAYCAST_VALUES
     public Sprite playerNotCarrying;
     public Sprite spriteCarry;
     private Carryable carriedObj;
@@ -29,11 +30,11 @@ public class Player : MonoBehaviour
     private IRaycastBehavior raycastBehavior;
     [SerializeField] private GameObject objectFound;
     [SerializeField] private GameObject lastObjectFound;
-
     [Header("Debug")]
     public float radiusSphere = 5f;
     public LayerMask interactableLayer;
-
+    #endregion
+    #region HOLE
     [Header("Hole Section")]
     [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
     public GameObject holePrefab;
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
     public RectTransform getMainRect => mainRect;
     private RectTransform iteration3rect;
     public RectTransform getIteration3Rect => iteration3rect;
+    #endregion
     #endregion
 
     [HideInInspector]
@@ -74,17 +76,14 @@ public class Player : MonoBehaviour
         {
             if (carriedObj.TryGetComponent(out Corpse c))
             {
-                if ((c.ThisQuest != null && c.ThisQuest.requestInfos.siz > 0) || (c.ThisQuest == null && c.CorpseData.size > 0))
+                objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
+
+                if((c.CorpseData.size > 0))
                 {
-                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
-                    if (objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
+                    if(objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
                     {
                         return;
                     }
-                }
-                else
-                {
-                    objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
                 }
             }
             if (carriedObj.TryGetComponent(out GriefPNJInteractable griefPnj))
@@ -97,19 +96,23 @@ public class Player : MonoBehaviour
             objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, null, new string[] { "DigUpPNJ" });
         }
 
-        // Outline
+        // Outline & Bubble
         if (objectFound != null && objectFound != lastObjectFound)
         {
             if (objectFound.GetComponent<SpriteRenderer>() != null)
             {
                 Outline(objectFound, true);
                 Outline(lastObjectFound, false);
+                if (objectFound.TryGetComponent(out Hole a))
+                    a.ShowBubble();
                 lastObjectFound = objectFound;
             }
         }
         else if (objectFound == null && lastObjectFound != null)
         {
             Outline(lastObjectFound, false);
+            if(lastObjectFound.TryGetComponent(out Hole a))
+                a.Hidebubble();
             lastObjectFound = null;
         }
     }
