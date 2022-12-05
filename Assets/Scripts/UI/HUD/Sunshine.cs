@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class Sunshine : MonoBehaviour
 {
     [SerializeField] private Transform endPos;
-    [SerializeField] private float timing;
+    public float timing;
 
     private Vector3 startPos;
     private Vector3 center;
