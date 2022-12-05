@@ -105,6 +105,7 @@ public class Hole : MonoBehaviour, IInteractable
                         player.CarriedObj.transform.parent = null;
                         player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
                     }
+                    corpse.OutlineImg.SetActive(false); // <- deactivate exclamation point
                     player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
                     StartCoroutine(BurryingCorpse(corpse));
                     heldCorpse = corpse;

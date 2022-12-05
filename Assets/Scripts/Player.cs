@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public int id;
 
-    private void Start() 
+    private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         raycastBehavior = new RaycastEmptyHand();
@@ -70,14 +70,14 @@ public class Player : MonoBehaviour
         //Debug player vision
         Debug.DrawLine(transform.position, transform.position + transform.forward * distGraveCreation, Color.red);
 
-        if(carriedObj != null)
+        if (carriedObj != null)
         {
-            if(carriedObj.TryGetComponent(out Corpse c))
+            if (carriedObj.TryGetComponent(out Corpse c))
             {
-                if((c.ThisQuest != null && c.ThisQuest.requestInfos.siz > 0) || (c.ThisQuest == null && c.CorpseData.size > 0))
+                if ((c.ThisQuest != null && c.ThisQuest.requestInfos.siz > 0) || (c.ThisQuest == null && c.CorpseData.size > 0))
                 {
                     objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
-                    if(objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
+                    if (objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
                     {
                         return;
                     }
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
                     objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole", "DigUpPNJ" });
                 }
             }
-            if(carriedObj.TryGetComponent(out GriefPNJInteractable griefPnj))
+            if (carriedObj.TryGetComponent(out GriefPNJInteractable griefPnj))
             {
                 objectFound = raycastBehavior.PerformRaycast(transform.position, raycastRadius, interactableLayer, new string[] { "Hole" }, new string[] { "DigUpPNJ" });
             }
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         // Outline
         if (objectFound != null && objectFound != lastObjectFound)
         {
-            if(objectFound.GetComponent<SpriteRenderer>() != null)
+            if (objectFound.GetComponent<SpriteRenderer>() != null)
             {
                 Outline(objectFound, true);
                 Outline(lastObjectFound, false);
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
 
     private void Outline(GameObject obj, bool active)
     {
-        if(obj != null)
+        if (obj != null)
         {
             CallOutline(active, obj.GetComponent<SpriteRenderer>());
         }
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if(objectFound != null)
+            if (objectFound != null)
             {
                 //Debug.Log("Object found : " + objectFound.name);
                 if (objectFound.TryGetComponent(out Hole hole))
@@ -155,7 +155,8 @@ public class Player : MonoBehaviour
                     bigcorpse.Interact(this);
                     carriedObj = bigcorpse.gameObject.GetComponent<Corpse>();
                     carriedObj.Interact(this);
-                } else if(objectFound.TryGetComponent(out DigUpPNJInteractable digUpPnj) && carriedObj != null)
+                }
+                else if (objectFound.TryGetComponent(out DigUpPNJInteractable digUpPnj) && carriedObj != null)
                 {
                     digUpPnj.Interact(this);
                 }
@@ -175,18 +176,18 @@ public class Player : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if(carriedObj != null)
+            if (carriedObj != null)
             {
                 carriedObj.gameObject.layer = 7; // <- Interactable layer 
                 if (carriedObj.TryGetComponent(out Corpse corpse))
                 {
-                    if(carriedObj.TryGetComponent(out BigCorpse bc))
+                    if (carriedObj.TryGetComponent(out BigCorpse bc))
                     {
                         carriedObj = null;
-                        if(corpse.ThisQuest != null)
+                        if (corpse.ThisQuest != null)
                             corpse.ThisQuest.DesactivateOulineUI();
                         bc.Interact(this);
-                        
+
                     }
                     else
                     {
@@ -220,7 +221,7 @@ public class Player : MonoBehaviour
         {
             hole.SetHoleSize = modifier;
         }
-        else if(objectFound == null)
+        else if (objectFound == null)
         {
             // Instantiate Hole to where the player is looking
             Instantiate(holePrefab, new Vector3(transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole, transform.position.y - 1f,
@@ -253,5 +254,50 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
+    }
+
+    // Activate DragSounds
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (carriedObj != null && carriedObj.TryGetComponent(out BigCorpse bc))
+        {
+            if (collision.gameObject.CompareTag("Water"))
+            {
+                Debug.Log("Play Mug");
+                SoundManager.instance.Play("DragMud");
+            }
+            else if (collision.gameObject.CompareTag("Shrine"))
+            {
+                Debug.Log("Play Stone");
+                SoundManager.instance.Play("DragStone");
+            }
+            else
+            {
+                SoundManager.instance.Play("DragDirt");
+                Debug.Log("Play Dirt");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (carriedObj != null && carriedObj.TryGetComponent(out BigCorpse c))
+        {
+            if (collision.gameObject.CompareTag("Water"))
+            {
+                Debug.Log("Stop mug");
+                SoundManager.instance.Stop("DragMud");
+            }
+            else if (collision.gameObject.CompareTag("Shrine"))
+            {
+                Debug.Log("Stop Stone");
+                SoundManager.instance.Stop("DragStone");
+            }
+            else
+            {
+                Debug.Log("Stop dirt");
+                SoundManager.instance.Stop("DragDirt");
+            }
+        }
     }
 }

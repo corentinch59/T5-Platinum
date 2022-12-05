@@ -15,6 +15,7 @@ public class Quest : MonoBehaviour
     [SerializeField] private RawImage coffinImage;
     [SerializeField] private Slider questSlider;
     [SerializeField] private float questTime = 5;
+    public float QuestTime => questTime;
     [SerializeField] private Image image;
     [SerializeField] private RawImage Outline;
     private bool isQuestFinished;

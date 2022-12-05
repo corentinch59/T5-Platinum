@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class Corpse : Carryable
 {
+    [SerializeField] private GameObject outlineImg;
+    public GameObject OutlineImg => outlineImg; // <- deactivate outline with the current quest duration
     [SerializeField] private CorpseData corpseData;
     [SerializeField] private Quest thisQuest;
     private PNJInteractable pnjFrom;
@@ -25,7 +27,6 @@ public class Corpse : Carryable
     public Quest ThisQuest { get { return thisQuest; } set { thisQuest = value; } }
     public BigCorpse BigCorpse { get { return bigCorpse; } set { bigCorpse = value; } }
     public Sprite[] TombSprite => tombSprite;
-
     public SpriteRenderer SpriteRenderer => spriteRenderer;
     public PNJInteractable PnjFrom { get { return pnjFrom; } set { pnjFrom = value; } }
     public bool IsInteractable { get { return isInteractable; } set { isInteractable = value; } }
@@ -136,6 +137,12 @@ public class Corpse : Carryable
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    public IEnumerator DeactivateExclamationPointIfTimeOutQuest(float durationQuest)
+    {
+        yield return new WaitForSeconds(durationQuest);
+        outlineImg.SetActive(false);
     }
 
     public CorpseData UpdateRequestLocalisation(bool locationToo = false)

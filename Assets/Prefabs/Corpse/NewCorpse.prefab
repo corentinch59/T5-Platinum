@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2afd9f134b51381409bfccd5c51228e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineImg: {fileID: 8087352350128485496}
   corpseData:
     name: Jean
     size: 1
@@ -366,5 +367,10 @@ PrefabInstance:
 --- !u!224 &3951094864232481207 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
+  m_PrefabInstance: {fileID: 4121159833758641790}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8087352350128485496 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5263935100384352774, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
   m_PrefabInstance: {fileID: 4121159833758641790}
   m_PrefabAsset: {fileID: 0}
