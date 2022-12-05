@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void GameOverHandler();
 public class UIGameOver : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static event GameOverHandler onGameOver;
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("STOP");
+        onGameOver?.Invoke();
     }
 }
