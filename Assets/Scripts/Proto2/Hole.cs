@@ -90,9 +90,6 @@ public class Hole : MonoBehaviour, IInteractable
                     SoundManager.instance.Stop("DragMud");
                     SoundManager.instance.Stop("DragStone");
                     SoundManager.instance.Stop("DragDirt");
-                    player.DirtIsPlaying = false;
-                    player.MudIsPlaying = false;
-                    player.StoneIsPlaying = false;
                     #endregion
                     if (player.CarriedObj.TryGetComponent(out BigCorpse bc))
                     {

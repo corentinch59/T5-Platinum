@@ -80,9 +80,6 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
             SoundManager.instance.Stop("DragMud");
             SoundManager.instance.Stop("DragStone");
             SoundManager.instance.Stop("DragDirt");
-            player.DirtIsPlaying = false;
-            player.MudIsPlaying = false;
-            player.StoneIsPlaying = false;
             #endregion
         }
         // if not good quest -> score-- but stays
