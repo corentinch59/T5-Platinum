@@ -15320,14 +15320,6 @@ MonoBehaviour:
         m_Groups: 
         m_Action: Join
         m_Flags: 0
-      - m_Name: 
-        m_Id: 8be1ebdf-d93a-4382-8aca-fcbe1ee83cba
-        m_Path: <Keyboard>/space
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Join
-        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_PlayerPrefab: {fileID: 1135708998}

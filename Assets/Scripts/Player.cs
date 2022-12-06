@@ -96,26 +96,26 @@ public class Player : MonoBehaviour
                     {
                         if (area.tag == "Water")
                         {
-                            if (!mudIsPlaying)
+                            if (!SoundManager.instance.GetSound("DragMud").source.isPlaying)
                             {
                                 SoundManager.instance.Play("DragMud");
-                                mudIsPlaying = true;
+                                //mudIsPlaying = true;
                             }
                         }
                         else if (area.tag == "Shrine")
                         {
-                            if (!stoneIsPlaying)
+                            if (!SoundManager.instance.GetSound("DragStone").source.isPlaying)
                             {
                                 SoundManager.instance.Play("DragStone");
-                                stoneIsPlaying = true;
+                                //stoneIsPlaying = true;
                             }
                         }
                         else
                         {
-                            if (!dirtIsPlaying)
+                            if (!SoundManager.instance.GetSound("DragDirt").source.isPlaying)
                             {
                                 SoundManager.instance.Play("DragDirt");
-                                dirtIsPlaying = true;
+                                //dirtIsPlaying = true;
                             }
                         }
                     }
@@ -124,9 +124,9 @@ public class Player : MonoBehaviour
                         SoundManager.instance.Stop("DragMud");
                         SoundManager.instance.Stop("DragStone");
                         SoundManager.instance.Stop("DragDirt");
-                        dirtIsPlaying = false;
-                        mudIsPlaying = false;
-                        stoneIsPlaying = false;
+                        //dirtIsPlaying = false;
+                        //mudIsPlaying = false;
+                        //stoneIsPlaying = false;
                     }
 
                     if (objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
