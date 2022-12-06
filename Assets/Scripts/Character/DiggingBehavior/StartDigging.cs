@@ -8,6 +8,7 @@ public class StartDigging : DiggingBehavior
 
     public override void PerformAction()
     {
+        _player.TriggerVibration();
         _player.DisableInput("Move");
         _player.SetCrackHole();
         #region ITERATION_3
