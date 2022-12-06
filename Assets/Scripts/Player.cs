@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     public LayerMask locationLayers;
     public float distGraveCreation;
 
+    private bool dirtIsPlaying;
+    private bool mudIsPlaying;
+    private bool stoneIsPlaying;
+
     private PlayerMovement playerMovement;
     public PlayerMovement getPlayerMovement => playerMovement;
 
@@ -84,20 +88,32 @@ public class Player : MonoBehaviour
                 if(c.CorpseData.size > 0)
                 {
                     // Drag sound
-                    /*GameObject area = raycastBehavior.PerformRaycast(c.transform.position, raycastRadius, locationLayers);
-                    if(area != null && playerMovement.getMove.sqrMagnitude > 0)
+                    GameObject area = raycastBehavior.PerformRaycast(c.transform.position, raycastRadius, locationLayers);
+                    if (area != null && playerMovement.getMove.sqrMagnitude > 0)
                     {
-                        if(area.tag == "Water")
+                        if (area.tag == "Water")
                         {
-                            SoundManager.instance.Play("DragMud");
+                            if (!mudIsPlaying)
+                            {
+                                SoundManager.instance.Play("DragMud");
+                                mudIsPlaying = true;
+                            }
                         }
-                        else if(area.tag == "Shrine")
+                        else if (area.tag == "Shrine")
                         {
-                            SoundManager.instance.Play("DragStone");
+                            if (!stoneIsPlaying)
+                            {
+                                SoundManager.instance.Play("DragStone");
+                                stoneIsPlaying = true;
+                            }
                         }
-                        else 
+                        else
                         {
-                            SoundManager.instance.Play("DragDirt");
+                            if (!dirtIsPlaying)
+                            {
+                                SoundManager.instance.Play("DragDirt");
+                                dirtIsPlaying = true;
+                            }
                         }
                     }
                     else
@@ -105,7 +121,10 @@ public class Player : MonoBehaviour
                         SoundManager.instance.Stop("DragMud");
                         SoundManager.instance.Stop("DragStone");
                         SoundManager.instance.Stop("DragDirt");
-                    }*/
+                        dirtIsPlaying = false;
+                        mudIsPlaying = false;
+                        stoneIsPlaying = false;
+                    }
 
                     if (objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
                     {
@@ -211,6 +230,13 @@ public class Player : MonoBehaviour
         {
             if (carriedObj != null)
             {
+                // stop drag sounds
+                SoundManager.instance.Stop("DragMud");
+                SoundManager.instance.Stop("DragStone");
+                SoundManager.instance.Stop("DragDirt");
+                dirtIsPlaying = false;
+                mudIsPlaying = false;
+                stoneIsPlaying = false;
                 carriedObj.gameObject.layer = 7; // <- Interactable layer 
                 if (carriedObj.TryGetComponent(out Corpse corpse))
                 {
