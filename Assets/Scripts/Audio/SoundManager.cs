@@ -39,7 +39,6 @@ public class SoundManager : MonoBehaviour
             {
                 s.source.outputAudioMixerGroup = SFXGroup;
             }
-
         }
     }
 
