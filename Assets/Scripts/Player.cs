@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class Player : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Player : MonoBehaviour
 
     private PlayerMovement playerMovement;
     public PlayerMovement getPlayerMovement => playerMovement;
+
+    [SerializeField] private VisualEffect tiredVFX; // when dragging big body
+    public VisualEffect TiredVFX => tiredVFX;
 
     #region CARRY_AND_RAYCAST_VALUES
     public Sprite playerNotCarrying;
@@ -65,8 +69,8 @@ public class Player : MonoBehaviour
         vfx = GetComponent<PlayerVFX>();
         TransitionDigging(new StartDigging());
         #region ITERATION_3
-        mainRect = transform.GetChild(transform.childCount - 1).GetChild(1).GetComponent<RectTransform>();
-        iteration3rect = transform.GetChild(transform.childCount - 1).GetChild(1).GetChild(1).GetComponent<RectTransform>();
+        mainRect = transform.GetChild(transform.childCount - 2).GetChild(1).GetComponent<RectTransform>();
+        iteration3rect = transform.GetChild(transform.childCount - 2).GetChild(1).GetChild(1).GetComponent<RectTransform>();
         #endregion
     }
 
@@ -179,6 +183,7 @@ public class Player : MonoBehaviour
                 {
                     objectFound.layer = 0; // <- not interactable for now
                     griefPnj.Interact(this);
+
                     int randomint = UnityEngine.Random.Range(1, 3);
                     SoundManager.instance.Play("Pickup_Npc" + randomint);
                 }
@@ -194,6 +199,12 @@ public class Player : MonoBehaviour
                 }
                 else if (objectFound.TryGetComponent(out BigCorpse bigcorpse) && carriedObj == null)
                 {
+                    // tired drops from player's head
+                    if (tiredVFX != null)
+                    {
+                        Debug.Log("Tired Plays");
+                        tiredVFX.Play();
+                    }
                     bigcorpse.Interact(this);
                     carriedObj = bigcorpse.gameObject.GetComponent<Corpse>();
                     carriedObj.Interact(this);
@@ -231,6 +242,11 @@ public class Player : MonoBehaviour
                 {
                     if (carriedObj.TryGetComponent(out BigCorpse bc))
                     {
+                        // tired drops from player's head
+                        if (tiredVFX != null)
+                        {
+                            tiredVFX.Stop();
+                        }
                         carriedObj = null;
                         if (corpse.ThisQuest != null)
                             corpse.ThisQuest.DesactivateOulineUI();
