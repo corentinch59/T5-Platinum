@@ -48,12 +48,19 @@ public class PlayerVFX : MonoBehaviour
         currentCoroutine = null;
     }
 
-    public IEnumerator Outline(bool isClose, SpriteRenderer nearestHole)
+    public IEnumerator Outline(bool isClose, SpriteRenderer nearestHole, int playerID)
     {
-        if(isClose)
+        if (isClose)
+        {
+            nearestHole.material.SetFloat("_PlayerInterractableID", playerID);
             nearestHole.material.SetFloat("_IsOuline", 1);
+        }
         else
+        {
+            nearestHole.material.SetFloat("_PlayerInterractableID", 0);
             nearestHole.material.SetFloat("_IsOuline", 0);
+        }
+            
         yield break;
     }
 }

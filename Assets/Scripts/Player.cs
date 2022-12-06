@@ -150,8 +150,8 @@ public class Player : MonoBehaviour
         {
             if (objectFound.GetComponent<SpriteRenderer>() != null)
             {
-                Outline(objectFound, true);
-                Outline(lastObjectFound, false);
+                Outline(objectFound, true, id);
+                Outline(lastObjectFound, false, id);
                 if (objectFound.TryGetComponent(out Hole a))
                     a.ShowBubble();
                 if (lastObjectFound != null && lastObjectFound.TryGetComponent(out Hole b))
@@ -162,18 +162,18 @@ public class Player : MonoBehaviour
         }
         else if (objectFound == null && lastObjectFound != null)
         {
-            Outline(lastObjectFound, false);
+            Outline(lastObjectFound, false, id);
             if(lastObjectFound.TryGetComponent(out Hole a))
                 a.Hidebubble();
             lastObjectFound = null;
         }
     }
 
-    private void Outline(GameObject obj, bool active)
+    private void Outline(GameObject obj, bool active, int playerID)
     {
         if (obj != null)
         {
-            CallOutline(active, obj.GetComponent<SpriteRenderer>());
+            CallOutline(active, obj.GetComponent<SpriteRenderer>(), id);
         }
     }
 
@@ -312,9 +312,9 @@ public class Player : MonoBehaviour
         Destroy(lastCrack);
     }
 
-    private void CallOutline(bool active, SpriteRenderer renderer)
+    private void CallOutline(bool active, SpriteRenderer renderer, int playerID)
     {
-        StartCoroutine(vfx.Outline(active, renderer));
+        StartCoroutine(vfx.Outline(active, renderer, playerID));
     }
 
     public void TransitionDigging(DiggingBehavior newdiggingBehavior)
