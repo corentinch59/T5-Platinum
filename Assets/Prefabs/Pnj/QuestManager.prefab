@@ -47,9 +47,11 @@ MonoBehaviour:
   _scriptableRequestBase: {fileID: 11400000, guid: 9a2496293c6f2be4085c9ab80e858000, type: 2}
   activeQuests: []
   activeDeuilQuests: []
+  activeDigUpQuests: []
   allQuests: []
   questFinished: []
   numberOfQuests: 10
   numberOfDeuilQuests: 10
+  numberOfDigUpQuests: 10
   scoreText: {fileID: 0}
   score: 0

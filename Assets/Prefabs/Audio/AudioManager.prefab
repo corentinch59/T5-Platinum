@@ -101,7 +101,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Dig1
     clip: {fileID: 8300000, guid: 7fc38b57a58d6e34fa13be9a16891dd2, type: 3}
-    volume: 0.5
+    volume: 0.2
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Dig2
     clip: {fileID: 8300000, guid: 8020b6d156f7783439b8c2bf411d546f, type: 3}
-    volume: 0.5
+    volume: 0.2
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Dig3
     clip: {fileID: 8300000, guid: 9e75a30a503b30f408d39b62dcf57c44, type: 3}
-    volume: 0.5
+    volume: 0.2
     volumeVariance: 0.1
     pitch: 1
     pitchVariance: 0

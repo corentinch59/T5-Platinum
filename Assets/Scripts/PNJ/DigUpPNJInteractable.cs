@@ -20,6 +20,8 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Transform questLoc;
     [SerializeField] private Transform returnLoc;
 
+    private Coroutine feedback;
+
     private void Start()
     {
         transform.position = returnLoc.position;
@@ -33,6 +35,14 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         {
             pnjActivated = true;
             StartCoroutine(Walk(true));
+        }
+
+        if (agent.isOnNavMesh)
+        {
+            if (!agent.isStopped && feedback == null)
+            {
+                feedback = StartCoroutine(FeedBackPlayerMoves());
+            }
         }
     }
 
@@ -111,6 +121,16 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         }
     }
 
+    private IEnumerator FeedBackPlayerMoves()
+    {
+        transform.DOScaleX(1.8f, 0.3f);
+        transform.DOScaleY(2.3f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        transform.DOScaleX(2f, 0.3f);
+        transform.DOScaleY(2f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        feedback = null;
+    }
     public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
     {
         throw new System.NotImplementedException();

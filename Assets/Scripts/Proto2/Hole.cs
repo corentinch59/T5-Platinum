@@ -86,7 +86,15 @@ public class Hole : MonoBehaviour, IInteractable
             {
                 if (player.CarriedObj.TryGetComponent(out Corpse corpse))
                 {
-                    if(player.CarriedObj.TryGetComponent(out BigCorpse bc))
+                    #region stop drag sounds
+                    SoundManager.instance.Stop("DragMud");
+                    SoundManager.instance.Stop("DragStone");
+                    SoundManager.instance.Stop("DragDirt");
+                    player.DirtIsPlaying = false;
+                    player.MudIsPlaying = false;
+                    player.StoneIsPlaying = false;
+                    #endregion
+                    if (player.CarriedObj.TryGetComponent(out BigCorpse bc))
                     {
                         if(SetHoleSize > 1)
                         {
