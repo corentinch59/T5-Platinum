@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     private bool dirtIsPlaying;
     private bool mudIsPlaying;
     private bool stoneIsPlaying;
+    public bool StoneIsPlaying { get { return stoneIsPlaying; } set { stoneIsPlaying = value; } }
+    public bool MudIsPlaying { get { return mudIsPlaying; } set { mudIsPlaying = value; } }
+    public bool DirtIsPlaying { get { return dirtIsPlaying; } set { dirtIsPlaying = value; } }
 
     private PlayerMovement playerMovement;
     public PlayerMovement getPlayerMovement => playerMovement;
@@ -230,13 +233,15 @@ public class Player : MonoBehaviour
         {
             if (carriedObj != null)
             {
-                // stop drag sounds
+                #region stop drag sounds
                 SoundManager.instance.Stop("DragMud");
                 SoundManager.instance.Stop("DragStone");
                 SoundManager.instance.Stop("DragDirt");
                 dirtIsPlaying = false;
                 mudIsPlaying = false;
                 stoneIsPlaying = false;
+                #endregion
+
                 carriedObj.gameObject.layer = 7; // <- Interactable layer 
                 if (carriedObj.TryGetComponent(out Corpse corpse))
                 {
