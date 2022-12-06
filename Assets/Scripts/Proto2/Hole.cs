@@ -276,15 +276,6 @@ public class Hole : MonoBehaviour, IInteractable
         StartCoroutine(BurryAnim(scaleAnimTombDuration));
     }
 
-    public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
-    {
-    }
-
-    public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
-    {
-        yield break;
-    }
-
     public void ShowBubble()
     {
         if (imageShown || heldCorpse == null)
@@ -307,12 +298,6 @@ public class Hole : MonoBehaviour, IInteractable
         bubbleParent.transform.DOScale(Vector3.zero, 0.5f);
         imageShown = false;
     }
-
-    public void CancelbubbleAnim()
-    {
-
-    }
-
     
     [HideInInspector] public List<int> playersID;
     [HideInInspector] public int numbersOfPlayers;

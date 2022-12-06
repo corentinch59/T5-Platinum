@@ -1,6 +1,7 @@
 using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,18 +10,31 @@ using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
+public delegate void VibrationDelegate(Vector2 value, float duration);
+
 public class Player : MonoBehaviour
 {
     [SerializeField] private float distanceSpawnHole = 2f;
+    [SerializeField] private Vector2 holeVibrationStrength;
+    [SerializeField] private float holeVibrationDuration;
+    [SerializeField] private VisualEffect tiredVFX; // when dragging big body
 
     public LayerMask locationLayers;
     public float distGraveCreation;
-
     private PlayerMovement playerMovement;
-    public PlayerMovement getPlayerMovement => playerMovement;
+    private PlayerVibration playerVibration;
 
-    [SerializeField] private VisualEffect tiredVFX; // when dragging big body
+    #region DELEGATES
+    public event VibrationDelegate onVibration;
+    #endregion
+    #region GETTERS_AND_SETTERS
+    public int getNumbersOfTaps => numberOfTaps;
+    public DiggingBehavior DiggingBehavior => diggingBehavior;
+    public PlayerMovement getPlayerMovement => playerMovement;
+    public PlayerVibration getPlayerVibration => playerVibration;
+    public PlayerVFX getVFX => vfx;
     public VisualEffect TiredVFX => tiredVFX;
+    #endregion
 
     #region CARRY_AND_RAYCAST_VALUES
     public Sprite playerNotCarrying;
@@ -44,10 +58,8 @@ public class Player : MonoBehaviour
     [SerializeField] [Tooltip("The distance at which a hole is detected.")] private float raycastRadius;
     public GameObject holePrefab;
     [SerializeField] private int numberOfTaps;
-    public int getNumbersOfTaps => numberOfTaps;
 
     private DiggingBehavior diggingBehavior;
-    public DiggingBehavior DiggingBehavior => diggingBehavior;
     private PlayerVFX vfx;
     public GameObject crackToInstantiate;
     private GameObject lastCrack;
@@ -65,6 +77,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        playerVibration = GetComponent<PlayerVibration>();
         raycastBehavior = new RaycastEmptyHand();
         vfx = GetComponent<PlayerVFX>();
         TransitionDigging(new StartDigging());
@@ -217,8 +230,9 @@ public class Player : MonoBehaviour
             else if (objectFound == null && carriedObj == null)
             {
                 diggingBehavior.PerformAction();
-                vfx.hitImpact.gameObject.SetActive(true);
-                vfx.hitImpact.Play();
+                //TriggerVibration();
+                //vfx.hitImpact.gameObject.SetActive(true);
+                //vfx.hitImpact.Play();
                 int randomint = UnityEngine.Random.Range(1, 4);
                 SoundManager.instance.Play("Dig" + randomint);
             }
@@ -331,6 +345,11 @@ public class Player : MonoBehaviour
     public void DisableInput(string input)
     {
         playerMovement.getPlayerInput.currentActionMap.FindAction(input).Disable();
+    }
+
+    public void TriggerVibration()
+    {
+        onVibration?.Invoke(holeVibrationStrength, holeVibrationDuration);
     }
 
     private void OnDrawGizmosSelected()

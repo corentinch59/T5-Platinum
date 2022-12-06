@@ -128,13 +128,4 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(0.3f);
         feedback = null;
     }
-    public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public IEnumerator SetVibrationsCoroutine(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
-    {
-        throw new System.NotImplementedException();
-    }
 }
