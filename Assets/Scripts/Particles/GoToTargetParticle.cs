@@ -47,14 +47,13 @@ public class GoToTargetParticle : MonoBehaviour
 
         if (numParticlesAlive == 0)
         {
-            Debug.Log("hehe");
+            //Debug.Log("hehe");
             elapsedTime = 0f;
         }
 
         //if (particleEmitter.isPlaying)
 
         // Change only the particles that are alive
-
     }
 
     private void InitializeIfNeeded()
@@ -65,5 +64,4 @@ public class GoToTargetParticle : MonoBehaviour
         if (particles == null || particles.Length < particleEmitter.main.maxParticles)
             particles = new ParticleSystem.Particle[particleEmitter.main.maxParticles];
     }
-
 }

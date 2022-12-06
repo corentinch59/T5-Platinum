@@ -74,6 +74,7 @@ public class Quest : MonoBehaviour
     {
         if(data.localisation == requestInfos.loc)
         {
+            ParticlePlayManager.instance.PlayAtPosition("Satisfaction");
             image.color = Color.green;
             // add score
             switch (stateTimer)
@@ -87,6 +88,7 @@ public class Quest : MonoBehaviour
                 default:
                     return 0f;
             }
+            
         }
         else
         {
