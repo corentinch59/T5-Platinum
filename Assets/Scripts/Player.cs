@@ -15,13 +15,6 @@ public class Player : MonoBehaviour
     public LayerMask locationLayers;
     public float distGraveCreation;
 
-    private bool dirtIsPlaying;
-    private bool mudIsPlaying;
-    private bool stoneIsPlaying;
-    public bool StoneIsPlaying { get { return stoneIsPlaying; } set { stoneIsPlaying = value; } }
-    public bool MudIsPlaying { get { return mudIsPlaying; } set { mudIsPlaying = value; } }
-    public bool DirtIsPlaying { get { return dirtIsPlaying; } set { dirtIsPlaying = value; } }
-
     private PlayerMovement playerMovement;
     public PlayerMovement getPlayerMovement => playerMovement;
 
@@ -99,7 +92,6 @@ public class Player : MonoBehaviour
                             if (!SoundManager.instance.GetSound("DragMud").source.isPlaying)
                             {
                                 SoundManager.instance.Play("DragMud");
-                                //mudIsPlaying = true;
                             }
                         }
                         else if (area.tag == "Shrine")
@@ -107,7 +99,6 @@ public class Player : MonoBehaviour
                             if (!SoundManager.instance.GetSound("DragStone").source.isPlaying)
                             {
                                 SoundManager.instance.Play("DragStone");
-                                //stoneIsPlaying = true;
                             }
                         }
                         else
@@ -115,7 +106,6 @@ public class Player : MonoBehaviour
                             if (!SoundManager.instance.GetSound("DragDirt").source.isPlaying)
                             {
                                 SoundManager.instance.Play("DragDirt");
-                                //dirtIsPlaying = true;
                             }
                         }
                     }
@@ -124,9 +114,6 @@ public class Player : MonoBehaviour
                         SoundManager.instance.Stop("DragMud");
                         SoundManager.instance.Stop("DragStone");
                         SoundManager.instance.Stop("DragDirt");
-                        //dirtIsPlaying = false;
-                        //mudIsPlaying = false;
-                        //stoneIsPlaying = false;
                     }
 
                     if (objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
@@ -237,9 +224,6 @@ public class Player : MonoBehaviour
                 SoundManager.instance.Stop("DragMud");
                 SoundManager.instance.Stop("DragStone");
                 SoundManager.instance.Stop("DragDirt");
-                dirtIsPlaying = false;
-                mudIsPlaying = false;
-                stoneIsPlaying = false;
                 #endregion
 
                 carriedObj.gameObject.layer = 7; // <- Interactable layer 
