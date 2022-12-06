@@ -7,21 +7,20 @@ using UnityEngine.UI;
 
 public class Hole : MonoBehaviour, IInteractable
 {
-    private Corpse heldCorpse;
-    private Tween tween;
-    private SpriteRenderer spriteRenderer;
-    private Sprite originalSprite;
-    private BoxCollider colliderHole;
-    private Vector3 originalSize;
+    [SerializeField] private float bubbleHeight = 2.75f;
+
     private int HoleSize = 1;
-    private RectTransform bubbleParent;
-    private Image bubbleIMage;
     private bool imageShown = false;
+    private Vector3 originalSize;
+    private Tween tween;
+    private Image bubbleIMage;
+    private Corpse heldCorpse;
+    private Sprite originalSprite;
     private Sequence showBubbleSequence;
     private Sequence hideBubbleSequence;
-
-    
-    private const float BUBBLE_HEIGHT = 2.75f;
+    private BoxCollider colliderHole;
+    private RectTransform bubbleParent;
+    private SpriteRenderer spriteRenderer;
 
     public Corpse HeldCorpse => heldCorpse;
 
@@ -285,7 +284,7 @@ public class Hole : MonoBehaviour, IInteractable
         bubbleParent.transform.localScale = Vector3.zero;
         bubbleParent.transform.localPosition = Vector3.zero;
         bubbleParent.transform.DOScale( new Vector3( 1f,1f,1f), 0.5f);
-        bubbleParent.transform.DOLocalMove(new Vector3 (0f, BUBBLE_HEIGHT, 0f), 0.5f);
+        bubbleParent.transform.DOLocalMove(new Vector3 (0f, bubbleHeight, 0f), 0.5f);
         imageShown = true;
     }
 
