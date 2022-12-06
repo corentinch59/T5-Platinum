@@ -33,6 +33,12 @@ public class GriefPNJInteractable : Carryable
     private void Start()
     {
         transform.position = startLoc.position;
+        UIGameOver.onGameOver += UIGameOver_onGameOver;
+    }
+
+    private void UIGameOver_onGameOver()
+    {
+        StopAllCoroutines();
     }
 
     private void Update()
@@ -177,5 +183,10 @@ public class GriefPNJInteractable : Carryable
         transform.DOScaleY(2f, 0.3f);
         yield return new WaitForSeconds(0.3f);
         feedback = null;
+    }
+
+    private void OnDestroy()
+    {
+        UIGameOver.onGameOver -= UIGameOver_onGameOver;
     }
 }

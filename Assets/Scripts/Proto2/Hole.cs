@@ -148,6 +148,8 @@ public class Hole : MonoBehaviour, IInteractable
             {
                 // Dig Up Corpse
                 player.DiggingBehavior.PerformAction();
+                int randomint = UnityEngine.Random.Range(1, 4);
+                SoundManager.instance.Play("Dig" + randomint);
                 if (player.DiggingBehavior is StartDigging)
                 {
                     //player.DiggingBehavior.OnDigCompleted

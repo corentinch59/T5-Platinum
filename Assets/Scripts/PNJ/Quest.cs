@@ -61,14 +61,13 @@ public class Quest : MonoBehaviour
     }
 
     public void InitialiseQuestUI(RequestDataBase requestInformation, Texture corpseT, Texture localisationT,
-        Texture coffinT, DigRequest request)
+         DigRequest request)
     {
         _request = request; 
         requestInfos = requestInformation;
         nameText.text = requestInfos.corpseName;
         corpseImage.texture = corpseT;
         localisationImage.texture = localisationT;
-        coffinImage.texture = coffinT;
     }
 
     private float CheckScoreQuest(CorpseData data)

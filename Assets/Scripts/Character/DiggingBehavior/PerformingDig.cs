@@ -27,6 +27,7 @@ public class PerformingDig : DiggingBehavior
         #endregion
         _player.EnableInput("Move");
         _player.TransitionDigging(new StartDigging());
+        _player.DestroyCrackHole();
     }
 
     public override void PerformAction()
@@ -34,7 +35,7 @@ public class PerformingDig : DiggingBehavior
         if (internalTaps < numberOfTaps - 1)
         {
             ++internalTaps;
-            //_player.vfx.hitImpact.gameObject.SetActive(true);
+            Debug.Log("ca creuse ici ou quoi");
             #region ITERATION_3
             if (a != null)
             {
@@ -56,7 +57,6 @@ public class PerformingDig : DiggingBehavior
         else
         {
             _player.Dig(1);
-            //_player.vfx.hitImpact.gameObject.SetActive(true);
             _player.EnableInput("Move");
             #region ITERATION_3
             CancelAnimation();

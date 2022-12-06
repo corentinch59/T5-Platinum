@@ -22,6 +22,17 @@ public class PNJInteractable : MonoBehaviour
 
     [HideInInspector] public Transform returnLoc;
     [HideInInspector] public Transform questLoc;
+
+    private void Start()
+    {
+        UIGameOver.onGameOver += UIGameOver_onGameOver;
+    }
+
+    private void UIGameOver_onGameOver()
+    {
+        StopAllCoroutines();
+    }
+
     private void Update()
     {
         if (agent.hasPath && feedback == null)
@@ -137,5 +148,10 @@ public class PNJInteractable : MonoBehaviour
         transform.DOScaleY(2f, 0.3f);
         yield return new WaitForSeconds(0.3f);
         feedback = null;
+    }
+
+    private void OnDestroy()
+    {
+        UIGameOver.onGameOver -= UIGameOver_onGameOver;
     }
 }

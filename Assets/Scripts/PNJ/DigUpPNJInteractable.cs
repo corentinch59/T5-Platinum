@@ -41,6 +41,7 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         // if good quest : same body as asked
         if(player.CarriedObj.TryGetComponent(out Corpse c) && c.CorpseData.corpseType == digUpRequest.RequestInfo.corps)
         {
+            Destroy(digUpRequest.RequestInUI);
             digUpRequest.RequestCorpseImg.transform.DOScale(0, 0.5f);
             gameObject.layer = 0; // <- can't be interact with
             transform.DOJump(transform.position, 3f, 3, 3f);
@@ -64,6 +65,15 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
             QuestManager.instance.activeDigUpQuests.Remove(digUpRequest.RequestInfo);
             digUpRequest.RequestInfo = null;
             QuestManager.instance.UpdateScore(scoreToAdd);
+
+            # region stop drag sound
+            SoundManager.instance.Stop("DragMud");
+            SoundManager.instance.Stop("DragStone");
+            SoundManager.instance.Stop("DragDirt");
+            player.DirtIsPlaying = false;
+            player.MudIsPlaying = false;
+            player.StoneIsPlaying = false;
+            #endregion
         }
         // if not good quest -> score-- but stays
         else

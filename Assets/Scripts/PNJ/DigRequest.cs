@@ -53,7 +53,7 @@ public class DigRequest : RequestH
         /*Debug.Log("loc" + (int)requestInfo.loc);
         Debug.Log("corpse" + ((int)requestInfo.corps - 1));*/
         quest.GetComponent<Quest>().InitialiseQuestUI(requestInfo, tex.corpsesTex[(int)requestInfo.corps - 1],
-            tex.localisationTex[(int)requestInfo.loc],tex.coffinTex[(int)requestInfo.cof], this);
+            tex.localisationTex[(int)requestInfo.loc], this);
     }
 
     public void GoodByePnj()

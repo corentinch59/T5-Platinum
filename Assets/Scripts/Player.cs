@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -11,8 +12,15 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float distanceSpawnHole = 2f;
 
-    public LayerMask graveLayer;
+    public LayerMask locationLayers;
     public float distGraveCreation;
+
+    private bool dirtIsPlaying;
+    private bool mudIsPlaying;
+    private bool stoneIsPlaying;
+    public bool StoneIsPlaying { get { return stoneIsPlaying; } set { stoneIsPlaying = value; } }
+    public bool MudIsPlaying { get { return mudIsPlaying; } set { mudIsPlaying = value; } }
+    public bool DirtIsPlaying { get { return dirtIsPlaying; } set { dirtIsPlaying = value; } }
 
     private PlayerMovement playerMovement;
     public PlayerMovement getPlayerMovement => playerMovement;
@@ -44,6 +52,8 @@ public class Player : MonoBehaviour
     private DiggingBehavior diggingBehavior;
     public DiggingBehavior DiggingBehavior => diggingBehavior;
     private PlayerVFX vfx;
+    public GameObject crackToInstantiate;
+    private GameObject lastCrack;
     #region ITERATION_3
     private RectTransform mainRect;
     public RectTransform getMainRect => mainRect;
@@ -80,7 +90,46 @@ public class Player : MonoBehaviour
 
                 if(c.CorpseData.size > 0)
                 {
-                    if(objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
+                    // Drag sound
+                    GameObject area = raycastBehavior.PerformRaycast(c.transform.position, raycastRadius, locationLayers);
+                    if (area != null && playerMovement.getMove.sqrMagnitude > 0)
+                    {
+                        if (area.tag == "Water")
+                        {
+                            if (!mudIsPlaying)
+                            {
+                                SoundManager.instance.Play("DragMud");
+                                mudIsPlaying = true;
+                            }
+                        }
+                        else if (area.tag == "Shrine")
+                        {
+                            if (!stoneIsPlaying)
+                            {
+                                SoundManager.instance.Play("DragStone");
+                                stoneIsPlaying = true;
+                            }
+                        }
+                        else
+                        {
+                            if (!dirtIsPlaying)
+                            {
+                                SoundManager.instance.Play("DragDirt");
+                                dirtIsPlaying = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        SoundManager.instance.Stop("DragMud");
+                        SoundManager.instance.Stop("DragStone");
+                        SoundManager.instance.Stop("DragDirt");
+                        dirtIsPlaying = false;
+                        mudIsPlaying = false;
+                        stoneIsPlaying = false;
+                    }
+
+                    if (objectFound != null && objectFound.TryGetComponent(out Hole h) && h.SetHoleSize <= 1)
                     {
                         return;
                     }
@@ -184,6 +233,15 @@ public class Player : MonoBehaviour
         {
             if (carriedObj != null)
             {
+                #region stop drag sounds
+                SoundManager.instance.Stop("DragMud");
+                SoundManager.instance.Stop("DragStone");
+                SoundManager.instance.Stop("DragDirt");
+                dirtIsPlaying = false;
+                mudIsPlaying = false;
+                stoneIsPlaying = false;
+                #endregion
+
                 carriedObj.gameObject.layer = 7; // <- Interactable layer 
                 if (carriedObj.TryGetComponent(out Corpse corpse))
                 {
@@ -232,7 +290,26 @@ public class Player : MonoBehaviour
             // Instantiate Hole to where the player is looking
             Instantiate(holePrefab, new Vector3(transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole, transform.position.y - 1f,
                 transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole), holePrefab.transform.rotation);
+            DestroyCrackHole();
+
         }
+    }
+    
+    public void SetCrackHole()
+    {
+        if(crackToInstantiate != null)
+        {
+            lastCrack = Instantiate(crackToInstantiate, new Vector3(
+                transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole,
+                transform.position.y - 1f,
+                transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole),
+            crackToInstantiate.transform.rotation);
+        }
+    }
+
+    public void DestroyCrackHole()
+    {
+        Destroy(lastCrack);
     }
 
     private void CallOutline(bool active, SpriteRenderer renderer)
@@ -262,10 +339,10 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
     }
 
-    // Activate DragSounds
+    /*// Activate DragSounds
     private void OnTriggerEnter(Collider collision)
     {
-        if (carriedObj != null && carriedObj.TryGetComponent(out BigCorpse bc))
+        if (playerMovement.getMove.magnitude > 0 && carriedObj != null && carriedObj.TryGetComponent(out BigCorpse bc))
         {
             if (collision.gameObject.CompareTag("Water"))
             {
@@ -287,23 +364,20 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (carriedObj != null && carriedObj.TryGetComponent(out BigCorpse c))
+        if (collision.gameObject.CompareTag("Water"))
         {
-            if (collision.gameObject.CompareTag("Water"))
-            {
-                Debug.Log("Stop mug");
-                SoundManager.instance.Stop("DragMud");
-            }
-            else if (collision.gameObject.CompareTag("Shrine"))
-            {
-                Debug.Log("Stop Stone");
-                SoundManager.instance.Stop("DragStone");
-            }
-            else
-            {
-                Debug.Log("Stop dirt");
-                SoundManager.instance.Stop("DragDirt");
-            }
+            Debug.Log("Stop mug");
+            SoundManager.instance.Stop("DragMud");
         }
-    }
+        else if (collision.gameObject.CompareTag("Shrine"))
+        {
+            Debug.Log("Stop Stone");
+            SoundManager.instance.Stop("DragStone");
+        }
+        else
+        {
+            Debug.Log("Stop dirt");
+            SoundManager.instance.Stop("DragDirt");
+        }
+    }*/
 }

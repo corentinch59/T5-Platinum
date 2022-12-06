@@ -19,6 +19,7 @@ TagManager:
   - Hole
   - DigUpPNJ
   - Sunshine
+  - DigUpQuestUI
   layers:
   - Default
   - TransparentFX
