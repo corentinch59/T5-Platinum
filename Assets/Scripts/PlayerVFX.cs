@@ -13,6 +13,7 @@ public class PlayerVFX : MonoBehaviour
     public SpriteRenderer vfx;
     private Coroutine currentCoroutine;
     public VisualEffect hitImpact;
+    private Vector4 actualsPlayersOnOutline;
     
 
 
@@ -50,17 +51,44 @@ public class PlayerVFX : MonoBehaviour
 
     public IEnumerator Outline(bool isClose, SpriteRenderer nearestHole, int playerID)
     {
-        if (isClose)
+
+        if (nearestHole.TryGetComponent(out Hole hole))
         {
-            nearestHole.material.SetFloat("_PlayerInterractableID", playerID);
-            nearestHole.material.SetFloat("_IsOuline", 1);
+            if (isClose && !hole.playersID.Contains(playerID))
+            {
+                hole.AddInteractablePlayers(playerID);
+            }
+            else
+            {
+                hole.RemoveInteractablePlayer(playerID);
+            } 
         }
-        else
+        else if (nearestHole.TryGetComponent(out Corpse corpse))
         {
-            nearestHole.material.SetFloat("_PlayerInterractableID", 0);
-            nearestHole.material.SetFloat("_IsOuline", 0);
+            if (isClose && !corpse.playersID.Contains(playerID))
+            {
+                corpse.AddInteractablePlayers(playerID);
+            }
+            else
+            {
+                corpse.RemoveInteractablePlayer(playerID);
+            } 
         }
-            
+        else if (nearestHole.TryGetComponent(out GriefPNJInteractable grief))
+        {
+            if (isClose && !grief.playersID.Contains(playerID))
+            {
+                grief.AddInteractablePlayers(playerID);
+            }
+            else
+            {
+                grief.RemoveInteractablePlayer(playerID);
+            } 
+        }
+        
+        
+        
         yield break;
     }
+
 }

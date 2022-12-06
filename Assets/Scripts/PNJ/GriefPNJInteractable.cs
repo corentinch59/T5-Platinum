@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.AI;
@@ -188,5 +189,44 @@ public class GriefPNJInteractable : Carryable
     private void OnDestroy()
     {
         UIGameOver.onGameOver -= UIGameOver_onGameOver;
+    }
+    
+    [HideInInspector] public List<int> playersID;
+    [HideInInspector] public int numbersOfPlayers;
+    [HideInInspector] public bool isOutline;
+    
+    public void AddInteractablePlayers(int playerID)
+    {
+        playersID.Add(playerID);
+        numbersOfPlayers++;
+        GetComponent<SpriteRenderer>().material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
+        if(!isOutline)
+            ActivateOutline();
+    }
+
+    private void ActivateOutline()
+    {
+        isOutline = true;
+        GetComponent<SpriteRenderer>().material.SetFloat("_PlayerInterractableID", 1 /*playerId*/ );
+        GetComponent<SpriteRenderer>().material.SetFloat("_IsOuline", 1);
+    }
+    
+    public void RemoveInteractablePlayer(int playerID)
+    {
+        playersID.Remove(playerID);
+        numbersOfPlayers--;
+        GetComponent<SpriteRenderer>().material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
+        if (isOutline && numbersOfPlayers <= 0)
+        {
+            numbersOfPlayers = 0;
+            DesactivateOutline();
+        }
+    }
+
+    private void DesactivateOutline()
+    {
+        isOutline = false;
+        GetComponent<SpriteRenderer>().material.SetFloat("_PlayerInterractableID", 0);
+        GetComponent<SpriteRenderer>().material.SetFloat("_IsOuline", 0);
     }
 }
