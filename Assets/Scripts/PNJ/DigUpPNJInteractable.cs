@@ -97,7 +97,6 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         {
             agent.destination = questLoc.position;
             yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
-            Debug.Log("Got a quest come to me !");
             digUpRequest.SetDigUpRequest();
             gameObject.layer = 7; // <- can be interact with
         }

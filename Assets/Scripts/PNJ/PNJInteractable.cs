@@ -111,18 +111,17 @@ public class PNJInteractable : MonoBehaviour
             requestImg.SetActive(true);
             agent.destination = questLoc.position;
             yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
-            if (!CheckIfAlreadyACorpse())
+            AddNewQuest();
+            /*if (!CheckIfAlreadyACorpse())
             {
                 AddNewQuest();
             }
             else
             {
                 Debug.Log("Il y a un corps là");
-                GameManager.Instance.NewPNJComingWithQuest();
-                //transform.DOMoveX()
-                yield return new WaitForSeconds(2f);
+                GameManager.Instance.NewPNJComingWithQuest(); ;
                 yield return StartCoroutine(Walk(false));
-            }
+            }*/
         }
         //a plus de quete et rentre chez lui
         else

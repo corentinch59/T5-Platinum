@@ -223,7 +223,6 @@ public class Player : MonoBehaviour
                     // tired drops from player's head
                     if (tiredVFX != null)
                     {
-                        Debug.Log("Tired Plays");
                         tiredVFX.Play();
                     }
                     bigcorpse.Interact(this);

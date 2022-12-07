@@ -4467,6 +4467,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 928
       objectReference: {fileID: 0}
+    - target: {fileID: 5027943281809704129, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: sceneNameToLoad
+      value: FreddyTest
+      objectReference: {fileID: 0}
     - target: {fileID: 5762806868897783849, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_Pivot.y
       value: 0

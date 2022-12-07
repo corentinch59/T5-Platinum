@@ -26,8 +26,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public List<PnjGivesQuest> pnjs;
 
-    [SerializeField] private List<PNJInteractable> pnjsAlreadyGaveQuest;
+    private List<PNJInteractable> pnjsAlreadyGaveQuest = new List<PNJInteractable>();
     public List<PNJInteractable> PnjsAlreadyGaveQuest => pnjsAlreadyGaveQuest;
+
+    private IEnumerator questsSpawning;
+    public IEnumerator QuestsSpawning { get { return questsSpawning; } set { questsSpawning = value; } }
+
+    [SerializeField] private float timeBetweenEachQuest = 5f;
+    [SerializeField] private float timeToRemoveFromEveryQuest = 1f;
 
     protected virtual void Awake()
     {
@@ -43,13 +49,14 @@ public class GameManager : MonoBehaviour
             pnjs[i].pnj.questLoc = pnjs[i].questLocation;
             pnjs[i].pnj.transform.position = pnjs[i].pnj.returnLoc.position;
         }
-        NewPNJComingWithQuest();
+        questsSpawning = NewPNJComingWithQuest();
+        StartCoroutine(questsSpawning);
 
         SoundManager.instance.Play("MainLoop");
         SoundManager.instance.Play("Ambiance");
     }
 
-    public void NewPNJComingWithQuest()
+    public IEnumerator NewPNJComingWithQuest()
     {
         PNJInteractable newPnjGivesQuest;
 
@@ -66,7 +73,7 @@ public class GameManager : MonoBehaviour
         else
         {
             // < of the max pnjs in scene
-            if(pnjsAlreadyGaveQuest.Count < 3)
+            if(pnjsAlreadyGaveQuest.Count < pnjs.Count)
             {
                 // change pnj
                 while (pnjsAlreadyGaveQuest.Contains(newPnjGivesQuest))
@@ -78,10 +85,18 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                // if the list is full return
-                return;
+                // if the list is full break
+                // => No more quest until players will take care of an ancient one
+                questsSpawning = null;
+                yield break;
             }
         }
         newPnjGivesQuest.StartCoroutine(newPnjGivesQuest.Walk(true));
+
+        yield return new WaitForSeconds(timeBetweenEachQuest);
+
+        timeBetweenEachQuest -= timeToRemoveFromEveryQuest;
+
+        StartCoroutine(NewPNJComingWithQuest());
     }
 }

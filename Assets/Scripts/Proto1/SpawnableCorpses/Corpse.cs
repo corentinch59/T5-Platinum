@@ -61,7 +61,7 @@ public class Corpse : Carryable
 
     private void Update()
     {
-        if (thisQuest.timer >= thisQuest.QuestTime/2 && !isAlmostOver && thisQuest)
+        if (thisQuest != null && thisQuest.timer >= thisQuest.QuestTime/2 && !isAlmostOver)
         {
             OutlineImg.GetComponent<Image>().material.SetFloat("_IsAlmostOver", 1);
             //ta fonction ici
@@ -114,18 +114,23 @@ public class Corpse : Carryable
             gameObject.tag = "Untagged";
             if(thisQuest == null)
             {
-                if (GameManager.Instance.PnjsAlreadyGaveQuest.Count <= 2)
+                /*if (GameManager.Instance.PnjsAlreadyGaveQuest.Count <= 2)
                 {
                     GameManager.Instance.NewPNJComingWithQuest();
-                }
+                }*/
                 GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
                 pnjFrom = null;
             }
             else
             {
-                GameManager.Instance.NewPNJComingWithQuest();
+                //GameManager.Instance.NewPNJComingWithQuest();
                 GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
                 pnjFrom = null;
+            }
+            if(GameManager.Instance.QuestsSpawning == null)
+            {
+                GameManager.Instance.QuestsSpawning = GameManager.Instance.NewPNJComingWithQuest();
+                GameManager.Instance.StartCoroutine(GameManager.Instance.QuestsSpawning);
             }
         }
     }

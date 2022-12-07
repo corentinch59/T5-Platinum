@@ -211,7 +211,6 @@ public class BigCorpse : MonoBehaviour, IInteractable
         player1_move = Vector2.zero;
         player2_move = Vector2.zero;
         player.getPlayerMovement.canMove = true;
-        Debug.Log($"Detached {player.name} from a big corpse.");
     }
 
     public void SetVibrations(PlayerInput playerInput, float frequencyLeftHaptic, float frequencyRightHaptic)
