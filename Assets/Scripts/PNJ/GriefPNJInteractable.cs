@@ -191,7 +191,7 @@ public class GriefPNJInteractable : Carryable
         UIGameOver.onGameOver -= UIGameOver_onGameOver;
     }
     
-    [HideInInspector] public List<int> playersID;
+    public List<int> playersID;
     [HideInInspector] public int numbersOfPlayers;
     [HideInInspector] public bool isOutline;
     
@@ -199,34 +199,60 @@ public class GriefPNJInteractable : Carryable
     {
         playersID.Add(playerID);
         numbersOfPlayers++;
-        GetComponent<SpriteRenderer>().material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
         if(!isOutline)
-            ActivateOutline();
+            ActivateOutline(spriteRenderer);
     }
 
-    private void ActivateOutline()
+    private void ActivateOutline(SpriteRenderer renderer)
     {
         isOutline = true;
-        GetComponent<SpriteRenderer>().material.SetFloat("_PlayerInterractableID", 1 /*playerId*/ );
-        GetComponent<SpriteRenderer>().material.SetFloat("_IsOuline", 1);
+        switch (numbersOfPlayers)
+        {
+            case 1:
+            {
+                renderer.material.SetVector("_IDs", new Vector4(playersID[0], 0,0,0));
+                break;
+            }
+            case 2:
+            {
+                Debug.Log(playersID[1]);
+                renderer.material.SetVector("_IDs", new Vector4(playersID[0], playersID[1],0,0));
+                break;
+            }
+            case 3:
+            {
+                renderer.material.SetVector("_IDs", new Vector4(playersID[0], playersID[1],playersID[2],0));
+                break;
+            }
+            case 4:
+            {
+                renderer.material.SetVector("_IDs", new Vector4(playersID[0], playersID[1],playersID[2],playersID[3]));
+                break;
+            }
+        }
+        //renderer.material.SetFloat("_PlayerInterractableID", 1 /*playerId*/ );
+        renderer.material.SetFloat("_IsOuline", 1);
     }
     
     public void RemoveInteractablePlayer(int playerID)
     {
         playersID.Remove(playerID);
         numbersOfPlayers--;
-        GetComponent<SpriteRenderer>().material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
         if (isOutline && numbersOfPlayers <= 0)
         {
             numbersOfPlayers = 0;
-            DesactivateOutline();
+            DesactivateOutline(spriteRenderer);
         }
     }
 
-    private void DesactivateOutline()
+    private void DesactivateOutline(SpriteRenderer renderer)
     {
         isOutline = false;
-        GetComponent<SpriteRenderer>().material.SetFloat("_PlayerInterractableID", 0);
-        GetComponent<SpriteRenderer>().material.SetFloat("_IsOuline", 0);
+        renderer.material.SetFloat("_PlayerInterractableID", 0);
+        renderer.material.SetFloat("_IsOuline", 0);
     }
 }

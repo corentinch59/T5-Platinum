@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -1483,6 +1483,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1930823153, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930823154, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2107677564, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: spriteCarry
       value: 
@@ -1546,6 +1554,10 @@ PrefabInstance:
     - target: {fileID: 2596005604130923474, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867756836792690502, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
@@ -4392,6 +4404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c694be21806c76242bbd81089d173c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holesSprites: []
 --- !u!4 &1795639115
 Transform:
   m_ObjectHideFlags: 0
@@ -4500,15 +4513,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6277989285045595071, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6277989285045595071, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6277989285045595071, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6357613032687324023, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_LocalScale.x
