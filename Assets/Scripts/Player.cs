@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public float distGraveCreation;
     private PlayerMovement playerMovement;
     private PlayerVibration playerVibration;
+    private bool lampPlaying;
 
     #region DELEGATES
     public event VibrationDelegate onVibration;
@@ -358,45 +359,22 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radiusSphere);
     }
 
-    /*// Activate DragSounds
-    private void OnTriggerEnter(Collider collision)
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (playerMovement.getMove.magnitude > 0 && carriedObj != null && carriedObj.TryGetComponent(out BigCorpse bc))
+        if (hit.gameObject.CompareTag("Tree"))// && !lampPlaying)
         {
-            if (collision.gameObject.CompareTag("Water"))
-            {
-                Debug.Log("Play Mug");
-                SoundManager.instance.Play("DragMud");
-            }
-            else if (collision.gameObject.CompareTag("Shrine"))
-            {
-                Debug.Log("Play Stone");
-                SoundManager.instance.Play("DragStone");
-            }
-            else
-            {
-                SoundManager.instance.Play("DragDirt");
-                Debug.Log("Play Dirt");
-            }
+            //lampPlaying = true;
+            StartCoroutine(StopAnim(hit.gameObject));
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private IEnumerator StopAnim(GameObject hit)
     {
-        if (collision.gameObject.CompareTag("Water"))
-        {
-            Debug.Log("Stop mug");
-            SoundManager.instance.Stop("DragMud");
-        }
-        else if (collision.gameObject.CompareTag("Shrine"))
-        {
-            Debug.Log("Stop Stone");
-            SoundManager.instance.Stop("DragStone");
-        }
-        else
-        {
-            Debug.Log("Stop dirt");
-            SoundManager.instance.Stop("DragDirt");
-        }
-    }*/
+        hit.transform.parent.GetChild(1).transform.GetChild(0).GetComponent<Animator>().SetBool("Collision 0", true);
+        hit.transform.parent.GetChild(1).transform.GetChild(1).GetComponent<Animator>().SetBool("Collision 0", true);
+        yield return new WaitForSeconds(2f);
+        hit.transform.parent.GetChild(1).transform.GetChild(0).GetComponent<Animator>().SetBool("Collision 0", false);
+        hit.transform.parent.GetChild(1).transform.GetChild(1).GetComponent<Animator>().SetBool("Collision 0", false);
+        //lampPlaying = false;
+    }
 }
