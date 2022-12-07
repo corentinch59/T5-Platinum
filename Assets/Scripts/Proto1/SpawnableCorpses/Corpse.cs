@@ -17,6 +17,7 @@ public class Corpse : Carryable
     [SerializeField] private LayerMask localisationsLayer;
     [SerializeField] private LayerMask interactableHole;
     [SerializeField] private Sprite[] tombSprite = new Sprite[5];
+    [SerializeField] private ParticleSystem bigCorpseTrail;
 
     private BigCorpse bigCorpse;
     private SpriteRenderer spriteRenderer;
@@ -42,6 +43,11 @@ public class Corpse : Carryable
             spriteRenderer.sprite = sprite;
         }
         IsInteractable = true;
+
+        if (corpseData.size == RequestDataBase.size.MEDIUM)
+        {
+            bigCorpseTrail.gameObject.SetActive(true);
+        }
     }
 
     public override void Interact(Player player)
