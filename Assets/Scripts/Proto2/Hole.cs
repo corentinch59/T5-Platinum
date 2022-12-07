@@ -96,9 +96,9 @@ public class Hole : MonoBehaviour, IInteractable
                         if(SetHoleSize > 1)
                         {
                             // Stop tiredVfx
-                            if(player.TiredVFX != null)
+                            if (bc.Players[0].TiredVFX != null)
                             {
-                                player.TiredVFX.Stop();
+                                bc.Players[0].TiredVFX.Stop();
                             }
 
                             player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
@@ -106,6 +106,11 @@ public class Hole : MonoBehaviour, IInteractable
                             bc.Players[0].CarriedObj = null;
                             if(bc.Players[1] != null)
                             {
+                                // Stop tiredVfx
+                                if (bc.Players[1].TiredVFX != null)
+                                {
+                                    bc.Players[1].TiredVFX.Stop();
+                                }
                                 bc.Players[1].CarriedObj = null;
                                 bc.Interact(bc.Players[1]);
                             }
