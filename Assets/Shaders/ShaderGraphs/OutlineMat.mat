@@ -48,6 +48,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: ea98e2484511be642b7690716d14e41f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_049d1532d2bb4d938c4c80b244c8b649_Texture_1:
         m_Texture: {fileID: 2800000, guid: ea98e2484511be642b7690716d14e41f, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -88,7 +92,9 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _IsOuline: 0
+    - _NumberOfPlayers: 0
     - _OpaqueCullMode: 2
+    - _PlayerInterractableID: 0
     - _RenderQueueType: 4
     - _SrcBlend: 1
     - _StencilRef: 0
@@ -115,7 +121,9 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
+    - _ActivesPlayers: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _IDs: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 60.235294, g: 766.9961, b: 0, a: 0}
   m_BuildTextureStacks: []

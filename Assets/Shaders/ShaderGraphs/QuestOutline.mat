@@ -99,6 +99,7 @@ Material:
     - _GlowPower: 1
     - _GradientPower: 2.7
     - _Intensity: 13
+    - _IsAlmostOver: 0
     - _OpaqueCullMode: 2
     - _RayTracing: 0
     - _ReceivesSSR: 1
@@ -119,6 +120,7 @@ Material:
     - _StencilWriteMaskMV: 40
     - _SupportDecals: 1
     - _SurfaceType: 1
+    - _TimeSpeed: 0.5
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -139,5 +141,6 @@ Material:
     - _GlowColor: {r: 0.21052867, g: 0.5641177, b: 0.7830188, a: 0}
     - _MiddleColor: {r: 2.5261347, g: 2.1651738, b: 0, a: 0}
     - _OutlineColor: {r: 0.8490566, g: 0.12415447, b: 0.12415447, a: 0}
+    - _RedColor: {r: 23.96863, g: 0, b: 0, a: 0}
     - _TopColor: {r: 0, g: 0.7490196, b: 0.44705883, a: 0}
   m_BuildTextureStacks: []

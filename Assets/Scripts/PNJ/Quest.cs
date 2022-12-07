@@ -19,7 +19,7 @@ public class Quest : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private RawImage Outline;
     private bool isQuestFinished;
-    private float timer;
+    [HideInInspector] public float timer;
 
     private void Start()
     {
@@ -117,7 +117,7 @@ public class Quest : MonoBehaviour
         QuestManager.instance.activeQuests.Remove(requestInfos);
         QuestManager.instance.questFinished.Add(requestInfos);
         QuestManager.onFinishQuest?.Invoke(-5f);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         gameObject.SetActive(false);
         GameManager.Instance.NewPNJComingWithQuest();
     }

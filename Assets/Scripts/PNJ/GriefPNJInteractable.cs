@@ -201,13 +201,13 @@ public class GriefPNJInteractable : Carryable
         numbersOfPlayers++;
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
+        UpdateOutline(spriteRenderer);
         if(!isOutline)
             ActivateOutline(spriteRenderer);
     }
 
-    private void ActivateOutline(SpriteRenderer renderer)
+    public void UpdateOutline(SpriteRenderer renderer)
     {
-        isOutline = true;
         switch (numbersOfPlayers)
         {
             case 1:
@@ -217,7 +217,6 @@ public class GriefPNJInteractable : Carryable
             }
             case 2:
             {
-                Debug.Log(playersID[1]);
                 renderer.material.SetVector("_IDs", new Vector4(playersID[0], playersID[1],0,0));
                 break;
             }
@@ -232,7 +231,11 @@ public class GriefPNJInteractable : Carryable
                 break;
             }
         }
-        //renderer.material.SetFloat("_PlayerInterractableID", 1 /*playerId*/ );
+    }
+
+    private void ActivateOutline(SpriteRenderer renderer)
+    {
+        isOutline = true;
         renderer.material.SetFloat("_IsOuline", 1);
     }
     
@@ -241,6 +244,7 @@ public class GriefPNJInteractable : Carryable
         playersID.Remove(playerID);
         numbersOfPlayers--;
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        UpdateOutline(spriteRenderer);
         spriteRenderer.material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
         if (isOutline && numbersOfPlayers <= 0)
         {

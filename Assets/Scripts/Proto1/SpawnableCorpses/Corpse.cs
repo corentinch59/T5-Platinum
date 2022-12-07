@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Corpse : Carryable
 {
@@ -22,6 +23,8 @@ public class Corpse : Carryable
     private BigCorpse bigCorpse;
     private SpriteRenderer spriteRenderer;
     private bool isInteractable;
+    private Material material;
+    private bool isAlmostOver;
 
     #region get/set
     public CorpseData CorpseData { get { return corpseData; } set { corpseData = value; } }
@@ -48,7 +51,23 @@ public class Corpse : Carryable
         {
             bigCorpseTrail.gameObject.SetActive(true);
         }
+
         else bigCorpseTrail.gameObject.SetActive(false);
+
+
+        Material mat = Instantiate(OutlineImg.GetComponent<Image>().material);
+        OutlineImg.GetComponent<Image>().material = mat;
+    }
+
+    private void Update()
+    {
+        if (thisQuest.timer >= thisQuest.QuestTime/2 && !isAlmostOver)
+        {
+            OutlineImg.GetComponent<Image>().material.SetFloat("_IsAlmostOver", 1);
+            //ta fonction ici
+            isAlmostOver = true;
+        }
+
     }
 
     public override void Interact(Player player)
@@ -207,13 +226,13 @@ public class Corpse : Carryable
         numbersOfPlayers++;
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
+        UpdateOutline(spriteRenderer);
         if(!isOutline)
             ActivateOutline(spriteRenderer);
     }
 
-    private void ActivateOutline(SpriteRenderer renderer)
+    public void UpdateOutline(SpriteRenderer renderer)
     {
-        isOutline = true;
         switch (numbersOfPlayers)
         {
             case 1:
@@ -237,7 +256,11 @@ public class Corpse : Carryable
                 break;
             }
         }
-        //renderer.material.SetFloat("_PlayerInterractableID", 1 /*playerId*/ );
+    }
+
+    private void ActivateOutline(SpriteRenderer renderer)
+    {
+        isOutline = true;
         renderer.material.SetFloat("_IsOuline", 1);
     }
     
@@ -246,6 +269,7 @@ public class Corpse : Carryable
         playersID.Remove(playerID);
         numbersOfPlayers--;
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        UpdateOutline(spriteRenderer);
         spriteRenderer.material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
         if (isOutline && numbersOfPlayers <= 0)
         {
