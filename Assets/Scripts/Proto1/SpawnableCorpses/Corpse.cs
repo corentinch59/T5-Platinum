@@ -61,7 +61,7 @@ public class Corpse : Carryable
 
     private void Update()
     {
-        if (thisQuest.timer >= thisQuest.QuestTime/2 && !isAlmostOver)
+        if (thisQuest.timer >= thisQuest.QuestTime/2 && !isAlmostOver && thisQuest)
         {
             OutlineImg.GetComponent<Image>().material.SetFloat("_IsAlmostOver", 1);
             //ta fonction ici
