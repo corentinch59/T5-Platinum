@@ -32,16 +32,16 @@ MonoBehaviour:
   - corpseName: Arthur
     siz: 0
     loc: 1
-    corps: 4
+    corps: 5
   - corpseName: Simon
     siz: 0
     loc: 4
-    corps: 3
+    corps: 6
   - corpseName: Corentin
     siz: 0
     loc: 3
-    corps: 2
+    corps: 7
   - corpseName: Jack
     siz: 1
     loc: 1
-    corps: 7
+    corps: 8

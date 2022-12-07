@@ -130,7 +130,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   tombSprite:
-  - {fileID: 21300000, guid: 678d1923fc612a14895b49f3071849d3, type: 3}
   - {fileID: 21300000, guid: 723d693c5b2ecd846be7ed89091306c5, type: 3}
   - {fileID: 21300000, guid: 129e0c6a888b4c841a2b893de44ad88a, type: 3}
   - {fileID: 21300000, guid: 4dfe4f66365dab14babc9ec21d0579e7, type: 3}
