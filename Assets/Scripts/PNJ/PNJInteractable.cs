@@ -119,6 +119,8 @@ public class PNJInteractable : MonoBehaviour
             {
                 Debug.Log("Il y a un corps là");
                 GameManager.Instance.NewPNJComingWithQuest();
+                //transform.DOMoveX()
+                yield return new WaitForSeconds(2f);
                 yield return StartCoroutine(Walk(false));
             }
         }
