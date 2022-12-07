@@ -1,14 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public delegate void GameOverHandler();
 public class UIGameOver : MonoBehaviour
 {
-    public static event GameOverHandler onGameOver;
-    void Start()
+    public static GameOverHandler onGameOver;
+    //public static event GameOverHandler onRestart;
+
+    [SerializeField] private string sceneNameToLoad;
+
+    //private void Start()
+    //{
+    //    onGameOver?.Invoke();
+    //}
+
+
+
+    public void Restart()
     {
-        Debug.Log("STOP");
-        onGameOver?.Invoke();
+        SceneManager.LoadScene(sceneNameToLoad);
     }
 }

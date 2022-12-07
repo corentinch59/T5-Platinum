@@ -48,6 +48,7 @@ public class Corpse : Carryable
         {
             bigCorpseTrail.gameObject.SetActive(true);
         }
+        else bigCorpseTrail.gameObject.SetActive(false);
     }
 
     public override void Interact(Player player)

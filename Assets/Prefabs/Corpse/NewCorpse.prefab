@@ -460,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4433548707735685210, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
       propertyPath: m_Name
-      value: TrailChara
+      value: TrailBigCorpse
       objectReference: {fileID: 0}
     - target: {fileID: 4433548707735685210, guid: 486622b8c0ee8fc4ebde3241743cb87c, type: 3}
       propertyPath: m_IsActive

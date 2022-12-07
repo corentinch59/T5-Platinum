@@ -28,6 +28,7 @@ public class SatisfactionManager : MonoBehaviour
 
         QuestManager.onFinishQuest += AddSatisfaction;
         timerEndMeshPro.gameObject.SetActive(false);
+        gameOverScreen.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -89,6 +90,7 @@ public class SatisfactionManager : MonoBehaviour
             timerEndMeshPro.text = "0";
             Debug.Log("GameOver");
             gameOverScreen.SetActive(true);
+            UIGameOver.onGameOver?.Invoke();
             timerEndMeshPro.gameObject.SetActive(false);
         }
     }

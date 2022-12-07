@@ -39,15 +39,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         currentInput = playerInput.currentActionMap.name;
+
+        UIGameOver.onGameOver += UIGameOver_onGameOver;
     }
 
+    private void UIGameOver_onGameOver()
+    {
+        playerInput.SwitchCurrentActionMap("UI");
+    }
     private void FixedUpdate()
     {
         if (canMove)
