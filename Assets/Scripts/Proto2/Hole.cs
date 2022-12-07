@@ -353,7 +353,6 @@ public class Hole : MonoBehaviour, IInteractable
     {
         playersID.Remove(playerID);
         numbersOfPlayers--;
-        
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         UpdateOutline(spriteRenderer);
         spriteRenderer.material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
