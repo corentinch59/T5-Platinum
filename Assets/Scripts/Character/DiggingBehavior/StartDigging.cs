@@ -11,10 +11,8 @@ public class StartDigging : DiggingBehavior
         _player.TriggerVibration();
         _player.DisableInput("Move");
         _player.SetCrackHole();
-        #region ITERATION_3
         _player.getMainRect.gameObject.SetActive(true);
         _player.getIteration3Rect.localScale = Vector3.zero;
-        #endregion
         _player.TransitionDigging(new PerformingDig(_player.getNumbersOfTaps));
     }
 }

@@ -1,4 +1,5 @@
 using Cinemachine.Utility;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
     public PlayerVibration getPlayerVibration => playerVibration;
     public PlayerVFX getVFX => vfx;
     public VisualEffect TiredVFX => tiredVFX;
+    public GameObject getCrack { get { if (lastCrack != null) return lastCrack; return null; } }
     #endregion
 
     #region CARRY_AND_RAYCAST_VALUES
@@ -64,6 +66,10 @@ public class Player : MonoBehaviour
     private PlayerVFX vfx;
     public GameObject crackToInstantiate;
     private GameObject lastCrack;
+    private Tween crackTweenScale;
+    private Tween crackTweenShake;
+    private Tween crackTweenSpawn;
+    private DG.Tweening.Sequence crackSequence;
     #region ITERATION_3
     private RectTransform mainRect;
     public RectTransform getMainRect => mainRect;
@@ -319,11 +325,44 @@ public class Player : MonoBehaviour
                 transform.position.y - 1f,
                 transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole),
             crackToInstantiate.transform.rotation);
+            lastCrack.transform.localScale = Vector3.zero;
+            lastCrack.transform.DOScale(new Vector3(0.5f,0.5f,0.5f), 0.5f);
         }
+    }
+
+    public void AnimateCrackHole(float tap)
+    {
+        if (lastCrack == null)
+        {
+            Debug.Log("no crack to animate");
+            return;
+        }
+
+        if (crackTweenSpawn != null)
+            crackTweenSpawn.Kill();
+
+        if(crackTweenScale != null)
+            crackTweenScale.Kill();
+
+        if(crackTweenShake != null)
+            crackTweenShake.Kill();
+
+        crackTweenScale = lastCrack.transform.DOScale(new Vector3(2f,2f,2f) * tap / numberOfTaps * 5f, 0.25f);
+        crackTweenShake = lastCrack.transform.DOShakePosition(
+            duration: 0.25f,
+            strength: 0.2f
+            );
+
+        crackSequence = DOTween.Sequence();
+        crackSequence.Append(crackTweenScale).Join(crackTweenShake);
     }
 
     public void DestroyCrackHole()
     {
+        crackTweenSpawn.Kill();
+        crackTweenScale.Kill();
+        crackTweenShake.Kill();
+        crackSequence.Kill();
         Destroy(lastCrack);
     }
 

@@ -36,9 +36,9 @@ public class PerformingDig : DiggingBehavior
         {
             ++internalTaps;
             _player.TriggerVibration();
+            _player.AnimateCrackHole(internalTaps);
             _player.getVFX.hitImpact.gameObject.SetActive(true);
             _player.getVFX.hitImpact.Play();
-            Debug.Log("ca creuse ici ou quoi");
             #region ITERATION_3
             if (a != null)
             {

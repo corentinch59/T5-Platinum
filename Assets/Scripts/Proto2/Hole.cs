@@ -16,9 +16,7 @@ public class Hole : MonoBehaviour, IInteractable
     private Image bubbleIMage;
     private Corpse heldCorpse;
     private Sprite originalSprite;
-    private Sequence showBubbleSequence;
-    private Sequence hideBubbleSequence;
-    private BoxCollider colliderHole;
+      private BoxCollider colliderHole;
     private RectTransform bubbleParent;
     private SpriteRenderer spriteRenderer;
 

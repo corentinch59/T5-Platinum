@@ -103,7 +103,6 @@ public class GriefQuest : MonoBehaviour
     {
         _request.GoodByeGriefPNJ();
         //_request.griefCoroutine = null;
-        image.color = Color.red;
         QuestManager.onFinishQuest?.Invoke(-5f);
         QuestManager.instance.activeDeuilQuests.Remove(requestInfos);
         yield return new WaitForSeconds(2);
