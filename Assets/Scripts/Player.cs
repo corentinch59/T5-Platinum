@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public PlayerVFX getVFX => vfx;
     public VisualEffect TiredVFX => tiredVFX;
     public GameObject getCrack { get { if (lastCrack != null) return lastCrack; return null; } }
+    public GameObject getObjectFound => objectFound;
     #endregion
 
     #region CARRY_AND_RAYCAST_VALUES
@@ -237,9 +238,6 @@ public class Player : MonoBehaviour
             else if (objectFound == null && carriedObj == null)
             {
                 diggingBehavior.PerformAction();
-                //TriggerVibration();
-                //vfx.hitImpact.gameObject.SetActive(true);
-                //vfx.hitImpact.Play();
                 int randomint = UnityEngine.Random.Range(1, 4);
                 SoundManager.instance.Play("Dig" + randomint);
             }
