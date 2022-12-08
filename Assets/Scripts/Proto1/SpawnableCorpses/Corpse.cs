@@ -296,7 +296,7 @@ public class Corpse : Carryable
 
     private void ShakeQuest()
     {
-        meep = thisQuest.transform.DOShakePosition(
+        meep = thisQuest.transform.DOShakeRotation(
             duration: durationShakeTween,
             strength: strengthShakeTween
             ).SetLoops(-1);
