@@ -192,7 +192,6 @@ MonoBehaviour:
     siz: 0
     loc: 0
     corps: 0
-  requestCorpseImg: {fileID: 304341981180831301}
   spritesCorpse:
   - {fileID: 21300000, guid: 75e7e67392a86074d9a73dbd6741932d, type: 3}
   - {fileID: 21300000, guid: 817f6865be48f7f4789e09e1fba9d060, type: 3}
