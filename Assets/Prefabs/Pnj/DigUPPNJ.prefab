@@ -115,8 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14a69ef5387bfa4dbc5551d14f4daf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreToAdd: 5
-  scoreToRemove: -5
   digUpRequest: {fileID: 304341980518285181}
   agent: {fileID: 304341980500953292}
   questLoc: {fileID: 0}
@@ -193,10 +191,10 @@ MonoBehaviour:
     loc: 0
     corps: 0
   spritesCorpse:
-  - {fileID: 21300000, guid: 75e7e67392a86074d9a73dbd6741932d, type: 3}
-  - {fileID: 21300000, guid: 817f6865be48f7f4789e09e1fba9d060, type: 3}
-  - {fileID: 21300000, guid: c17516a751f67e84fac5dbd65e67981e, type: 3}
-  - {fileID: 21300000, guid: 27a907e2426b1884eabd6db2f273812f, type: 3}
+  - {fileID: 21300000, guid: 612ee818c14734b4fb76fc48826b68cc, type: 3}
+  - {fileID: 21300000, guid: 8e3d1bc0066294d449a4d11f17e50f8a, type: 3}
+  - {fileID: 21300000, guid: ba47988b02cac274c92feaee897f8f88, type: 3}
+  - {fileID: 21300000, guid: d29bcf6f13863ef4fa3e7ce04e10ed3b, type: 3}
   - {fileID: 21300000, guid: 9833a2da4ee298242a1c03f94fa7561d, type: 3}
   - {fileID: 21300000, guid: afa53f6cdf3197e47964fdf5231cd765, type: 3}
   - {fileID: 21300000, guid: a8325a8e5231bd741bc2beca26eb7075, type: 3}
