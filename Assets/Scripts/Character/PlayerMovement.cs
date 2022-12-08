@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerInput.SwitchCurrentActionMap("UI");
     }
+
     private void FixedUpdate()
     {
         if (canMove)
@@ -136,5 +137,4 @@ public class PlayerMovement : MonoBehaviour
         playerInput.SwitchCurrentActionMap(inputActionMap);
         currentInput = inputActionMap;
     }
-
 }
