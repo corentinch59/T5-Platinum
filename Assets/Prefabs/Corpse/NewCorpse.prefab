@@ -134,6 +134,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 129e0c6a888b4c841a2b893de44ad88a, type: 3}
   - {fileID: 21300000, guid: 4dfe4f66365dab14babc9ec21d0579e7, type: 3}
   bigCorpseTrail: {fileID: 7354921488166601030}
+  durationShakeTween: 1
+  strengthShakeTween: 3
   playersID: 
   numbersOfPlayers: 0
   isOutline: 0
