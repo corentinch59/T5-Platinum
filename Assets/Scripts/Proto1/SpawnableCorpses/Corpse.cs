@@ -150,9 +150,15 @@ public class Corpse : Carryable
 
         if (player.getPlayerMovement.canMove) // if one player -> put the body anywhere he wants to
         {
-            //put down corpse in front of a player -> use rotation but now just t.right
-            player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
-                player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
+            /*Debug.Log("x :" + player.getPlayerMovement.getOrientation.x);
+            Debug.Log("y :" + player.getPlayerMovement.getOrientation.y);
+            Debug.Log("futur Corpse Z :" + player.transform.position.z);
+            float posZ = player.transform.position.z;
+            float mult = player.getPlayerMovement.getOrientation.y * 10f;
+            float final = posZ + mult;
+            Debug.Log(final);*/
+            player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 4f,
+                player.transform.position.y, + player.getPlayerMovement.getOrientation.y * 4f);
             player.CarriedObj.transform.parent = null;
         }
         else

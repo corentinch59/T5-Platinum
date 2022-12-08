@@ -174,6 +174,17 @@ public class Hole : MonoBehaviour, IInteractable
                     heldCorpse.transform.position = posCorpse;
                     heldCorpse.gameObject.SetActive(true);
                     heldCorpse.tag = "Corpse";
+
+                    // reset the size to avoid dotween animation problem
+                    if (heldCorpse.CorpseData.size > 0)
+                    {
+                        heldCorpse.transform.localScale = new Vector3(2, 2, 2);
+                    }
+                    else
+                    {
+                        heldCorpse.transform.localScale = new Vector3(1, 1, 1);
+                    }
+
                     //player.CarriedObj = heldCorpse;
                     // if we dug up a big or a little body
                     if (heldCorpse.CorpseData.size > 0)
