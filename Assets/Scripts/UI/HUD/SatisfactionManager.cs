@@ -81,6 +81,7 @@ public class SatisfactionManager : MonoBehaviour
         {
             elapsedTimeBeforeGO = 0f;
             timerEndMeshPro.gameObject.SetActive(false);
+            displayTimerFloat = 5f;
         }
         #endregion
 
