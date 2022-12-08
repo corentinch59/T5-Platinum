@@ -27,8 +27,8 @@ public class TestEditor : Editor
 
         EditorGUILayout.Space(5f);
 
-        this.myPlayer.distGraveCreation =
-            EditorGUILayout.FloatField("Grave's Creation Distance", this.myPlayer.distGraveCreation);
+        //this.myPlayer.distGraveCreation =
+            //EditorGUILayout.FloatField("Grave's Creation Distance", this.myPlayer.distGraveCreation);
 
 
         EditorGUILayout.HelpBox("Set the grave's creation distance.", MessageType.Info);

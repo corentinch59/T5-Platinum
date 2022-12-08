@@ -15,16 +15,13 @@ public delegate void VibrationDelegate(Vector2 value, float duration);
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float distanceSpawnHole = 2f;
     [SerializeField] private Vector2 holeVibrationStrength;
     [SerializeField] private float holeVibrationDuration;
     [SerializeField] private VisualEffect tiredVFX; // when dragging big body
 
     public LayerMask locationLayers;
-    public float distGraveCreation;
     private PlayerMovement playerMovement;
     private PlayerVibration playerVibration;
-    private bool lampPlaying;
 
     #region DELEGATES
     public event VibrationDelegate onVibration;
@@ -53,7 +50,6 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject objectFound;
     [SerializeField] private GameObject lastObjectFound;
     [Header("Debug")]
-    public float radiusSphere = 5f;
     public LayerMask interactableLayer;
     #endregion
     #region HOLE
@@ -96,9 +92,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        //Debug player vision
-        Debug.DrawLine(transform.position, transform.position + transform.forward * distGraveCreation, Color.red);
-
         if (carriedObj != null)
         {
             if (carriedObj.TryGetComponent(out Corpse c))
@@ -394,7 +387,7 @@ public class Player : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(transform.position, radiusSphere);
+        Gizmos.DrawWireSphere(transform.position, raycastRadius);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)

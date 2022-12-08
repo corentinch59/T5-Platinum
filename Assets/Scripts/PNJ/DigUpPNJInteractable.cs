@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 public class DigUpPNJInteractable : MonoBehaviour, IInteractable
 {
     [Header("Score")]
-    [SerializeField][Range(0, 20)] private int scoreToAdd = 5;
-    [SerializeField][Range(-20, 0)] private int scoreToRemove = -5;
     private bool pnjActivated; // Temporary
 
     [Space]
@@ -56,7 +54,6 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
                 player.TiredVFX.Stop();
             }
             Destroy(digUpRequest.RequestInUI);
-            //digUpRequest.RequestCorpseImg.transform.DOScale(0, 0.5f);
             gameObject.layer = 0; // <- can't be interact with
             transform.DOJump(transform.position, 3f, 3, 3f);
             StartCoroutine(Walk(false)); // go back and return later with a new dig up quest
