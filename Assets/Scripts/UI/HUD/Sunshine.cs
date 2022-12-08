@@ -8,6 +8,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public delegate void SunshineDelegate();
+
 public class Sunshine : MonoBehaviour
 {
     [SerializeField] private Transform endPos;
@@ -22,6 +24,7 @@ public class Sunshine : MonoBehaviour
     public Image cadran;
 
     public PostProcessManager postProcessManager;
+    public static SunshineDelegate onTimerEnd;
 
     private float angle;
     private float radius;
@@ -69,6 +72,7 @@ public class Sunshine : MonoBehaviour
 
             yield return null;
         }
+        onTimerEnd?.Invoke();
         //timer = 0f;
     }
 
