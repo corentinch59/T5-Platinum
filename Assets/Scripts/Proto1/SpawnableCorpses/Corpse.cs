@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class Corpse : Carryable
 {
     [SerializeField] private GameObject outlineImg;
-    public GameObject OutlineImg => outlineImg; // <- deactivate outline with the current quest duration
     [SerializeField] private CorpseData corpseData;
     [SerializeField] private Quest thisQuest;
     private PNJInteractable pnjFrom;
@@ -19,17 +18,21 @@ public class Corpse : Carryable
     [SerializeField] private LayerMask interactableHole;
     [SerializeField] private Sprite[] tombSprite = new Sprite[5];
     [SerializeField] private ParticleSystem bigCorpseTrail;
+    [SerializeField] private float durationShakeTween;
+    [SerializeField] private float strengthShakeTween;
 
     private BigCorpse bigCorpse;
     private SpriteRenderer spriteRenderer;
     private bool isInteractable;
     private Material material;
     private bool isAlmostOver;
+    private Tween meep;
 
     #region get/set
     public CorpseData CorpseData { get { return corpseData; } set { corpseData = value; } }
     public Quest ThisQuest { get { return thisQuest; } set { thisQuest = value; } }
     public BigCorpse BigCorpse { get { return bigCorpse; } set { bigCorpse = value; } }
+    public GameObject OutlineImg => outlineImg; // <- deactivate outline with the current quest duration
     public Sprite[] TombSprite => tombSprite;
     public SpriteRenderer SpriteRenderer => spriteRenderer;
     public PNJInteractable PnjFrom { get { return pnjFrom; } set { pnjFrom = value; } }
@@ -65,6 +68,7 @@ public class Corpse : Carryable
         {
             OutlineImg.GetComponent<Image>().material.SetFloat("_IsAlmostOver", 1);
             //ta fonction ici
+            ShakeQuest();
             isAlmostOver = true;
         }
 
@@ -288,5 +292,19 @@ public class Corpse : Carryable
         isOutline = false;
         renderer.material.SetFloat("_PlayerInterractableID", 0);
         renderer.material.SetFloat("_IsOuline", 0);
+    }
+
+    private void ShakeQuest()
+    {
+        meep = thisQuest.transform.DOShakePosition(
+            duration: durationShakeTween,
+            strength: strengthShakeTween
+            ).SetLoops(-1);
+        thisQuest.onQuestDestroy += DestroyTween;
+    }
+
+    public void DestroyTween()
+    {
+        meep.Kill();
     }
 }

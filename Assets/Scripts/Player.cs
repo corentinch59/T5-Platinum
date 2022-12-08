@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
     public GameObject getCrack { get { if (lastCrack != null) return lastCrack; return null; } }
     public GameObject getObjectFound => objectFound;
     #endregion
-
     #region CARRY_AND_RAYCAST_VALUES
     public Sprite playerNotCarrying;
     public Sprite spriteCarry;

@@ -4,20 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public delegate void QuestDelegate();
 
 public class Quest : MonoBehaviour
 {
     public RequestDataBase requestInfos;
     [HideInInspector] public DigRequest _request;
-    [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] public RawImage corpseImage;
+    [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage localisationImage;
     [SerializeField] private RawImage coffinImage;
+    [SerializeField] private Image image;
+    [SerializeField] private RawImage Outline;
     [SerializeField] private Slider questSlider;
     [SerializeField] private float questTime = 5;
     public float QuestTime => questTime;
-    [SerializeField] private Image image;
-    [SerializeField] private RawImage Outline;
+    public QuestDelegate onQuestDestroy;
     private bool isQuestFinished;
     [HideInInspector] public float timer;
 
@@ -106,6 +108,7 @@ public class Quest : MonoBehaviour
         QuestManager.instance.questFinished.Add(requestInfos);
         QuestManager.instance.activeQuests.Remove(requestInfos);
         yield return new WaitForSeconds(1);
+        onQuestDestroy?.Invoke();
         Destroy(gameObject);
     }
 
