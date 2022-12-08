@@ -72,14 +72,15 @@ public class Quest : MonoBehaviour
         localisationImage.texture = localisationT;
     }
 
-    private float CheckScoreQuest(CorpseData data)
+    private bool CheckScoreQuest(CorpseData data)
     {
         if(data.localisation == requestInfos.loc)
         {
             ParticlePlayManager.instance.PlayAtPosition("Satisfaction");
             image.color = Color.green;
+            return true;
             // add score
-            switch (stateTimer)
+           /* switch (stateTimer)
             {
                 case StateTimer.EXCELLENT:
                     return 8f;
@@ -89,14 +90,14 @@ public class Quest : MonoBehaviour
                     return 3f;
                 default:
                     return 0f;
-            }
+            }*/
             
         }
         else
         {
             // remove score
             image.color = Color.red;
-            return -5f;
+            return false;
         }
     }
     
@@ -119,7 +120,8 @@ public class Quest : MonoBehaviour
         image.color = Color.red;
         QuestManager.instance.activeQuests.Remove(requestInfos);
         QuestManager.instance.questFinished.Add(requestInfos);
-        QuestManager.onFinishQuest?.Invoke(-5f);
+        //QuestManager.onFinishQuest?.Invoke(-5f);
+        QuestManager.instance.UpdateScore(false);
         yield return new WaitForSeconds(1);
         gameObject.SetActive(false);
         //GameManager.Instance.NewPNJComingWithQuest();

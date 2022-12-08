@@ -1884,37 +1884,9 @@ PrefabInstance:
       value: DigUPPNJ
       objectReference: {fileID: 0}
     - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: texData
-      value: 
-      objectReference: {fileID: 11400000, guid: 1c91b26c7fd3b3d459127a8143bcf1b3, type: 2}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
       propertyPath: questParent
       value: 
       objectReference: {fileID: 1911439381}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: questToInstantiate
-      value: 
-      objectReference: {fileID: 8707251112121258463, guid: f669a0935cedd9247a433e1382a49325, type: 3}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: spritesCorpse.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: spritesCorpse.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 9833a2da4ee298242a1c03f94fa7561d, type: 3}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: spritesCorpse.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: afa53f6cdf3197e47964fdf5231cd765, type: 3}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: spritesCorpse.Array.data[6]
-      value: 
-      objectReference: {fileID: 21300000, guid: a8325a8e5231bd741bc2beca26eb7075, type: 3}
-    - target: {fileID: 304341980518285181, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
-      propertyPath: spritesCorpse.Array.data[7]
-      value: 
-      objectReference: {fileID: 21300000, guid: fa7654ce477cf254095d8048dafdc0a8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64c97423ee3ad5749bf7d10e47e3b835, type: 3}
 --- !u!1001 &811323230

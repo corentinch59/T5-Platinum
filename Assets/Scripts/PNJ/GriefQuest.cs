@@ -60,14 +60,15 @@ public class GriefQuest : MonoBehaviour
         corpseImage.texture = corpseT;
     }
 
-    private int CheckScoreQuest(RequestDataBase.corpseType corpseType)
+    private bool CheckScoreQuest(RequestDataBase.corpseType corpseType)
     {
         if (corpseType == requestInfos.corps)
         {
             _request.GriefPnjInteractable.transform.DOJump(_request.GriefPnjInteractable.transform.position, 3f, 3, 3f);
+            return true;
             //image.color = Color.green;
             // add score
-            switch (stateTimer)
+            /*switch (stateTimer)
             {
                 case StateTimer.EXCELLENT:
                     return 5;
@@ -77,14 +78,14 @@ public class GriefQuest : MonoBehaviour
                     return 1;
                 default:
                     return 10;
-            }
+            }*/
         }
         else
         {
             _request.GriefPnjInteractable.transform.DOShakePosition(3f, new Vector3(2, 0, 0), 5, 10, false, true, ShakeRandomnessMode.Harmonic);
+            return false;
             // remove score
             //image.color = Color.red;
-            return -5;
         }
     }
 
@@ -103,7 +104,8 @@ public class GriefQuest : MonoBehaviour
     {
         _request.GoodByeGriefPNJ();
         //_request.griefCoroutine = null;
-        QuestManager.onFinishQuest?.Invoke(-5f);
+        //QuestManager.onFinishQuest?.Invoke(-5f);
+        QuestManager.instance.UpdateScore(false);
         QuestManager.instance.activeDeuilQuests.Remove(requestInfos);
         yield return new WaitForSeconds(2);
         Destroy(gameObject);

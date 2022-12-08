@@ -74,7 +74,7 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
 
             QuestManager.instance.activeDigUpQuests.Remove(digUpRequest.RequestInfo);
             digUpRequest.RequestInfo = null;
-            QuestManager.instance.UpdateScore(scoreToAdd);
+            QuestManager.instance.UpdateScore(true);
 
             # region stop drag sound
             SoundManager.instance.Stop("DragMud");
@@ -86,7 +86,7 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         else
         {
             transform.DOShakePosition(3f, new Vector3(2, 0, 0), 5, 10, false, true, ShakeRandomnessMode.Harmonic);
-            QuestManager.instance.UpdateScore(scoreToRemove);
+            QuestManager.instance.UpdateScore(false);
         }
     }
 

@@ -19,15 +19,17 @@ public class QuestManager : MonoBehaviour
     public int numberOfDigUpQuests = 10;
     public static QuestManager instance;
     
-
-    public TextMeshProUGUI scoreText;
+    [Header("Score")]
     public float score;
+    public const float failComboToAdd = 2.5f;
+    public const float scoreToAdd = 1.5f;
+    public const float scoreToRemove = 1.5f;
+    private float failCombo = 0f;
 
     public static FinishQuestHandler onFinishQuest;
 
     private void Awake()
     {
-        //scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<TextMeshProUGUI>();
         instance = this;
         foreach (var quest in _scriptableRequestBase._dataBase)
         {
@@ -35,12 +37,20 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void UpdateScore(float scoreToAdd)
+    public void UpdateScore(bool isSuccess)
     {
-        score += scoreToAdd;
+        if (isSuccess)
+        {
+            score += scoreToAdd;
+            onFinishQuest?.Invoke(scoreToAdd);
+        }
+        else
+        {
+            failCombo += failComboToAdd;
+            score -= scoreToRemove * failCombo;
+            onFinishQuest?.Invoke(-(scoreToRemove * failCombo));
+        }
         score = Mathf.Clamp(score, 0, int.MaxValue);
-        onFinishQuest?.Invoke(scoreToAdd);
-        //scoreText.text = score.ToString();
     }
 
     public void AcceptRequest(Request request, RequestDataBase requestInfo)
