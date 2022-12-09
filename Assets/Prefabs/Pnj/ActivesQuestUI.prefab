@@ -1081,7 +1081,7 @@ MonoBehaviour:
   image: {fileID: 8999927999622090272}
   Outline: {fileID: 6113753872093889044}
   questSlider: {fileID: 6185174995862996059}
-  questTime: 10
+  questTime: 30
   timerQuestManager: {fileID: 3520785073279246336}
   timer: 0
   stateTimer: 0
