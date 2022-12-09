@@ -40,10 +40,6 @@ public class SatisfactionManager : MonoBehaviour
     private void Update()
     {
         TestGameOver();
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            TestWin();
-        }
     }
 
     private void AddSatisfaction(float value)
