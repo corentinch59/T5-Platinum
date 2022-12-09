@@ -747,6 +747,6 @@ MonoBehaviour:
   nameText: {fileID: 847699982}
   corpseImage: {fileID: 735907266}
   questSlider: {fileID: 6185174995862996059}
-  questTime: 5
+  questTime: 20
   image: {fileID: 0}
   stateTimer: 0

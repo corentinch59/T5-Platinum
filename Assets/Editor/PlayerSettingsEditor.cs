@@ -7,11 +7,16 @@ using UnityEditor;
 public class PlayerSettingsEditor : Editor
 {
     Player player;
+    [Header("Vibration Settings")]
     SerializedProperty holeVibration;
     SerializedProperty holeVibrationStr;
+
+    [Header("Locations to check")]
     SerializedProperty locations;
-    SerializedProperty interactable;
     SerializedProperty nberOfTaps;
+
+    [Header("")]
+    SerializedProperty interactable;
     SerializedProperty rayRadius;
 
     private void OnEnable()
@@ -19,8 +24,8 @@ public class PlayerSettingsEditor : Editor
         holeVibration = serializedObject.FindProperty("holeVibrationDuration");
         holeVibrationStr = serializedObject.FindProperty("holeVibrationStrength");
         locations = serializedObject.FindProperty("locationLayers");
-        interactable = serializedObject.FindProperty("interactableLayer");
         nberOfTaps = serializedObject.FindProperty("numberOfTaps");
+        interactable = serializedObject.FindProperty("interactableLayer");
         rayRadius = serializedObject.FindProperty("raycastRadius");
         
     }

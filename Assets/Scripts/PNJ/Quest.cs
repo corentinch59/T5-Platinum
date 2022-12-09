@@ -18,15 +18,17 @@ public class Quest : MonoBehaviour
     [SerializeField] private RawImage Outline;
     [SerializeField] private Slider questSlider;
     [SerializeField] private float questTime = 5;
+    [SerializeField] private TimerQuestManager timerQuestManager;
     public float QuestTime => questTime;
     public QuestDelegate onQuestDestroy;
     private bool isQuestFinished;
     [HideInInspector] public float timer;
-
+    private bool isBarShaderStarted;
     private void Start()
     {
         Material mat = Instantiate(Outline.material);
         Outline.material = mat;
+        
     }
 
     public enum StateTimer
@@ -54,12 +56,14 @@ public class Quest : MonoBehaviour
                 questSlider.value = 0;
                 StartCoroutine(TimeOutQuest());
             }
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                //StartCoroutine(FinishQuest());
-            }
         }
+
+        if (!isBarShaderStarted)
+        {
+            timerQuestManager.SetBorderBar(questTime);
+            isBarShaderStarted = true;
+        }
+        
     }
 
     public void InitialiseQuestUI(RequestDataBase requestInformation, Texture corpseT, Texture localisationT,
@@ -70,6 +74,7 @@ public class Quest : MonoBehaviour
         nameText.text = requestInfos.corpseName;
         corpseImage.texture = corpseT;
         localisationImage.texture = localisationT;
+        
     }
 
     private bool CheckScoreQuest(CorpseData data)

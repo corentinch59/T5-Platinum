@@ -157,8 +157,8 @@ public class Corpse : Carryable
             float mult = player.getPlayerMovement.getOrientation.y * 10f;
             float final = posZ + mult;
             Debug.Log(final);*/
-            player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 4f,
-                player.transform.position.y, + player.getPlayerMovement.getOrientation.y * 4f);
+            player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
+                player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
             player.CarriedObj.transform.parent = null;
         }
         else

@@ -339,7 +339,7 @@ public class Player : MonoBehaviour
         if(crackTweenShake != null)
             crackTweenShake.Kill();
 
-        crackTweenScale = lastCrack.transform.DOScale(new Vector3(2f,2f,2f) * tap / numberOfTaps * 5f, 0.25f);
+        crackTweenScale = lastCrack.transform.DOScale(new Vector3(1.5f,1.5f,1.5f) * tap / numberOfTaps * 5f, 0.25f);
         crackTweenShake = lastCrack.transform.DOShakePosition(
             duration: 0.25f,
             strength: 0.2f

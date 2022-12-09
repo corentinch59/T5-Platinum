@@ -1611,6 +1611,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c05ef041caf3b84e807d0219d33134b, type: 3}
+--- !u!1 &1154993375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7563758147592577305, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+  m_PrefabInstance: {fileID: 1851410321}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1274071293
 GameObject:
   m_ObjectHideFlags: 0
@@ -2591,7 +2596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b450b7edde9ba4ca610a3ca357294d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSettings: {fileID: 0}
 --- !u!4 &1708686564
 Transform:
   m_ObjectHideFlags: 0
@@ -2812,6 +2816,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 928
       objectReference: {fileID: 0}
+    - target: {fileID: 3747200723461411546, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: winScreen
+      value: 
+      objectReference: {fileID: 1154993375}
     - target: {fileID: 5027943281809704129, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: sceneNameToLoad
       value: FreddyTest

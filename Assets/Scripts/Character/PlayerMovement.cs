@@ -91,10 +91,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!_isDashing)
         {
-            transform.DOScale(new Vector3(1.3f, 0.7f), 0.15f);
+            transform.DOScale(new Vector3(1.3f, 0.7f, 1f), 0.15f);
             yield return new WaitForSeconds(0.15f);
             //transform.DOMoveY(transform.position.y, 0.15f);
-            transform.DOScale(new Vector3(1f, 1f), 0.1f);
+            transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f);
             //transform.DOScaleY(1f, 0.3f);
             yield return new WaitForSeconds(0.1f);
         }
