@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Freddy/SimonFinalLD.unity
     guid: 93ac474c02552ef47a7f8bcc214b42df
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/MainMenu.unity
+    guid: 49e1c5806710807458334590ce928908
   m_configObjects: {}
