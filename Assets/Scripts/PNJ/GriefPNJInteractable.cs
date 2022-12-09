@@ -89,8 +89,6 @@ public class GriefPNJInteractable : Carryable
         player.CarriedObj.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
         player.CarriedObj.gameObject.transform.parent = null;
 
-        player.GetComponent<SpriteRenderer>().sprite = player.playerNotCarrying;
-
         // Update corpseType the pnj wants
         Collider[] infos = Physics.OverlapSphere(transform.position, radius);
         float min = float.MaxValue;

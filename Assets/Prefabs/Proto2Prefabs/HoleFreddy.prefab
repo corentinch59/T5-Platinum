@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2.75}
-  m_SizeDelta: {x: 1, y: 1}
+  m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8467226328685381466
 CanvasRenderer:
@@ -201,10 +201,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc2be099a4cacd478c63be5fef9c02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleHeight: 2.75
   scaleAmountToAdd: 0.2
   scaleAnimDuration: 1
   scaleAnimTombDuration: 0.5
   tombSpawnDuration: 1
+  playersID: 
+  numbersOfPlayers: 0
+  isOutline: 0
 --- !u!212 &218320910913509318
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -353,7 +357,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &248809203708261453
 MonoBehaviour:
   m_ObjectHideFlags: 0
