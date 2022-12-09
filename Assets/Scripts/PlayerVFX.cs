@@ -14,7 +14,7 @@ public class PlayerVFX : MonoBehaviour
     private Coroutine currentCoroutine;
     public VisualEffect hitImpact;
     private Vector4 actualsPlayersOnOutline;
-    
+
 
 
     public void Update()
@@ -28,7 +28,7 @@ public class PlayerVFX : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.gameObject.CompareTag("Player") && hit.controller != null && currentCoroutine == null)
+        if (hit.gameObject.CompareTag("Player") && hit.controller != null && currentCoroutine == null)
         {
             _secondPlayerMovement = gameObject.GetComponent<PlayerMovement>();
             Debug.Log("Collision");
@@ -61,7 +61,7 @@ public class PlayerVFX : MonoBehaviour
             else
             {
                 hole.RemoveInteractablePlayer(playerID);
-            } 
+            }
         }
         else if (nearestHole.TryGetComponent(out Corpse corpse))
         {
@@ -72,7 +72,7 @@ public class PlayerVFX : MonoBehaviour
             else
             {
                 corpse.RemoveInteractablePlayer(playerID);
-            } 
+            }
         }
         else if (nearestHole.TryGetComponent(out GriefPNJInteractable grief))
         {
@@ -83,12 +83,23 @@ public class PlayerVFX : MonoBehaviour
             else
             {
                 grief.RemoveInteractablePlayer(playerID);
-            } 
+            }
         }
-        
-        
-        
-        yield break;
-    }
+        else if (nearestHole.TryGetComponent(out DigUpPNJInteractable digUpPnj))
+        {
+            Debug.Log("c'est le monsieur interagible");
+            if (isClose && !digUpPnj.playersID.Contains(playerID))
+            {
+                digUpPnj.AddInteractablePlayers(playerID);
+            }
+            else
+            {
+                digUpPnj.RemoveInteractablePlayer(playerID);
+            }
 
+
+        }
+        yield break;
+
+    }
 }

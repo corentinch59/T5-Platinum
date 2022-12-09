@@ -128,4 +128,73 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(0.3f);
         feedback = null;
     }
+    
+        public List<int> playersID;
+    [HideInInspector] public int numbersOfPlayers;
+    [HideInInspector] public bool isOutline;
+    
+    public void AddInteractablePlayers(int playerID)
+    {
+        playersID.Add(playerID);
+        numbersOfPlayers++;
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
+        UpdateOutline(spriteRenderer);
+        if(!isOutline)
+            ActivateOutline(spriteRenderer);
+    }
+
+    public void UpdateOutline(SpriteRenderer renderer)
+    {
+        switch (numbersOfPlayers)
+        {
+            case 1:
+            {
+                renderer.material.SetVector("_IDs", new Vector4(playersID[0], 0,0,0));
+                break;
+            }
+            case 2:
+            {
+                renderer.material.SetVector("_IDs", new Vector4(playersID[0], playersID[1],0,0));
+                break;
+            }
+            case 3:
+            {
+                renderer.material.SetVector("_IDs", new Vector4(playersID[0], playersID[1],playersID[2],0));
+                break;
+            }
+            case 4:
+            {
+                renderer.material.SetVector("_IDs", new Vector4(playersID[0], playersID[1],playersID[2],playersID[3]));
+                break;
+            }
+        }
+    }
+
+    private void ActivateOutline(SpriteRenderer renderer)
+    {
+        isOutline = true;
+        renderer.material.SetFloat("_IsOuline", 1);
+    }
+    
+    public void RemoveInteractablePlayer(int playerID)
+    {
+        playersID.Remove(playerID);
+        numbersOfPlayers--;
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        UpdateOutline(spriteRenderer);
+        spriteRenderer.material.SetFloat("_NumberOfPlayers", numbersOfPlayers);
+        if (isOutline && numbersOfPlayers <= 0)
+        {
+            numbersOfPlayers = 0;
+            DesactivateOutline(spriteRenderer);
+        }
+    }
+
+    private void DesactivateOutline(SpriteRenderer renderer)
+    {
+        isOutline = false;
+        renderer.material.SetFloat("_PlayerInterractableID", 0);
+        renderer.material.SetFloat("_IsOuline", 0);
+    }
 }
