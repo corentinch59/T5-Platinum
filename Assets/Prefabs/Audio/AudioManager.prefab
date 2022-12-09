@@ -45,8 +45,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: MenuMusic
+    clip: {fileID: 8300000, guid: 5f1c39a4d5f981540b64e84231c1d32a, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    type: 1
+    source: {fileID: 0}
+  - name: MenuSwapR
+    clip: {fileID: 8300000, guid: a9aa3b814bac8bb4b9282edeb3fa998c, type: 3}
+    volume: 0.2
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    type: 2
+    source: {fileID: 0}
+  - name: MenuSwapL
+    clip: {fileID: 8300000, guid: ee4c134e69dac9840b3fadd700c06cd1, type: 3}
+    volume: 0.2
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    type: 2
+    source: {fileID: 0}
   - name: MainLoop
-    clip: {fileID: 8300000, guid: e4345d3f6c52a02439ff2629f9d27deb, type: 3}
+    clip: {fileID: 8300000, guid: 42513c45f19f0d2478c7b23bd0388217, type: 3}
     volume: 0.1
     volumeVariance: 0
     pitch: 1
