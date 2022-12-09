@@ -22,7 +22,7 @@ public class QuestManager : MonoBehaviour
     [Header("Score")]
     public float score;
     public const float failComboToAdd = 2.5f;
-    public const float scoreToAdd = 1.5f;
+    public const float scoreToAdd = 3f;
     public const float scoreToRemove = 1.5f;
     private float failCombo = 0f;
 

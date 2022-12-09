@@ -1948,6 +1948,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 126644696937740994, guid: d9c18a3d0e689ee4bb8299c1d5257373, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 126644697006794594, guid: d9c18a3d0e689ee4bb8299c1d5257373, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -28.446287
+      objectReference: {fileID: 0}
+    - target: {fileID: 126644697006794596, guid: d9c18a3d0e689ee4bb8299c1d5257373, type: 3}
+      propertyPath: lengthInSec
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 126644697006794596, guid: d9c18a3d0e689ee4bb8299c1d5257373, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 126644697006794597, guid: d9c18a3d0e689ee4bb8299c1d5257373, type: 3}
+      propertyPath: TimeBeforeGo
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 126644697629939693, guid: d9c18a3d0e689ee4bb8299c1d5257373, type: 3}
       propertyPath: m_RootOrder
       value: 11
