@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class SatisfactionManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerEndMeshPro;
+    [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject retryGameOverButton;
     [SerializeField] private GameObject winScreen;
+    [SerializeField] private GameObject retryWinButton;
 
     private Slider satisfactionSlider = default;
     private Coroutine currentCoroutine = null;
@@ -27,9 +31,10 @@ public class SatisfactionManager : MonoBehaviour
     private void Start()
     {
         satisfactionSlider = GetComponent<Slider>();
-
         QuestManager.onFinishQuest += AddSatisfaction;
         Sunshine.onTimerEnd += TestWin;
+        Sunshine.onTimerEnd += () => { eventSystem.firstSelectedGameObject = retryWinButton; };
+        UIGameOver.onGameOver += () => { eventSystem.firstSelectedGameObject = retryGameOverButton; };
         timerEndMeshPro.gameObject.SetActive(false);
         gameOverScreen.gameObject.SetActive(false);
         winScreen.gameObject.SetActive(false);
