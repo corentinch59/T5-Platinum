@@ -14,14 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TextureData:
     corpsesTex:
-    - {fileID: 2800000, guid: e16b009bfecdaef49a1e4f73e3743597, type: 3}
-    - {fileID: 2800000, guid: e6469b0ba4475964ab3f00a59b88294d, type: 3}
-    - {fileID: 2800000, guid: 851580d4ee983344b94716365f5d074e, type: 3}
-    - {fileID: 2800000, guid: f16ff5034055f34459ba86b6efd7e712, type: 3}
+    - {fileID: 2800000, guid: d68037e3bdc589c4d814eb318cb60d3e, type: 3}
+    - {fileID: 2800000, guid: 3aba14dbc5ab3d94b97298f7551e2542, type: 3}
+    - {fileID: 2800000, guid: 298b174299e0618439422af549db8419, type: 3}
+    - {fileID: 2800000, guid: d67fee84075b0ae4ea7abea43bcf145b, type: 3}
     - {fileID: 2800000, guid: f4f7efffb4bde724fbb0344f081922ae, type: 3}
     - {fileID: 2800000, guid: 895c5f24446189b4e9cc6f3599ff5045, type: 3}
     - {fileID: 2800000, guid: 02784827f65003947853f6a8cf097474, type: 3}
     - {fileID: 2800000, guid: f3d00c3d53966ca41bb69c72aa4ceb52, type: 3}
+    - {fileID: 2800000, guid: b71e66064c2585741b55a90bf7e3eb53, type: 3}
+    - {fileID: 2800000, guid: 3cb0b9789043f794e916f4399cd5b7b5, type: 3}
+    - {fileID: 2800000, guid: bb26500f4bbfcab45b9e6944c61a4998, type: 3}
+    - {fileID: 2800000, guid: 77128172d408eec47bf2dadf94d9a039, type: 3}
     localisationTex:
     - {fileID: 0}
     - {fileID: 2800000, guid: ec656434fdd7b1a47a6c32b8202b291e, type: 3}
