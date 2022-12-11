@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class PNJInteractable : MonoBehaviour
 {
     [SerializeField] private DigRequest request;
-    [SerializeField] private GameObject requestImg;
+    //[SerializeField] private GameObject requestImg;
     [SerializeField] private GameObject corpseToCreate;
     private GameObject corpseCreated;
     public GameObject CorpseCreated => corpseCreated;
@@ -43,7 +43,7 @@ public class PNJInteractable : MonoBehaviour
 
     public void AddNewQuest()
     {
-        requestImg.SetActive(false);
+        //requestImg.SetActive(false);
         request.AcceptDigRequest();
 
         // spawn Corpse To Bury
@@ -108,7 +108,7 @@ public class PNJInteractable : MonoBehaviour
         //Arrive Avec sa quete
         if (isWalkingForward)
         {
-            requestImg.SetActive(true);
+            //requestImg.SetActive(true);
             agent.destination = questLoc.position;
             yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
             AddNewQuest();
@@ -126,7 +126,7 @@ public class PNJInteractable : MonoBehaviour
         //a plus de quete et rentre chez lui
         else
         {
-            requestImg.SetActive(false);
+            //requestImg.SetActive(false);
             //QuestManager.instance.activeQuests.Remove(request.requestInfo);
             //QuestManager.instance.questFinished.Add(request.requestInfo);
             agent.destination = returnLoc.position;

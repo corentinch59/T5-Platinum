@@ -1,22 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OutlineManager : MonoBehaviour
 {
-    public static OutlineManager instance;
-
-    public List<SpriteRenderer> holesSprites;
-    
-    
-    private void Awake()
+    [SerializeField] private Image exclamationImage;
+    private void Start()
     {
-        instance = this;
+        Material mat = Instantiate(exclamationImage.material);
+        exclamationImage.material = mat;
+        OutlineIntensity();
     }
 
-    public void Outline()
+    private void OutlineIntensity()
     {
-        
+        exclamationImage.material.DOFloat(12, "_Intensity", 8);
     }
 }
