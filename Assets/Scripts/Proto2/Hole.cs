@@ -166,38 +166,29 @@ public class Hole : MonoBehaviour, IInteractable
                 SoundManager.instance.Play("Dig" + randomint);
                 if (player.DiggingBehavior is StartDigging)
                 {
-                    //player.DiggingBehavior.OnDigCompleted
-
-                    Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+                    Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y + 2.54f, transform.position.z - 2);
+                    heldCorpse.transform.position = posCorpse;
                     heldCorpse.gameObject.layer = 7; // <- is Interactable
                     heldCorpse.IsInteractable = true;
-                    heldCorpse.transform.position = posCorpse;
                     heldCorpse.gameObject.SetActive(true);
                     heldCorpse.tag = "Corpse";
 
                     // reset the size to avoid dotween animation problem
-                    if (heldCorpse.CorpseData.size > 0)
+                    if (heldCorpse.TryGetComponent(out BigCorpse bc))
                     {
                         heldCorpse.transform.localScale = new Vector3(2, 2, 2);
+                        HoleSize = 1;
                     }
                     else
                     {
                         heldCorpse.transform.localScale = new Vector3(1, 1, 1);
+                        Vector3 posLittleCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+                        heldCorpse.transform.position = posLittleCorpse;
                     }
 
-                    //player.CarriedObj = heldCorpse;
-                    // if we dug up a big or a little body
-                    if (heldCorpse.CorpseData.size > 0)
-                    {
-                        HoleSize = 1;
-                        //heldCorpse.GetComponent<BigCorpse>().Interact(player);
-                    }
-                    else
-                    {
-                        //heldCorpse.Interact(player);
-                    }
                     StartCoroutine(BurryingCorpse(heldCorpse));
                     Hidebubble();
+                    //Debug.Log(heldCorpse.transform.position.y);
                     heldCorpse = null;
                 }
             }
@@ -206,7 +197,6 @@ public class Hole : MonoBehaviour, IInteractable
 
     public IEnumerator BurryingCorpse(Corpse corpse)
     {
-        
         Vector3 holepos = transform.position;
         // burry corpse
         if(heldCorpse == null)
