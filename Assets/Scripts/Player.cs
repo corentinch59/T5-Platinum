@@ -305,7 +305,7 @@ public class Player : MonoBehaviour
 
         }
     }
-    
+
     public void SetCrackHole()
     {
         if(crackToInstantiate != null)
