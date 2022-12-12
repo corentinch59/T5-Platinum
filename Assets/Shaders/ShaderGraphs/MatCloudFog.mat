@@ -86,6 +86,7 @@ Material:
     - _FresnelOpacity: 2.86
     - _FresnelPower: 1.31
     - _GradientScale: 0.04
+    - _Intensity: 0
     - _MaxAlpha: 0.25
     - _MinAlpha: 0.18
     - _Noise_Edge_1: 0.2
