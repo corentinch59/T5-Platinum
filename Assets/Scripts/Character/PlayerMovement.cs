@@ -107,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         move = ctx.ReadValue<Vector2>();
+
         if (move.magnitude > 0)
         {
             //this.PlayerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.1f, 0.05f);
@@ -129,6 +130,14 @@ public class PlayerMovement : MonoBehaviour
                     
             }
             orientationVect.Normalize();
+            if(ctx.ReadValue<Vector2>().x > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
         }
     }
 
