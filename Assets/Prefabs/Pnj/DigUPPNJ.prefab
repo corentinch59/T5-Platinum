@@ -119,6 +119,9 @@ MonoBehaviour:
   agent: {fileID: 304341980500953292}
   questLoc: {fileID: 0}
   returnLoc: {fileID: 0}
+  playersID: 
+  numbersOfPlayers: 0
+  isOutline: 0
 --- !u!195 &304341980500953292
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -199,6 +202,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: afa53f6cdf3197e47964fdf5231cd765, type: 3}
   - {fileID: 21300000, guid: a8325a8e5231bd741bc2beca26eb7075, type: 3}
   - {fileID: 21300000, guid: fa7654ce477cf254095d8048dafdc0a8, type: 3}
+  - {fileID: 21300000, guid: 5c92cbaad485bf440b84864f0306c819, type: 3}
+  - {fileID: 21300000, guid: 197ec13e213c8174a86a962302ce38d7, type: 3}
+  - {fileID: 21300000, guid: 019e2d83438f91247b3e1e559c6e7e70, type: 3}
+  - {fileID: 21300000, guid: 1c44d2dd337e6b644b477c141f5cb017, type: 3}
   questParent: {fileID: 0}
   questToInstantiate: {fileID: 8707251112121258463, guid: f669a0935cedd9247a433e1382a49325, type: 3}
   texData: {fileID: 11400000, guid: 1c91b26c7fd3b3d459127a8143bcf1b3, type: 2}
