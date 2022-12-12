@@ -48,16 +48,16 @@ MonoBehaviour:
   - corpseName: Jean
     siz: 0
     loc: 3
-    corps: 5
+    corps: 9
   - corpseName: Paul
     siz: 1
     loc: 2
-    corps: 6
+    corps: 10
   - corpseName: Franck
     siz: 0
     loc: 1
-    corps: 7
+    corps: 11
   - corpseName: Titi
     siz: 1
     loc: 4
-    corps: 8
+    corps: 12
