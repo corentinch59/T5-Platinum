@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.3369, g: 325.0498, b: 430.21924, a: 1}
+  m_IndirectSpecularColor: {r: 0.1280942, g: 0.15871572, b: 0.21006799, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -637,7 +637,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2864,7 +2864,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3031,7 +3031,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3137,7 +3137,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c4f9926dd688ce54a8c6868111202869, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6650944, b: 0.72347903, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -3465,7 +3465,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4078,7 +4078,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c4f9926dd688ce54a8c6868111202869, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6650944, b: 0.72347903, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4238,7 +4238,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 32282309583817545a869d41a0624f20, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6650944, b: 0.72347903, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4395,6 +4395,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 434513463, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
     - target: {fileID: 1117425976, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4447,6 +4451,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1117425978, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
     - target: {fileID: 1323323359, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4499,6 +4507,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1323323361, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
     - target: {fileID: 1491407978, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4555,6 +4567,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1491407980, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
     - target: {fileID: 1571528972, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4599,6 +4615,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1571528974, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
     - target: {fileID: 1576602199, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4679,6 +4699,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1715238079, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
     - target: {fileID: 1721703095, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4723,6 +4747,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1721703097, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
     - target: {fileID: 1860521354, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.201805
@@ -4775,6 +4803,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2042345259, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
     - target: {fileID: 1892540999152392678, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6089,7 +6121,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 32282309583817545a869d41a0624f20, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6650944, b: 0.72347903, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -6964,7 +6996,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7284,7 +7316,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7722,7 +7754,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9aa4e4adde2fa0444b1164d3445c15ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
