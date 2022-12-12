@@ -29,7 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalScenes/Menu.unity
     guid: e80256be667c66243ad2ba76cd7aaada
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Freddy/SimonFinalLD.unity
     guid: 93ac474c02552ef47a7f8bcc214b42df
+  - enabled: 1
+    path: Assets/Scenes/Freddy/TestCamera.unity
+    guid: 24deda772ad6ea44387aa8dabe45989b
   m_configObjects: {}
