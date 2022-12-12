@@ -169,8 +169,11 @@ MonoBehaviour:
   startLoc: {fileID: 0}
   endLoc: {fileID: 0}
   agent: {fileID: 1215423061}
-  griefName: 
+  griefCorpseType: 0
   radius: 10
+  playersID: 
+  numbersOfPlayers: 0
+  isOutline: 0
 --- !u!212 &2620190660970719590
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -396,7 +399,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grief PNJ Request Image
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5146352193560279154, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
 --- !u!114 &44559037398815808 stripped
 MonoBehaviour:
@@ -419,3 +423,46 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8983269627774115074, guid: 35e97d5c9c327824f999ba82926b4666, type: 3}
   m_PrefabInstance: {fileID: 3082349119247911250}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6638280562398626380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6227431622254957648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c694be21806c76242bbd81089d173c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exclamationImage: {fileID: 4933602326812023122}
+--- !u!114 &4933602326812023122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6227431622254957648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: c18c1d5845026524fb2e38e2e6a42815, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: e316d6f0ef575984ca4611780dd0cefc, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
