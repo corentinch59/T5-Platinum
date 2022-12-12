@@ -20,6 +20,7 @@ public class Corpse : Carryable
     [SerializeField] private ParticleSystem bigCorpseTrail;
     [SerializeField] private float durationShakeTween;
     [SerializeField] private float strengthShakeTween;
+    [SerializeField] private float bigCorpseSize;
 
     private BigCorpse bigCorpse;
     private SpriteRenderer spriteRenderer;
@@ -37,16 +38,18 @@ public class Corpse : Carryable
     public SpriteRenderer SpriteRenderer => spriteRenderer;
     public PNJInteractable PnjFrom { get { return pnjFrom; } set { pnjFrom = value; } }
     public bool IsInteractable { get { return isInteractable; } set { isInteractable = value; } }
+    public float BigCorpseSize { get { return bigCorpseSize; } set { bigCorpseSize = value; } }
     #endregion
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        // Set sprite in game 
         if(ThisQuest != null)
         {
-            Texture2D texture2D = (Texture2D) thisQuest.corpseImage.texture;
+          /*  Texture2D texture2D = (Texture2D) thisQuest.corpseImage.texture;
             Sprite sprite = Sprite.Create(texture2D, new Rect(0,0, texture2D.width, texture2D.height), new Vector2(0.5f,0.5f));
-            spriteRenderer.sprite = sprite;
+            spriteRenderer.sprite = sprite;*/
         }
         IsInteractable = true;
 

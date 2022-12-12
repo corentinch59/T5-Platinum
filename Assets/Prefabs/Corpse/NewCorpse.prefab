@@ -138,6 +138,7 @@ MonoBehaviour:
   bigCorpseTrail: {fileID: 7354921488166601030}
   durationShakeTween: 1
   strengthShakeTween: 3
+  bigCorpseSize: 1.5
   playersID: 
   numbersOfPlayers: 0
   isOutline: 0

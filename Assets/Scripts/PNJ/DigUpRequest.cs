@@ -30,7 +30,7 @@ public class DigUpRequest : MonoBehaviour
 
         //UI
         requestInUI = Instantiate(questToInstantiate, questParent.transform);
-        requestInUI.transform.GetChild(2).GetComponent<RawImage>().texture = texData._TextureData.corpsesTex[(int)requestInfo.corps - 1];
+        requestInUI.transform.GetChild(2).GetComponent<RawImage>().texture = texData._TextureData.headsTex[(int)requestInfo.corps - 1];
         //requestInUI.SetActive(true);
     }
 }

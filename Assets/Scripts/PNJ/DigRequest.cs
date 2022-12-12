@@ -52,7 +52,7 @@ public class DigRequest : RequestH
         quest = Instantiate(questToInstantiate, questParent.transform);
         /*Debug.Log("loc" + (int)requestInfo.loc);
         Debug.Log("corpse" + ((int)requestInfo.corps - 1));*/
-        quest.GetComponent<Quest>().InitialiseQuestUI(requestInfo, tex.corpsesTex[(int)requestInfo.corps - 1],
+        quest.GetComponent<Quest>().InitialiseQuestUI(requestInfo, tex.headsTex[(int)requestInfo.corps - 1], tex.corpsesTex[(int)requestInfo.corps - 1],
             tex.localisationTex[(int)requestInfo.loc], this);
     }
 

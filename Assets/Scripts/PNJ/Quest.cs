@@ -24,6 +24,10 @@ public class Quest : MonoBehaviour
     private bool isQuestFinished;
     [HideInInspector] public float timer;
     private bool isBarShaderStarted;
+
+    private Sprite corpseSprite;
+    public Sprite CorpseSprite => corpseSprite;
+
     private void Start()
     {
         Material mat = Instantiate(Outline.material);
@@ -66,13 +70,14 @@ public class Quest : MonoBehaviour
         
     }
 
-    public void InitialiseQuestUI(RequestDataBase requestInformation, Texture corpseT, Texture localisationT,
+    public void InitialiseQuestUI(RequestDataBase requestInformation, Texture headT, Texture2D corpseT, Texture localisationT,
          DigRequest request)
     {
         _request = request; 
         requestInfos = requestInformation;
         nameText.text = requestInfos.corpseName;
-        corpseImage.texture = corpseT;
+        corpseImage.texture = headT;
+        corpseSprite = Sprite.Create(corpseT, new Rect(0, 0, corpseT.width, corpseT.height), new Vector2(0.5f, 0.5f));
         localisationImage.texture = localisationT;
         
     }

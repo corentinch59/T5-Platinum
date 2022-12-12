@@ -5,5 +5,6 @@ using UnityEngine;
 public class TextureData
 {
     public List<Texture2D> corpsesTex;
+    public List<Texture2D> headsTex;
     public List<Texture2D> localisationTex;
 }

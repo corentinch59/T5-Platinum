@@ -55,6 +55,7 @@ public class PNJInteractable : MonoBehaviour
         {
             // corpseCreated is taking data from the request
             c.ThisQuest = request.quest.GetComponent<Quest>();
+            c.GetComponent<SpriteRenderer>().sprite = c.ThisQuest.CorpseSprite;
             c.CorpseData = c.UpdateRequestLocalisation(true);
             c.PnjFrom = this;
             c.gameObject.layer = 7;
@@ -65,7 +66,7 @@ public class PNJInteractable : MonoBehaviour
             {
                 // Big corpse
                 c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y + 2f, c.transform.position.z);
-                corpseCreated.transform.DOScale(new Vector3(2, 2, 2), 0.5f);
+                corpseCreated.transform.DOScale(new Vector3(c.BigCorpseSize, c.BigCorpseSize, c.BigCorpseSize), 0.5f);
                 InitBigCorpse(c);
             }
             else

@@ -11,12 +11,14 @@ public class GriefQuest : MonoBehaviour
     private GriefRequest _request;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private RawImage corpseImage;
+    [SerializeField] private Sprite spriteInGame;
     [SerializeField] private Slider questSlider;
     [SerializeField] private float questTime = 50;
     [SerializeField] private Image image;
     private bool isQuestFinished;
     private float timer = 0;
 
+    public Sprite SpriteInGame => spriteInGame;
     public enum StateTimer
     {
         EXCELLENT,
@@ -52,12 +54,12 @@ public class GriefQuest : MonoBehaviour
         
     }
 
-    public void InitialiseDeuilQuestUI(RequestDataBase requestInformation, Texture corpseT, GriefRequest request)
+    public void InitialiseDeuilQuestUI(RequestDataBase requestInformation, Texture headT, GriefRequest request)
     {
         _request = request;
         requestInfos = requestInformation;
         nameText.text = requestInfos.corpseName;
-        corpseImage.texture = corpseT;
+        corpseImage.texture = headT;
     }
 
     private bool CheckScoreQuest(RequestDataBase.corpseType corpseType)

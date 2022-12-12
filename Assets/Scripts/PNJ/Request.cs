@@ -56,7 +56,8 @@ public class Request : MonoBehaviour
     {
         nameText.text = _requestInfos.corpseName;
         TextureData tex = _textureData._TextureData;
-        corpseImage.texture = tex.corpsesTex[(int)_requestInfos.corps];
+        corpseImage.texture = tex.headsTex[(int)_requestInfos.corps];
+        //corpseImage.texture = tex.headsTex[(int)_requestInfos.corps];
         localisationImage.texture = tex.localisationTex[(int)_requestInfos.loc];
     }
 
