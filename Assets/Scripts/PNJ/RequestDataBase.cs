@@ -31,10 +31,10 @@ public class RequestDataBase
         CORGNON6 = 6,
         CORGNON7 = 7,
         CORGNON8 = 8,
-        LEZARD1 = 5,
-        LEZARD2 = 6,
-        LEZARD3 = 7,
-        LEZARD4 = 8,
+        LEZARD1 = 9,
+        LEZARD2 = 10,
+        LEZARD3 = 11,
+        LEZARD4 = 12,
         
     }
     

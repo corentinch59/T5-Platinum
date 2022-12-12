@@ -44,13 +44,6 @@ public class Corpse : Carryable
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        // Set sprite in game 
-        if(ThisQuest != null)
-        {
-          /*  Texture2D texture2D = (Texture2D) thisQuest.corpseImage.texture;
-            Sprite sprite = Sprite.Create(texture2D, new Rect(0,0, texture2D.width, texture2D.height), new Vector2(0.5f,0.5f));
-            spriteRenderer.sprite = sprite;*/
-        }
         IsInteractable = true;
 
         if (corpseData.size == RequestDataBase.size.MEDIUM)

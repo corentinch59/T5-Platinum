@@ -26,6 +26,19 @@ MonoBehaviour:
     - {fileID: 2800000, guid: 197ec13e213c8174a86a962302ce38d7, type: 3}
     - {fileID: 2800000, guid: 019e2d83438f91247b3e1e559c6e7e70, type: 3}
     - {fileID: 2800000, guid: 1c44d2dd337e6b644b477c141f5cb017, type: 3}
+    headsTex:
+    - {fileID: 2800000, guid: d68037e3bdc589c4d814eb318cb60d3e, type: 3}
+    - {fileID: 2800000, guid: 3aba14dbc5ab3d94b97298f7551e2542, type: 3}
+    - {fileID: 2800000, guid: 298b174299e0618439422af549db8419, type: 3}
+    - {fileID: 2800000, guid: d67fee84075b0ae4ea7abea43bcf145b, type: 3}
+    - {fileID: 2800000, guid: 3abeca24512d3934785bf0f0fce76c53, type: 3}
+    - {fileID: 2800000, guid: 444001845bd0f6146a4d5cbb3097ad2f, type: 3}
+    - {fileID: 2800000, guid: 25d86e704364984408182bb16e4c3c25, type: 3}
+    - {fileID: 2800000, guid: 3782fa084b2678247858b028c1405a23, type: 3}
+    - {fileID: 2800000, guid: b71e66064c2585741b55a90bf7e3eb53, type: 3}
+    - {fileID: 2800000, guid: 3cb0b9789043f794e916f4399cd5b7b5, type: 3}
+    - {fileID: 2800000, guid: bb26500f4bbfcab45b9e6944c61a4998, type: 3}
+    - {fileID: 2800000, guid: 77128172d408eec47bf2dadf94d9a039, type: 3}
     localisationTex:
     - {fileID: 0}
     - {fileID: 2800000, guid: ec656434fdd7b1a47a6c32b8202b291e, type: 3}
