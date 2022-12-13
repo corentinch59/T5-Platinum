@@ -5006,7 +5006,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126644696937740997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -37}
+  m_LocalPosition: {x: 52.5, y: 0, z: -33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5063,7 +5063,7 @@ MonoBehaviour:
   particleEmitter: {fileID: 126644697006794596}
   target: {fileID: 126644696937740994}
   speed: 40
-  TimeBeforeGo: 2.5
+  TimeBeforeGo: 1
 --- !u!198 &126644697006794596
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5072,7 +5072,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126644697006794598}
   serializedVersion: 8
-  lengthInSec: 6.5
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5147,7 +5147,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 6
+      scalar: 4.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
