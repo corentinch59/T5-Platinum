@@ -755,7 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 20
-  spriteRenderer: {fileID: 82249407}
+  spriteRenderer: {fileID: 2321410641102125202}
   canMove: 1
 --- !u!114 &1676592206633555986
 MonoBehaviour:

@@ -27,8 +27,8 @@ public class Player : MonoBehaviour
     private Sprite draggingSprite;
     private Sprite digSprite;
 
-    private Vector3 armLeftPosition = new Vector3(-0.5f, 0.25f, 2.980232E-0f);
-    private Vector3 armRightPosition = new Vector3(0.0575f, 0.25f, 2.980232E-08f);
+    private Vector3 armLeftPosition = new Vector3(-0.5f, 0.25f, 0f);
+    private Vector3 armRightPosition = new Vector3(0.0575f, 0.25f, 0f);
 
     #region DELEGATES
     public event VibrationDelegate onVibration;
@@ -44,6 +44,9 @@ public class Player : MonoBehaviour
     public GameObject getObjectFound => objectFound;
     public Sprite setDraggingSprite { set { draggingSprite = value; } }
     public Sprite setDigSprite { set { digSprite = value; } }
+    public Vector3 getArmLeftPosition => armLeftPosition;
+    public Vector3 getArmRightPosition => armRightPosition;
+    public GameObject getArms => arms;
     #endregion
     #region CARRY_AND_RAYCAST_VALUES
     public Sprite playerNotCarrying;
@@ -451,6 +454,7 @@ public class Player : MonoBehaviour
 
     public void DisableArms()
     {
+        arms.GetComponent<SpriteRenderer>().flipX = false;
         arms.SetActive(false);
     }
 }

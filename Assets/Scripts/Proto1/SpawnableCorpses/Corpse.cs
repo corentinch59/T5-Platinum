@@ -11,7 +11,6 @@ public class Corpse : Carryable
     [SerializeField] private GameObject outlineImg;
     [SerializeField] private CorpseData corpseData;
     [SerializeField] private Quest thisQuest;
-    private PNJInteractable pnjFrom;
 
     [SerializeField] private float radius = 10f;
     [SerializeField] private LayerMask localisationsLayer;
@@ -22,12 +21,13 @@ public class Corpse : Carryable
     [SerializeField] private float strengthShakeTween;
     [SerializeField] private float bigCorpseSize;
 
-    private BigCorpse bigCorpse;
+    private PNJInteractable pnjFrom;
     private SpriteRenderer spriteRenderer;
-    private bool isInteractable;
+    private BigCorpse bigCorpse;
     private Material material;
-    private bool isAlmostOver;
     private Tween meep;
+    private bool isInteractable;
+    private bool isAlmostOver;
 
     #region get/set
     public CorpseData CorpseData { get { return corpseData; } set { corpseData = value; } }
@@ -64,7 +64,6 @@ public class Corpse : Carryable
         if (thisQuest != null && thisQuest.timer >= thisQuest.QuestTime/2 && !isAlmostOver)
         {
             OutlineImg.GetComponent<Image>().material.SetFloat("_IsAlmostOver", 1);
-            //ta fonction ici
             ShakeQuest();
             isAlmostOver = true;
         }
