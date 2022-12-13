@@ -119,6 +119,7 @@ MonoBehaviour:
   agent: {fileID: 304341980500953292}
   questLoc: {fileID: 0}
   returnLoc: {fileID: 0}
+  outlineObject: {fileID: 2222682211291098169}
   playersID: 
   numbersOfPlayers: 0
   isOutline: 0
@@ -423,6 +424,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e316d6f0ef575984ca4611780dd0cefc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
+--- !u!1 &2222682211291098169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5263935100384352774, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
+  m_PrefabInstance: {fileID: 6329189858091431487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6355030374991747574 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}

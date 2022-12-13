@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
@@ -17,12 +18,16 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
     [Header("Locations")]
     [SerializeField] private Transform questLoc;
     [SerializeField] private Transform returnLoc;
+    [Header("Outline")]
+    [SerializeField] private GameObject outlineObject;
+    
 
     private Coroutine feedback;
 
     private void Start()
     {
         transform.position = returnLoc.position;
+        outlineObject.SetActive(false);
         gameObject.layer = 0;
     }
 
@@ -98,12 +103,14 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         {
             agent.destination = questLoc.position;
             yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
+            outlineObject.SetActive(true);
             digUpRequest.SetDigUpRequest();
             gameObject.layer = 7; // <- can be interact with
         }
         //a plus de quete et rentre chez lui
         else
         {
+            outlineObject.SetActive(false);
             agent.destination = returnLoc.position;
             yield return new WaitForSeconds(5f);
             // if there are bodies to dig up then continue
