@@ -29,6 +29,7 @@ public class GriefPNJInteractable : Carryable
     {
         endLoc = GameObject.FindGameObjectWithTag("GriefEndLoc").GetComponent<Transform>();
         startLoc = GameObject.FindGameObjectWithTag("GriefStartLoc").GetComponent<Transform>();
+        requestImg.SetActive(false);
     }
 
     private void Start()
@@ -95,13 +96,13 @@ public class GriefPNJInteractable : Carryable
 
         for(int i = 0; i < infos.Length; ++i)
         {
-            if (infos[i].gameObject.TryGetComponent(out Corpse c))
+            if (infos[i].gameObject.TryGetComponent(out Hole h))
             {
                 float dist = Vector3.Distance(infos[i].gameObject.transform.position, transform.position);
                 if (dist < min)
                 {
                     min = dist;
-                    griefCorpseType = c.CorpseData.corpseType;
+                    griefCorpseType = h.HeldCorpse.CorpseData.corpseType;
                 }
             }
         }
@@ -146,21 +147,26 @@ public class GriefPNJInteractable : Carryable
         if (isWalkingForward)
         {
             gameObject.layer = 7;
-            requestImg.SetActive(true);
             agent.destination  = endLoc.position;
         }
         //a plus de quete et rentre chez lui
         else
         {
             gameObject.layer = 0;
-            requestImg.SetActive(false);
             agent.destination = startLoc.position;
         }
         float distToEnd = Vector3.Distance(agent.destination, transform.position) / agent.speed;
         yield return new WaitForSeconds(distToEnd);
 
-        if(!isWalkingForward) 
+        if (!isWalkingForward)
+        {
+            requestImg.SetActive(false);
             StartCoroutine(QuestManager.instance.WaitForNewRequest(3, deathRequest));
+        }
+        else
+        {
+            requestImg.SetActive(true);
+        }
 
         isInteractable = true;
         questActivated = false;

@@ -22,10 +22,15 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
     [SerializeField] private GameObject outlineObject;
     
 
+    [Header("Timer")]
+    [SerializeField] private float timerPnjComes;
+    private float timerPnjComesSet;
+
     private Coroutine feedback;
 
     private void Start()
     {
+        timerPnjComesSet = timerPnjComes;
         transform.position = returnLoc.position;
         outlineObject.SetActive(false);
         gameObject.layer = 0;
@@ -34,7 +39,9 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
     // Temporary
     private void Update()
     {
-        if(QuestManager.instance.questFinished.Count > 0 && !pnjActivated)
+        // First instance
+        timerPnjComes -= Time.deltaTime;
+        if(QuestManager.instance.questFinished.Count > 0 && timerPnjComes <= 0 && !pnjActivated)
         {
             pnjActivated = true;
             StartCoroutine(Walk(true));
@@ -121,6 +128,7 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
             else
             {
                 pnjActivated = false;
+                timerPnjComes = timerPnjComesSet;
             }
         }
     }
