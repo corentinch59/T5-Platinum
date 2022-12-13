@@ -1,5 +1,6 @@
 using Cinemachine.Utility;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public int id;
+    private Tween scaleTween;
 
     private void Start()
     {
@@ -397,6 +399,22 @@ public class Player : MonoBehaviour
             //lampPlaying = true;
             StartCoroutine(StopAnim(hit.gameObject));
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Plant"))
+        {
+            StartCoroutine(ScalePlant(other.gameObject));
+        }
+    }
+
+    private IEnumerator ScalePlant(GameObject go)
+    {
+        go.GetComponent<SpriteRenderer>().material.DOFloat(3, "_YTilling", 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        go.GetComponent<SpriteRenderer>().material.DOFloat(1, "_YTilling", 0.5f);
+        yield return new WaitForSeconds(0.5f);
     }
 
     private IEnumerator StopAnim(GameObject hit)

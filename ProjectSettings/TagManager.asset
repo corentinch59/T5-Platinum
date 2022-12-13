@@ -20,6 +20,7 @@ TagManager:
   - DigUpPNJ
   - Sunshine
   - DigUpQuestUI
+  - Plant
   layers:
   - Default
   - TransparentFX
