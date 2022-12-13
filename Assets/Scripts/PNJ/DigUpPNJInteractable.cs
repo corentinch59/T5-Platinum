@@ -27,6 +27,12 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
     private float timerPnjComesSet;
 
     private Coroutine feedback;
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void Start()
     {
@@ -45,6 +51,7 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         {
             pnjActivated = true;
             StartCoroutine(Walk(true));
+            
         }
 
         if (agent.isOnNavMesh)
@@ -67,8 +74,8 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
             }
             Destroy(digUpRequest.RequestInUI);
             gameObject.layer = 0; // <- can't be interact with
-            transform.DOJump(transform.position, 3f, 3, 3f);
-            StartCoroutine(Walk(false)); // go back and return later with a new dig up quest
+            Tween jump = transform.DOJump(transform.position, 3f, 3, 3f);
+            jump.onComplete += () => { StartCoroutine(Walk(false)); };// go back and return later with a new dig up quest
 
             // Have to detach player from corpse or Big one
             if(c.TryGetComponent(out BigCorpse bc))
@@ -109,6 +116,7 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         if (isWalkingForward)
         {
             agent.destination = questLoc.position;
+            spriteRenderer.flipX = false;
             yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
             outlineObject.SetActive(true);
             digUpRequest.SetDigUpRequest();
@@ -119,6 +127,7 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
         {
             outlineObject.SetActive(false);
             agent.destination = returnLoc.position;
+            spriteRenderer.flipX = true;
             yield return new WaitForSeconds(5f);
             // if there are bodies to dig up then continue
             if(QuestManager.instance.questFinished.Count > 0)
