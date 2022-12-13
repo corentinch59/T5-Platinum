@@ -19,9 +19,15 @@ public class PNJInteractable : MonoBehaviour
     [SerializeField] private LayerMask corpseLayer;
 
     private Coroutine feedback;
+    private SpriteRenderer spriteRenderer;
 
     [HideInInspector] public Transform returnLoc;
     [HideInInspector] public Transform questLoc;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void Start()
     {
@@ -111,6 +117,14 @@ public class PNJInteractable : MonoBehaviour
         {
             //requestImg.SetActive(true);
             agent.destination = questLoc.position;
+            if (agent.velocity.x > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
             yield return new WaitForSeconds((Vector3.Distance(transform.position, agent.destination) / agent.speed));
             AddNewQuest();
             /*if (!CheckIfAlreadyACorpse())
@@ -131,6 +145,14 @@ public class PNJInteractable : MonoBehaviour
             //QuestManager.instance.activeQuests.Remove(request.requestInfo);
             //QuestManager.instance.questFinished.Add(request.requestInfo);
             agent.destination = returnLoc.position;
+            if (agent.velocity.x > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
             yield return null;
         }
     }
