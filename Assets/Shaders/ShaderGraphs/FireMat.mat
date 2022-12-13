@@ -57,7 +57,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DistortionOffsetSpeed: -0.2
+    - _DistortionOffsetSpeed: -0.02
     - _DistortionPower: 0.05
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
@@ -67,7 +67,7 @@ Material:
     - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
     - _RenderQueueType: 4
-    - _ScrollSpeed: 0.5
+    - _ScrollSpeed: 0.4
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 0
