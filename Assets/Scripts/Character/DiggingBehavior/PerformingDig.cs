@@ -26,6 +26,7 @@ public class PerformingDig : DiggingBehavior
         _player.getMainRect.gameObject.SetActive(false);
         #endregion
         _player.EnableInput("Move");
+        _player.DisableArms();
         _player.TransitionDigging(new StartDigging());
         _player.DestroyCrackHole();
     }
@@ -61,6 +62,7 @@ public class PerformingDig : DiggingBehavior
         {
             _player.Dig(1);
             _player.EnableInput("Move");
+            _player.DisableArms();
             #region ITERATION_3
             CancelAnimation();
             _player.getMainRect.gameObject.SetActive(false);

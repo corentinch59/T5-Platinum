@@ -7,6 +7,8 @@ public delegate void PlayerJoinHandler();
 public class SpawnPlayers : MonoBehaviour
 {
     [SerializeField] private List<Sprite> _sprites = new List<Sprite>();
+    [SerializeField] private List<Sprite> _armGrabSprites = new List<Sprite>();
+    [SerializeField] private List<Sprite> _armDigSprites = new List<Sprite>();
     [SerializeField] private List<Transform> listPos = new List<Transform>();
     [SerializeField] private List<PlayerInput> players = new List<PlayerInput>();
 
@@ -25,10 +27,15 @@ public class SpawnPlayers : MonoBehaviour
         players.Add(playerInput);
         //player.transform.position = listPos[playerInput.playerIndex].position;
 
-
+        // 1 : blue | 2 : Red | 3 : Green | 4 : Yellow
         player.GetComponent<SpriteRenderer>().sprite = _sprites[playerInputManager.playerCount - 1];
         player.GetComponent<Player>().id = playerInputManager.playerCount;
         player.gameObject.transform.position = listPos[playerInput.playerIndex].position;
+
+        Player playerScript = player.GetComponent<Player>();
+        playerScript.id = playerInputManager.playerCount;
+        playerScript.setDigSprite = _armDigSprites[playerInputManager.playerCount - 1 % 2];
+        playerScript.setDraggingSprite = _armGrabSprites[playerInputManager.playerCount - 1 % 2];
 
         StartWhenAllPlayer(playerInput);
     }

@@ -133,10 +133,12 @@ public class PlayerMovement : MonoBehaviour
             if(ctx.ReadValue<Vector2>().x > 0)
             {
                 spriteRenderer.flipX = true;
+                //Arm adjustment 
             }
             else
             {
                 spriteRenderer.flipX = false;
+                //arm adjustment
             }
         }
     }
