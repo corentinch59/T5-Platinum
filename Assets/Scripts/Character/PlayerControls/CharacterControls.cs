@@ -1028,6 +1028,12 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Void"",
+            ""id"": ""a30551e8-7e8b-4792-9d0f-3277c67cfcf7"",
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": []
@@ -1065,6 +1071,8 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Void
+        m_Void = asset.FindActionMap("Void", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1429,6 +1437,31 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Void
+    private readonly InputActionMap m_Void;
+    private IVoidActions m_VoidActionsCallbackInterface;
+    public struct VoidActions
+    {
+        private @CharacterControls m_Wrapper;
+        public VoidActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
+        public InputActionMap Get() { return m_Wrapper.m_Void; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(VoidActions set) { return set.Get(); }
+        public void SetCallbacks(IVoidActions instance)
+        {
+            if (m_Wrapper.m_VoidActionsCallbackInterface != null)
+            {
+            }
+            m_Wrapper.m_VoidActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+            }
+        }
+    }
+    public VoidActions @Void => new VoidActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -1466,5 +1499,8 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IVoidActions
+    {
     }
 }

@@ -1006,6 +1006,12 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Void",
+            "id": "a30551e8-7e8b-4792-9d0f-3277c67cfcf7",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

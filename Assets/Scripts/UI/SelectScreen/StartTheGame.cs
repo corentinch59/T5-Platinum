@@ -9,7 +9,6 @@ using TMPro;
 public delegate void StartTheGameHandler();
 public class StartTheGame : MonoBehaviour
 {
-    [SerializeField] private List<Transform> listPos = new List<Transform>();
     [SerializeField] private List<ChoseYourChara> selectionPlayers = new List<ChoseYourChara>();
     //[SerializeField] private PlayerInputManager m;
     //[SerializeField] private VisualEffect vEffect;
@@ -26,14 +25,14 @@ public class StartTheGame : MonoBehaviour
     {
         ChoseYourChara.OnReady += CheckIfAllPlayerOnReady;
         ChoseYourChara.UnReady += ChoseYourChara_UnReady;
-        PlayerManager.OnPlayerJoining += PlayerManager_OnPlayerJoining;
+        //SpawnPlayers.OnPlayerJoin += PlayerManager_OnPlayerJoining;
     }
 
-    private void PlayerManager_OnPlayerJoining(GameObject player, int index)
+    private void PlayerManager_OnPlayerJoining(PlayerInput player)
     {
-        ChoseYourChara_UnReady();
-        player.transform.position = listPos[index].position;
-        selectionPlayers.Add(player.GetComponent<ChoseYourChara>());
+        //ChoseYourChara_UnReady();
+        //player.transform.position = listPos[player.playerIndex].position;
+        //selectionPlayers.Add(player.GetComponent<ChoseYourChara>());
     }
 
     private void CheckIfAllPlayerOnReady()
@@ -120,6 +119,6 @@ public class StartTheGame : MonoBehaviour
     {
         ChoseYourChara.OnReady -= CheckIfAllPlayerOnReady;
         ChoseYourChara.UnReady -= ChoseYourChara_UnReady;
-        PlayerManager.OnPlayerJoining -= PlayerManager_OnPlayerJoining;
+        //SpawnPlayers.OnAllPlayerJoin -= PlayerManager_OnPlayerJoining;
     }
 }

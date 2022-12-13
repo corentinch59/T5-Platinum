@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public delegate void StartHandler();
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeBetweenEachQuest = 5f;
     [SerializeField] private float timeToRemoveFromEveryQuest = 1f;
 
+    public static event StartHandler OnStart;
     protected virtual void Awake()
     {
         if (Instance == null)
@@ -49,11 +51,19 @@ public class GameManager : MonoBehaviour
             pnjs[i].pnj.questLoc = pnjs[i].questLocation;
             pnjs[i].pnj.transform.position = pnjs[i].pnj.returnLoc.position;
         }
-        questsSpawning = NewPNJComingWithQuest();
-        StartCoroutine(questsSpawning);
+        //questsSpawning = NewPNJComingWithQuest();
+        //StartCoroutine(questsSpawning);
 
         SoundManager.instance.Play("MainLoop");
         SoundManager.instance.Play("Ambiance");
+
+        SpawnPlayers.OnAllPlayerJoin += SpawnPlayers_OnAllPlayerJoin;
+    }
+
+    private void SpawnPlayers_OnAllPlayerJoin()
+    {
+        questsSpawning = NewPNJComingWithQuest();
+        StartCoroutine(questsSpawning);
     }
 
     public IEnumerator NewPNJComingWithQuest()
