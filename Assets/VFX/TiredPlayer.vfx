@@ -20,7 +20,7 @@ MonoBehaviour:
     x: 675
     y: -190
     width: 690
-    height: 1538
+    height: 1558
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   attribute: color
   Composition: 0
   AlphaComposition: 0
-  SampleMode: 0
+  SampleMode: 2
   Mode: 1
   ColorMode: 3
   channels: 6
@@ -1243,7 +1243,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.004405492916703224,"g":0.546683669090271,"b":0.9339622855186462,"a":1.0},"time":0.0},{"color":{"r":0.004405492916703224,"g":0.5466837286949158,"b":0.9339622855186462,"a":1.0},"time":0.9970549941062927}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.10000763088464737},{"alpha":1.0,"time":0.800000011920929},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.004405492916703224,"g":0.546683669090271,"b":0.9339622855186462,"a":1.0},"time":0.0},{"color":{"r":0.06755074113607407,"g":0.10681414604187012,"b":0.6226415038108826,"a":1.0},"time":0.5000076293945313}],"alphaKeys":[{"alpha":1.0,"time":0.014709697104990483},{"alpha":0.5490196347236633,"time":1.0}],"gradientMode":0}'
     m_Space: 2147483647
   m_Property:
     name: Color

@@ -28,7 +28,6 @@ public class SpawnPlayers : MonoBehaviour
 
         player.GetComponent<SpriteRenderer>().sprite = _sprites[playerInputManager.playerCount - 1];
         player.GetComponent<Player>().id = playerInputManager.playerCount;
-
         player.gameObject.transform.position = listPos[playerInput.playerIndex].position;
 
         StartWhenAllPlayer(playerInput);
