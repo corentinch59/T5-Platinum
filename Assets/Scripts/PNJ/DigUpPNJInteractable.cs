@@ -86,10 +86,6 @@ public class DigUpPNJInteractable : MonoBehaviour, IInteractable
                 }
                 bc.Interact(bc.Players[0]);
             }
-            else
-            {
-                player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
-            }
             Destroy(player.CarriedObj.gameObject);
 
             QuestManager.instance.activeDigUpQuests.Remove(digUpRequest.RequestInfo);

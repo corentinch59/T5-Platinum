@@ -37,7 +37,6 @@ public class ChoseYourChara : MonoBehaviour
         currentSprite = sprites[0];
         spriteRenderer.sprite = currentSprite;
 
-        GetComponent<Player>().playerNotCarrying = currentSprite;
     }
 
     public void MoveRight(InputAction.CallbackContext context)
@@ -62,7 +61,6 @@ public class ChoseYourChara : MonoBehaviour
             }
             spriteRenderer.sprite = currentSprite;
         }
-        GetComponent<Player>().playerNotCarrying = currentSprite;
     }
 
     public void MoveLeft(InputAction.CallbackContext context)
@@ -87,7 +85,6 @@ public class ChoseYourChara : MonoBehaviour
             spriteRenderer.sprite = currentSprite;
         }
 
-        GetComponent<Player>().playerNotCarrying = currentSprite;
     }
 
     public void GetReady(InputAction.CallbackContext context)
