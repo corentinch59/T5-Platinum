@@ -286,116 +286,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""SelectionScreenControl"",
-            ""id"": ""8a54639e-965d-4ebf-a512-0bca53662b6a"",
-            ""actions"": [
-                {
-                    ""name"": ""ChangeLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""8e17399d-219d-4361-8e40-5d0cb8612fac"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""ChangeRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""b1334139-407d-4107-86fc-9c849ba2cae9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Ready"",
-                    ""type"": ""Button"",
-                    ""id"": ""c3909571-cddd-4d00-a05f-e2dfc4ff82c8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""UnReady"",
-                    ""type"": ""Button"",
-                    ""id"": ""ef91c638-039c-45dc-a7c1-36e036ea2ef2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""73107d7d-f1a2-422f-aebf-8daa2e338e9f"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""db46a877-07cf-403a-92ef-003efa791ed0"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3df8caad-e30b-4010-a868-c107f7f07c14"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""71642d6e-2557-4cc6-995b-798d6c672322"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6deda0c0-f84d-4038-ad14-7e865ad0e1ee"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Ready"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6fdfac58-daa3-457d-ad80-9b9ccfad9cc2"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UnReady"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Pilote"",
             ""id"": ""2cf4ff88-3d63-422f-9544-b052bad57333"",
             ""actions"": [
@@ -1045,12 +935,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_LDashFou = m_Player.FindAction("LDashFou", throwIfNotFound: true);
         m_Player_LDsim1 = m_Player.FindAction("LDsim1", throwIfNotFound: true);
-        // SelectionScreenControl
-        m_SelectionScreenControl = asset.FindActionMap("SelectionScreenControl", throwIfNotFound: true);
-        m_SelectionScreenControl_ChangeLeft = m_SelectionScreenControl.FindAction("ChangeLeft", throwIfNotFound: true);
-        m_SelectionScreenControl_ChangeRight = m_SelectionScreenControl.FindAction("ChangeRight", throwIfNotFound: true);
-        m_SelectionScreenControl_Ready = m_SelectionScreenControl.FindAction("Ready", throwIfNotFound: true);
-        m_SelectionScreenControl_UnReady = m_SelectionScreenControl.FindAction("UnReady", throwIfNotFound: true);
         // Pilote
         m_Pilote = asset.FindActionMap("Pilote", throwIfNotFound: true);
         m_Pilote_MoveWithCorpse = m_Pilote.FindAction("MoveWithCorpse", throwIfNotFound: true);
@@ -1193,63 +1077,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
-
-    // SelectionScreenControl
-    private readonly InputActionMap m_SelectionScreenControl;
-    private ISelectionScreenControlActions m_SelectionScreenControlActionsCallbackInterface;
-    private readonly InputAction m_SelectionScreenControl_ChangeLeft;
-    private readonly InputAction m_SelectionScreenControl_ChangeRight;
-    private readonly InputAction m_SelectionScreenControl_Ready;
-    private readonly InputAction m_SelectionScreenControl_UnReady;
-    public struct SelectionScreenControlActions
-    {
-        private @CharacterControls m_Wrapper;
-        public SelectionScreenControlActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ChangeLeft => m_Wrapper.m_SelectionScreenControl_ChangeLeft;
-        public InputAction @ChangeRight => m_Wrapper.m_SelectionScreenControl_ChangeRight;
-        public InputAction @Ready => m_Wrapper.m_SelectionScreenControl_Ready;
-        public InputAction @UnReady => m_Wrapper.m_SelectionScreenControl_UnReady;
-        public InputActionMap Get() { return m_Wrapper.m_SelectionScreenControl; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(SelectionScreenControlActions set) { return set.Get(); }
-        public void SetCallbacks(ISelectionScreenControlActions instance)
-        {
-            if (m_Wrapper.m_SelectionScreenControlActionsCallbackInterface != null)
-            {
-                @ChangeLeft.started -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeLeft;
-                @ChangeLeft.performed -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeLeft;
-                @ChangeLeft.canceled -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeLeft;
-                @ChangeRight.started -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeRight;
-                @ChangeRight.performed -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeRight;
-                @ChangeRight.canceled -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnChangeRight;
-                @Ready.started -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnReady;
-                @Ready.performed -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnReady;
-                @Ready.canceled -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnReady;
-                @UnReady.started -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnUnReady;
-                @UnReady.performed -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnUnReady;
-                @UnReady.canceled -= m_Wrapper.m_SelectionScreenControlActionsCallbackInterface.OnUnReady;
-            }
-            m_Wrapper.m_SelectionScreenControlActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @ChangeLeft.started += instance.OnChangeLeft;
-                @ChangeLeft.performed += instance.OnChangeLeft;
-                @ChangeLeft.canceled += instance.OnChangeLeft;
-                @ChangeRight.started += instance.OnChangeRight;
-                @ChangeRight.performed += instance.OnChangeRight;
-                @ChangeRight.canceled += instance.OnChangeRight;
-                @Ready.started += instance.OnReady;
-                @Ready.performed += instance.OnReady;
-                @Ready.canceled += instance.OnReady;
-                @UnReady.started += instance.OnUnReady;
-                @UnReady.performed += instance.OnUnReady;
-                @UnReady.canceled += instance.OnUnReady;
-            }
-        }
-    }
-    public SelectionScreenControlActions @SelectionScreenControl => new SelectionScreenControlActions(this);
 
     // Pilote
     private readonly InputActionMap m_Pilote;
@@ -1469,13 +1296,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnLDashFou(InputAction.CallbackContext context);
         void OnLDsim1(InputAction.CallbackContext context);
-    }
-    public interface ISelectionScreenControlActions
-    {
-        void OnChangeLeft(InputAction.CallbackContext context);
-        void OnChangeRight(InputAction.CallbackContext context);
-        void OnReady(InputAction.CallbackContext context);
-        void OnUnReady(InputAction.CallbackContext context);
     }
     public interface IPiloteActions
     {
