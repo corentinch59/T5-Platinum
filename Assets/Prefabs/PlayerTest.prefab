@@ -757,6 +757,7 @@ MonoBehaviour:
   playerSpeed: 20
   spriteRenderer: {fileID: 2321410641102125202}
   canMove: 1
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1676592206633555986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,7 +1066,7 @@ MonoBehaviour:
     m_Bits: 128
   raycastRadius: 5
   holePrefab: {fileID: 7901434866790508091, guid: cd2d637137505204abb9811ca0f361bc, type: 3}
-  numberOfTaps: 6
+  numberOfTaps: 3
   crackToInstantiate: {fileID: 214332175945876190, guid: 753230ffd5b0b6a4dbbcb1e6d7e3e5e1, type: 3}
   id: 0
 --- !u!114 &180761167794623798

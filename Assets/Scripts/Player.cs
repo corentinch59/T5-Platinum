@@ -26,9 +26,11 @@ public class Player : MonoBehaviour
     private GameObject arms;
     private Sprite draggingSprite;
     private Sprite digSprite;
+    private Tween dig;
 
     private Vector3 armLeftPosition = new Vector3(-0.5f, 0.25f, 0f);
     private Vector3 armRightPosition = new Vector3(0.0575f, 0.25f, 0f);
+    private Vector3 diggingPunchPosition = new Vector3(0f, -1f, 0f);
 
     #region DELEGATES
     public event VibrationDelegate onVibration;
@@ -456,5 +458,20 @@ public class Player : MonoBehaviour
     {
         arms.GetComponent<SpriteRenderer>().flipX = false;
         arms.SetActive(false);
+    }
+
+    public void AnimateDigging()
+    {
+        if(dig != null)
+        {
+            dig.Kill();
+            arms.transform.localPosition = Vector3.zero;
+        }
+
+        dig = arms.transform.DOPunchPosition(
+            punch: diggingPunchPosition,
+            duration: 0.5f,
+            vibrato : 10
+            );
     }
 }

@@ -38,6 +38,7 @@ public class PerformingDig : DiggingBehavior
             ++internalTaps;
             _player.TriggerVibration();
             _player.AnimateCrackHole(internalTaps);
+            _player.AnimateDigging();
             _player.getVFX.hitImpact.gameObject.SetActive(true);
             _player.getVFX.hitImpact.Play();
             #region ITERATION_3
