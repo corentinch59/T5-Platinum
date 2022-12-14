@@ -329,10 +329,10 @@ public class Player : MonoBehaviour
                 transform.position.y - 1f,
                 transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole),
             crackToInstantiate.transform.rotation);*/
-            lastCrack = Instantiate(crackToInstantiate, new Vector3(transform.position.x, 0.7f, transform.position.z),
+            lastCrack = Instantiate(crackToInstantiate, new Vector3(transform.position.x, 0.72f, transform.position.z - 1.4f),
             crackToInstantiate.transform.rotation);
             lastCrack.transform.localScale = Vector3.zero;
-            lastCrack.transform.DOScale(new Vector3(0.5f,0.5f,0.5f), 0.5f);
+            crackTweenSpawn = lastCrack.transform.DOScale(new Vector3(0.5f,0.5f,0.5f), 0.5f);
         }
     }
 
@@ -351,7 +351,10 @@ public class Player : MonoBehaviour
             crackTweenScale.Kill();
 
         if(crackTweenShake != null)
+        {
             crackTweenShake.Kill();
+            lastCrack.transform.position = new Vector3(transform.position.x, 0.72f, transform.position.z - 1.4f);
+        }
 
         crackTweenScale = lastCrack.transform.DOScale(new Vector3(1.5f,1.5f,1.5f) * tap / numberOfTaps * 5f, 0.25f);
         crackTweenShake = lastCrack.transform.DOShakePosition(
