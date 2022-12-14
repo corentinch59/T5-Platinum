@@ -228,8 +228,14 @@ MonoBehaviour:
   _sprites:
   - {fileID: 21300000, guid: 5c0dd34424e6b1d42a520f6b18306b1f, type: 3}
   - {fileID: 21300000, guid: 46bc225e2cde5a148a95867ea6d2aa6c, type: 3}
-  - {fileID: 21300000, guid: 434a481089efc014f9b343434340e609, type: 3}
   - {fileID: 21300000, guid: 2bbabc4a797d39541b9f80c25037b284, type: 3}
+  - {fileID: 21300000, guid: 434a481089efc014f9b343434340e609, type: 3}
+  _armGrabSprites:
+  - {fileID: 21300000, guid: 2be9e57d68e78c14287d9e75fb7248d8, type: 3}
+  - {fileID: 21300000, guid: bff08e04a6b74974385597e1573972fd, type: 3}
+  _armDigSprites:
+  - {fileID: 21300000, guid: 37ae6d7821692c44dbd9e887228c5a70, type: 3}
+  - {fileID: 21300000, guid: 0c5a449700050f04a8cd58d7a5b414e0, type: 3}
   listPos:
   - {fileID: 3871353798937845500}
   - {fileID: 3871353797938701844}

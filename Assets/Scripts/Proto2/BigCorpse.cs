@@ -59,10 +59,11 @@ public class BigCorpse : MonoBehaviour, IInteractable
             Vector3 direction = players[0].transform.position - players[1].transform.position;
             transform.position = (direction / 2) + players[1].transform.position;
 
-           /* float rotationAngle = Vector2.SignedAngle(Vector2.up, new Vector2(direction.x, direction.z));
-            Vector3 tempRotation = transform.localEulerAngles;
-            tempRotation.y = -rotationAngle;
-            transform.localEulerAngles = tempRotation;*/
+            /* float rotationAngle = Vector2.SignedAngle(Vector2.up, new Vector2(direction.x, direction.z));
+             Vector3 tempRotation = transform.localEulerAngles;
+             tempRotation.y = -rotationAngle;
+             transform.localEulerAngles = tempRotation;*/
+
         }
         else if (players[0] != null)
         {
@@ -77,6 +78,18 @@ public class BigCorpse : MonoBehaviour, IInteractable
         if (players[0] != null)
         {
             players[0].getPlayerMovement.getController.Move(corpseMovement * carrySpeed * Time.fixedDeltaTime);
+
+            Vector3 grabDirection = players[0].transform.position - transform.position;
+            if (grabDirection.x > 0)
+            {
+                players[0].getArms.transform.localPosition = players[0].getArmLeftPosition;
+                players[0].getArms.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                players[0].getArms.transform.localPosition = players[0].getArmRightPosition;
+                players[0].getArms.GetComponent<SpriteRenderer>().flipX = false;
+            }
         }
 
         if (players[1] != null)
@@ -90,6 +103,18 @@ public class BigCorpse : MonoBehaviour, IInteractable
             else
             {
                 PerformMovementRotation();
+            }
+
+            Vector3 grabDirection = players[0].transform.position - transform.position;
+            if(grabDirection.x > 0)
+            {
+                players[1].getArms.transform.position = players[1].getArmLeftPosition;
+                players[1].getArms.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                players[1].getArms.transform.position = players[1].getArmRightPosition;
+                players[1].getArms.GetComponent<SpriteRenderer>().flipX = false;
             }
         }
         else
@@ -188,6 +213,7 @@ public class BigCorpse : MonoBehaviour, IInteractable
             }
         }
         player.getPlayerMovement.canMove = false;
+        player.EnableDraggingArms();
         //Debug.Log($"Attached {player.name} to a big corpse.");
     }
 
@@ -210,6 +236,7 @@ public class BigCorpse : MonoBehaviour, IInteractable
         }
         player1_move = Vector2.zero;
         player2_move = Vector2.zero;
+        player.DisableArms();
         player.getPlayerMovement.canMove = true;
     }
 

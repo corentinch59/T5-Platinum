@@ -11,7 +11,6 @@ public class Corpse : Carryable
     [SerializeField] private GameObject outlineImg;
     [SerializeField] private CorpseData corpseData;
     [SerializeField] private Quest thisQuest;
-    private PNJInteractable pnjFrom;
 
     [SerializeField] private float radius = 10f;
     [SerializeField] private LayerMask localisationsLayer;
@@ -22,12 +21,13 @@ public class Corpse : Carryable
     [SerializeField] private float strengthShakeTween;
     [SerializeField] private float bigCorpseSize;
 
-    private BigCorpse bigCorpse;
+    private PNJInteractable pnjFrom;
     private SpriteRenderer spriteRenderer;
-    private bool isInteractable;
+    private BigCorpse bigCorpse;
     private Material material;
-    private bool isAlmostOver;
     private Tween meep;
+    private bool isInteractable;
+    private bool isAlmostOver;
 
     #region get/set
     public CorpseData CorpseData { get { return corpseData; } set { corpseData = value; } }
@@ -56,6 +56,7 @@ public class Corpse : Carryable
 
         Material mat = Instantiate(OutlineImg.GetComponent<Image>().material);
         OutlineImg.GetComponent<Image>().material = mat;
+        DropSmoke();
     }
 
     private void Update()
@@ -63,7 +64,6 @@ public class Corpse : Carryable
         if (thisQuest != null && thisQuest.timer >= thisQuest.QuestTime/2 && !isAlmostOver)
         {
             OutlineImg.GetComponent<Image>().material.SetFloat("_IsAlmostOver", 1);
-            //ta fonction ici
             ShakeQuest();
             isAlmostOver = true;
         }
@@ -72,6 +72,7 @@ public class Corpse : Carryable
 
     public override void Interact(Player player)
     {
+        ResetSmoke();
         if (thisQuest != null)
         {
             thisQuest.ActivateOulineUI(player.id);
@@ -100,6 +101,7 @@ public class Corpse : Carryable
                 transform.localPosition = Vector3.up * 2f;
                 player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
                 transform.localScale = new Vector3(1, 1, 1);
+                
             }
             else
             {
@@ -139,6 +141,7 @@ public class Corpse : Carryable
     {
         gameObject.layer = 7; // <-is Interactable
         isInteractable = true;
+        DropSmoke();
         if (thisQuest != null)
         {
             thisQuest.DesactivateOulineUI();
@@ -225,6 +228,16 @@ public class Corpse : Carryable
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    private void DropSmoke()
+    {
+       StartCoroutine(GetComponent<AnimatorController>().StartSmokeAnime());
+    }
+    
+    private void ResetSmoke()
+    {
+        GetComponent<AnimatorController>().StopAnim();
     }
     
     public List<int> playersID;

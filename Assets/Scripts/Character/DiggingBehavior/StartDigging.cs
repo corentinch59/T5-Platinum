@@ -9,6 +9,7 @@ public class StartDigging : DiggingBehavior
     public override void PerformAction()
     {
         _player.TriggerVibration();
+        _player.EnableDiggingArms();
         _player.DisableInput("Move");
         if (_player.getObjectFound != null && _player.getObjectFound.TryGetComponent(out Hole h)) { } else { _player.SetCrackHole(); }
         _player.getMainRect.gameObject.SetActive(true);

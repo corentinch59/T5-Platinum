@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     public LayerMask locationLayers;
     private PlayerMovement playerMovement;
     private PlayerVibration playerVibration;
+    private GameObject arms;
+    private Sprite draggingSprite;
+    private Sprite digSprite;
+
+    private Vector3 armLeftPosition = new Vector3(-0.5f, 0.25f, 0f);
+    private Vector3 armRightPosition = new Vector3(0.0575f, 0.25f, 0f);
 
     #region DELEGATES
     public event VibrationDelegate onVibration;
@@ -36,6 +42,11 @@ public class Player : MonoBehaviour
     public VisualEffect TiredVFX => tiredVFX;
     public GameObject getCrack { get { if (lastCrack != null) return lastCrack; return null; } }
     public GameObject getObjectFound => objectFound;
+    public Sprite setDraggingSprite { set { draggingSprite = value; } }
+    public Sprite setDigSprite { set { digSprite = value; } }
+    public Vector3 getArmLeftPosition => armLeftPosition;
+    public Vector3 getArmRightPosition => armRightPosition;
+    public GameObject getArms => arms;
     #endregion
     #region CARRY_AND_RAYCAST_VALUES
     public Sprite playerNotCarrying;
@@ -83,6 +94,7 @@ public class Player : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerVibration = GetComponent<PlayerVibration>();
+        arms = transform.GetChild(0).gameObject;
         raycastBehavior = new RaycastEmptyHand();
         vfx = GetComponent<PlayerVFX>();
         TransitionDigging(new StartDigging());
@@ -425,5 +437,24 @@ public class Player : MonoBehaviour
         hit.transform.parent.GetChild(1).transform.GetChild(0).GetComponent<Animator>().SetBool("Collision 0", false);
         hit.transform.parent.GetChild(1).transform.GetChild(1).GetComponent<Animator>().SetBool("Collision 0", false);
         //lampPlaying = false;
+    }
+
+    public void EnableDiggingArms()
+    {
+        arms.transform.localPosition = new Vector3(0f, 0f, 0f);
+        arms.GetComponent<SpriteRenderer>().sprite = digSprite;
+        arms.SetActive(true);
+    }
+
+    public void EnableDraggingArms()
+    {
+        arms.GetComponent<SpriteRenderer>().sprite = draggingSprite;
+        arms.SetActive(true);
+    }
+
+    public void DisableArms()
+    {
+        arms.GetComponent<SpriteRenderer>().flipX = false;
+        arms.SetActive(false);
     }
 }

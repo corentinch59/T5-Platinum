@@ -130,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
                     
             }
             orientationVect.Normalize();
+
             if(ctx.ReadValue<Vector2>().x > 0)
             {
                 spriteRenderer.flipX = true;
