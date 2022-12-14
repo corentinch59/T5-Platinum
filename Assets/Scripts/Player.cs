@@ -314,7 +314,7 @@ public class Player : MonoBehaviour
             // Instantiate Hole to where the player is looking
             /*Instantiate(holePrefab, new Vector3(transform.position.x + getPlayerMovement.getOrientation.x * distanceSpawnHole, transform.position.y - 1f,
                 transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole), holePrefab.transform.rotation);*/
-            Instantiate(holePrefab, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), holePrefab.transform.rotation);
+            Instantiate(holePrefab, new Vector3(transform.position.x, 0.7f, transform.position.z), holePrefab.transform.rotation);
             DestroyCrackHole();
 
         }
@@ -329,7 +329,7 @@ public class Player : MonoBehaviour
                 transform.position.y - 1f,
                 transform.position.z + getPlayerMovement.getOrientation.y * distanceSpawnHole),
             crackToInstantiate.transform.rotation);*/
-            lastCrack = Instantiate(crackToInstantiate, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z),
+            lastCrack = Instantiate(crackToInstantiate, new Vector3(transform.position.x, 0.7f, transform.position.z),
             crackToInstantiate.transform.rotation);
             lastCrack.transform.localScale = Vector3.zero;
             lastCrack.transform.DOScale(new Vector3(0.5f,0.5f,0.5f), 0.5f);
@@ -470,7 +470,7 @@ public class Player : MonoBehaviour
         dig = arms.transform.DOPunchPosition(
             punch: diggingPunchPosition,
             duration: 0.5f,
-            vibrato : 10
+            vibrato : 7
             );
     }
 }
