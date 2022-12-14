@@ -39,7 +39,6 @@ public class SpawnPlayers : MonoBehaviour
         StartWhenAllPlayer(playerInput);
     }
 
-
     private void StartWhenAllPlayer(PlayerInput player)
     {
         if (player.playerIndex == 0)//Changer pour la build et override le player

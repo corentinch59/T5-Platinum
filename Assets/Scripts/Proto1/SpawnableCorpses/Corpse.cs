@@ -91,7 +91,6 @@ public class Corpse : Carryable
                 }
                 transform.parent = player.transform;
                 transform.localPosition = Vector3.up * 2f;
-                player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
                 transform.localScale = new Vector3(1, 1, 1);
             }
         }
