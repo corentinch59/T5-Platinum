@@ -21,6 +21,7 @@ TagManager:
   - Sunshine
   - DigUpQuestUI
   - Plant
+  - Mushroom
   layers:
   - Default
   - TransparentFX

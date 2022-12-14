@@ -461,6 +461,9 @@ public class Player : MonoBehaviour
         {
             other.gameObject.transform.GetChild(0).GetComponent<VisualEffect>().Play();
             StartCoroutine(ScalePlant(other.gameObject));
+        } else if (other.gameObject.CompareTag("Mushroom"))
+        {
+            StartCoroutine(ScalePlant(other.gameObject));
         }
     }
 

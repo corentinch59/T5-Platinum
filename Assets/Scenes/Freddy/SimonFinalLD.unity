@@ -551,15 +551,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3026082339422642394, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3026082339422642394, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3026082339422642394, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3026082339422642394, guid: adb6dbb30907cb144a6815019cb34e5f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2008,7 +2008,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &750388456
@@ -4841,6 +4841,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 46bc225e2cde5a148a95867ea6d2aa6c, type: 3}
   - {fileID: 21300000, guid: 434a481089efc014f9b343434340e609, type: 3}
   - {fileID: 21300000, guid: 2bbabc4a797d39541b9f80c25037b284, type: 3}
+  _armGrabSprites: []
+  _armDigSprites: []
+  listPos: []
+  players: []
 --- !u!1 &1825817269
 GameObject:
   m_ObjectHideFlags: 0
@@ -5077,6 +5081,10 @@ PrefabInstance:
     - target: {fileID: 6375890417845245769, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375890417845245769, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.1779003
       objectReference: {fileID: 0}
     - target: {fileID: 7251406974714591645, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: sceneNameToLoad
