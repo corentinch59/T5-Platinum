@@ -40,7 +40,7 @@ public class PlayerDash : MonoBehaviour
     {
         _controller.enabled = false;
         isDashing = true;
-        _playerMouvement.isDashing = isDashing;
+        //_playerMouvement.isDashing = isDashing;
         //StopCoroutine(_playerMouvement.FeedBackPlayerMoves());
 
 
@@ -54,7 +54,7 @@ public class PlayerDash : MonoBehaviour
 
         _controller.enabled = true;
         isDashing = false;
-        _playerMouvement.isDashing = isDashing;
+        //_playerMouvement.isDashing = isDashing;
 
         if (DidIHitSomething && collisionCharacter != null)
         {

@@ -29,11 +29,11 @@ public class SpawnPlayers : MonoBehaviour
 
         // 1 : blue | 2 : Red | 3 : Green | 4 : Yellow
         player.GetComponent<SpriteRenderer>().sprite = _sprites[playerInputManager.playerCount - 1];
-        player.GetComponent<Player>().id = playerInputManager.playerCount;
-        player.gameObject.transform.position = listPos[playerInput.playerIndex].position;
+        player.GetComponent<PlayerMovement>().startPos = listPos[playerInputManager.playerCount - 1].position;
 
         Player playerScript = player.GetComponent<Player>();
         playerScript.id = playerInputManager.playerCount;
+        playerScript.startPos = listPos[playerInput.playerIndex].position;
         playerScript.setDigSprite = _armDigSprites[playerInputManager.playerCount - 1 % 2];
         playerScript.setDraggingSprite = _armGrabSprites[playerInputManager.playerCount - 1 % 2];
 

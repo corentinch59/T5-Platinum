@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 moveDir;
     private Vector3 playerVelocity;
-    public bool canMove = true;
+    public bool canMove = false;
 
     private const float gravityValue = -9.81f;
 
@@ -33,9 +33,10 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInput getPlayerInput => playerInput;
     private Coroutine feedback;
 
-    private bool _isDashing = false;
     private float _t = 0f;
-    public bool isDashing { get{ return _isDashing; } set { _isDashing = value; } }
+
+    public Vector3 startPos;
+    
 
     private void Awake()
     {
@@ -48,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
         currentInput = playerInput.currentActionMap.name;
 
         UIGameOver.onGameOver += UIGameOver_onGameOver;
+
+        transform.position = startPos;
+        controller.enabled = false;
+        StartCoroutine(DebutCoroutine());
     }
 
     private void UIGameOver_onGameOver()
@@ -59,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove)
         {
-            moveDir = new Vector3(move.x, 0, move.y);
+            moveDir = new Vector3(move.x, 0f, move.y);
             controller.Move(moveDir * playerSpeed * Time.fixedDeltaTime);
 
             if(moveDir.magnitude > 0)
@@ -89,16 +94,12 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator FeedBackPlayerMoves()
     {
-        if (!_isDashing)
-        {
-            transform.DOScale(new Vector3(1.3f, 0.7f, 1f), 0.15f);
-            yield return new WaitForSeconds(0.15f);
-            //transform.DOMoveY(transform.position.y, 0.15f);
-            transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f);
-            //transform.DOScaleY(1f, 0.3f);
-            yield return new WaitForSeconds(0.1f);
-        }
-        else yield return null;
+        transform.DOScale(new Vector3(1.3f, 0.7f, 1f), 0.15f);
+        yield return new WaitForSeconds(0.15f);
+        //transform.DOMoveY(transform.position.y, 0.15f);
+        transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f);
+        //transform.DOScaleY(1f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
         //transform.DOMoveY(transform.position.y + 1f, 0.15f);
         
         feedback = null;
@@ -107,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         move = ctx.ReadValue<Vector2>();
+        
 
         if (move.magnitude > 0)
         {
@@ -146,5 +148,11 @@ public class PlayerMovement : MonoBehaviour
     {
         playerInput.SwitchCurrentActionMap(inputActionMap);
         currentInput = inputActionMap;
+    }
+
+    private IEnumerator DebutCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        controller.enabled = true;
     }
 }
