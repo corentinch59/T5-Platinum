@@ -81,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
                     SoundManager.instance.Play("FootStep" + randomInt);
                     _t = 0f;
                 }
-
             }
 
             if (controller.isGrounded && playerVelocity.y < 0)

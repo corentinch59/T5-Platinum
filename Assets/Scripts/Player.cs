@@ -88,7 +88,6 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public int id;
-    public Vector3 startPos = Vector3.zero;
     private Tween scaleTween;
 
     private void Start()
@@ -103,8 +102,6 @@ public class Player : MonoBehaviour
         mainRect = transform.GetChild(transform.childCount - 1).GetChild(1).GetComponent<RectTransform>();
         iteration3rect = transform.GetChild(transform.childCount - 1).GetChild(1).GetChild(1).GetComponent<RectTransform>();
         #endregion
-
-        //transform.position = startPos;
     }
 
     private void Update()
