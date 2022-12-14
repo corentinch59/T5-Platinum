@@ -106,6 +106,7 @@ public class SatisfactionManager : MonoBehaviour
             UIGameOver.onGameOver?.Invoke();
             StartCoroutine(_screenShot.TakeScreenShot(false));
             timerEndMeshPro.gameObject.SetActive(false);
+            eventSystem.firstSelectedGameObject = retryGameOverButton;
         }
     }
 
@@ -133,6 +134,9 @@ public class SatisfactionManager : MonoBehaviour
             }
             
             percentageRank.text = $"Satisfaction : {satisfactionSlider.value}%";
+
+            eventSystem.firstSelectedGameObject = retryWinButton;
+
         }
         else
         {

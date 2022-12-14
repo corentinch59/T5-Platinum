@@ -3459,10 +3459,10 @@ MonoBehaviour:
   timerEndMeshPro: {fileID: 6053644963102836367}
   eventSystem: {fileID: 0}
   gameOverScreen: {fileID: 7490770880705740518}
-  retryGameOverButton: {fileID: 0}
+  retryGameOverButton: {fileID: 7954237538074967224}
   winScreen: {fileID: 7563758147592577305}
-  retryWinButton: {fileID: 0}
-  _screenShot: {fileID: 0}
+  retryWinButton: {fileID: 2084978290155546426}
+  _screenShot: {fileID: 6121902325981246537}
 --- !u!1 &9223341922172294652
 GameObject:
   m_ObjectHideFlags: 0
