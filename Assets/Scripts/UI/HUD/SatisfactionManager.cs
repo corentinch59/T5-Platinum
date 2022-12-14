@@ -11,9 +11,8 @@ public class SatisfactionManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerEndMeshPro;
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private GameObject retryGameOverButton;
     [SerializeField] private GameObject winScreen;
-    [SerializeField] private GameObject retryWinButton;
+    [SerializeField] private GameObject retryButton;
     [SerializeField] private ScreenShot _screenShot;
 
     private Slider satisfactionSlider = default;
@@ -34,13 +33,15 @@ public class SatisfactionManager : MonoBehaviour
         satisfactionSlider = GetComponent<Slider>();
         QuestManager.onFinishQuest += AddSatisfaction;
         Sunshine.onTimerEnd += TestWin;
-        Sunshine.onTimerEnd += () => { eventSystem.firstSelectedGameObject = retryWinButton; };
-        UIGameOver.onGameOver += () => { eventSystem.firstSelectedGameObject = retryGameOverButton; };
+        //Sunshine.onTimerEnd += () => { eventSystem.firstSelectedGameObject = retryWinButton; };
+        //UIGameOver.onGameOver += () => { eventSystem.firstSelectedGameObject = retryGameOverButton; };
         timerEndMeshPro.gameObject.SetActive(false);
         gameOverScreen.gameObject.SetActive(false);
         winScreen.gameObject.SetActive(false);
+        retryButton.gameObject.SetActive(false);
         winnerRank = winScreen.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         percentageRank = winScreen.gameObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+
     }
 
     private void Update()
@@ -106,7 +107,8 @@ public class SatisfactionManager : MonoBehaviour
             UIGameOver.onGameOver?.Invoke();
             StartCoroutine(_screenShot.TakeScreenShot(false));
             timerEndMeshPro.gameObject.SetActive(false);
-            eventSystem.firstSelectedGameObject = retryGameOverButton;
+            retryButton.gameObject.SetActive(true);
+            eventSystem.SetSelectedGameObject(retryButton);
         }
     }
 
@@ -134,9 +136,8 @@ public class SatisfactionManager : MonoBehaviour
             }
             
             percentageRank.text = $"Satisfaction : {satisfactionSlider.value}%";
-
-            eventSystem.firstSelectedGameObject = retryWinButton;
-
+            retryButton.gameObject.SetActive(true);
+            eventSystem.SetSelectedGameObject(retryButton);
         }
         else
         {

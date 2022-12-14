@@ -57,7 +57,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void UIGameOver_onGameOver()
     {
+
+        //Debug.Log(playerInput.defaultActionMap);
         playerInput.SwitchCurrentActionMap("UI");
+        //Debug.Log(playerInput.defaultActionMap);
     }
 
     private void FixedUpdate()
@@ -153,5 +156,10 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         controller.enabled = true;
+    }
+
+    private void OnDestroy()
+    {
+        UIGameOver.onGameOver -= UIGameOver_onGameOver;
     }
 }

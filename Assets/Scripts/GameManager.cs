@@ -109,4 +109,9 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(NewPNJComingWithQuest());
     }
+
+    private void OnDestroy()
+    {
+        SpawnPlayers.OnAllPlayerJoin -= SpawnPlayers_OnAllPlayerJoin;
+    }
 }

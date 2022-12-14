@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public delegate void PlayerJoinHandler();
 public class SpawnPlayers : MonoBehaviour
@@ -11,6 +12,7 @@ public class SpawnPlayers : MonoBehaviour
     [SerializeField] private List<Sprite> _armDigSprites = new List<Sprite>();
     [SerializeField] private List<Transform> listPos = new List<Transform>();
     [SerializeField] private List<PlayerInput> players = new List<PlayerInput>();
+    //[SerializeField] private InputSystemUIInputModule inputUISystem;
 
     private PlayerInputManager playerInputManager;
 
@@ -24,6 +26,7 @@ public class SpawnPlayers : MonoBehaviour
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         GameObject player = playerInput.gameObject;
+        //playerInput.uiInputModule = inputUISystem;
         players.Add(playerInput);
         //player.transform.position = listPos[playerInput.playerIndex].position;
 
