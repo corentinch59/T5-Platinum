@@ -20,6 +20,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject UIPtite;
     public GameObject UIGrosse;
 
+    public GameObject Ptitcorp;
+    public GameObject Groscorp;
+
+
     void Start()
     {
         HoleCount = 0;
@@ -35,6 +39,7 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //Canva.SetActive(true);
+            GetRebouchedptit = 3;
             GrosTombe();
             PtitTombe();
         }
@@ -45,7 +50,7 @@ public class DialogueManager : MonoBehaviour
     IEnumerator Next()
     {
         
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(6f);
         if (TxtCount == 3)
         {
             Canva.SetActive(false);
@@ -58,7 +63,8 @@ public class DialogueManager : MonoBehaviour
         {
             Canva.SetActive(false);
             CanvasA = false;
-            UIPtite.SetActive(true); 
+            UIPtite.SetActive(true);
+            Ptitcorp.SetActive(true);
         }
         if (TxtCount == 7)
         {
@@ -66,6 +72,7 @@ public class DialogueManager : MonoBehaviour
             CanvasA = false;
             //TxtCount++;
             UIGrosse.SetActive(true);
+            Groscorp.SetActive(true);
         }
         if (TxtCount == 12)
         {
@@ -124,6 +131,7 @@ public class DialogueManager : MonoBehaviour
         {
             GetRebouchedptit = 5;
             UIPtite.SetActive(false);
+            Ptitcorp.SetActive(false);
             Canva.SetActive(true);
             CanvasA = true;
             Index = 6;
@@ -138,6 +146,7 @@ public class DialogueManager : MonoBehaviour
         {
             GetRebouchedgros = 3;
             UIGrosse.SetActive(false);
+            Groscorp.SetActive(false);
             Canva.SetActive(true);
             CanvasA = true;
             Index = 8;
