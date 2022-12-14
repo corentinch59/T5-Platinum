@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TextureData:
     corpsesTex:
-    - {fileID: 2800000, guid: 612ee818c14734b4fb76fc48826b68cc, type: 3}
+    - {fileID: 2800000, guid: ecd6a7156a68bd0449d90cb2b3a08f7e, type: 3}
     - {fileID: 2800000, guid: 8e3d1bc0066294d449a4d11f17e50f8a, type: 3}
     - {fileID: 2800000, guid: ba47988b02cac274c92feaee897f8f88, type: 3}
-    - {fileID: 2800000, guid: d29bcf6f13863ef4fa3e7ce04e10ed3b, type: 3}
+    - {fileID: 2800000, guid: eabd590f6fc123a4599b1fd45e692e08, type: 3}
     - {fileID: 2800000, guid: f4f7efffb4bde724fbb0344f081922ae, type: 3}
     - {fileID: 2800000, guid: 895c5f24446189b4e9cc6f3599ff5045, type: 3}
     - {fileID: 2800000, guid: 02784827f65003947853f6a8cf097474, type: 3}
