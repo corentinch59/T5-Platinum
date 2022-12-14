@@ -419,6 +419,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Plant"))
         {
+            other.gameObject.transform.GetChild(0).GetComponent<VisualEffect>().Play();
             StartCoroutine(ScalePlant(other.gameObject));
         }
     }
