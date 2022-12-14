@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class ScreenShot : MonoBehaviour
 {
-    public Texture2D text;
+    [SerializeField] private RenderTexture text;
+    [SerializeField] private RawImage defeatScreenShotImage;
+    [SerializeField] private RawImage winScreenShotImage;
+
+
     /*private bool takeScreenShot;
   
    private void OnEnable()
@@ -40,18 +45,9 @@ public class ScreenShot : MonoBehaviour
    }
    */
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        { 
-            //ScreenCapture.CaptureScreenshot("ScreenShot.png");
-            //StartCoroutine(TakeScreenShot());
-            //takeScreenShot = true;
-           
-        }
-    }
 
-    private IEnumerator TakeScreenShot()
+
+    public IEnumerator TakeScreenShot(bool isWin)
     {
         //Wait so EveryThing is rendered
         yield return new WaitForEndOfFrame();
@@ -65,12 +61,23 @@ public class ScreenShot : MonoBehaviour
         screenShotTexture.Apply();
         
         //save directement la texture in game pour la reutiliser pour l'écran de fin
-        text = screenShotTexture;
+        //text = screenShotTexture;
+        SetScreenShot(isWin);
+        
         /*
         //Permet de convertir une texture en png puis de la save dans les assets
         byte[] byteArray = screenShotTexture.EncodeToPNG();
         System.IO.File.WriteAllBytes(Application.dataPath + "/CameraScreenshot.png", byteArray);
         */
+    }
+
+    private void SetScreenShot(bool isWin)
+    {
+        if (isWin)
+            winScreenShotImage.texture = text;
+        else
+            defeatScreenShotImage.texture = text;
+
     }
     
     

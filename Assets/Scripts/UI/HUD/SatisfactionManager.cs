@@ -14,6 +14,7 @@ public class SatisfactionManager : MonoBehaviour
     [SerializeField] private GameObject retryGameOverButton;
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject retryWinButton;
+    [SerializeField] private ScreenShot _screenShot;
 
     private Slider satisfactionSlider = default;
     private Coroutine currentCoroutine = null;
@@ -77,7 +78,7 @@ public class SatisfactionManager : MonoBehaviour
     {
         if (IsGameOver) return;
 
-        #region 2eme itération float 
+        #region 2eme itÃ©ration float 
 
         if (satisfactionSlider.value == 0)
         {
@@ -103,6 +104,7 @@ public class SatisfactionManager : MonoBehaviour
             Debug.Log("GameOver");
             gameOverScreen.SetActive(true);
             UIGameOver.onGameOver?.Invoke();
+            StartCoroutine(_screenShot.TakeScreenShot(false));
             timerEndMeshPro.gameObject.SetActive(false);
         }
     }
@@ -112,6 +114,7 @@ public class SatisfactionManager : MonoBehaviour
         if(satisfactionSlider.value >= 20f)
         {
             winScreen.SetActive(true);
+            StartCoroutine(_screenShot.TakeScreenShot(true));
             if(satisfactionSlider.value >= 80)
             {
                 winnerRank.text = "S";
@@ -128,7 +131,7 @@ public class SatisfactionManager : MonoBehaviour
             {
                 winnerRank.text = "C";
             }
-
+            
             percentageRank.text = $"Satisfaction : {satisfactionSlider.value}%";
         }
         else
