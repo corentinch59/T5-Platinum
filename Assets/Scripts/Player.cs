@@ -307,7 +307,7 @@ public class Player : MonoBehaviour
                     griefPnj.PutDown(this);
                 }
             }
-            else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && hole.HeldCorpse == null && carriedObj == null)
+            else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && hole.HeldCorpse == null && carriedObj == null && diggingBehavior.GetType() != typeof(PerformingDig))
             {
                 Dig(-1);
             }
