@@ -2067,6 +2067,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: HerbVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2128,6 +2152,30 @@ PrefabInstance:
     - target: {fileID: 3401914905739022200, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_Name
       value: HerbVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
@@ -2191,6 +2239,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: HerbVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2252,6 +2324,30 @@ PrefabInstance:
     - target: {fileID: 3401914905739022200, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_Name
       value: HerbVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
@@ -2315,6 +2411,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: HerbVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2376,6 +2496,30 @@ PrefabInstance:
     - target: {fileID: 3401914905739022200, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_Name
       value: HerbVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
@@ -2439,6 +2583,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: HerbVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2500,6 +2668,30 @@ PrefabInstance:
     - target: {fileID: 3401914905739022200, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_Name
       value: HerbVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
@@ -2563,6 +2755,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: HerbVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2624,6 +2840,30 @@ PrefabInstance:
     - target: {fileID: 3401914905739022200, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_Name
       value: HerbVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
@@ -2687,6 +2927,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: HerbVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2748,6 +3012,30 @@ PrefabInstance:
     - target: {fileID: 3401914905739022200, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_Name
       value: HerbVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
@@ -2811,6 +3099,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: HerbVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2872,6 +3184,30 @@ PrefabInstance:
     - target: {fileID: 3401914905739022200, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_Name
       value: HerbVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
@@ -2935,6 +3271,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: HerbVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2996,6 +3356,30 @@ PrefabInstance:
     - target: {fileID: 3401914905739022200, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_Name
       value: HerbVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
@@ -3059,6 +3443,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: HerbVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3120,6 +3528,30 @@ PrefabInstance:
     - target: {fileID: 3401914905739022200, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_Name
       value: HerbVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401914905739022205, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3401914905739022207, guid: 84a657a42329f214eb4fb6264ab062b9, type: 3}
       propertyPath: m_RootOrder

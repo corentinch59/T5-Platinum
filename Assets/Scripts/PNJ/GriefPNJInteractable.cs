@@ -24,9 +24,11 @@ public class GriefPNJInteractable : Carryable
     private float griefDuration = 3f;
     private Coroutine feedback;
     private Coroutine finishGriefQuest;
+    private Vector3 originalScale;
 
     public void Awake()
     {
+        originalScale = transform.localScale;
         endLoc = GameObject.FindGameObjectWithTag("GriefEndLoc").GetComponent<Transform>();
         startLoc = GameObject.FindGameObjectWithTag("GriefStartLoc").GetComponent<Transform>();
         requestImg.SetActive(false);
@@ -56,6 +58,7 @@ public class GriefPNJInteractable : Carryable
 
     public override void Interact(Player player)
     {
+        transform.localScale = originalScale;
         // check if isinteractable and avoid player to take him if he didn't finish his coroutine
         if (isInteractable && finishGriefQuest == null)
         {
@@ -84,6 +87,8 @@ public class GriefPNJInteractable : Carryable
 
     public override void PutDown(Player player, bool isTimeOut = false)
     {
+        transform.localScale = originalScale;
+
         // Give Interactable layer back to be able to interact with him
         gameObject.layer = 7;
 
