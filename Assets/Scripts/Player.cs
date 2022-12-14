@@ -309,12 +309,24 @@ public class Player : MonoBehaviour
             }
             else if (objectFound != null && objectFound.TryGetComponent(out Hole hole) && hole.HeldCorpse == null && carriedObj == null && diggingBehavior.GetType() != typeof(PerformingDig))
             {
-                Dig(-1);
+                //need anim duh
+                EnableDiggingArms();
+                DisableAllInputs();
+                Tween fillHole = arms.transform.DOPunchPosition(
+                punch: diggingPunchPosition,
+                duration: 0.5f,
+                vibrato: 7
+                );
+
+                fillHole.onComplete += () => {
+                    DisableArms();
+                    EnableAllInputs();
+                    Dig(-1);
+                };
             }
             else
             {
                 diggingBehavior.CancelAction();
-                // player dash
             }
         }
     }
@@ -411,6 +423,16 @@ public class Player : MonoBehaviour
     public void DisableInput(string input)
     {
         playerMovement.getPlayerInput.currentActionMap.FindAction(input).Disable();
+    }
+
+    public void EnableAllInputs()
+    {
+        playerMovement.getPlayerInput.currentActionMap.Enable();
+    }
+
+    public void DisableAllInputs()
+    {
+        playerMovement.getPlayerInput.currentActionMap.Disable();
     }
 
     public void TriggerVibration()

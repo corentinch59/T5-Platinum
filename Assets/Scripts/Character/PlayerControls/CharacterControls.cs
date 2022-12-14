@@ -813,124 +813,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Pilote"",
-            ""id"": ""2cf4ff88-3d63-422f-9544-b052bad57333"",
-            ""actions"": [
-                {
-                    ""name"": ""MoveWithCorpse"",
-                    ""type"": ""Value"",
-                    ""id"": ""486c4d0b-0bee-4c83-bc5f-1f39e4d5f172"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""105745ca-3069-48a8-b9a1-48931acf5594"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""ea4fee41-b670-4894-8900-029950101214"",
-                    ""path"": ""<Gamepad>/leftStick/y"",
-                    ""interactions"": """",
-                    ""processors"": ""StickDeadzone(min=0.5)"",
-                    ""groups"": """",
-                    ""action"": ""MoveWithCorpse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e34184a2-00be-4704-aae1-8c7d2e2e3fca"",
-                    ""path"": ""<Gamepad>/dpad/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveWithCorpse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f63758d5-87f7-4b2a-b269-4fec0ecc5139"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Co-Pilote"",
-            ""id"": ""f60151be-66ff-4fe0-aad0-196245b1f0ff"",
-            ""actions"": [
-                {
-                    ""name"": ""OrientateCorpse"",
-                    ""type"": ""Value"",
-                    ""id"": ""66887643-a484-4b6c-be4c-70fe7051f592"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""3adfcfb8-e1af-4dee-9499-973aced5b007"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""f3f90042-e12b-458f-b323-01d1f38f0738"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bf64a43f-26a3-4e2a-8e56-0aec22fa3567"",
-                    ""path"": ""<Gamepad>/leftStick/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OrientateCorpse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6c47d7c9-f0f0-4e37-9d08-db96a05ee285"",
-                    ""path"": ""<Gamepad>/dpad/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OrientateCorpse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Void"",
             ""id"": ""a30551e8-7e8b-4792-9d0f-3277c67cfcf7"",
             ""actions"": [],
@@ -958,14 +840,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        // Pilote
-        m_Pilote = asset.FindActionMap("Pilote", throwIfNotFound: true);
-        m_Pilote_MoveWithCorpse = m_Pilote.FindAction("MoveWithCorpse", throwIfNotFound: true);
-        m_Pilote_Interact = m_Pilote.FindAction("Interact", throwIfNotFound: true);
-        // Co-Pilote
-        m_CoPilote = asset.FindActionMap("Co-Pilote", throwIfNotFound: true);
-        m_CoPilote_OrientateCorpse = m_CoPilote.FindAction("OrientateCorpse", throwIfNotFound: true);
-        m_CoPilote_Interact = m_CoPilote.FindAction("Interact", throwIfNotFound: true);
         // Void
         m_Void = asset.FindActionMap("Void", throwIfNotFound: true);
     }
@@ -1194,88 +1068,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
     }
     public UIActions @UI => new UIActions(this);
 
-    // Pilote
-    private readonly InputActionMap m_Pilote;
-    private IPiloteActions m_PiloteActionsCallbackInterface;
-    private readonly InputAction m_Pilote_MoveWithCorpse;
-    private readonly InputAction m_Pilote_Interact;
-    public struct PiloteActions
-    {
-        private @CharacterControls m_Wrapper;
-        public PiloteActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MoveWithCorpse => m_Wrapper.m_Pilote_MoveWithCorpse;
-        public InputAction @Interact => m_Wrapper.m_Pilote_Interact;
-        public InputActionMap Get() { return m_Wrapper.m_Pilote; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PiloteActions set) { return set.Get(); }
-        public void SetCallbacks(IPiloteActions instance)
-        {
-            if (m_Wrapper.m_PiloteActionsCallbackInterface != null)
-            {
-                @MoveWithCorpse.started -= m_Wrapper.m_PiloteActionsCallbackInterface.OnMoveWithCorpse;
-                @MoveWithCorpse.performed -= m_Wrapper.m_PiloteActionsCallbackInterface.OnMoveWithCorpse;
-                @MoveWithCorpse.canceled -= m_Wrapper.m_PiloteActionsCallbackInterface.OnMoveWithCorpse;
-                @Interact.started -= m_Wrapper.m_PiloteActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_PiloteActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_PiloteActionsCallbackInterface.OnInteract;
-            }
-            m_Wrapper.m_PiloteActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @MoveWithCorpse.started += instance.OnMoveWithCorpse;
-                @MoveWithCorpse.performed += instance.OnMoveWithCorpse;
-                @MoveWithCorpse.canceled += instance.OnMoveWithCorpse;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
-            }
-        }
-    }
-    public PiloteActions @Pilote => new PiloteActions(this);
-
-    // Co-Pilote
-    private readonly InputActionMap m_CoPilote;
-    private ICoPiloteActions m_CoPiloteActionsCallbackInterface;
-    private readonly InputAction m_CoPilote_OrientateCorpse;
-    private readonly InputAction m_CoPilote_Interact;
-    public struct CoPiloteActions
-    {
-        private @CharacterControls m_Wrapper;
-        public CoPiloteActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @OrientateCorpse => m_Wrapper.m_CoPilote_OrientateCorpse;
-        public InputAction @Interact => m_Wrapper.m_CoPilote_Interact;
-        public InputActionMap Get() { return m_Wrapper.m_CoPilote; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CoPiloteActions set) { return set.Get(); }
-        public void SetCallbacks(ICoPiloteActions instance)
-        {
-            if (m_Wrapper.m_CoPiloteActionsCallbackInterface != null)
-            {
-                @OrientateCorpse.started -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnOrientateCorpse;
-                @OrientateCorpse.performed -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnOrientateCorpse;
-                @OrientateCorpse.canceled -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnOrientateCorpse;
-                @Interact.started -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_CoPiloteActionsCallbackInterface.OnInteract;
-            }
-            m_Wrapper.m_CoPiloteActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @OrientateCorpse.started += instance.OnOrientateCorpse;
-                @OrientateCorpse.performed += instance.OnOrientateCorpse;
-                @OrientateCorpse.canceled += instance.OnOrientateCorpse;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
-            }
-        }
-    }
-    public CoPiloteActions @CoPilote => new CoPiloteActions(this);
-
     // Void
     private readonly InputActionMap m_Void;
     private IVoidActions m_VoidActionsCallbackInterface;
@@ -1320,16 +1112,6 @@ public partial class @CharacterControls : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
-    }
-    public interface IPiloteActions
-    {
-        void OnMoveWithCorpse(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
-    }
-    public interface ICoPiloteActions
-    {
-        void OnOrientateCorpse(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IVoidActions
     {
