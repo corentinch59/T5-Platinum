@@ -20,6 +20,7 @@ public class Corpse : Carryable
     [SerializeField] private float durationShakeTween;
     [SerializeField] private float strengthShakeTween;
     [SerializeField] private float bigCorpseSize;
+    [SerializeField] private bool isTuto;
 
     private PNJInteractable pnjFrom;
     private SpriteRenderer spriteRenderer;
@@ -43,6 +44,11 @@ public class Corpse : Carryable
 
     private void Start()
     {
+        if (isTuto)
+        {
+            bigCorpse = GetComponent<BigCorpse>();
+        }
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         IsInteractable = true;
 
@@ -76,7 +82,6 @@ public class Corpse : Carryable
         if (thisQuest != null)
         {
             thisQuest.ActivateOulineUI(player.id);
-            //Debug.Log(player.id);
             if(thisQuest.requestInfos.siz <= 0)
             {
                 if (player.CarriedObj == null)
@@ -99,9 +104,7 @@ public class Corpse : Carryable
                 }
                 transform.parent = player.transform;
                 transform.localPosition = Vector3.up * 2f;
-                player.getPlayerMovement.SpriteRenderer.sprite = player.spriteCarry;
                 transform.localScale = new Vector3(1, 1, 1);
-                
             }
             else
             {
@@ -116,16 +119,11 @@ public class Corpse : Carryable
             gameObject.tag = "Untagged";
             if(thisQuest == null)
             {
-                /*if (GameManager.Instance.PnjsAlreadyGaveQuest.Count <= 2)
-                {
-                    GameManager.Instance.NewPNJComingWithQuest();
-                }*/
                 GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
                 pnjFrom = null;
             }
             else
             {
-                //GameManager.Instance.NewPNJComingWithQuest();
                 GameManager.Instance.PnjsAlreadyGaveQuest.Remove(pnjFrom);
                 pnjFrom = null;
             }
@@ -149,13 +147,6 @@ public class Corpse : Carryable
 
         if (player.getPlayerMovement.canMove) // if one player -> put the body anywhere he wants to
         {
-            /*Debug.Log("x :" + player.getPlayerMovement.getOrientation.x);
-            Debug.Log("y :" + player.getPlayerMovement.getOrientation.y);
-            Debug.Log("futur Corpse Z :" + player.transform.position.z);
-            float posZ = player.transform.position.z;
-            float mult = player.getPlayerMovement.getOrientation.y * 10f;
-            float final = posZ + mult;
-            Debug.Log(final);*/
             player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
                 player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
             player.CarriedObj.transform.parent = null;
@@ -164,8 +155,6 @@ public class Corpse : Carryable
         {
             player.getPlayerMovement.canMove = true;
         }
-
-        player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
 
         player.CarriedObj = null;
         // To avoid dotween problem with player increasing scale of this (as a child)

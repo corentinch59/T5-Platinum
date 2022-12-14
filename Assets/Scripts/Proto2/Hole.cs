@@ -16,7 +16,7 @@ public class Hole : MonoBehaviour, IInteractable
     private Image bubbleIMage;
     private Corpse heldCorpse;
     private Sprite originalSprite;
-      private BoxCollider colliderHole;
+    private BoxCollider colliderHole;
     private RectTransform bubbleParent;
     private SpriteRenderer spriteRenderer;
 
@@ -130,7 +130,6 @@ public class Hole : MonoBehaviour, IInteractable
                     {
                         corpse.IsInteractable = false;
                         player.CarriedObj.transform.parent = null;
-                        player.getPlayerMovement.SpriteRenderer.sprite = player.playerNotCarrying;
                     }
                     corpse.OutlineImg.SetActive(false); // <- deactivate exclamation point
                     player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
