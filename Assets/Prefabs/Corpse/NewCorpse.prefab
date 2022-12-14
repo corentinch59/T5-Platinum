@@ -140,6 +140,7 @@ MonoBehaviour:
   durationShakeTween: 1
   strengthShakeTween: 3
   bigCorpseSize: 1.5
+  isTuto: 0
   playersID: 
   numbersOfPlayers: 0
   isOutline: 0
@@ -157,6 +158,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 7664854474663327484}
   _animatorFlipped: {fileID: 3867833199969835489}
+  _renderer: {fileID: 0}
+  _rendererFlipped: {fileID: 0}
 --- !u!208 &-5864278713313341788
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -231,7 +234,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3284638053161091697}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -284,7 +287,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3284638053161091697}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6925850046469f942b4b2a00b40a59c0, type: 2}
   m_CullingMode: 0

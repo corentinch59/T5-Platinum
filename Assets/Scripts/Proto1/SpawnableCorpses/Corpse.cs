@@ -44,6 +44,7 @@ public class Corpse : Carryable
 
     private void Start()
     {
+        //ResetSmoke();
         if (isTuto)
         {
             bigCorpse = GetComponent<BigCorpse>();
@@ -59,7 +60,7 @@ public class Corpse : Carryable
 
         else bigCorpseTrail.gameObject.SetActive(false);
 
-
+        
         Material mat = Instantiate(OutlineImg.GetComponent<Image>().material);
         OutlineImg.GetComponent<Image>().material = mat;
         DropSmoke();

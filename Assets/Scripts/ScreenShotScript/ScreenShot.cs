@@ -66,10 +66,11 @@ public class ScreenShot : MonoBehaviour
         
         //save directement la texture in game pour la reutiliser pour l'écran de fin
         text = screenShotTexture;
-        
+        /*
         //Permet de convertir une texture en png puis de la save dans les assets
         byte[] byteArray = screenShotTexture.EncodeToPNG();
         System.IO.File.WriteAllBytes(Application.dataPath + "/CameraScreenshot.png", byteArray);
+        */
     }
     
     
