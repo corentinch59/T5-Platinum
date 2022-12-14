@@ -77,10 +77,9 @@ public class Hole : MonoBehaviour, IInteractable
 
     public void Interact(Player player)
     {
-
         if (player.CarriedObj != null)
         {
-            if(heldCorpse == null)
+            if (heldCorpse == null)
             {
                 if (player.CarriedObj.TryGetComponent(out Corpse corpse))
                 {
@@ -91,7 +90,7 @@ public class Hole : MonoBehaviour, IInteractable
                     #endregion
                     if (player.CarriedObj.TryGetComponent(out BigCorpse bc))
                     {
-                        if(SetHoleSize > 1)
+                        if (SetHoleSize > 1)
                         {
                             // Stop tiredVfx
                             if (bc.Players[0].TiredVFX != null)
@@ -102,7 +101,7 @@ public class Hole : MonoBehaviour, IInteractable
                             player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
                             // Detach both players
                             bc.Players[0].CarriedObj = null;
-                            if(bc.Players[1] != null)
+                            if (bc.Players[1] != null)
                             {
                                 // Stop tiredVfx
                                 if (bc.Players[1].TiredVFX != null)
@@ -152,44 +151,12 @@ public class Hole : MonoBehaviour, IInteractable
         }
         else
         {
-            if (heldCorpse == null)
-            {
-                // Grow hole size
-                SetHoleSize = 1;
-            }
-            else
+            if (heldCorpse != null)
             {
                 // Dig Up Corpse
-                player.DiggingBehavior.PerformAction();
+                player.DiggingBehavior.PerformAction(() => { GiveCorpse(); });
                 int randomint = UnityEngine.Random.Range(1, 4);
                 SoundManager.instance.Play("Dig" + randomint);
-                if (player.DiggingBehavior is StartDigging)
-                {
-                    Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y + 2.54f, transform.position.z - 2);
-                    heldCorpse.transform.position = posCorpse;
-                    heldCorpse.gameObject.layer = 7; // <- is Interactable
-                    heldCorpse.IsInteractable = true;
-                    heldCorpse.gameObject.SetActive(true);
-                    heldCorpse.tag = "Corpse";
-
-                    // reset the size to avoid dotween animation problem
-                    if (heldCorpse.TryGetComponent(out BigCorpse bc))
-                    {
-                        heldCorpse.transform.localScale = new Vector3(2, 2, 2);
-                        HoleSize = 1;
-                    }
-                    else
-                    {
-                        heldCorpse.transform.localScale = new Vector3(1, 1, 1);
-                        Vector3 posLittleCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
-                        heldCorpse.transform.position = posLittleCorpse;
-                    }
-
-                    StartCoroutine(BurryingCorpse(heldCorpse));
-                    Hidebubble();
-                    //Debug.Log(heldCorpse.transform.position.y);
-                    heldCorpse = null;
-                }
             }
         }
     }
@@ -368,5 +335,33 @@ public class Hole : MonoBehaviour, IInteractable
         isOutline = false;
         renderer.material.SetFloat("_PlayerInterractableID", 0);
         renderer.material.SetFloat("_IsOuline", 0);
+    }
+
+    private void GiveCorpse()
+    {
+        Vector3 posCorpse = new Vector3(transform.position.x, transform.position.y + 2.54f, transform.position.z - 2);
+        heldCorpse.transform.position = posCorpse;
+        heldCorpse.gameObject.layer = 7; // <- is Interactable
+        heldCorpse.IsInteractable = true;
+        heldCorpse.gameObject.SetActive(true);
+        heldCorpse.tag = "Corpse";
+
+        // reset the size to avoid dotween animation problem
+        if (heldCorpse.TryGetComponent(out BigCorpse bc))
+        {
+            heldCorpse.transform.localScale = new Vector3(2, 2, 2);
+            HoleSize = 1;
+        }
+        else
+        {
+            heldCorpse.transform.localScale = new Vector3(1, 1, 1);
+            Vector3 posLittleCorpse = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+            heldCorpse.transform.position = posLittleCorpse;
+        }
+
+        StartCoroutine(BurryingCorpse(heldCorpse));
+        Hidebubble();
+        //Debug.Log(heldCorpse.transform.position.y);
+        heldCorpse = null;
     }
 }

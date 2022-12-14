@@ -204,7 +204,23 @@ public class Player : MonoBehaviour
                 //Debug.Log("Object found : " + objectFound.name);
                 if (objectFound.TryGetComponent(out Hole hole))
                 {
-                    hole.Interact(this);
+                    if(carriedObj == null)
+                    {
+                        if(hole.HeldCorpse == null && hole.SetHoleSize < 2)
+                        {
+                            diggingBehavior.PerformAction(() => { hole.SetHoleSize = 2; });
+                            int randomint = UnityEngine.Random.Range(1, 4);
+                            SoundManager.instance.Play("Dig" + randomint);
+                        }
+                        else
+                        {
+                            hole.Interact(this);
+                        }
+                    }
+                    else
+                    {
+                        hole.Interact(this);
+                    }
                 }
                 else if (objectFound.TryGetComponent(out GriefPNJInteractable griefPnj) && carriedObj == null)
                 {
@@ -242,7 +258,7 @@ public class Player : MonoBehaviour
             }
             else if (objectFound == null && carriedObj == null)
             {
-                diggingBehavior.PerformAction();
+                diggingBehavior.PerformAction(() => { Dig(1); });
                 int randomint = UnityEngine.Random.Range(1, 4);
                 SoundManager.instance.Play("Dig" + randomint);
             }
@@ -372,7 +388,8 @@ public class Player : MonoBehaviour
         crackTweenScale.Kill();
         crackTweenShake.Kill();
         crackSequence.Kill();
-        Destroy(lastCrack);
+        if(lastCrack != null)
+            Destroy(lastCrack);
     }
 
     private void CallOutline(bool active, SpriteRenderer renderer, int playerID)

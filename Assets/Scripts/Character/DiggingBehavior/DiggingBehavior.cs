@@ -1,6 +1,8 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public abstract class DiggingBehavior
@@ -15,7 +17,7 @@ public abstract class DiggingBehavior
         _player = player;
     }
 
-    public abstract void PerformAction();
+    public abstract void PerformAction(Action myFunc = null);
 
     public abstract void CancelAction();
 

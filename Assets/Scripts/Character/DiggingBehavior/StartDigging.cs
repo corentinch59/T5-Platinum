@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class StartDigging : DiggingBehavior
 {
     public override void CancelAction(){}
 
-    public override void PerformAction()
+    public override void PerformAction(Action myFunc = null)
     {
         _player.TriggerVibration();
         _player.EnableDiggingArms();

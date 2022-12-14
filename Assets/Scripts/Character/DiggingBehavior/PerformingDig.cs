@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,11 +32,12 @@ public class PerformingDig : DiggingBehavior
         _player.DestroyCrackHole();
     }
 
-    public override void PerformAction()
+    public override void PerformAction(Action myFunc = null)
     {
         if (internalTaps < numberOfTaps - 1)
         {
             ++internalTaps;
+
             _player.TriggerVibration();
             _player.AnimateCrackHole(internalTaps);
             _player.AnimateDigging();
@@ -61,7 +63,7 @@ public class PerformingDig : DiggingBehavior
         }
         else
         {
-            _player.Dig(1);
+            myFunc?.Invoke();
             _player.EnableInput("Move");
             _player.DisableArms();
             #region ITERATION_3
