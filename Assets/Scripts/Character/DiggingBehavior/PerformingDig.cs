@@ -34,7 +34,7 @@ public class PerformingDig : DiggingBehavior
 
     public override void PerformAction(Action myFunc = null)
     {
-        if (internalTaps < numberOfTaps - 1)
+        if (internalTaps < numberOfTaps)
         {
             ++internalTaps;
 
@@ -60,17 +60,17 @@ public class PerformingDig : DiggingBehavior
             sequence = DOTween.Sequence();
             sequence.Append(a).Append(b);
             #endregion
-        }
-        else
-        {
-            myFunc?.Invoke();
-            _player.EnableInput("Move");
-            _player.DisableArms();
-            #region ITERATION_3
-            CancelAnimation();
-            _player.getMainRect.gameObject.SetActive(false);
-            #endregion
-            _player.TransitionDigging(new StartDigging());
+
+            if(internalTaps > numberOfTaps - 1)
+            {
+                sequence.onComplete += () => {
+                    myFunc?.Invoke();
+                    _player.EnableInput("Move");
+                    _player.DisableArms();
+                    _player.getMainRect.gameObject.SetActive(false);
+                    _player.TransitionDigging(new StartDigging());
+                };
+            }
         }
     }
 }
