@@ -36,8 +36,8 @@ public class SpawnPlayers : MonoBehaviour
 
         Player playerScript = player.GetComponent<Player>();
         playerScript.id = playerInputManager.playerCount;
-        playerScript.setDigSprite = _armDigSprites[playerInputManager.playerCount - 1 % 2];
-        playerScript.setDraggingSprite = _armGrabSprites[playerInputManager.playerCount - 1 % 2];
+        playerScript.setDigSprite = _armDigSprites[(playerInputManager.playerCount - 1) % 2];
+        playerScript.setDraggingSprite = _armGrabSprites[(playerInputManager.playerCount - 1) % 2];
 
         StartWhenAllPlayer(playerInput);
     }
