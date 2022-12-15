@@ -86,6 +86,7 @@ public class Quest : MonoBehaviour
     {
         if(data.localisation == requestInfos.loc)
         {
+            Debug.Log("Bien joué");
             ParticlePlayManager.instance.PlayAtPosition("Satisfaction");
             image.color = Color.green;
             return true;
@@ -106,6 +107,7 @@ public class Quest : MonoBehaviour
         else
         {
             // remove score
+            Debug.Log("Mal joué");
             image.color = Color.red;
             return false;
         }

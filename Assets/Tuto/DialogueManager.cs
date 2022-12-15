@@ -236,7 +236,6 @@ public class DialogueManager : MonoBehaviour
 
     public void StartSceneByName()
     {
-        SceneManager.LoadScene("TestCamera2");
+        SceneManager.LoadScene("TestCamera2 1");
     }
-
 }

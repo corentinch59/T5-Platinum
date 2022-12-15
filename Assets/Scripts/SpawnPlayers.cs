@@ -50,8 +50,8 @@ public class SpawnPlayers : MonoBehaviour
             for (int i = 0; i < players.Count; i++)
             {
                 players[i].SwitchCurrentActionMap("Player");
-                OnAllPlayerJoin?.Invoke();
             }
+            OnAllPlayerJoin?.Invoke();
         }
         else return;
     }

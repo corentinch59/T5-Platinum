@@ -2450,20 +2450,24 @@ PrefabInstance:
       value: 4.485827
       objectReference: {fileID: 0}
     - target: {fileID: 6692717970229256045, guid: 07dd12df99b9e724d9eed325bd64d752, type: 3}
+      propertyPath: m_Size.y
+      value: 13.104356
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692717970229256045, guid: 07dd12df99b9e724d9eed325bd64d752, type: 3}
       propertyPath: m_Size.z
       value: 2.0609174
       objectReference: {fileID: 0}
     - target: {fileID: 6692717970229256045, guid: 07dd12df99b9e724d9eed325bd64d752, type: 3}
       propertyPath: m_Center.x
-      value: -1.1637381
+      value: -1.163738
       objectReference: {fileID: 0}
     - target: {fileID: 6692717970229256045, guid: 07dd12df99b9e724d9eed325bd64d752, type: 3}
       propertyPath: m_Center.y
-      value: -0.00000006110947
+      value: 6.052176
       objectReference: {fileID: 0}
     - target: {fileID: 6692717970229256045, guid: 07dd12df99b9e724d9eed325bd64d752, type: 3}
       propertyPath: m_Center.z
-      value: 0.0013378932
+      value: 0.0013378953
       objectReference: {fileID: 0}
     - target: {fileID: 8704218334368560641, guid: 07dd12df99b9e724d9eed325bd64d752, type: 3}
       propertyPath: m_LocalScale.x
@@ -3469,7 +3473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7910595005406105686, guid: 473d7723f0db4014aa858e1a478fa9d2, type: 3}
       propertyPath: m_Size.x
-      value: 1.6905987
+      value: 1.6905988
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910595005406105686, guid: 473d7723f0db4014aa858e1a478fa9d2, type: 3}
+      propertyPath: m_Size.y
+      value: 6.6314464
       objectReference: {fileID: 0}
     - target: {fileID: 7910595005406105686, guid: 473d7723f0db4014aa858e1a478fa9d2, type: 3}
       propertyPath: m_Size.z
@@ -3482,6 +3490,10 @@ PrefabInstance:
     - target: {fileID: 7910595005406105686, guid: 473d7723f0db4014aa858e1a478fa9d2, type: 3}
       propertyPath: m_Center.x
       value: -0.17442822
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910595005406105686, guid: 473d7723f0db4014aa858e1a478fa9d2, type: 3}
+      propertyPath: m_Center.y
+      value: 2.8157248
       objectReference: {fileID: 0}
     - target: {fileID: 7910595005406105686, guid: 473d7723f0db4014aa858e1a478fa9d2, type: 3}
       propertyPath: m_Center.z
@@ -4304,7 +4316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: timeToRemoveFromEveryQuest
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6150980914314984683, guid: 74165454455c9864ca9e9873db8a6962, type: 3}
       propertyPath: pnjs.Array.data[0].questLocation
@@ -4977,11 +4989,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 126644697006794596, guid: d9c18a3d0e689ee4bb8299c1d5257373, type: 3}
       propertyPath: lengthInSec
-      value: 3.5
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 126644697006794596, guid: d9c18a3d0e689ee4bb8299c1d5257373, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 126644697006794597, guid: d9c18a3d0e689ee4bb8299c1d5257373, type: 3}
       propertyPath: TimeBeforeGo
@@ -5070,7 +5082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458673007253006444, guid: b98b869305b539841bf1633fd278fdd9, type: 3}
       propertyPath: m_Size.y
-      value: 2
+      value: 13.863792
       objectReference: {fileID: 0}
     - target: {fileID: 3458673007253006444, guid: b98b869305b539841bf1633fd278fdd9, type: 3}
       propertyPath: m_Size.z
@@ -5082,7 +5094,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458673007253006444, guid: b98b869305b539841bf1633fd278fdd9, type: 3}
       propertyPath: m_Center.x
-      value: 0.16943204
+      value: 0.16943216
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458673007253006444, guid: b98b869305b539841bf1633fd278fdd9, type: 3}
+      propertyPath: m_Center.y
+      value: 5.931896
       objectReference: {fileID: 0}
     - target: {fileID: 3458673007253006444, guid: b98b869305b539841bf1633fd278fdd9, type: 3}
       propertyPath: m_Center.z
@@ -8523,12 +8539,20 @@ PrefabInstance:
       value: 1.2017362
       objectReference: {fileID: 0}
     - target: {fileID: 7595027861660920612, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Size.y
+      value: 11.598455
+      objectReference: {fileID: 0}
+    - target: {fileID: 7595027861660920612, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_Size.z
       value: 1.0760313
       objectReference: {fileID: 0}
     - target: {fileID: 7595027861660920612, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_Center.x
-      value: -0.10086856
+      value: -0.1008686
+      objectReference: {fileID: 0}
+    - target: {fileID: 7595027861660920612, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
+      propertyPath: m_Center.y
+      value: 5.2992277
       objectReference: {fileID: 0}
     - target: {fileID: 7595027861660920612, guid: ec2d492cd2274b04a8f2a65304146100, type: 3}
       propertyPath: m_Center.z
@@ -10814,6 +10838,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 848
       objectReference: {fileID: 0}
+    - target: {fileID: 2408016235989861010, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721676757784158023, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: sceneNameToLoad
+      value: TestCamera2 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2964388166902575545, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_SizeDelta.x
       value: 410
@@ -10866,9 +10898,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4967584945326103150, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: m_Value
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967584945326103150, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5027943281809704129, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: sceneNameToLoad
       value: SimonFinalLD - Rework
+      objectReference: {fileID: 0}
+    - target: {fileID: 5212427758644342821, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5762806868897783849, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_LocalScale.x

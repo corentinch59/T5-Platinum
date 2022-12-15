@@ -14,7 +14,7 @@ public class SatisfactionManager : MonoBehaviour
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject retryButton;
     [SerializeField] private ScreenShot _screenShot;
-    [SerializeField] private List<Sprite> ranks = new List<Sprite>();   
+    [SerializeField] private List<Sprite> ranks = new List<Sprite>();
     [SerializeField] private Image sliderFill;
 
     private Slider satisfactionSlider = default;

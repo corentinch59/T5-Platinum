@@ -350,7 +350,7 @@ public class Hole : MonoBehaviour, IInteractable
         // reset the size to avoid dotween animation problem
         if (heldCorpse.TryGetComponent(out BigCorpse bc))
         {
-            heldCorpse.transform.localScale = new Vector3(2, 2, 2);
+            heldCorpse.transform.localScale = new Vector3(heldCorpse.BigCorpseSize, heldCorpse.BigCorpseSize, heldCorpse.BigCorpseSize);
             HoleSize = 1;
         }
         else
