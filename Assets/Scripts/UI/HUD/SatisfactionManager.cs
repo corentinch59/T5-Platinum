@@ -102,7 +102,6 @@ public class SatisfactionManager : MonoBehaviour
         {
             IsGameOver = true;
             timerEndMeshPro.text = "0";
-            Debug.Log("GameOver");
             gameOverScreen.SetActive(true);
             UIGameOver.onGameOver?.Invoke();
             StartCoroutine(_screenShot.TakeScreenShot(false));
