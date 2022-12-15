@@ -6686,7 +6686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4967584945326103150, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 5027943281809704129, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: sceneNameToLoad
@@ -6860,14 +6860,6 @@ PrefabInstance:
       propertyPath: sceneNameToLoad
       value: SimonFinalLD
       objectReference: {fileID: 0}
-    - target: {fileID: 7254901045510849115, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 410
-      objectReference: {fileID: 0}
-    - target: {fileID: 7254901045510849115, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 410
-      objectReference: {fileID: 0}
     - target: {fileID: 7490770880705740518, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -6899,14 +6891,6 @@ PrefabInstance:
     - target: {fileID: 8463558664251921555, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -374.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 9088252621069643859, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 590
-      objectReference: {fileID: 0}
-    - target: {fileID: 9088252621069643859, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 332
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}

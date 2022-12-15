@@ -57,10 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UIGameOver_onGameOver()
     {
-
-        //Debug.Log(playerInput.defaultActionMap);
         playerInput.SwitchCurrentActionMap("UI");
-        //Debug.Log(playerInput.defaultActionMap);
     }
 
     private void FixedUpdate()
@@ -98,11 +95,8 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.DOScale(new Vector3(1.3f, 0.7f, 1f), 0.15f);
         yield return new WaitForSeconds(0.15f);
-        //transform.DOMoveY(transform.position.y, 0.15f);
         transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f);
-        //transform.DOScaleY(1f, 0.3f);
         yield return new WaitForSeconds(0.1f);
-        //transform.DOMoveY(transform.position.y + 1f, 0.15f);
         
         feedback = null;
     }
@@ -110,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         move = ctx.ReadValue<Vector2>();
-        
 
         if (move.magnitude > 0)
         {

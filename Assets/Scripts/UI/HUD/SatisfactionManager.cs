@@ -14,10 +14,11 @@ public class SatisfactionManager : MonoBehaviour
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject retryButton;
     [SerializeField] private ScreenShot _screenShot;
+    [SerializeField] private List<Sprite> ranks = new List<Sprite>();   
 
     private Slider satisfactionSlider = default;
     private Coroutine currentCoroutine = null;
-    private TextMeshProUGUI winnerRank;
+    private Image winnerRank;
     private TextMeshProUGUI percentageRank;
 
     private float lerpDuration = 1.5f;
@@ -39,7 +40,7 @@ public class SatisfactionManager : MonoBehaviour
         gameOverScreen.gameObject.SetActive(false);
         winScreen.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
-        winnerRank = winScreen.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        winnerRank = winScreen.gameObject.transform.GetChild(2).GetComponent<Image>();
         percentageRank = winScreen.gameObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
 
     }
@@ -119,19 +120,19 @@ public class SatisfactionManager : MonoBehaviour
             StartCoroutine(_screenShot.TakeScreenShot(true));
             if(satisfactionSlider.value >= 80)
             {
-                winnerRank.text = "S";
+                winnerRank.sprite = ranks[0]; //S
             }
             else if(satisfactionSlider.value >= 60)
             {
-                winnerRank.text = "A";
+                winnerRank.sprite = ranks[1];//A
             }
             else if(satisfactionSlider.value >= 40)
             {
-                winnerRank.text = "B";
+                winnerRank.sprite = ranks[2];//B
             }
             else
             {
-                winnerRank.text = "C";
+                winnerRank.sprite = ranks[3];//C
             }
             
             percentageRank.text = $"Satisfaction : {satisfactionSlider.value}%";
