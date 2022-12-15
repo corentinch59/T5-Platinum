@@ -54,6 +54,33 @@ MonoBehaviour:
     loop: 1
     type: 1
     source: {fileID: 0}
+  - name: MenuSubmit
+    clip: {fileID: 8300000, guid: 871e9ddd280c9414d986627da6cce1da, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    type: 2
+    source: {fileID: 0}
+  - name: MenuSelect
+    clip: {fileID: 8300000, guid: dd8acd65a9d985c42ab5e48792ce643a, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    type: 2
+    source: {fileID: 0}
+  - name: MenuBack
+    clip: {fileID: 8300000, guid: dd8acd65a9d985c42ab5e48792ce643a, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 0.48
+    pitchVariance: 0.1
+    loop: 0
+    type: 2
+    source: {fileID: 0}
   - name: MenuSwapR
     clip: {fileID: 8300000, guid: a9aa3b814bac8bb4b9282edeb3fa998c, type: 3}
     volume: 0.2

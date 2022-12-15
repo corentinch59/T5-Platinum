@@ -12,6 +12,7 @@ public class SpawnPlayers : MonoBehaviour
     [SerializeField] private List<Sprite> _armDigSprites = new List<Sprite>();
     [SerializeField] private List<Transform> listPos = new List<Transform>();
     [SerializeField] private List<PlayerInput> players = new List<PlayerInput>();
+    [SerializeField] private int howManyPlayersToStart;
     //[SerializeField] private InputSystemUIInputModule inputUISystem;
 
     private PlayerInputManager playerInputManager;
@@ -44,7 +45,7 @@ public class SpawnPlayers : MonoBehaviour
 
     private void StartWhenAllPlayer(PlayerInput player)
     {
-        if (player.playerIndex == 0)//Changer pour la build et override le player
+        if (player.playerIndex == howManyPlayersToStart)//Changer pour la build et override le player
         {
             for (int i = 0; i < players.Count; i++)
             {
