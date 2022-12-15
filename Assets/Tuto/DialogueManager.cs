@@ -114,7 +114,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (Index <= Sentences.Length - 1 && CanvasA == true)
         {
-            Animalese();
+            //Animalese();
             DialogueText.text = "";
             StartCoroutine(WriteSentence());
             StartCoroutine(Next());
