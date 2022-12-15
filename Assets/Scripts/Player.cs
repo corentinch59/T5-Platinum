@@ -99,8 +99,8 @@ public class Player : MonoBehaviour
         vfx = GetComponent<PlayerVFX>();
         TransitionDigging(new StartDigging());
         #region ITERATION_3
-        mainRect = transform.GetChild(transform.childCount - 1).GetChild(1).GetComponent<RectTransform>();
-        iteration3rect = transform.GetChild(transform.childCount - 1).GetChild(1).GetChild(1).GetComponent<RectTransform>();
+        mainRect = transform.GetChild(transform.childCount - 1).GetComponent<RectTransform>();
+        iteration3rect = transform.GetChild(transform.childCount - 1).GetChild(0).GetChild(1).GetComponent<RectTransform>();
         #endregion
     }
 
