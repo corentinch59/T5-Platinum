@@ -42,6 +42,6 @@ MonoBehaviour:
     localisationTex:
     - {fileID: 0}
     - {fileID: 2800000, guid: ec656434fdd7b1a47a6c32b8202b291e, type: 3}
-    - {fileID: 2800000, guid: 220bee86d23c2d4499107367b3089a08, type: 3}
+    - {fileID: 2800000, guid: d2ca352a19a69164daa23da4ae4882aa, type: 3}
     - {fileID: 2800000, guid: 3cf9752d44a53084f9ffb0d7c6ab7522, type: 3}
     - {fileID: 2800000, guid: 4399e24b51101ee47b6a3753dd8a10a6, type: 3}

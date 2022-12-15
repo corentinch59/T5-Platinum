@@ -107,7 +107,10 @@ public class GriefPNJInteractable : Carryable
                 if (dist < min)
                 {
                     min = dist;
-                    griefCorpseType = h.HeldCorpse.CorpseData.corpseType;
+                    if(h.HeldCorpse != null)
+                    {
+                        griefCorpseType = h.HeldCorpse.CorpseData.corpseType;
+                    }
                 }
             }
         }
