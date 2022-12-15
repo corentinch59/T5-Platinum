@@ -26,5 +26,4 @@ public class Detecteur : MonoBehaviour
             Debug.Log("Hello");
         }
     }
-
 }
