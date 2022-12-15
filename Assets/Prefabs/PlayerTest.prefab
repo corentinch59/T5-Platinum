@@ -1057,8 +1057,6 @@ MonoBehaviour:
   locationLayers:
     serializedVersion: 2
     m_Bits: 793
-  playerNotCarrying: {fileID: 21300000, guid: b4b51065e95a0004f901aed91deacb29, type: 3}
-  spriteCarry: {fileID: 21300000, guid: b4b51065e95a0004f901aed91deacb29, type: 3}
   objectFound: {fileID: 0}
   lastObjectFound: {fileID: 0}
   interactableLayer:
@@ -6321,7 +6319,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_TargetDisplay: 0
 --- !u!114 &5011652580486710445
 MonoBehaviour:
@@ -6538,14 +6536,6 @@ PrefabInstance:
     - target: {fileID: 2521479570276670200, guid: 680b311a9a324e743850d69e7b634525, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521479570276670202, guid: 680b311a9a324e743850d69e7b634525, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521479570276670202, guid: 680b311a9a324e743850d69e7b634525, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2521479570276670203, guid: 680b311a9a324e743850d69e7b634525, type: 3}
       propertyPath: m_InitialEventName
