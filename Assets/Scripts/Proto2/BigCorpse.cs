@@ -117,12 +117,12 @@ public class BigCorpse : MonoBehaviour, IInteractable
             Vector3 grabDirection = players[1].transform.position - transform.position;
             if(grabDirection.x > 0)
             {
-                players[1].getArms.transform.position = players[1].getArmLeftPosition;
+                players[1].getArms.transform.localPosition = players[1].getArmLeftPosition;
                 players[1].getArms.GetComponent<SpriteRenderer>().flipX = true;
             }
             else
             {
-                players[1].getArms.transform.position = players[1].getArmRightPosition;
+                players[1].getArms.transform.localPosition = players[1].getArmRightPosition;
                 players[1].getArms.GetComponent<SpriteRenderer>().flipX = false;
             }
         }
