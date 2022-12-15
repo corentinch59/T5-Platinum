@@ -16,6 +16,8 @@ public class Menu : MonoBehaviour
     public EventSystem eventSystem;
     private Animator anim;
 
+    public GameObject FondMenu;
+
     void Start()
     {
         SoundManager.instance.Play("MenuMusic");
@@ -40,14 +42,16 @@ public class Menu : MonoBehaviour
     {
         eventSystem.SetSelectedGameObject(backBtn);
         mainUI.SetActive(false);
+        FondMenu.SetActive(true);
         settingUI.SetActive(true);
     }
     public void DisplayMain()
     {
         settingUI.SetActive(false);
         mainUI.SetActive(true);
+        FondMenu.SetActive(false);
         GameObject btnToSelect = new GameObject();
-        if (ButtonP.activeInHierarchy == true)
+        /*if (ButtonP.activeInHierarchy == true)
         {
             //anim.Play("Fade");
             ButtonQ.SetActive(false);
@@ -69,8 +73,9 @@ public class Menu : MonoBehaviour
             ButtonS.SetActive(false);
             btnToSelect = ButtonQ;
 
-        }
-        eventSystem.SetSelectedGameObject(btnToSelect);
+        }*/
+        btnToSelect = ButtonP;
+        eventSystem.SetSelectedGameObject(btnToSelect); 
     }
 
     public void QuitGame()

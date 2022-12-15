@@ -37,25 +37,32 @@ public class DialogueManager : MonoBehaviour
         HoleCount = 0;
         if (TxtCount == 0)
         {
-            NextSentence();
-
+            StartCoroutine(Uno());
         }
         GetRebouchedgros = false;
         GetRebouchedptit = false;
+        SoundManager.instance.Play("Ambiance");
     }
 
 
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //Canva.SetActive(true);
-            GrosTombe();
-            PtitTombe();
-        }*/
+            //GrosTombe();
+            // PtitTombe();
+            StartSceneByName();
+        }
         PtitTombe();
         GrosTombe();
 
+    }
+
+    IEnumerator Uno()
+    {
+        yield return new WaitForSeconds(2f);
+        NextSentence();
     }
 
     //Le temps entre les textes
@@ -107,6 +114,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (Index <= Sentences.Length - 1 && CanvasA == true)
         {
+            Animalese();
             DialogueText.text = "";
             StartCoroutine(WriteSentence());
             StartCoroutine(Next());
@@ -170,6 +178,61 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    void Animalese()
+    {
+        if (Index == 0)
+        {
+            SoundManager.instance.Play("Dialogue 1");
+        }
+        if (Index == 1)
+        {
+            SoundManager.instance.Play("Dialogue 2");
+        }
+        if (Index == 2)
+        {
+            SoundManager.instance.Play("Dialogue 3");
+        }
+        if (Index == 3)
+        {
+            SoundManager.instance.Play("Dialogue 4");
+        }
+        if (Index == 4)
+        {
+            SoundManager.instance.Play("Dialogue 5");
+        }
+        if (Index == 5)
+        {
+            SoundManager.instance.Play("Dialogue 6");
+        }
+        if (Index == 6)
+        {
+            SoundManager.instance.Play("Dialogue 7");
+        }
+        if (Index == 7)
+        {
+            SoundManager.instance.Play("Dialogue 8");
+        }
+        if (Index == 8)
+        {
+            SoundManager.instance.Play("Dialogue 9");
+        }
+        if (Index == 9)
+        {
+            SoundManager.instance.Play("Dialogue 10");
+        }
+        if (Index == 10)
+        {
+            SoundManager.instance.Play("Dialogue 11");
+        }
+        if (Index == 11)
+        {
+            SoundManager.instance.Play("Dialogue 12");
+        }
+        if (Index == 12)
+        {
+            SoundManager.instance.Play("Dialogue 13");
+        }
+    }
 
     public void StartSceneByName()
     {
