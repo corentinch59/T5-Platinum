@@ -77,6 +77,15 @@ public class BigCorpse : MonoBehaviour, IInteractable
 
         if (players[0] != null)
         {
+            if(corpseMovement.sqrMagnitude > 0)
+            {
+                players[0].getPlayerMovement.getPlayerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.1f, 0.1f);
+            }
+            else
+            {
+                players[0].getPlayerMovement.getPlayerInput.GetDevice<Gamepad>().ResetHaptics();
+            }
+
             players[0].getPlayerMovement.getController.Move(corpseMovement * carrySpeed * Time.fixedDeltaTime);
 
             Vector3 grabDirection = players[0].transform.position - transform.position;
@@ -219,6 +228,7 @@ public class BigCorpse : MonoBehaviour, IInteractable
 
     public void DetachFromCorpse(Player player)
     {
+        player.getPlayerMovement.getPlayerInput.GetDevice<Gamepad>().ResetHaptics();
         for (int i = 0; i < players.Length; ++i)
         {
             if(player == players[i])

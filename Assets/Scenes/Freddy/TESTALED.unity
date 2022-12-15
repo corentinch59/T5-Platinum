@@ -454,7 +454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1037586494055066646, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2321410641102125202, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_Enabled
@@ -536,10 +536,6 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1280300297}
-    - target: {fileID: 3503397756124454441, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7652846810555299861, guid: c58683c1109b1774c87e9bfacdd3f713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.08278155
@@ -4287,6 +4283,17 @@ Transform:
   m_Father: {fileID: 629771553}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1013460812 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7030785500199079053, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+  m_PrefabInstance: {fileID: 1851410321}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1050928438
 GameObject:
   m_ObjectHideFlags: 0
@@ -7956,6 +7963,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3747200723461411546, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: sliderFill
+      value: 
+      objectReference: {fileID: 1013460812}
     - target: {fileID: 3747200723461411546, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: _screenShot
       value: 
