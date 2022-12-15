@@ -264,124 +264,6 @@
             ]
         },
         {
-            "name": "Pilote",
-            "id": "2cf4ff88-3d63-422f-9544-b052bad57333",
-            "actions": [
-                {
-                    "name": "MoveWithCorpse",
-                    "type": "Value",
-                    "id": "486c4d0b-0bee-4c83-bc5f-1f39e4d5f172",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "105745ca-3069-48a8-b9a1-48931acf5594",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "ea4fee41-b670-4894-8900-029950101214",
-                    "path": "<Gamepad>/leftStick/y",
-                    "interactions": "",
-                    "processors": "StickDeadzone(min=0.5)",
-                    "groups": "",
-                    "action": "MoveWithCorpse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e34184a2-00be-4704-aae1-8c7d2e2e3fca",
-                    "path": "<Gamepad>/dpad/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveWithCorpse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f63758d5-87f7-4b2a-b269-4fec0ecc5139",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Co-Pilote",
-            "id": "f60151be-66ff-4fe0-aad0-196245b1f0ff",
-            "actions": [
-                {
-                    "name": "OrientateCorpse",
-                    "type": "Value",
-                    "id": "66887643-a484-4b6c-be4c-70fe7051f592",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "3adfcfb8-e1af-4dee-9499-973aced5b007",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "f3f90042-e12b-458f-b323-01d1f38f0738",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bf64a43f-26a3-4e2a-8e56-0aec22fa3567",
-                    "path": "<Gamepad>/leftStick/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OrientateCorpse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6c47d7c9-f0f0-4e37-9d08-db96a05ee285",
-                    "path": "<Gamepad>/dpad/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OrientateCorpse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "UI",
             "id": "aac7dd34-cdb5-475f-a498-de3bbc483aa4",
             "actions": [
@@ -798,6 +680,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d448f1db-0ad1-4ec2-af4d-7ef5eec871ec",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "dc3b8970-2b45-4a13-b7be-945645c9684d",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -813,7 +706,7 @@
                     "path": "<Pen>/tip",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "",
                     "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false

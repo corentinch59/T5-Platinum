@@ -3836,6 +3836,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1249071474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2084978290155546426, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+  m_PrefabInstance: {fileID: 1851410321}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1274071293
 GameObject:
   m_ObjectHideFlags: 0
@@ -6768,7 +6773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1249071474}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1825817272
@@ -7130,6 +7135,14 @@ PrefabInstance:
     - target: {fileID: 6375890417845245769, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375890417845245769, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.1779003
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887426136757666530, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 20.799988
       objectReference: {fileID: 0}
     - target: {fileID: 7251406974714591645, guid: 306368d5f0bf782448c1661fee0e6b05, type: 3}
       propertyPath: sceneNameToLoad

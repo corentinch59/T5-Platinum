@@ -96,7 +96,7 @@ public class GriefPNJInteractable : Carryable
         player.CarriedObj.gameObject.transform.parent = null;
 
         // Update corpseType the pnj wants
-        Collider[] infos = Physics.OverlapSphere(transform.position, radius);
+        /*Collider[] infos = Physics.OverlapSphere(transform.position, radius);
         float min = float.MaxValue;
 
         for(int i = 0; i < infos.Length; ++i)
@@ -107,10 +107,13 @@ public class GriefPNJInteractable : Carryable
                 if (dist < min)
                 {
                     min = dist;
-                    griefCorpseType = h.HeldCorpse.CorpseData.corpseType;
+                    if(h.HeldCorpse != null)
+                    {
+                        griefCorpseType = h.HeldCorpse.CorpseData.corpseType;
+                    }
                 }
             }
-        }
+        }*/
 
         player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
                 player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
@@ -123,6 +126,26 @@ public class GriefPNJInteractable : Carryable
     public void CheckLocationWanted(Player player)
     {
         PutDown(player);
+        // Update corpseType the pnj wants
+        Collider[] infos = Physics.OverlapSphere(transform.position, radius);
+        float min = float.MaxValue;
+
+        for (int i = 0; i < infos.Length; ++i)
+        {
+            if (infos[i].gameObject.TryGetComponent(out Hole h))
+            {
+                float dist = Vector3.Distance(infos[i].gameObject.transform.position, transform.position);
+                if (dist < min)
+                {
+                    min = dist;
+                    if (h.HeldCorpse != null)
+                    {
+                        griefCorpseType = h.HeldCorpse.CorpseData.corpseType;
+                    }
+                }
+            }
+        }
+
         if (deathRequest.griefQuest.TryGetComponent(out GriefQuest dq))
         {
             finishGriefQuest = StartCoroutine(dq.FinishGriefQuest(griefCorpseType));

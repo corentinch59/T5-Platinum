@@ -63,6 +63,7 @@ public class Hole : MonoBehaviour, IInteractable
         }
         else if (modifier < 0)
         {
+            gameObject.layer = 0;
             StartCoroutine(BurryAnim(scaleAnimDuration));
         }
     }
