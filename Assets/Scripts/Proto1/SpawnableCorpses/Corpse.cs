@@ -74,7 +74,6 @@ public class Corpse : Carryable
             ShakeQuest();
             isAlmostOver = true;
         }
-
     }
 
     public override void Interact(Player player)
