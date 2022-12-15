@@ -63,7 +63,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   request: {fileID: 2126752867567367414}
-  requestImg: {fileID: 3266256926193268498}
   corpseToCreate: {fileID: 694417260691800150, guid: 2c37c2b4654ba6247b38a9d97dfcfac5, type: 3}
   agent: {fileID: 4086287966202717261}
   radius: 5
@@ -112,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7cfd32bb736c7f04aa7add895962af05, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -301,9 +300,7 @@ MonoBehaviour:
     corpseName: 
     siz: 0
     loc: 0
-    cof: 0
     corps: 0
-    spec: 0
   textureData: {fileID: 11400000, guid: 1c91b26c7fd3b3d459127a8143bcf1b3, type: 2}
   nameText: {fileID: 0}
   corpseImage: {fileID: 0}
@@ -422,11 +419,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
---- !u!1 &3266256926193268498 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5263935100384352774, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
-  m_PrefabInstance: {fileID: 7230901162654182676}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7763366397300572893 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1145135660130643913, guid: dc7284c2aa608194e8cdad202a65224e, type: 3}
