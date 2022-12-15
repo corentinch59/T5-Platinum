@@ -15,6 +15,7 @@ public class SatisfactionManager : MonoBehaviour
     [SerializeField] private GameObject retryButton;
     [SerializeField] private ScreenShot _screenShot;
     [SerializeField] private List<Sprite> ranks = new List<Sprite>();   
+    [SerializeField] private Image sliderFill;
 
     private Slider satisfactionSlider = default;
     private Coroutine currentCoroutine = null;
@@ -65,7 +66,12 @@ public class SatisfactionManager : MonoBehaviour
         float elapsedTime = 0f;
         float svalue = satisfactionSlider.value;
         float endValue = svalue + value;
-        
+
+        if (value < 0f)
+        {
+            sliderFill.color = Color.red;
+        }
+
         while (elapsedTime < lerpDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -74,6 +80,7 @@ public class SatisfactionManager : MonoBehaviour
         }
 
         currentCoroutine = null;
+        sliderFill.color = Color.white;
     }
 
     private void TestGameOver()
