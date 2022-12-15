@@ -107,7 +107,7 @@ public class Corpse : Carryable
             }
             else
             {
-                transform.localScale = new Vector3(2, 2, 2);
+                transform.localScale = new Vector3(bigCorpseSize, bigCorpseSize, bigCorpseSize);
             }
         }
         // Remove tag "Corpse" to avoid the pnj to check if he has to leave cause this is already at its spot
@@ -161,7 +161,7 @@ public class Corpse : Carryable
         // To avoid dotween problem with player increasing scale of this (as a child)
         if (corpseData.size > 0)
         {
-            transform.localScale = new Vector3(2, 2, 2);
+            transform.localScale = new Vector3(bigCorpseSize, bigCorpseSize, bigCorpseSize);
         }
         else
         {

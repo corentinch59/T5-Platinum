@@ -77,7 +77,7 @@ public class BigCorpse : MonoBehaviour, IInteractable
 
         if (players[0] != null)
         {
-            if(corpseMovement.sqrMagnitude > 0)
+            if(corpseMovement.sqrMagnitude > 0 && players[1] == null)
             {
                 players[0].getPlayerMovement.getPlayerInput.GetDevice<Gamepad>().SetMotorSpeeds(0.1f, 0.1f);
             }
@@ -209,12 +209,14 @@ public class BigCorpse : MonoBehaviour, IInteractable
                 players[i] = player;
                 if(i == 1)
                 {
+                    players[0].getPlayerMovement.getPlayerInput.GetDevice<Gamepad>().ResetHaptics();
                     Vector3 dirBetweenPlayers = players[0].transform.position - players[1].transform.position;
                     distanceBetweenPlayers = dirBetweenPlayers.magnitude;
                     gameObject.layer = 0; // <- not interactable for now
                 }
                 else
                 {
+                    players[0].getPlayerMovement.getPlayerInput.GetDevice<Gamepad>().ResetHaptics();
                     Vector3 dirNoPlayer = transform.position - players[0].transform.position;
                     distanceNoPlayer = dirNoPlayer.magnitude;
                 }
