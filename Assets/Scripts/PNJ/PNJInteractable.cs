@@ -165,11 +165,11 @@ public class PNJInteractable : MonoBehaviour
 
     private IEnumerator FeedBackPlayerMoves()
     {
-        transform.DOScaleX(1.8f, 0.3f);
-        transform.DOScaleY(2.3f, 0.3f);
+        transform.DOScaleX(2.4f, 0.3f);
+        transform.DOScaleY(2.9f, 0.3f);
         yield return new WaitForSeconds(0.3f);
-        transform.DOScaleX(2f, 0.3f);
-        transform.DOScaleY(2f, 0.3f);
+        transform.DOScaleX(2.6f, 0.3f);
+        transform.DOScaleY(2.6f, 0.3f);
         yield return new WaitForSeconds(0.3f);
         feedback = null;
     }
