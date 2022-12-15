@@ -11,7 +11,6 @@ public class TimerQuestManager : MonoBehaviour
     [SerializeField] private GameObject vfxGameObject;
     private int sortPriority = -10; // Or whatever HDRP sortPriority you want to set it to.
 
-
     private void Start()
     {
         Renderer renderer = vfxGameObject.GetComponent<Renderer>(); //VFXRenderer inherits from Renderer
@@ -22,15 +21,10 @@ public class TimerQuestManager : MonoBehaviour
         }
     }
 
-    
-
     public void SetBorderBar(float totalTime)
     {
         Material mat = Instantiate(borderImg.material);
         borderImg.material = mat;
         borderImg.material.DOFloat(-0.1f,"_Cutoff_Lenght", totalTime);
-        Debug.Log(borderImg.material);
     }
-
-   
 }

@@ -146,8 +146,10 @@ public class Corpse : Carryable
 
         if (player.getPlayerMovement.canMove) // if one player -> put the body anywhere he wants to
         {
-            player.CarriedObj.gameObject.transform.position = new Vector3(player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
-                player.transform.position.y, player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
+            player.CarriedObj.gameObject.transform.position = new Vector3(
+                player.transform.position.x + player.getPlayerMovement.getOrientation.x * 3f,
+                3.7f,
+                player.transform.position.z + player.getPlayerMovement.getOrientation.y * 3f);
             player.CarriedObj.transform.parent = null;
         }
         else

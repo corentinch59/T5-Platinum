@@ -71,14 +71,14 @@ public class PNJInteractable : MonoBehaviour
             if ((int)c.ThisQuest.requestInfos.siz > 0)
             {
                 // Big corpse
-                c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y + 2f, c.transform.position.z);
+                c.transform.position = new Vector3(c.transform.position.x, 3.7f, c.transform.position.z);
                 corpseCreated.transform.DOScale(new Vector3(c.BigCorpseSize, c.BigCorpseSize, c.BigCorpseSize), 0.5f);
                 InitBigCorpse(c);
             }
             else
             {
                 // small corpse
-                c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y + 0.7f, c.transform.position.z);
+                c.transform.position = new Vector3(c.transform.position.x, 3.7f, c.transform.position.z);
                 corpseCreated.transform.DOScale(new Vector3(1, 1, 1), 0.5f);
             }
         }
