@@ -20,7 +20,6 @@ public class SatisfactionManager : MonoBehaviour
     private Slider satisfactionSlider = default;
     private Coroutine currentCoroutine = null;
     private Image winnerRank;
-    private TextMeshProUGUI percentageRank;
 
     private float lerpDuration = 1.5f;
     private float endTimeDuration = 5f;
@@ -42,7 +41,6 @@ public class SatisfactionManager : MonoBehaviour
         winScreen.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
         winnerRank = winScreen.gameObject.transform.GetChild(2).GetComponent<Image>();
-        percentageRank = winScreen.gameObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
 
     }
 
@@ -142,7 +140,6 @@ public class SatisfactionManager : MonoBehaviour
                 winnerRank.sprite = ranks[3];//C
             }
             
-            percentageRank.text = $"Satisfaction : {satisfactionSlider.value}%";
             retryButton.gameObject.SetActive(true);
             eventSystem.SetSelectedGameObject(retryButton);
         }
