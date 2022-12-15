@@ -114,7 +114,7 @@ public class BigCorpse : MonoBehaviour, IInteractable
                 PerformMovementRotation();
             }
 
-            Vector3 grabDirection = players[0].transform.position - transform.position;
+            Vector3 grabDirection = players[1].transform.position - transform.position;
             if(grabDirection.x > 0)
             {
                 players[1].getArms.transform.position = players[1].getArmLeftPosition;
