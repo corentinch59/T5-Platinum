@@ -2074,7 +2074,7 @@ PrefabInstance:
       objectReference: {fileID: 1825817273}
     - target: {fileID: 3871353799097391825, guid: 3c5ddc5db82575a4db122f3e0c7fdca0, type: 3}
       propertyPath: howManyPlayersToStart
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871353799097391827, guid: 3c5ddc5db82575a4db122f3e0c7fdca0, type: 3}
       propertyPath: m_RootOrder

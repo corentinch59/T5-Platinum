@@ -202,6 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleHeight: 2.75
+  bigHoleSprite: {fileID: 21300000, guid: 4d6e55cd325f2ab4cb2690a4bdac9db4, type: 3}
   scaleAmountToAdd: 0.2
   scaleAnimDuration: 1
   scaleAnimTombDuration: 0.5
@@ -250,7 +251,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea98e2484511be642b7690716d14e41f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ade8da0a7e483884bb3de728bb4e4198, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

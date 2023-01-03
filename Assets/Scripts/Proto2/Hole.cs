@@ -12,7 +12,8 @@ public class Hole : MonoBehaviour, IInteractable
 
     private int HoleSize = 1;
     private bool imageShown = false;
-    private Vector3 originalSize;
+    private Vector3 originalColliderSize;
+    private Vector3 originalScale;
     private Tween tween;
     private Image bubbleIMage;
     private Corpse heldCorpse;
@@ -38,9 +39,7 @@ public class Hole : MonoBehaviour, IInteractable
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        originalSprite = spriteRenderer.sprite;
         colliderHole = GetComponent<BoxCollider>();
-        originalSize = colliderHole.size;
         bubbleParent = transform.GetChild(1).GetChild(0).GetComponent<RectTransform>();
         bubbleIMage = bubbleParent.GetChild(0).GetComponent<Image>();
         bubbleParent.gameObject.SetActive(false);
@@ -114,6 +113,8 @@ public class Hole : MonoBehaviour, IInteractable
                                 bc.Players[1].CarriedObj = null;
                                 bc.Interact(bc.Players[1]);
                             }
+                            originalScale = transform.localScale;
+                            originalSprite = spriteRenderer.sprite;
                             bc.Interact(bc.Players[0]);
                             StartCoroutine(BurryingCorpse(corpse));
                             heldCorpse = corpse;
@@ -133,6 +134,8 @@ public class Hole : MonoBehaviour, IInteractable
                         corpse.IsInteractable = false;
                         player.CarriedObj.transform.parent = null;
                     }
+                    originalScale = transform.localScale;
+                    originalSprite = spriteRenderer.sprite;
                     corpse.OutlineImg.SetActive(false); // <- deactivate exclamation point
                     player.CarriedObj.gameObject.layer = 7; // <- carriedObj is interactable
                     StartCoroutine(BurryingCorpse(corpse));
@@ -210,12 +213,12 @@ public class Hole : MonoBehaviour, IInteractable
             else
             {
                 //Dig up
-                colliderHole.size = originalSize;
+                transform.localScale = originalScale;
+                colliderHole.size = originalColliderSize;
                 spriteRenderer.sprite = originalSprite;
                 gameObject.layer = 0;
                 yield return new WaitForSeconds(2f);
                 gameObject.layer = 7;
-                SetHoleSize = 1;
             }
             yield break;
         }
