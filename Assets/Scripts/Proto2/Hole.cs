@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Hole : MonoBehaviour, IInteractable
 {
     [SerializeField] private float bubbleHeight = 2.75f;
+    [SerializeField] private Sprite bigHoleSprite;
 
     private int HoleSize = 1;
     private bool imageShown = false;
@@ -52,6 +53,7 @@ public class Hole : MonoBehaviour, IInteractable
             HoleSize += modifier;
             if(tween == null)
             {
+                spriteRenderer.sprite = bigHoleSprite;
                 tween = transform.DOScale(transform.localScale + new Vector3(scaleAmountToAdd, scaleAmountToAdd, 0) * modifier, scaleAnimDuration).SetEase(Ease.InBounce);
             }
             else
