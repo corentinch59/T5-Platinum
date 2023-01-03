@@ -10,6 +10,9 @@ public class SatisfactionManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerEndMeshPro;
     [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private GameObject finish;
+    [SerializeField] private float finishDuration;
+    [SerializeField] private GameObject questUI;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject retryButton;
@@ -31,6 +34,7 @@ public class SatisfactionManager : MonoBehaviour
 
     private void Start()
     {
+        finish.SetActive(false);
         satisfactionSlider = GetComponent<Slider>();
         QuestManager.onFinishQuest += AddSatisfaction;
         Sunshine.onTimerEnd += TestWin;
@@ -81,9 +85,69 @@ public class SatisfactionManager : MonoBehaviour
         sliderFill.color = Color.white;
     }
 
+    private IEnumerator TimeOutFinish(bool gameOver)
+    {
+        yield return new WaitForSeconds(finishDuration);
+
+        finish.SetActive(true);
+
+        //finish.GetComponent<RectTransform>().DORotate(new Vector3(0f, 0f, 13f), 0.5f);
+
+        yield return new WaitForSeconds(finishDuration);
+
+        finish.SetActive(false);
+
+        if (gameOver)
+        {
+            timerEndMeshPro.text = "0";
+            questUI.SetActive(false);
+            gameOverScreen.SetActive(true);
+            UIGameOver.onGameOver?.Invoke();
+            StartCoroutine(_screenShot.TakeScreenShot(false));
+            timerEndMeshPro.gameObject.SetActive(false);
+            retryButton.gameObject.SetActive(true);
+            eventSystem.SetSelectedGameObject(retryButton);
+        }
+        else
+        {
+            if (satisfactionSlider.value >= 20f)
+            {
+                questUI.SetActive(false);
+                winScreen.SetActive(true);
+                StartCoroutine(_screenShot.TakeScreenShot(true));
+                if (satisfactionSlider.value >= 80)
+                {
+                    winnerRank.sprite = ranks[0]; //S
+                }
+                else if (satisfactionSlider.value >= 60)
+                {
+                    winnerRank.sprite = ranks[1];//A
+                }
+                else if (satisfactionSlider.value >= 40)
+                {
+                    winnerRank.sprite = ranks[2];//B
+                }
+                else
+                {
+                    winnerRank.sprite = ranks[3];//C
+                }
+
+                retryButton.gameObject.SetActive(true);
+                eventSystem.SetSelectedGameObject(retryButton);
+            }
+            else
+            {
+
+            }
+        }
+    }
+
     private void TestGameOver()
     {
-        if (IsGameOver) return;
+        if (IsGameOver)
+        {
+            return;
+        }
 
         #region 2eme itération float 
 
@@ -107,50 +171,19 @@ public class SatisfactionManager : MonoBehaviour
         if (displayTimerFloat <= 0)
         {
             IsGameOver = true;
-            timerEndMeshPro.text = "0";
-            gameOverScreen.SetActive(true);
-            UIGameOver.onGameOver?.Invoke();
-            StartCoroutine(_screenShot.TakeScreenShot(false));
-            timerEndMeshPro.gameObject.SetActive(false);
-            retryButton.gameObject.SetActive(true);
-            eventSystem.SetSelectedGameObject(retryButton);
+            StartCoroutine(TimeOutFinish(true));
         }
     }
 
     private void TestWin()
     {
-        if(satisfactionSlider.value >= 20f)
-        {
-            winScreen.SetActive(true);
-            StartCoroutine(_screenShot.TakeScreenShot(true));
-            if(satisfactionSlider.value >= 80)
-            {
-                winnerRank.sprite = ranks[0]; //S
-            }
-            else if(satisfactionSlider.value >= 60)
-            {
-                winnerRank.sprite = ranks[1];//A
-            }
-            else if(satisfactionSlider.value >= 40)
-            {
-                winnerRank.sprite = ranks[2];//B
-            }
-            else
-            {
-                winnerRank.sprite = ranks[3];//C
-            }
-            
-            retryButton.gameObject.SetActive(true);
-            eventSystem.SetSelectedGameObject(retryButton);
-        }
-        else
-        {
-
-        }
+        StartCoroutine(TimeOutFinish(false));
+        
     }
 
     private void OnDestroy()
     {
         QuestManager.onFinishQuest -= AddSatisfaction;
+        Sunshine.onTimerEnd -= TestWin;
     }
 }

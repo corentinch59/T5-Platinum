@@ -11,13 +11,6 @@ public class UIGameOver : MonoBehaviour
 
     [SerializeField] private string sceneNameToLoad;
 
-    //private void Start()
-    //{
-    //    onGameOver?.Invoke();
-    //}
-
-
-
     public void Restart()
     {
         SceneManager.LoadScene(sceneNameToLoad);
