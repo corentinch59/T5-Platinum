@@ -477,8 +477,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.21
-  m_Height: 4.676482
+  m_Radius: 1
+  m_Height: 3.53
   m_Direction: 1
   m_Center: {x: 0, y: -0.46324116, z: 0}
 --- !u!143 &2596005604130923465
@@ -493,7 +493,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 4
-  m_Radius: 1.75
+  m_Radius: 1.63
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e251c9eb6ee39e448a99e1f81a2529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 20
+  playerSpeed: 18
   spriteRenderer: {fileID: 2321410641102125202}
   canMove: 1
   startPos: {x: 0, y: 0, z: 0}
@@ -574,38 +574,6 @@ MonoBehaviour:
     m_ActionName: Player/Interact[/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
-        m_MethodName: MoveLeft
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 8e17399d-219d-4361-8e40-5d0cb8612fac
-    m_ActionName: SelectionScreenControlE/ChangeLeft[/XInputControllerWindows/leftStick/left,/XInputControllerWindows/dpad/left]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
-        m_MethodName: MoveRight
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: b1334139-407d-4107-86fc-9c849ba2cae9
-    m_ActionName: SelectionScreenControlE/ChangeRight[/XInputControllerWindows/leftStick/right,/XInputControllerWindows/dpad/right]
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 2107677564}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: DashCancelInput
@@ -620,102 +588,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e7be9c4a-f55f-4234-89b6-ec47aeea6552
     m_ActionName: Player/Dash[/XInputControllerWindows/buttonEast]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
-        m_MethodName: GetReady
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c3909571-cddd-4d00-a05f-e2dfc4ff82c8
-    m_ActionName: SelectionScreenControl/Ready[/DualShock4GamepadHID/buttonSouth]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ChoseYourChara, Assembly-CSharp
-        m_MethodName: RemovePlayer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ef91c638-039c-45dc-a7c1-36e036ea2ef2
-    m_ActionName: SelectionScreenControl/UnReady[/DualShock4GamepadHID/buttonEast]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2596005604130923475}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnMovePilote
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 486c4d0b-0bee-4c83-bc5f-1f39e4d5f172
-    m_ActionName: Pilote/MoveWithCorpse[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID/dpad/down,/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID/dpad/right]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
-        m_MethodName: InteractInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 105745ca-3069-48a8-b9a1-48931acf5594
-    m_ActionName: Pilote/Interact[/DualShock4GamepadHID/buttonSouth]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2596005604130923475}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnMoveCoPilote
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 66887643-a484-4b6c-be4c-70fe7051f592
-    m_ActionName: Co-Pilote/OrientateCorpse[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/leftStick/right]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerTest, Assembly-CSharp
-        m_MethodName: InteractInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3adfcfb8-e1af-4dee-9499-973aced5b007
-    m_ActionName: Co-Pilote/Interact[/DualShock4GamepadHID/buttonSouth]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 117b99d2-1128-496e-b443-37f838e3fa42
